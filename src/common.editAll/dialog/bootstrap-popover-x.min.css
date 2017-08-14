@@ -1,0 +1,153 @@
+/*!
+ * @copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2017
+ * @version 1.4.3
+ *
+ * Bootstrap Popover Extended - Popover with modal behavior, styling enhancements and more.
+ *
+ * For more JQuery/Bootstrap plugins and demos visit http://plugins.krajee.com
+ * For more Yii related demos visit http://demos.krajee.com
+ */.popover{padding:0}.popover-lg{min-width:480px}.popover-md{min-width:350px}.popover>.close{float:right;margin:7px 9px 7px 7px}.popover.bottom-right>.arrow,.popover.top-right>.arrow{left:90%}.popover.bottom-left>.arrow,.popover.top-left>.arrow{left:10%}.popover.left-top>.arrow,.popover.right-top>.arrow{top:10%}.popover.left-bottom>.arrow,.popover.right-bottom>.arrow{top:90%}.popover-default.bottom>.arrow:after{border-bottom-color:#f7f7f7}.popover-primary.bottom>.arrow:after{border-bottom-color:#428bca}.popover-success.bottom>.arrow:after{border-bottom-color:#dff0d8}.popover-danger.bottom>.arrow:after{border-bottom-color:#f2dede}.popover-warning.bottom>.arrow:after{border-bottom-color:#fcf8e3}.popover-info.bottom>.arrow:after{border-bottom-color:#d9edf7}.popover-default.left-top>.arrow:after{border-left-color:#f7f7f7}.popover-default.right-top>.arrow:after{border-right-color:#f7f7f7}.popover-primary.left-top>.arrow:after{border-left-color:#428bca}.popover-primary.right-top>.arrow:after{border-right-color:#428bca}.popover-success.left-top>.arrow:after{border-left-color:#dff0d8}.popover-success.right-top>.arrow:after{border-right-color:#dff0d8}.popover-danger.left-top>.arrow:after{border-left-color:#f2dede}.popover-danger.right-top>.arrow:after{border-right-color:#f2dede}.popover-warning.left-top>.arrow:after{border-left-color:#fcf8e3}.popover-warning.right-top>.arrow:after{border-right-color:#fcf8e3}.popover-info.left-top>.arrow:after{border-left-color:#d9edf7}.popover-info.right-top>.arrow:after{border-right-color:#d9edf7}.popover-default>.popover-title{color:#333;background-color:#f7f7f7}.popover-primary>.popover-title{color:#fff;background-color:#428bca;border:2px solid #428bca}.popover-success>.popover-title{color:#3c763d;background-color:#dff0d8;border-bottom:1px solid #d6e9c6}.popover-info>.popover-title{color:#31708f;background-color:#d9edf7;border-bottom:1px solid #bce8f1}.popover-warning>.popover-title{color:#8a6d3b;background-color:#fcf8e3;border-bottom:1px solid #faebcc}.popover-danger>.popover-title{color:#a94442;background-color:#f2dede;border-bottom:1px solid #ebccd1}.popover-footer{padding:4px;background-color:#fbfbfb;text-align:right;border-top:1px solid #ebebeb;border-radius:0 0 5px 5px}.popover-footer .btn+.btn{margin-bottom:0;margin-left:4px}.popover-footer .btn-group .btn+.btn{margin-left:-1px}.popover-footer .btn-block+.btn-block{margin-left:0}.has-footer.popover.top>.arrow:after,.popover.has-footer.top>.arrow:after{border-top-color:#fbfbfb}.popover.has-footer.left-bottom>.arrow:after{border-top-color:transparent;border-left-color:#fbfbfb}.popover.has-footer.right-bottom>.arrow:after{border-top-color:transparent;border-right-color:#fbfbfb}.popover-loading{padding:30px;background:url(../img/loading.gif) center center}.popover-x-body.modal-open{overflow-y:auto}.popover-x-body .navbar{z-index:1051}
+ .popover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1060;
+    display: none;
+    max-width: 420px;
+    padding: 1px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: left;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    word-spacing: normal;
+    word-wrap: normal;
+    white-space: normal;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    line-break: auto;
+}
+.popover > .arrow {
+    border-width: 11px;
+}
+.popover > .arrow, .popover > .arrow:after {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+.popover-default>.popover-title {
+    color: #333;
+    background-color: #f7f7f7;
+}
+.popover-title {
+    padding: 8px 14px;
+    margin: 0;
+    font-size: 14px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #ebebeb;
+    border-radius: 5px 5px 0 0;
+}
+.close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .2;
+    filter: alpha(opacity=20);
+}
+.pull-right {
+    float: right !important;
+}
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+.popover-content {
+    padding: 9px 14px;
+}
+.popover-footer {
+    padding: 4px;
+    background-color: #fbfbfb;
+    text-align: right;
+    border-top: 1px solid #ebebeb;
+    border-radius: 0 0 5px 5px;
+}
+.btn-sm, .btn-group-sm > .btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+#myPopover1{
+    left:50%;
+    margin-left:-210px;
+    top:50%;
+    margin-top:-111px;
+}
+.close{
+    cursor: pointer;
+}
+.close:hover{
+    opacity: 0.6;
+}
+.btn-sm:hover{
+    opacity: 0.8;
+}
+.select_rt{
+    display: inline-block;
+}

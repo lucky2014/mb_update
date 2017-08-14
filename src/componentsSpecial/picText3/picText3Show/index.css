@@ -1,0 +1,10 @@
+.picText3 .hotProduct{margin-top: 20px;padding-bottom: 10px;background-color: #fff;}
+.picText3 .hotProduct h1{width: 70%;margin: 10px auto 0;text-align: center;color: #116ba4; font-size: 1.2rem;padding-bottom: 8px;/*border-bottom: 1px solid #cccccc;*/}
+.picText3 .hotProduct .blueSu{width: 80%;height: 1px;margin: 0 auto;background-color: #cccccc;}
+.picText3 .hotProduct .blueSu i{display: block;width: 44px;height: 6px;background-color: #116ba4;position: relative;top: -2px;left: 44%;}
+.picText3 .hotProduct .blueTex{display: block;text-align: center;color: #707070;margin-top: 6px;}
+.picText3 .recoType{margin-top: 14px;overflow: hidden;}
+.picText3 .recoType ul{text-align: center;overflow: hidden;}
+.picText3 .recoType li{width: 28%; height: 33px; margin-left: 4%;background-size: 100% 100%;color: #fff;text-align: center;display: inline-block;float: left;margin-bottom: 15px;}
+.picText3 .recoType li img{width: 100%;}
+.picText3 .recoType li i{display: block;height: 33px;line-height: 33px; font-style: normal;}

@@ -1,0 +1,16 @@
+*{ margin: 0; padding: 0; list-style: none; font-size: 14px; font-family: "microsoft yahei"; color: #656565;}
+body,html{ background: #eef2f7; position: relative;}
+.hide{ display: none;}
+
+#menu {
+	width:100px; 
+	height: 200px; 
+	border: 1px solid red;
+	top:0;
+	left:0;
+	position: absolute; 
+	display: none;
+}
+#menu li{}
+#banner{ border: 2px solid red; width: 300px; height: 300px; z-index: 1;}
+#intro{ border: 2px solid red; width: 300px; height: 300px; z-index: 1;}

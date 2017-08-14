@@ -1,0 +1,121 @@
+body {
+    background: #f4f5fa;
+    font-size: 14px;
+}
+.dn{display: none;}
+p.titleName{
+    background: #fff;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 5px;
+}
+p.titleName span{
+    display: inline-block;
+    height: 25px;
+    line-height: 20px;
+    color: #656565;
+    border-bottom: 3px solid #324057;
+    margin-left: 30px;
+}
+.section {
+    min-width: 1100px;
+    width: 98%;
+    background-color: #fff;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-left: 2%;
+}
+.microContainer{
+	position: relative;
+    margin: 20px 0 0 20px;
+}
+.microItem,.newSite{
+	width: 236px;
+    height: 280px;
+    float: left;
+    margin-left: 30px;
+    margin-bottom: 40px;
+    position: relative;
+    border-radius: 4px; background: #f3f7fe;
+}
+.newSite{ border: 2px solid #20a0ff; width: 232px; height: 216px; border-radius: 0; box-shadow: none; text-align: center;
+ padding-top: 60px; cursor: pointer;}
+.newSite a{ display: block; cursor: pointer;}
+.newSite span{ display: block;; padding: 20px 0; color: #617084;}
+.microItem>img{
+	width: 100%;
+	height: 170px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px; box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+.microItem{ position: relative;}
+.microItem .siteStatus{ position: absolute; left: 1px; top: 1px; width: 60px; height: 44px; color: #fff; text-align: left; 
+font-size: 13px; z-index: 4; padding-left: 10px; line-height: 30px;}
+.microItem .siteStatus.bGray{ background: url(../../imgs/bGray.png);}
+.microItem .siteStatus.bBlue{ background: url(../../imgs/bBlue.png);}
+.microItem .siteStatus.bRed{ background: url(../../imgs/bRed.png);}
+.microItem .hover,.microItem .siteEv{
+	background: rgba(0, 0, 0, 0.4);
+    width: 90%;
+    height: 120px;
+    position: absolute;
+    padding: 50px 5% 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    display: none;
+    top: 1px;
+
+}
+.microItem .siteEv{
+    height: 130px;
+    padding: 40px 5% 0;
+}
+.microItem .siteEv canvas{ margin: 0 auto;}
+.microItem .hover a{
+	float: left;
+    width: 33.3%;
+    height: 56px; text-align: center;
+    cursor: pointer; display: inline-block; color: #fff;
+}
+.microItem .hover a img{ width: 44px; height: 44px;}
+.microItem .hover a span{display: block; text-align: center; font-size: 12px;}
+
+/**/
+.microItem .siteEv{ line-height: 26px;}
+.microItem .siteEv div{ color: #fff; font-size: 12px;}
+.microItem .siteEv div.siteCode{ text-align: center;}
+.microItem .siteEv input{ width: 96%; color: #617084; font-size: 12px; border-radius: 4px; background: #fff; border: none;
+margin: 6px 0 10px; height: 26px; padding: 0 2%;}
+.microItem .siteEv button{ background: #20a0ff; color: #fff; display: block; border: none; height: 26px;  width: 70px; border-radius: 4px;}
+
+.microItem .miContent{
+    padding: 0 10px;
+    text-align: left; color: #617084; border: 2px solid #d3dce6; border-top: none; margin-top: -3px; height: 108px;
+}
+.microItem .miContent p{
+    margin-top: 10px;
+    height: 16px;
+    line-height: 16px;
+}
+.microItem dl.siteQl{ overflow: hidden; padding-top: 5px;}
+.microItem dl.siteQl a{ font-size: 12px; display: block; cursor: pointer; text-align: center;}
+.microItem dl.siteQl a:hover{ color: #20a0ff;}
+.microItem dl.siteQl dt{ float: left; display: inline; width: 40px;}
+.microItem dl.siteQl dd{ float: right; display: inline; margin: 0 2px;}
+.microItem dl.siteQl i,.microItem .miContent .time i{ display: block; width: 18px; height: 18px; margin:0 auto 2px; background: url(../../imgs/siteIcon.png);}
+.microItem dl.siteQl a.qrcode i{ background-position: 0 -54px; }
+.microItem dl.siteQl a.link i{ background-position: 0 -36px; }
+.microItem dl.siteQl a.del i{ background-position: 0 0; }
+.microItem dl.siteQl a.down i{ background-position: 0 -18px; }
+.microItem dl.siteQl a.up i{ background-position: 0 -72px; }
+.microItem .miContent .time{ font-size: 12px; height: 30px; line-height: 30px;}
+.microItem .miContent .time i{ background-position: 0 -90px; display: inline-block; vertical-align: top; margin-top: 6px; 
+margin-right: 4px;}
+
+.microItem dl.siteQl a.qrcode:hover i{ background-position: -18px -54px; }
+.microItem dl.siteQl a.link:hover i{ background-position: -18px -36px; }
+.microItem dl.siteQl a.del:hover i{ background-position: -18px 0; }
+.microItem dl.siteQl a.down:hover i{ background-position: -18px -18px; }
+.microItem dl.siteQl a.up:hover i{ background-position: -18px -72px; }
+.microItem .miContent .time:hover i{ background-position: -18px -90px; }

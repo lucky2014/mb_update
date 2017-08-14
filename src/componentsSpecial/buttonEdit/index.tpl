@@ -1,0 +1,1 @@
+<input type="button" value="标准按钮" style="width:100%;min-height:32px;height:100%;background-color: #1c9ae3;color:#fff;outline: none;border-color:transparent;" name="">

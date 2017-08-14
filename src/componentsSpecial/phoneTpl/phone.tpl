@@ -1,0 +1,1 @@
+<img src='http://appmedia.qq.com/media/media/fl/logo-image-default.png' style='width:100%;height:100%;padding:0;border: 1px solid #ddd;'/>

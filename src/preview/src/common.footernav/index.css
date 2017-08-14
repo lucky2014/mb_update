@@ -1,0 +1,8 @@
+.footernav{background: #fff;margin-top: 14px;}
+.footernav ul{margin:10px 20px; overflow: hidden;}
+.footernav ul li{display:inline-block;width:24%;float:left;text-align: center;}
+.footernav ul li a{display: inline-block;}
+.footernav ul li i{display:block;text-align:center;height:20px;}
+.footernav ul li img{width:25px;height:25px;}
+.footernav ul li span{display:block;text-align:center;color:#999;margin-top:12px;}
+.footernav ul li.selectedHtml span{color:#116ba4;}

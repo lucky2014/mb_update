@@ -1,0 +1,121 @@
+<!doctype HTML>
+<html>
+  
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>微官网主页</title></head>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=g7UqdqYFme62tLfzp1PpEfba"></script>
+    <script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+  <body ng-app="myApp" ng-controller="myCtrl">
+      <div id="VAct_navbar">
+          <div class="navbar-inner">
+              <div class="nav-center"></div>
+          </div>
+      </div>
+      <div class="mobile-container">
+          <div class="VACT_main_page_index_box leftOuter">
+              <div class="sky leftDiv active" id="sky">
+                  <h1></h1>
+              </div>
+              <div class="left">
+                  
+              </div>
+              <div class="footernav leftDiv" id="footernav">
+              </div>
+              <!--div class="lineBox">
+                <p class="dragLine"></p>
+                <span id="showHeight"></span>
+              </div-->
+              
+          </div>
+          
+      </div>
+
+      <div class="right">
+        
+      </div>
+      <div id="dialog_paragraph" style="display: none;">
+            <div id="cke_vAct_modexBox_paragraph_content">
+              <div id="cke_vAct_modexBox_paragraph_content_child">
+                <div class="cke_vAct_modexBox_paragraph_list fontSize">
+                  <select>
+                    <option>字体</option>
+                    <option value="12" style="font-size: 12px;">12</option>
+                    <option value="14" style="font-size: 14px;">14</option>
+                    <option value="16" style="font-size: 16px;">16</option>
+                    <option value="18" style="font-size: 18px;">18</option>
+                    <option value="20" style="font-size: 20px;">20</option>
+                    <option value="22" style="font-size: 22px;">22</option>
+                    <option value="24" style="font-size: 24px;">24</option>
+                    <option value="26" style="font-size: 26px;">26</option>
+                    <option value="28" style="font-size: 28px;">28</option>
+                    <option value="30" style="font-size: 30px;">30</option></select>
+                </div>
+                <div class="cke_vAct_modexBox_paragraph_list lineHeight">
+                  <select>
+                    <option>行高</option>
+                    <option value="1" style="line-height: 1">1</option>
+                    <option value="1.2" style="line-height: 1.2">1.2</option>
+                    <option value="1.4" style="line-height: 1.4;">1.4</option>
+                    <option value="1.6" style="line-height: 1.6;">1.6</option>
+                    <option value="1.8" style="line-height: 1.8;">1.8</option>
+                    <option value="2.2" style="line-height: 2.2;">2.2</option>
+                    <option value="2.4" style="line-height: 2.4;">2.4</option>
+                    <option value="2.6" style="line-height: 2.6;">2.6</option>
+                    <option value="2.8" style="line-height: 2.8;">2.8</option>
+                    <option value="3.0" style="line-height: 3.0;">3.0</option></select>
+                </div>
+                <div class="cke_vAct_modexBox_paragraph_list bold">
+                  <a>
+                    <img src="../src/component/imgs/f032.png"></a>
+                </div>
+                <div class="cke_vAct_modexBox_paragraph_list italic">
+                  <a>
+                    <img src="../src/component/imgs/f033.png"></a>
+                </div>
+                <div class="cke_vAct_modexBox_paragraph_list color">
+                  <a>
+                    <img src="../src/component/imgs/color.png"></a>
+                </div>
+                <div class="cke_vAct_modexBox_paragraph_list edit_left">
+                  <a data-align="left">
+                    <img src="../src/component/imgs/div-left.png"></a>
+                </div>
+                <div class="cke_vAct_modexBox_paragraph_list edit_center">
+                  <a data-align="center">
+                    <img src="../src/component/imgs/div-center.png"></a>
+                </div>
+                <div class="cke_vAct_modexBox_paragraph_list edit_right">
+                  <a data-align="right">
+                    <img src="../src/component/imgs/div-right.png"></a>
+                </div>
+                <div class="cke_vAct_modexBox_paragraph_list link">
+                  <a data-align="right">
+                    <img src="../src/component/imgs/link.jpg"></a>
+                </div>
+              </div>
+            </div>
+      </div>
+      
+      <div id="userPicDialog" style="display: none;">
+          
+      </div>
+      <div id="dialog"></div>
+      <div id="pop"></div>
+      <div id="previewPop"></div>
+      <!-- <input type="button" value="撤销" id="undo" style="width:120px;height:32px;background-color: #0f0;color:#fff;position: fixed;left:700px;top:200px;" name=""> -->
+      <script type="text/javascript" src="../src/common.lib/sea.js"></script>
+      <script type="text/javascript" src="../src/common.lib/seajs-text/seajs-text-1.1.1/seajs-text.js"></script>
+      <script type="text/javascript" src="../src/config.js"></script>
+      <script>seajs.use("../src/common.lib/sea_css", function() {
+        seajs.use("../src/component/index/index");
+      });</script>
+  </body>
+
+</html>

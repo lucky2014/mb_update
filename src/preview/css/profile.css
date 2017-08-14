@@ -1,0 +1,74 @@
+.head{
+    width: 92%;
+    /* margin: 4% auto 0; */
+    padding: 4%;
+    /* padding-bottom: 4%; */
+    border-bottom: 1px solid #a8a8a8;
+}
+/*.head img{
+	width: 10%;
+	float: left;
+	padding-left: 10px;
+}*/
+.head .p1{
+	width: 44%;
+	background-size: 100% 100%;
+}
+/*.head .p2{
+	float: left;
+	padding-left: 10px;
+}*/
+.head .descrip{
+	display: block;
+    position: relative;
+    top: 20px;
+    left: 21%;
+    font-size: 1.2rem;
+    color: #555555;
+}
+.companyInfor{
+	/*padding: 4%;*/
+	text-indent: 2em;
+	color: #707070;
+}
+/*.companyInfor .show_1{
+	display: inline-block;
+	width: 47%;
+	float: left;
+}
+.companyInfor .marL5{
+	padding-left: 6%;
+}
+.companyInfor p{
+	display: inline-block;
+}
+.companyInfor .p1{
+	padding-top: 15px;
+}*/
+.description1{
+	padding: 4%;
+}
+.picShow li{
+	float: left;
+	width: 44%;
+	margin-left: 4%;
+	padding-bottom: 12px;
+}
+.picShow li img{
+	width: 100%;
+	height: 76px;
+}
+.companyInfor .show_3{
+	width: 100%;
+	display: block;
+}
+.description2{
+	padding: 0 4%;
+}
+.description3{
+	margin-top: 4%;
+	background-size: 100% 100%;
+}
+.description4{
+	padding: 4%;
+}

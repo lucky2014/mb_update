@@ -1,0 +1,38 @@
+.cuttingLineSet .setOuter>li{position: relative; margin-top: 20px;}
+.cuttingLineSet .setOuter>li>span{display: inline-block;float: left;width: 80px;height: 30px;line-height: 30px;}
+.cuttingLineSet .setOuter>li>p{cursor: pointer;position: relative;height: 30px;line-height: 30px;margin-left: 80px; border: 1px solid #c4c4c4;border-radius: 5px;}
+
+.cuttingLineSet .borderColor>p{width: 60px;}
+.cuttingLineSet .borderColor p i{position: absolute;top: 8px;left: 11px; display: inline-block; width: 15px;height: 15px;}
+.cuttingLineSet .setOuter>li p b{position: absolute;top: 11px;right: 8px;display: inline-block;width: 15px;height: 10px;background: url(../../../1/images/down.png) no-repeat;}
+
+.cuttingLineSet .borderWidth>p{width: 67px;}
+.cuttingLineSet .borderWidth>p i{position: absolute;top: 0;left: 10px; color: #2a3542;font-style: normal;}
+.cuttingLineSet .setOuter>li>ul{position: absolute;z-index: 99; top: 35px;left: 80px;background: #fff;border: 1px solid #1c9ae3;border-radius: 5px;}
+.cuttingLineSet .borderWidth>ul{width: 67px;}
+.cuttingLineSet .borderWidth>ul li{line-height: 25px;padding-left: 8px;color: #666;}
+
+
+.cuttingLineSet .borderStyle>p{width: 150px;}
+.cuttingLineSet .borderStyle>p i{position: absolute;left: 10px;top: 14px; display: inline-block; width: 100px;}
+.cuttingLineSet .borderStyle>ul{width: 150px;}
+.cuttingLineSet .borderStyle>ul li{padding: 10px 0;margin: 10px 0;}
+.cuttingLineSet .borderWidth>ul li:hover, .cuttingLineSet .borderStyle>ul li:hover{background: #1c9ae3;color: #fff;cursor: pointer;}
+
+.cuttingLineSet .borderStyle ul li i{display: block;border-top: none !important;width: 80%;margin-left: 8%;}
+.cuttingLineSet .borderStyle .solid i{border-style:solid;}
+.cuttingLineSet .borderStyle .dashed i{border-style:dashed;}
+.cuttingLineSet .borderStyle .dotted i{border-style:dotted;}
+.cuttingLineSet .borderStyle .double i{border-style:double;}
+.cuttingLineSet .borderStyle .groove i{border-style:groove;}
+.cuttingLineSet .borderStyle .ridge i{border-style:ridge;}
+.cuttingLineSet .borderStyle .inset i{border-style:inset;}
+.cuttingLineSet .borderStyle .outset i{border-style:outset;}
+
+.cuttingLineSet .progressBar .progress{position: relative; width:200px;display: inline-block;margin-top: 11px;}
+.cuttingLineSet .progressBar .progress_bg{height: 8px; border: 1px solid #ddd; border-radius: 5px; overflow: hidden;background-color:#f2f2f2;}
+.cuttingLineSet .progressBar .progress_bar{ width: 0; height: 10px; border-radius: 5px;}
+.cuttingLineSet .progressBar .progress_btn{width: 15px; height: 15px; border-radius: 50%; position: absolute;background:#fff; 
+left: 0px; margin-left: -10px; top:-3px; cursor: pointer;border:1px #1c9ae3 solid;box-sizing:border-box;}
+.cuttingLineSet .progressBar .progress_btn:hover{border-color:#F7B824;}
+.cuttingLineSet .progressBar .progress .text{position: absolute;right: -55px;top: -5px;width: 45px;color: #666;}

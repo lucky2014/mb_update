@@ -1,0 +1,15 @@
+.picText4 .about{margin-top: 0} 
+.picText4 .head{width: 92%;padding: 4%;border-bottom: 1px solid #a8a8a8;}
+.picText4 .head .p1{width: 44%;height: 30px; background-size: 100% 100%;}
+.picText4 .head .descrip{display: block; position: relative;top: 15px;left: 23%;font-size: 1.03rem;color: #555555;}
+.picText4 .companyInfor{color: #707070;}
+.picText4 .description1{padding: 4%;text-align: justify;line-height: 1.5;text-indent: 2em;}
+.picText4 .picShow{margin-bottom: 10px;}
+.picText4 .picShow ul{overflow: hidden;}
+.picText4 .picShow li{float: left;width: 50%;height: 75px;}
+.picText4 .picShow li img{width: 85%;display: block;margin: 0 auto;height: 100%;}
+.picText4 .companyInfor .show_3{width: 100%;display: block;}
+.picText4 .description2{text-indent: 2em;padding: 0 4%;text-align: justify;line-height: 1.5;}
+.picText4 .description3{margin-top: 4%;padding:0 4%;}
+.picText4 .description3 img{width: 100%;height: 108px;}
+.picText4 .description4{text-indent: 2em;padding: 4%;text-align: justify;line-height: 1.5;}

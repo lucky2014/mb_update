@@ -1,0 +1,2 @@
+.companyInformation .conHistory h3{overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;color: #707070;padding-top: 5px;font-size:1.07em;font-weight:normal;}
+.companyInformation .conHistory span{ color: #bbbbbb;line-height: 18px;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;height:35px;padding-top: 7px;}

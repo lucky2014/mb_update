@@ -1,0 +1,28 @@
+body {background: #f4f5fa;font-size: 14px;}
+ul,li{display: inline-block;}
+.dn{display: none;}
+p.titleName{background: #fff;height: 50px;line-height: 50px;}
+p.titleName span{display: inline-block;height: 25px;line-height: 25px;color: #656565;border-bottom: 3px solid #1577ac;margin-left: 30px;}
+.section {margin-top: 10px;}
+
+.microTemplate .classify{background: #fafafa;padding: 12px 16px;margin: 32px 32px 0;}
+.microTemplate .classify div span{display: inline-block; width: 75px;}
+.microTemplate .classify div ul li{color: #188acc;cursor: pointer;margin-right: 24px;}
+.microTemplate .classify div ul li:hover{color: #2badff;}
+.microTemplate .classify div ul li.selected{color: #324057;}
+.microTemplate .classify div.userScene{margin-top: 24px;}
+
+.microTemplate .temsContainer{overflow: hidden;margin: 32px 40px;}
+.microTemplate .tempOuter{overflow: hidden;margin-bottom: 40px;}
+.microTemplate .tempOuter ul{float: left; width:72%;}
+.microTemplate .tempOuter ul li{width: 21%;margin-right: 3%;}
+.microTemplate .tempOuter ul li img{border: 1px solid #aac3d0;width: 100%;}
+.tempOuter .previewCon{float: left; display: inline-block; width: 19%;}
+.tempOuter .previewCon span{display: block; color: #656565;margin-bottom: 5px;font-size: 16px;}
+.tempOuter .previewCon p{font-size: 14px;line-height: 1.5;}
+.tempOuter .previewCon div{width: 57%;border: 2px solid #555555;margin: 18px auto 0;}
+.tempOuter .previewCon div img{float: left; width: 90%;margin: 5% 5% 0;}
+.tempOuter .previewCon div i{display: inline-block;text-align: center;width: 100%;color:#ffa200;font-size: 14px;}
+.tempOuter .previewCon button{color: #fff;background: #20a0ff;cursor: pointer; border-radius: 5px;width: 100%;margin-top: 20px;border: none;padding: 6px 0;}
+.tempOuter .previewCon button:hover{background: #2badff;}
+.tempOuter .previewCon button:active{background: #0991f6;}

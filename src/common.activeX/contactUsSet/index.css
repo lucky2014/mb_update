@@ -1,0 +1,52 @@
+.contactUsSet .commonStyle{margin-top: 20px;}
+.contactUsSet .commonStyle input{background:#fafafa;width:308px;height: 30px;line-height: 30px;border-radius: 5px;background: #fff;padding: 0 5px;    border: 1px solid #bdc6d5;} 
+.contactUsSet .commonStyle span{display: inline-block;; width:60px} 
+
+.contactUsSet .divCommon {
+    border: 1px solid #bdc6d5;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.contactUsSet .imgTitle {
+    display: block;
+    font-size: 1rem;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #bdc6d5;
+    text-indent: 20px;
+}
+.contactUsSet .logoImg dl, .erweima dl{padding: 20px 5% 35px 5%;overflow: hidden;}
+.contactUsSet .logoImg dd{position: relative;width: 60%;}
+.contactUsSet .logoImg dd img{width: 100%;}
+.contactUsSet .logoImg dd input{ width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    cursor: pointer;}
+.contactUsSet .erweima dd{position: relative;width: 115px;float: left;}
+.contactUsSet .erweima dd .addPicture{width: 100%;}
+.contactUsSet .erweima dd input {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    cursor: pointer;
+}
+/* .contactUsSet .lastDtP{color: #8c8c8c;} */
+.contactUsSet .lastDtspan{color:#2193d3;font-size: 0.86rem;display: block;width: 120px;line-height: 2;}
+ .contactUsSet .erweima .lastDtP{bottom: -16px;}
+ .contactUsSet .erweima dt{margin-top: 6px;width: 218px;display: inline-block;margin-left: 10px;}
+ .contactUsSet .erweima dt span{display: block;text-indent: 5px;}
+ .contactUsSet .companyText {
+ 	border:1px solid #bdc6d5;
+ 	border-radius: 5px;
+    padding: 10px;
+    line-height: 1.5;
+    margin-top: 10px;
+}

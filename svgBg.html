@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.js"></script>
+    <script src="http://files.cnblogs.com/files/diligenceday/MutationJS.js"></script>
+</head>
+<body>
+    <div>
+        <p>
+            MutationObserver是为了替换掉原来Mutation Events的一系列事件， 浏览器会监听指定Element下所有元素的新增，删除，替换等;
+        </p>
+        <div style="padding:20px;border:1px solid #f00">
+            <input type="button" value="撤销操作" id="prev">
+            <input type="button" value="撤销操作回退" id="next">
+        </div>
+        <input type="button" value="添加节点" id="b0">
+        <input value="text" id="value">
+        <div id="div"></div>
+
+    </div>
+
+    <script type="text/javascript" src="src/common.lib/sea.js"></script>
+    <script type="text/javascript" src="src/common.lib/seajs-text/seajs-text-1.1.1/seajs-text.js"></script>
+    <script type="text/javascript" src="src/config.js"></script>
+    <script>
+        seajs.use("../mb_update2/src/common.lib/sea_css", function(){
+            seajs.use("../mb_update2/src/common.redo/index");
+        });
+    </script>
+</body>
+</html>

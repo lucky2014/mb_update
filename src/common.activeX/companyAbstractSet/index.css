@@ -1,0 +1,47 @@
+.companyAbstractSet .commonStyle li{height: 50px;color: #617084;margin-left: 10px;}
+.companyAbstractSet .commonStyle li input{width: 288px;}
+.companyAbstractSet .commonStyle li span{margin-right: 10px;font-size:1rem;display:inline-block;width:60px;}
+.companyAbstractSet .commonStyle li input{height: 30px;color:#324057; padding-left: 10px;border: 1px solid #bdc6d5;border-radius:5px;margin-top: 10px;}
+.companyAbstractSet .commonStyle li.mustInput{margin-left: 0;}
+.companyAbstractSet .commonStyle li.mustInput span{width: 70px;}
+.companyAbstractSet .commonStyle li.mustInput span i{width: 10px;color: red;display: inline-block;font-style: normal;}
+
+.companyAbstractSet .oneLine{height: 50px;line-height: 50px;color: #7a88a0;border: 1px solid #bdc6d5;border-radius:5px;}
+.companyAbstractSet .oneLine span{float: left;font-size:1rem;margin-left:20px;}
+.companyAbstractSet .oneLine ul li{display:inline-block;}
+.companyAbstractSet .oneLine b{float: left;height: 12px;width: 12px;border: 1px solid #0887c2;border-radius: 50%;margin-top: 19px;margin-left: 30px;cursor:pointer;}
+.companyAbstractSet .oneLine i{display: inline-block;width:6px;height: 6px;border-radius: 50%;float: left;margin-left: 3px;margin-top: 3px;}
+.companyAbstractSet .oneLine ul li.selected i{background-color: #0887c2;}
+.companyAbstractSet .oneLine em{font-style: normal;font-size: 1rem;margin-left: 10px;color:#596477;}
+.companyAbstractSet .addBanBtn{width: 100%;margin-top: 20px;height: 50px;text-align:left;text-indent:20px;line-height:50px;border:1px solid #bdc6d5;color: #596477;border-radius: 5px;background:#fff;font-size:1rem;}
+.companyAbstractSet .addBanBtn i{float:left;margin:12.5px 0 0 20px; display:inline-block;width:25px;height:25px;background:url(../images/addPic1.png) no-repeat top left;background-size:100% 100%;}
+
+.companyAbstractSet .commonLink{position:relative;}
+.companyAbstractSet .commonLink input{position:relative;background:#f5f7fc;cursor:pointer;z-index:10;}
+.companyAbstractSet .commonLink i{position:absolute;top:8px;right:15px;width:12px;height:16px;background:url(../images/arrowDown.png) no-repeat top left;display:block;z-index:12;cursor: pointer;}
+.companyAbstractSet .commonLink ul.linkChoose{ position: absolute;width: 157px;left: 70px;top: 30px;z-index:9;border: 1px solid #bdc6d5;border-radius:0 0 5px 5px;background: #fff;}
+.companyAbstractSet .commonLink ul.linkChoose li{text-indent:10px;height:23px !important;;line-height:23px !important;;cursor:pointer;margin:0 !important;}
+.companyAbstractSet .commonLink ul.linkChoose li.selectedLi{background:#6ec6cf;color:#fff;padding:1px 0;}
+
+.companyAbstractSet .commonAddress input{background:#fafafa;} 
+.companyAbstractSet .DivCommon{border:1px solid #bdc6d5;border-radius:5px;margin-top:20px;}
+.companyAbstractSet .titleCommon{display:block;border-bottom:1px solid #bdc6d5;height:30px;line-height:30px;text-indent:20px;color:#617084}
+.companyAbstractSet ul.piculCommon{margin:0 15px 15px 15px;}
+.companyAbstractSet ul.piculCommon li{position:relative;width:30%;height:115px;border:1px solid #bdc6d5;display:inline-block;margin-right:1%;margin-top: 15px;}
+.companyAbstractSet ul.piculCommon li .addPicture{width:92%;height:60px;margin:4% 4% 0;}
+.companyAbstractSet ul.piculCommon li .delectCha{position:absolute;top:0;right:0;width:20px;cursor:pointer;}
+.companyAbstractSet ul.piculCommon li input{position:absolute;top:64px;left:4%;display:block;width:92%;height:25px;opacity:0;cursor:pointer;z-index:10;}
+.companyAbstractSet ul.piculCommon li span{position:absolute;top:64px;left:4%;width:92%;text-align:center;height:25px;line-height:25px;cursor:pointer; display:inline-block;background:#20a0ff;color:#fff;}
+.companyAbstractSet ul.piculCommon li p{position:absolute;bottom:3px;;left:5px;width:92%;text-align:center;font-size:0.86rem;color: #ffa200;}
+.companyAbstractSet ul.piculCommon li.nodataPics input{position:absolute;top:4%;left:4%;display:block;width:92%;height:60px;}
+
+
+.companyAbstractSet{background-color: #fff;padding:20px 40px;color: #7a88a0;}
+.companyAbstractSet .companyText p{padding:10px 20px;color:#324057;line-height:1.5;text-indent:2em;}
+.companyAbstractSet .companyPics>div{position:relative;margin:10px 15px;width:130px;height:165px;border:1px solid #bdc6d5;}
+.companyAbstractSet .companyPics>div img{display:block;width:120px;height:110px;margin:5px 5px 0 5px;}
+.companyAbstractSet .companyPics>div input{position:absolute;top:114px;left:5px;display:block;width:120px;height:25px;opacity:0;cursor:pointer;z-index:10;}
+.companyAbstractSet .companyPics>div span{position:absolute;top:114px;left:5px;width:120px;text-align:center;height:25px;line-height:25px;cursor:pointer; display:inline-block;background:#20a0ff;color:#fff;}
+.companyAbstractSet .companyPics>div p{position:absolute;bottom:3px;;left:5px;width:120px;text-align:center;font-size:0.9rem;color: #ffa200;}
+.companyAbstractSet .abstractSet .commonLink i{top:18px;}
+.companyAbstractSet .commonLink ul.linkChoose{left:74px;top:40px;width:370px;}

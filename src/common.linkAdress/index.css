@@ -1,0 +1,14 @@
+.shclickLi{cursor:pointer;background: #fff;}
+.linkAddress i{position: absolute;
+    top: 13px;
+    right: 15px;
+    width: 12px;
+    height: 6px;
+    background: url(../1/images/arrowDown.png) no-repeat top left;
+    display: block;
+    z-index: 12;
+    cursor: pointer;}
+ .linkAddress{position: relative;text-align: left;}
+ ul.linkChoose{ position: absolute;width: 198px;left: 70px;top: 28px;z-index:9;border: 1px solid #bdc6d5;border-radius:0 0 5px 5px;background: #fff;}
+ ul.linkChoose li{text-indent:10px;height:23px !important;;line-height:23px !important;;cursor:pointer;margin:0 !important;}
+ ul.linkChoose li.selectedLi{background:#6ec6cf;color:#fff;padding:1px 0;}

@@ -1,0 +1,41 @@
+.waterfallSet .addBanBtn{width: 100%;margin-top: 20px;height: 50px;text-align:left;text-indent:20px;line-height:50px;border:1px solid #bdc6d5;color: #596477;border-radius: 5px;background:#fff;font-size:14px;}
+.waterfallSet .addBanBtn i{float:left;margin:12.5px 0 0 20px; display:inline-block;width:25px;height:25px;background:url(../../../1/images/addPic1.png) no-repeat top left;background-size:100% 100%;}
+
+.waterfallSet .commonAddress{margin-top: 20px !important;}
+.waterfallSet .commonAddress input {background: #fafafa;}
+.waterfallSet{background-color: #fff;padding:20px 20px;position: relative;}
+.waterfallSet .imgInfor{margin-top:20px;}
+.waterfallSet .imgTitle{display:block;font-size:14px; height:50px;line-height:50px;border:1px solid #bdc6d5;text-indent:20px;}
+.waterfallSet dl{position: relative;background-color: #fff;border: 1px solid #bdc6d5;padding:10px 20px 30px;border-top:none;}
+.waterfallSet dl:before,.waterfallSet dl:after{ /* overflow£ºhiddenÐ§¹û */
+	clear:both;
+	content:"";
+	display:table;
+}
+.waterfallSet .imgLink{margin:13px 0;}
+
+.waterfallSet dd{float: left;position: relative;width: 110px;height: 110px;margin-top:10px;}
+.waterfallSet dd img.addPicture{width: 100%;height: 100%;}
+.waterfallSet dd input{width: 100%;height: 100%;opacity: 0;position: absolute;left: 0;top: 0;z-index: 10;cursor: pointer;}
+.waterfallSet dd li{font-size:14px;color:#8c8c8c;margin-top:20px;}
+.waterfallSet dt{width: 217px;margin-left: 15px;float: left;}
+.waterfallSet dt li{height: 33.3px;line-height: 33.3px;font-size: 14px;margin-top: 10px;}
+.waterfallSet dt li input{width: 137px; height: 30px;line-height:30px;border-radius:5px; padding-left: 5px;border: 1px solid #a3b4cc;float: left;margin-left: 10px;z-index:10;text-indent:10px;}
+.waterfallSet dt li.lastDtP{font-size: 8px;}
+.waterfallSet .chooseInput{font-size: 12px;}
+.waterfallSet .chooseB{float: left;width: 12px;height: 12px;border: 1px solid #ccc;border-radius: 50%;margin-top: 10px;margin-left: 5px;cursor: pointer;}
+.waterfallSet .chooseB i{float: left;height: 8px;width: 8px;margin-left: 2px;margin-top: 2px;background-color: #ccc;border-radius: 50%;}
+.waterfallSet li span{float: left;width:57px;text-align:right;}
+.delectCha{position: absolute;right: 5px;top: 5px;height:20px;cursor:pointer;}
+.waterfallSet .bannerModel,.footSet .bannerModel{position: fixed;top: 10%;left: 20%;width: 60%;border:1px solid #b8bbcc;padding: 20px;background-color: #fff;z-index: 999;height:350px;overflow-y:auto;}
+.waterfallSet .searchBox,.footSet .searchBox{width: 250px;height: 30px;border:1px solid #6bb7da;}
+.waterfallSet .searchBox input,.footSet .searchBox input{height: 30px;float: left;width: 200px;border:none;padding-left: 5px;}
+.waterfallSet .searchBox img,.footSet .searchBox img{float: right;margin-top: 6px;margin-right: 10px;height:17px;}
+.waterfallSet table,.footSet table{width: 100%;color: #666;margin-top: 10px;}
+.waterfallSet table td,.footSet table td{text-align: center;}
+.waterfallSet table td button,.footSet table td button{width: 80px;margin-top: -20px;border: 1px solid #0887c2;}
+.waterfallSet table tbody td,.footSet table tbody td{font-size: 13px;border-bottom:1px solid #c5ccd6;padding: 15px 0;}
+.waterfallSet table tbody td img,.footSet table tbody td img{width:70px;}
+.waterfallSet table tbody tr:last-child td,.footSet table tbody tr:last-child td{border:none;}
+.waterfallSet p.totalP,.footSet p.totalP{text-align: right;font-size: 13px;color: #666;}
+.waterfallSet .lastDtspan{color:#2193d3;font-size: 12px;display: block;width: 120px;line-height: 2;}

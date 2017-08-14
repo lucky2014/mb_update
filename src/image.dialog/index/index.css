@@ -1,0 +1,336 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, button {
+    font-family: "Microsoft YaHei", å¾®è½¯é›…é»‘, å®‹ä½“, Arial, sans-serif;
+}
+#userPicDialog{
+    z-index: 1000000001;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: none;
+    left:0;
+    background:rgba(0,0,0,.6);
+}
+#tipsuserPicDialog.modal {
+    border-radius: 0;
+    border: 1px solid #c9cacb;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(0,0,0,0.25);
+}
+#tipsuserPicDialog {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+}
+.modal {
+    position: fixed;
+    top: 65px;
+    left: 50%;
+    z-index: 1050;
+    width: 800px;
+    border-radius: 5px;
+    margin-left: -400px;
+    background-color: #fff;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 3px 7px rgba(0,0,0,0.5);
+    box-shadow: 0 3px 7px rgba(0,0,0,0.5);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+
+}
+.uploadifive-button {
+    /* display: inline-block; */
+    vertical-align: middle;
+}
+.uploadifive-button {
+    color: rgb(7, 80, 107);
+}
+#tipsuserPicDialog.modal .modal-header {
+    background-image: none;
+    background-color: #f9fafb;
+    height: 45px;
+    border-bottom: 1px solid #e5e6e6;
+    padding: 0 20px;
+}
+.modal-header{
+    background-color: #fff;
+    color:#475669;
+    background-image: none;
+    border-bottom: 1px solid #d3dce6;
+}
+.layout-common .modal-header {
+    padding: 8px 32px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.popupWindow .modal-header {
+    cursor: move;
+}
+#tipsuserPicDialog.modal .modal-header .icon-popclose {
+    position: absolute;
+    top: 14px;
+    right: 20px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url(/img/icon-popclose.png) no-repeat 2px 2px;
+    margin: 0;
+    opacity: 1;
+}
+[class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-top: 1px;
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url(../imgs/glyphicons-halflings.png);
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+}
+a {
+    color: #08c;
+    text-decoration: none;
+}
+#tipsuserPicDialog.modal .modal-header h3 {
+    line-height: 45px;
+    font-weight: normal;
+}
+.layout-common h3 {
+    font-size: 16px;
+}
+.modal-header h3 {
+    display: inline-block;
+    margin: 0;
+    line-height: 30px;
+    color:#475669;
+}
+#userPicWindow{
+    height:520px;
+}
+#tab {
+    width: 97%;
+    height: 45px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+#tab .open {
+    color: rgb(6, 194, 156);
+    border-bottom: 2px solid rgb(6, 194, 156);
+}
+#tab > div {
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 10px 15px 15px;
+}
+.picList {
+    height: 370px;
+    overflow: auto;
+    margin-bottom: 40px;
+}
+.picList > div>div,.picList > #userpic_file_upload {
+    width: 124px;
+    height: 105px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    float: left;
+    position: relative;
+    background-color: rgb(241, 241, 241);
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(242, 242, 242);
+    border-image: initial;
+    background-repeat: no-repeat;
+    background-position: center center;
+     display: inline-block !important;
+}
+#uploadifive-file_upload_pic{
+    height: 101px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 120px;
+}
+#uploadifive-file_upload_pic .uploadifive-button {
+    width: 100%;
+    height: 60px;
+    color: rgb(89, 185, 11);
+    line-height: 90px;
+    font-size: 80px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+    background: url(../imgs/add_pic.png) center center / contain no-repeat rgb(241, 241, 241);
+    border-radius: 4px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#uploadifive-file_upload_pic input[file]{
+    font-size: 120px;
+    opacity: 0;
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    z-index: 999;
+}
+#userPicWindow .picList > div{
+    width: 125px;
+    height: 125px;
+    margin-right: 18px;
+    margin-bottom: 10px;
+    float: left;
+    position: relative;
+    background-color: rgb(241, 241, 241);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(242, 242, 242);
+    border-image: initial;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(https://fl4.gtimg.com/flpartition0/197/2003650197/843/30369511403147727599337988984001.png!t160x160.png);
+    background-size: contain;
+}
+.modal-body {
+    max-height: inherit;
+    padding: 32px 8px 32px 32px;
+}
+.picList .pic_thumb{
+    position: relative;
+    border: 2px solid #fff;
+    cursor: pointer;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-color:rgb(241, 241, 241);
+}
+.picList .pic_thumb.select,.picList .pic_thumb:hover,#userpic_file_upload:hover{
+    border-color: #1c9ae3;
+    padding: 0;
+}
+.picList .pic_thumb.select .pic_select {
+    width: 22px;
+    height: 22px;
+    background: url(../imgs/backIcon.png) no-repeat -8px -8px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+#userPicWindow .picList > div {
+    border: 1px solid #F2F2F2;
+    width: 125px;
+    height: 125px;
+    margin-right: 18px;
+    margin-bottom: 10px;
+    float: left;
+    background-repeat: no-repeat;
+    /* background-size: contain; */
+    background-position: center center;
+    position: relative;
+    background-color: #f1f1f1;
+}
+#userPicFooter {
+    width: 95%;
+    height: 37px;
+    position: absolute;
+    bottom: 32px;
+    left: 0;
+    padding-left: 20px;
+}
+#uploadifive-upload_pic_btn{
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 100px;
+}
+.picBtn, #graphicalSourceDialog .picBtn {
+    font-size: 14px;
+    width: 100px;
+    height: 40px;
+    background: url(../imgs/userpic.png) no-repeat -64px 0;
+    text-align: center;
+    cursor: pointer;
+    line-height: 40px;
+    display: block;
+}
+#uploadifive-upload_pic_btn input{
+    font-size: 40px;
+    opacity: 0;
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    z-index: 999;
+}
+.uploadifive-button input {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    z-index: 999;
+    cursor: pointer;
+}
+
+#selectPic, #graphicalSourceDialog #selectSource,.btn-cancel {
+    position: absolute;
+    right: 12px;
+}
+.btn-cancel {
+    position: absolute;
+    font-size: 14px;
+    width: 88px;
+    height: 35px;
+    background: #fff;
+    text-align: center;
+    cursor: pointer;
+    line-height: 35px;
+    display: block;
+    border: 1px solid #9baabf !important;
+    color: #617084 !important;
+    border-radius: 5px;
+    right: 118px;
+}
+.btn-cancel:hover{color: #2badff !important;border:1px solid #2badff !important;}
+.btn-cancel:active{color: #0991f6 !important;border:1px solid #0991f6 !important;}
+.picBtn.active, #graphicalSourceDialog .picBtn.active {
+    background-position: -169px 0;
+    color: #fff!important;
+}
+.picBtn, #graphicalSourceDialog .picBtn {
+    font-size: 14px;
+    width: 88px;
+    height: 35px;
+    background: #20a0ff;
+    text-align: center;
+    cursor: pointer;
+    line-height: 35px;
+    display: block;
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #20a0ff;
+    /* display: inline-block; */
+}
+.picBtn:hover, #graphicalSourceDialog .picBtn:hover{background: #2badff;}
+.picBtn:active, #graphicalSourceDialog .picBtn:active{background: #0991f6;}
+
+#tipsDialog .closeBtn{
+    display: inline-block; 
+    width: 16px;
+    height: 16px;
+    background: url(../imgs/backIcon.png) no-repeat -68px -11px;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #000;
+    text-shadow:none;
+    opacity:1;
+    margin-top: 7px;
+}
+#tipsDialog .closeBtn:hover{background: url(../imgs/backIcon.png) no-repeat -41px -11px;}

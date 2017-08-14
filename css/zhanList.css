@@ -1,0 +1,133 @@
+body {
+    background: #f4f5fa;
+    font-size: 14px;
+}
+.dn{display: none;}
+p.titleName{
+    background: #fff;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 5px;
+}
+p.titleName span{
+    display: inline-block;
+    height: 25px;
+    line-height: 20px;
+    color: #656565;
+    border-bottom: 3px solid #324057;
+    margin-left: 30px;
+}
+.section {
+    min-width: 1100px;
+    width: 80%;
+    background-color: #fff;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.microContainer{
+	position: relative;
+    margin: 20px 0 0 20px;
+}
+.microItem{
+	width: 20%;
+    height: 220px;
+    float: left;
+    margin-left: 3%;
+    margin-bottom: 40px;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+}
+.microItem img{
+	width: 100%;
+	height: 164px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.microItem .hover{
+	background: rgba(0, 0, 0, 0.8);
+    width: 76%;
+    height: 122px;
+    margin-top: -167px;
+    position: absolute;
+    padding: 18% 10% 0 10%;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    display: none;
+}
+.microItem .hover .check{
+	float: left;
+    background: url(../src/zhanList/imgs/check.png) no-repeat center center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    margin-left: 2%;
+}
+.microItem .hover .check:hover{
+	background-image: url(../src/zhanList/imgs/check-green.png);
+}
+.microItem .hover .edit:hover{
+	background-image: url(../src/zhanList/imgs/edit-green.png);
+}
+.microItem .hover .delete:hover{
+    background-image: url(../src/zhanList/imgs/delete-green.png);
+}
+.microItem .hover .edit{
+	float: left;
+    background: url(../src/zhanList/imgs/edit.png) no-repeat center center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    margin-left: 22%;
+}
+.microItem .hover .delete{
+	float: left;
+    background: url(../src/zhanList/imgs/delete.png) no-repeat center center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    margin-left: 21%;
+}
+.check2:after,.edit:after,.delete:after{
+    position: absolute;
+    top: 90px;
+    left: 7%;
+    color: #fff;
+    font-size: 14px;
+}
+.check2:after {
+    content: '预览站点';
+}
+.edit:after {
+    content: '编辑站点';
+    left: 23%;
+}
+.delete:after {
+    content: '删除站点';
+    left: 55%;
+}
+.microItem .miContent{
+    padding: 0 20px;
+    background-color: #fff;
+}
+.microItem .miContent p{
+    margin-top: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+}
+.newSite {
+    height: 36px;
+    width: 110px;
+    font-size: 15px;
+    border: none;
+    background-color: #28c18d;
+    color: #fff;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 51px;
+    cursor: pointer;
+}

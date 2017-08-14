@@ -1,0 +1,50 @@
+.hotCategorySet .oneLine{height: 50px;line-height: 50px;color: #617084;border: 1px solid #bdc6d5;border-radius:5px;}
+.hotCategorySet .oneLine span{float: left;font-size:1rem;margin-left:20px;}
+.hotCategorySet .oneLine ul{overflow: hidden;}
+.hotCategorySet .oneLine ul li{display:inline-block;}
+.hotCategorySet .oneLine b{float: left;height: 14px;width: 14px;background: #1d8ce0; border-radius: 50%;margin-top: 18px;margin-left: 30px;cursor:pointer;}
+.hotCategorySet .oneLine i{display: inline-block;width:6px;height: 6px;border-radius: 50%;float: left;margin-left: 4px;margin-top: 4px;}
+.hotCategorySet .oneLine ul li.selected i{background-color: #fff;}
+.hotCategorySet .oneLine em{font-style: normal;margin-left: 10px;color:#617084;}
+.hotCategorySet .addBanBtn{width: 100%;margin-top: 20px;height: 50px;outline: none; text-align:left;text-indent:20px;line-height:50px;border:1px solid #bdc6d5;color: #596477;border-radius: 5px;background:#fff;}
+.hotCategorySet .addBanBtn:hover{border:1px solid #2badff;color: #2badff;}
+.hotCategorySet .addBanBtn:active{border:1px solid #0991f6;color: #0991f6;}
+.hotCategorySet .addBanBtn i{float:left;margin:12.5px 0 0 20px; display:inline-block;width:25px;height:25px;background:url(../../../src/1/images/addPic1.png) no-repeat top left;background-size:100% 100%;}
+
+.hotCategorySet .commonAddress{margin-top: 20px !important;}
+.hotCategorySet .commonAddress input {background: #fafafa;}
+.hotCategorySet{background-color: #fff;padding:20px 20px;position: relative;color: #617084;}
+.hotCategorySet .imgInfor{margin-top:20px;}
+.hotCategorySet .imgTitle{display:block;font-size:1rem; height:50px;line-height:50px;border:1px solid #bdc6d5;text-indent:20px;}
+.hotCategorySet dl{position: relative;background-color: #fff;border: 1px solid #bdc6d5;padding:10px 20px 35px;border-top:none;}
+.hotCategorySet dl:before,.hotCategorySet dl:after{ /* overflow£ºhiddenÐ§¹û */
+	clear:both;
+	content:"";
+	display:table;
+}
+.hotCategorySet .imgLink{margin:13px 0;}
+.hotCategorySet .lastDtspan{position:absolute;bottom:-40px;left:0;color:#2193d3;font-size: 0.86rem;}
+.hotCategorySet dd{float: left;position: relative;width: 120px;height: 55px;margin-top:10px;}
+.hotCategorySet dd img.addPicture{width: 100%;height: 100%;}
+.hotCategorySet dd input{width: 100%;height: 100%;opacity: 0;position: absolute;left: 0;top: 0;z-index: 10;cursor: pointer;}
+.hotCategorySet dd li{font-size:1rem;color:#8c8c8c;margin-top:20px;}
+.hotCategorySet dt{width: 200px;margin-left: 15px;float: left;}
+.hotCategorySet dt li{height: 33.3px;line-height: 33.3px;font-size: 1rem;margin-top: 10px;}
+.hotCategorySet dt li input{width: 120px; height: 30px;line-height:30px;border-radius:5px; padding: 0 5px;border: 1px solid #a3b4cc;float: left;margin-left: 10px;z-index:10;color: #324057;}
+/* .hotCategorySet dd .lastDtP{font-size: 14px;color: #ffa200;} */
+.hotCategorySet .chooseInput{font-size: 0.86rem;}
+.hotCategorySet .chooseB{float: left;width: 12px;height: 12px;border: 1px solid #ccc;border-radius: 50%;margin-top: 10px;margin-left: 5px;cursor: pointer;}
+.hotCategorySet .chooseB i{float: left;height: 8px;width: 8px;margin-left: 2px;margin-top: 2px;background-color: #ccc;border-radius: 50%;}
+.hotCategorySet li span{float: left;width:57px;text-align:right;}
+.hotCategorySet .delectCha{position: absolute;right: 5px;top: 5px;height:20px;cursor:pointer;}
+.hotCategorySet .bannerModel,.footSet .bannerModel{position: fixed;top: 10%;left: 20%;width: 60%;border:1px solid #b8bbcc;padding: 20px;background-color: #fff;z-index: 999;height:350px;overflow-y:auto;}
+.hotCategorySet .searchBox,.footSet .searchBox{width: 250px;height: 30px;border:1px solid #6bb7da;}
+.hotCategorySet .searchBox input,.footSet .searchBox input{height: 30px;float: left;width: 200px;border:none;padding-left: 5px;}
+.hotCategorySet .searchBox img,.footSet .searchBox img{float: right;margin-top: 6px;margin-right: 10px;height:17px;}
+.hotCategorySet table,.footSet table{width: 100%;color: #666;margin-top: 10px;}
+.hotCategorySet table td,.footSet table td{text-align: center;}
+.hotCategorySet table td button,.footSet table td button{width: 80px;margin-top: -20px;border: 1px solid #0887c2;}
+.hotCategorySet table tbody td,.footSet table tbody td{font-size: 1rem;border-bottom:1px solid #c5ccd6;padding: 15px 0;}
+.hotCategorySet table tbody td img,.footSet table tbody td img{width:70px;}
+.hotCategorySet table tbody tr:last-child td,.footSet table tbody tr:last-child td{border:none;}
+.hotCategorySet p.totalP,.footSet p.totalP{text-align: right;font-size: 1rem;color: #666;}

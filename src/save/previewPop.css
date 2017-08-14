@@ -1,0 +1,31 @@
+#previewPop{ width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,.6);
+    z-index: 999;
+    display: none;
+}
+
+.previewPopInit{ background: url(../../imgs/previewPop.png); width: 800px; height: 600px; position: absolute; left: 50%; 
+margin-left: -400px; background-size: 100% 100%; top: 50%; margin-top: -300px;}
+.previewPopInit .left{ float: left; width: 400px; height: 600px; background: none;}
+.previewPopInit .r{ float: right; width: 400px; position: relative; height: 600px;}
+.previewPopInit .cut{ background: url(../../imgs/close.png); width: 15px; height: 16px; position: absolute; right: 80px;
+top: 70px; display: block;}
+.previewPopInit .cut:hover{ background-position: 0 -16px;}
+
+
+.previewPopInit .qrcode{ border: 1px solid #e0e0e0; padding: 20px; width: 200px; height: 200px; margin-top: 140px;}
+.previewPopInit .blueBtn{     width: 120px;
+    height: 32px;
+    line-height: 32px;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    background: #20a0ff;
+    display: inline-block;
+    margin: 40px 0 0 60px;
+    padding: 0;
+}

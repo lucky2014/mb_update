@@ -1,0 +1,9 @@
+body{background-color: #f0f0fa;}
+.waterfall .special{background-color: #fff;}
+.waterfall .special .item{ width: 50%; }
+.waterfall .special .item img{ width: 100%;}
+.waterfall .special .item .pic{position: relative;}
+.waterfall .special .item .foodName{position: absolute;display: inline-block;width: 90%;background-color: rgba(0,0,0,.6);color: #fff;left: 0; bottom: 0;line-height: 2rem;padding:0 5%;}
+.waterfall .special p{text-align: center;padding: 1rem 0;}
+.waterfall .special .more{display: inline-block;line-height: 2rem;background-color: #454545;color: #fff;padding: 0 1rem;}
+

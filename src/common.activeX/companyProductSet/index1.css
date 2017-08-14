@@ -1,0 +1,34 @@
+.hotRecommendSet{padding:20px 40px;}
+.hotRecommendSet .oneLine ul,.hotRecommendSet .oneLine ul li{display: inline-block; height:30px;line-height:30px;}
+.hotRecommendSet .oneLine b{margin-top:8px;}
+.hotRecommendSet .modelName{height:30px;line-height:30px; border: 1px solid #bdc6d5;border-radius:5px;margin-top:20px;text-indent:20px;}
+.hotRecommendSet .modelName span{margin:0 28px 0 20px;}
+.hotRecommendSet .modelName input{border:none;outline:none;}
+.hotRecommendSet .productsPics ul{margin:10px 0 20px 20px;overflow:hidden;}
+.hotRecommendSet .productsPics ul li{position:relative;float:left; width:29%;height:142px;display:inline-block;border: 1px solid #bdc6d5;margin-right:3.5%;margin-top:10px;}
+.hotRecommendSet .productsPics ul li .addPicture{width:90%;margin:5px 5px 0 5px;height:108px;}
+.hotRecommendSet .productsPics ul li .delectCha{position:absolute;top:0;right:0;width:20px;cursor:pointer;}
+.hotRecommendSet .productsPics ul li span{position:absolute;top:112px;left:5px;width:90%;text-align:center;height:25px;line-height:25px;cursor:pointer; display:inline-block;background:#20a0ff;color:#fff;}
+.hotRecommendSet .productsPics ul li.nodataPic .addPicture{height:132px;}
+.hotRecommendSet .productsPics ul li.hasPics input{position:absolute;top:114px;left:5px;display:block;width:90%;height:25px;opacity:0;cursor:pointer;z-index:10;}
+.hotRecommendSet .productsPics ul li.nodataPics input{position: absolute;top: 5px;left: 5px;width: 90%;height: 108px;}
+
+.hotRecommendSet .oneLine{height: 30px;line-height: 30px;border: 1px solid #bdc6d5;border-radius:5px;}
+.hotRecommendSet .oneLine.lunboStyle{margin-top: 20px;}
+.hotRecommendSet .oneLine span{float: left;font-size:1rem;margin-left:20px;}
+.hotRecommendSet .oneLine ul li{display:inline-block;}
+.hotRecommendSet .oneLine b{float: left;height: 14px;width: 14px;background: #1d8ce0; border-radius: 50%;margin-top: 8px;margin-left: 30px;cursor:pointer;}
+.hotRecommendSet .oneLine i{display: inline-block;width:6px;height: 6px;border-radius: 50%;float: left;margin-left: 4px;margin-top: 4px;}
+.hotRecommendSet .oneLine ul li.selected i{background-color: #fff;}
+.hotRecommendSet .oneLine em{font-style: normal;font-size: 1rem;margin-left: 10px;}
+.hotRecommendSet .DivCommon{border:1px solid #bdc6d5;border-radius:5px;margin-top:20px;}
+.hotRecommendSet .titleCommon{display:block;border-bottom:1px solid #bdc6d5;height:30px;line-height:30px;text-indent:20px;}
+
+ul.piculCommon{margin:0 20px 20px 20px;}
+ul.piculCommon li{position:relative;width:30%;height:125px;border:1px solid #bdc6d5;display:inline-block;margin-right:2%;margin-top: 15px;}
+ul.piculCommon li .addPicture{width:92%;height:70px;margin:4% 4% 0;}
+ul.piculCommon li .delectCha{position:absolute;top:0;right:0;width:20px;cursor:pointer;}
+ul.piculCommon li input{position:absolute;top:74px;left:4%;display:block;width:92%;height:25px;opacity:0;cursor:pointer;z-index:10;}
+ul.piculCommon li span{position:absolute;top:74px;left:4%;width:92%;text-align:center;height:25px;line-height:25px;cursor:pointer; display:inline-block;background:#2193d3;color:#fff;}
+ul.piculCommon li p{position:absolute;bottom:3px;;left:5px;width:92%;text-align:center;font-size:0.9rem;}
+ul.piculCommon li.nodataPics input{position:absolute;top:4%;left:4%;display:block;width:92%;height:70px;}
