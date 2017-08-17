@@ -83,10 +83,10 @@ define(function(require,exports,module){
                 pubsub.publish('dataChange',"img_new");
             });
             
-            $(".newProductSet .modelInput").focus(function(){  //输入框聚焦样式
+           /* $(".newProductSet .modelInput").focus(function(){  //输入框聚焦样式
               $(".newProductSet .modelName").css("border","1px solid #1d8ce0");
               pubsub.publish('dataChange',"img_new");
-            });
+            });*/
         },
 
     }

@@ -1,5 +1,5 @@
 <div class="previewPopInit">
-	<div class="previewLeft"><div></div></div>
+	<div class="previewLeft"></div>
 	
 	<div class="r">	
 		<a class="cut"></a>

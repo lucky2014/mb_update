@@ -114,9 +114,9 @@ define(function(require,exports,module){
                     prevButton: '.swiper-button-prev',
                 }); 
             }    
-            $(".hotRecommendSet .modelInput").focus(function(){ //输入框聚焦样式
+           /* $(".hotRecommendSet .modelInput").focus(function(){ //输入框聚焦样式
                 $(".hotRecommendSet .modelName").css("border","1px solid #1d8ce0");
-            });
+            });*/
         },
 
     }

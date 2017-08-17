@@ -503,18 +503,21 @@ html|* > svg {
 #show_pic_box {
     width: 260px;
     height: 131px;
-    line-height: 160px;
+    line-height: 131px;
     border: 1px solid #f0f4fa;
     text-align: center;
+    background: #f0f4fa;
 }
 #show_pic_url {
     max-width: 100%;
     max-height: 100%;
+    vertical-align: middle;
+    display: block;
 }
 #file_upload {
     background: none;
     font-size: 14px;
-    color: #188acc;
+    color: #0a679b;
 }
 #file_upload:hover{
     color: #2badff;

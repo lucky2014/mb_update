@@ -5,7 +5,7 @@
           <span><input type="button" value="标准按钮" name=""></span>
           <span class="jianbianBtn active"><input type="button" value="渐变按钮" name=""></span>
           <span class="graphBtn"><i></i><input type="button" value="图文按钮" name="" ></span>
-          <span class="opacBtn"><input type="button" value="透明按钮" name=""></span>
+          <!-- <span class="opacBtn"><input type="button" value="透明按钮" name=""></span> -->
       </div>
       <div class="innerDialog styleSetting" style="border-top:0px solid #ddd;margin-top: 16px;" hasmodified="1">
           <div>
@@ -15,7 +15,7 @@
                       <div id="button_text" class="colorSelectorWrapper clearfix none" style="display: block;">
                           <label class="label_slide" style="width:90px;">按钮文字</label>
                           <div class="clearfix btnText" style="float:left;margin-bottom:20px;">
-                              <input type="value" name="" value="标准按钮" class="form-control">
+                              <input type="text" name="" value="标准按钮" class="form-control">
                           </div>
                       </div>
                       <div class="linkDemo" style="margin-left:0;">

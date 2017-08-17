@@ -86,9 +86,9 @@ define(function(require,exports,module){
                 $("#hotProduct").addClass("active").find(".selectB").css("height",$("#hotProduct").height()-4);
             });
 
-            $(".hotProductSet .modelInput").focus(function(){  //输入框聚焦样式
+           /* $(".hotProductSet .modelInput").focus(function(){  //输入框聚焦样式
               $(".hotProductSet .modelName").css("border","1px solid #1d8ce0");
-            });
+            });*/
             
         },
 

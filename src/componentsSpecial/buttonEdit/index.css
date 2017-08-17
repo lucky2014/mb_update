@@ -1,10 +1,10 @@
-.DialogWindow{
+.buttonSetting .DialogWindow{
 	text-align: center;
 	margin: 32px 0 12px 24px;
 	border-bottom: 1px solid #e0e0e0;
 }
 .DialogWindow>span{
-	padding: 0.5%;
+	padding: 5px;
 	float: left;
 	border:1px solid transparent;
 	cursor: pointer;
@@ -12,11 +12,12 @@
 }
 .DialogWindow>span.active{
 	border:1px solid #1c9ae3;
+	border-radius: 5px;
 }
 .DialogWindow input{
 	position: relative;
 	height:32px;
-	color:#Fff;
+	color:#fff !important;
 	cursor: pointer;
 	border-radius: 5px;
 	border: none;
@@ -45,6 +46,9 @@
 	border-color:#527990;
 	border-style:dashed;
 	border-width:1px;
+}
+.DialogWindow span.opacBtn input:focus{
+	border: 1px dashed #527990 !important;
 }
 .DialogWindow span.jianbianBtn,.DialogWindow span.opacBtn{
 	margin-right:0;
@@ -137,3 +141,26 @@
 .btnDialog #userpic_file_upload{width: 81px;height: 81px;}
 .btnDialog #uploadifive-file_upload_pic{width: 77px;height: 77px;}
 .btnDialog #uploadifive-file_upload_pic .uploadifive-button{margin-top: 17px;height: 40px;}
+
+ .picBut{
+ 	background-image: url(../../1/images/addPic1.png);
+ 	background-repeat: no-repeat;
+ 	background-size: 20px 20px;
+ 	background-position: 10% center;
+ }
+
+ .picButFast li{
+ 	display: inline-block;
+ 	float: left;
+ 	margin-right: 8px;
+ 	border-radius: 5px;
+ 	width: 40px;
+ 	height: 40px;
+ 	background: #1c9ae3;
+ 	text-align: center;
+ 	line-height: 40px;
+ 	cursor: pointer;
+ }
+ .picButFast li img{
+ 	vertical-align: middle;
+ }

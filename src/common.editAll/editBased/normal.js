@@ -318,7 +318,7 @@ define(function(require,exports,module){
 			            }
 			            var url = $(".pic_thumb.select img").attr("src");
 			            //var pos = $(".pic_thumb.select i").attr("pos");
-			            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find("p").find("img").attr("src",url);
+			            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find(".picBut").css("background-image","url("+url+")");
 				        $("#userPicDialog").fadeOut(300);
 			    	})
 				},
@@ -343,7 +343,7 @@ define(function(require,exports,module){
 				            }
 				            var url = $(".pic_thumb.select img").attr("src");
 				            //var pos = $(".pic_thumb.select i").attr("pos");
-				            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find("p").find("img").attr("src",url);
+				            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find(".picBut").css("background-image","url("+url+")");
 				            $("#userPicDialog").fadeOut(300);
 				    	})
 					}

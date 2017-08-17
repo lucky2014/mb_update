@@ -38,7 +38,6 @@ define(function(require,exports,module){
         var dragParent = $(".drag").parent();
         for(var i = 0;i<dragParent.length;i++){
             var str = dragParent.eq(i).attr("id");
-            console.log(str)
             this.rightEditComponentInit(e,trimNumber(str),dragParent.eq(i))
         }
     }

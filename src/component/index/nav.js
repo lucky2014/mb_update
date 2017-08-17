@@ -49,7 +49,6 @@ define(function(require,exports,module){
                 _that.next().show();
             }
 
-
             me.templateList();
             me.componentList();
 
@@ -74,12 +73,7 @@ define(function(require,exports,module){
                 }
             });
             
-            me.pageInit();//网页模块小功能
-
-            //左边滚动条美化
-            /*var mouseWheel = require("common.mouseWheel/index"); //滚动条美化
-            mouseWheel.init(".navi-btn-dropdown.site-page-navi-list,.navi-btn-dropdown.templates-list,.navi-btn-dropdown.ext-app");
-            */       
+            me.pageInit();//网页模块小功能       
         },
         //网页模块小功能
         pageInit: function(){
@@ -163,7 +157,7 @@ define(function(require,exports,module){
             var me = this;
             $(".site-page-navi-list").delegate(".page-dele", "click", function(ev){
                 var self = $(this);
-                var pageId = self.attr('pageId');
+                var pageId = self.parents("li").attr('pageId');
 
                 popUp({
                     "title": '提示<a class="cut"></a>',
@@ -172,7 +166,7 @@ define(function(require,exports,module){
                     showConfirmButton: true,
                 }, function(){
                     if(pageId){
-                        setup.commonAjax("delPage.do", {imgId:imgId}, function(msg){  
+                        setup.commonAjax("delPage.do", {pageId:pageId}, function(msg){  
                           popUp({
                               "content":"删除成功！",
                               showCancelButton: false,
@@ -229,18 +223,16 @@ define(function(require,exports,module){
             setup.commonAjax("pageList.do", params, function(msg){  
                 var msg = msg.data;
                 var showDatas = {};
+                $(".left").html("");
                 $.each(msg, function(i,v){
                     v.pageName = v.pageName ? v.pageName : "页面"+ (i+1);
                     if(v.isHomePage == 1){
                         showDatas = $.extend({}, JSON.parse(v.data));
-                        $(".left").attr("isHomePage", 1);
+                        $(".left").attr("isHomePage", 1).attr("pageId", v.id);
                         //渲染中间的left
                         if(showDatas){
                             run.loadFn(showDatas,"",1);
                         }
-                    }else{
-                        $(".left").attr("isHomePage");
-                        showDatas = {};
                     }
                 });
 
@@ -249,14 +241,10 @@ define(function(require,exports,module){
                 $(".itemsDraw li:first-child").addClass("activePage").attr("isHomePage","1");  
                 $(".itemsDraw li:first-child").find(".page-dele").remove();
                 $(".itemsDraw li:first-child span").attr("index",1); 
-
-                var homePageId = $(".itemsDraw li[isHomePage=1]").attr("pageId");
-                $(".left").attr("pageId", homePageId);      
+   
                 //点击每个页面中间渲染
                 app.selectItems();         
                 
-                
-
                 //点击页面设计的保存
                 $(".right").delegate(".blueBtnSky", "click", function(){
                     var datas = run.saveData(sky);
@@ -321,24 +309,11 @@ define(function(require,exports,module){
                 self.parent().addClass("activePage").siblings().removeClass("activePage");
                 var pageId = self.parent("li").attr("pageId");
                 
-                //先判断编辑区域有没有没有保存的内容
-                var oldDatas = run.saveData();
-                if(run.compareCacheDatas(oldDatas)){
-                    popUp({
-                        "title": '温馨提示<a class="cut"></a>',
-                        "content":"您有未保存的页面，请点击右上角保存页面，再进行其他操作！",
-                        showCancelButton: true,
-                        showConfirmButton: true,
-                    },function(){
-                        $("#pop").html("").hide();
-                    });
-                }else{
-                    $(".left").html("").attr("pageId", pageId);;
-                    loadTemplateData.init("getPageInfo.do", "pageId", pageId, function(datas){
-                        //console.log(JSON.stringify(datas,null,2));
-                        run.running(datas);
-                    });
-                }
+                $(".left").html("").attr("pageId", pageId);;
+                loadTemplateData.init("getPageInfo.do", "pageId", pageId, function(datas){
+                    //console.log(JSON.stringify(datas,null,2));
+                    run.running(datas);
+                });
             })        
         },
     }

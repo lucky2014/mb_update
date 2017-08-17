@@ -19,7 +19,7 @@ define(function(require,exports,module){
     init:function(app){
       linkAdress.init();
       var me = this;
-    	$("body").delegate("#inpBtn span","click",function(){
+    	$("body").delegate("#inpBtn span","click",function(){  //按钮类型选择
           var ind = $(this).index();
           if(ind==0){
               $(app.dragTarget).html(button1);
@@ -48,7 +48,7 @@ define(function(require,exports,module){
       $("body").delegate("#font_type_select .before","click",function(){
         $("#fontConfig").slideToggle(300);
       })
-      $("body").delegate("#fontConfig i","click",function(){
+      $("body").delegate("#fontConfig i","click",function(){  //加粗倾斜设置
         var type = $(this).attr("type");
         var config = $(this).attr("config");
         if($(this).hasClass("active")){
@@ -67,11 +67,11 @@ define(function(require,exports,module){
             $(this).addClass("active");
         }
       })
-      $("body").delegate("#fontConfig select","change",function(){
+      $("body").delegate("#fontConfig select","change",function(){ //字体大小选择
           var self = $(this).find("option:selected");
           $(app.dragTarget).find("input").css("font-size",self.html())
       })
-      $(".right").delegate(".progress-circle","mouseover",function(){
+      $(".right").delegate(".progress-circle","mouseover",function(){ //鼠标上移显示进度条百分比
         var self = $(this);
         self.addClass("hover");
         self.siblings(".percent").html(self.parents("p").attr("value"));
@@ -84,12 +84,20 @@ define(function(require,exports,module){
         self.siblings("span").hide();
       })
 
-      $(".picStyleSel li").click(function(){
+      $("body").delegate(".picStyleSel li","click",function(){  //系统图片or我的图片切换
          var self = $(this);
          var indNum = self.attr("indNum");
          self.addClass("sel").siblings().removeClass("sel");
          $(".modal-body[indNum="+indNum+"]").show().siblings(".modal-body").hide();
 
+      })
+      $("body").delegate(".picButFast li","click",function(){ //快速更换按钮图标
+          var self = $(this);
+          var url = self.find("img").attr("src");
+          $(app.dragTarget).find(".picBut").css("background-image","url("+url+")");
+      })
+      $("body").delegate(".form-control","keyup",function(){
+          $(app.dragTarget).find("input").val($(this).val());
       })
       commonZujian.init();
     },

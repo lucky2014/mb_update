@@ -85,8 +85,6 @@ define(function(require,exports,module){
             if(me.cacheDatas){
                 var a1 = JSON.stringify(datas);
                 var a2 = JSON.stringify(me.cacheDatas);
-                console.log(a1);
-                console.log(a2);
                 if(a1 == a2){
                     return false;
                 }else{
@@ -99,7 +97,7 @@ define(function(require,exports,module){
             var me = this;
             var datas = me.saveData();
             //保存
-            if(datas.pageId){
+            if($(".left").attr("pageId")){
                 var params = {
                    "pageId": $(".left").attr("pageId"),
                    "templateName": datas.templateName,
@@ -140,7 +138,7 @@ define(function(require,exports,module){
             //渲染弹框
             box.render($("#previewPop"), {siteId: me.siteId, pageId: datas.pageId}, previewPop); 
             //保存、预览
-            if(datas.pageId){
+            if($(".left").attr("pageId")){
                 var params = {
                    "pageId": $(".left").attr("pageId"),
                    "templateName": datas.templateName,
@@ -182,7 +180,7 @@ define(function(require,exports,module){
             app.loadFn(datas, "previewLeft");
 
             //关闭按钮
-            $(".previewPopInit .cut").click(function(){
+            $("#previewPop").delegate(".cut","click",function(){
                 $("#previewPop").hide();
             });
         },
@@ -192,8 +190,8 @@ define(function(require,exports,module){
             var datas = me.saveData();
             if(me.compareCacheDatas(datas)){
                 popUp({
-                    "title": "温馨提示<a class='cut'></a>",
-                    "content": "您有未保持的数据，请先保存再发布！" ,
+                    "title": "提示<a class='cut'></a>",
+                    "content": "<div class='deleText'><b></b>您有未保持的数据，请先保存再发布！</div>" ,
                     showCancelButton: true,
                     showConfirmButton: true,
                 }, function(){
@@ -303,7 +301,9 @@ define(function(require,exports,module){
 
             return datas;
         },
-        changeData:function(){
+        changeData:function(w,h){
+            w = w || this.basedDevicedWidth;
+            h = h || 55;
             for(var id in this.elements){
                 var idValue = this.elements[id]
                 for(var className in idValue){
@@ -312,7 +312,7 @@ define(function(require,exports,module){
                             if(idValue[className][style].indexOf("%")==-1){
                                 if(!isNaN(parseInt(idValue[className][style]))){
                                     if(!IsPC()){
-                                        idValue[className][style] = parseInt((parseInt(idValue[className][style])-55)/308*this.basedDevicedWidth)+"px"
+                                        idValue[className][style] = parseInt((parseInt(idValue[className][style])-h)/308*w)+"px"
                                     }
                                 }
                             }
@@ -320,7 +320,7 @@ define(function(require,exports,module){
                             if(idValue[className][style].indexOf("%")==-1){
                                 if(!isNaN(parseInt(idValue[className][style]))){
                                     if(!IsPC()){
-                                        idValue[className][style] = parseInt(parseInt(idValue[className][style])/308*this.basedDevicedWidth)+"px";
+                                        idValue[className][style] = parseInt(parseInt(idValue[className][style])/308*w)+"px";
                                     }
                                 }
                             }
@@ -334,26 +334,32 @@ define(function(require,exports,module){
         },
         loadFn:function(datas, ele, log){ //渲染html5
             //目前components只有1个数组值
-            //console.log(JSON.stringify(datas,null,2));
+            
+            $(".left").html("");
+            if(ele) $("."+ele).html("");
+            
             var me = this;
             if(ele){
                 this.elements = datas.components[0].elements||{};
-                this.changeData();
-                var htmls = this.getSaved();
-                $("." + ele + ">div").append(htmls);
+                this.changeData(230,41);
+                var htmls = '<div><div class="skyHeader">'+datas.components[0].templateName+'</div>';
+                htmls += this.getSaved()+'</div>';
+                $("." + ele).html(htmls);
+                $("." + ele+">div").css({"backgroundColor": datas.components[0].backgroundColor})
             }else{
-                this.elements = datas.elements||{};
-                this.changeData();
-                var htmls = this.getSaved();
-                $(".left").append(htmls);
+                if(log){ //初始渲染
+                    this.elements = datas.components[0].elements||{};
+                    this.changeData();
+                    var htmls = this.getSaved();
+                    $(".left").html(htmls);
+                }else{
+                    this.elements = datas.elements||{};
+                    this.changeData();
+                    var htmls = this.getSaved();
+                    $(".left").html(htmls);
+                }
             } 
 
-            if(log){ //初始渲染
-                this.elements = datas.components[0].elements||{};
-                this.changeData();
-                var htmls = this.getSaved();
-                $(".left").append(htmls);
-            }
             /**这个方法作为读取组件信息时的基础数据绑定js在component/index/index.js*/
             me.rightEditComponentInitAll();
             me.cacheDatas = datas;          

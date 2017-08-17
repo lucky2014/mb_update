@@ -1,7 +1,7 @@
 <div class="setting-panel">
   <a class="setting-panel-switch"></a>
   <div class="setting-panel-content">
-      <div class="DialogWindow">
+      <div class="DialogWindow picture">
           <div class="innerDialog" style="padding-bottom:0;">
               <div id="show_pic_box">
                   <img src="../src/component/imgs/logoTip.png" id="show_pic_url">

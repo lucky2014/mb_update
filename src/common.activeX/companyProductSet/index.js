@@ -109,9 +109,9 @@ define(function(require,exports,module){
                 }); 
             };
 
-            $(".companyProductSet .modelInput").focus(function(){  //输入框聚焦样式
+           /* $(".companyProductSet .modelInput").focus(function(){  //输入框聚焦样式
               $(".companyProductSet .modelName").css("border","1px solid #1d8ce0");
-            });
+            });*/
             
         },
 

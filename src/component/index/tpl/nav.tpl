@@ -49,7 +49,7 @@
             <a class="nav-btn site_save" type="save"> 保存</a>
         </li>
         <li>
-        	<a class="nav-btn fBlue site_publish" type="publish"> 生成</a>
+        	<a class="nav-btn fBlue site_publish" type="publish"> 发布</a>
         </li>
     </ul>
 </div>

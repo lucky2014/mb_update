@@ -15,9 +15,10 @@ margin-left: -400px; background-size: 100% 100%; top: 50%; margin-top: -300px;}
     width: 230px;
     height: 408px;
     background: none;
-    position: relative;
+    position: relative; cursor: default; pointer-events: none;
 }
-.previewPopInit .previewLeft>div{ position: relative; width: 100%; height: 408px; overflow: hidden; background: #fff;}
+.previewPopInit .previewLeft>div{ position: relative; width: 100%; height: 408px; overflow: hidden; background: #fff; 
+cursor: default; pointer-events: none;}
 .previewPopInit .r{ float: right; width: 380px; position: relative; height: 600px;}
 .previewPopInit .r .cut{ background: url(../../imgs/close.png); width: 15px; height: 16px; position: absolute; right: 80px;
 top: 70px; display: block; cursor: pointer;}
@@ -59,3 +60,10 @@ line-height: 30px; padding: 0 8px; margin-top: 10px; float: left;
 }
 .pblTip{height: 74px; line-height: 74px; background: #fff; border-radius: 6px; color: #617084; width: 250px;
 left: 50%; margin-left: -125px; top: 50%; margin-top: -37px; position: absolute; text-align: center;}
+
+.skyHeader{ background: url(../../imgs/titleBk.png); background-size: 100% 100%; width: 100%;     text-align: center;
+    color: #fff;
+    padding-top: 11px;
+    height: 30px;
+    line-height: 30px;
+}
