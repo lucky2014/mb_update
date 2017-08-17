@@ -2,7 +2,7 @@ define(function(require, exports, module) {
 	var $ = require("jquery");
 
     var setupApp = {
-        url:"http://"+(location.host||"wx.yinnima.com")+"/template/official/", //测试
+        url:"http://"+(location.host||"wx.yinnima.com:8088")+"/template/official/", //测试
         getQueryString: function(name) { //获取URL的参数，isEit
           var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
           var r = window.location.search.substr(1).match(reg);

@@ -2,6 +2,8 @@ define(function(require,exports,module){
 		var $ = require("jquery");
 		var Engine = require("engine");
     	var box = Engine.init();
+    	//加载拖拽对象
+		var positionSetting = require("component/index/tpl/positionSetting.js");
 		var app = {
 			newArr:{},
 			sizeControlChange:function(){
@@ -21,6 +23,9 @@ define(function(require,exports,module){
 	                      '<div class="sizeControl bm"></div>'+
 	                      '<div class="sizeControl br"></div>'+
 	                      '<div class="rotateControl-point ui-draggable" title="旋转"></div>';
+	                      if(me.dragTarget){
+	                      		positionSetting.load(me);
+	                      }
 	                return str;
 			},
 			changeCursor:function(){

@@ -1,15 +1,14 @@
 .DialogWindow{
 	text-align: center;
+	margin: 32px 0 12px 24px;
+	border-bottom: 1px solid #e0e0e0;
 }
 .DialogWindow>span{
 	padding: 0.5%;
-	margin-right:6%;
 	float: left;
-	width:20%;
 	border:1px solid transparent;
 	cursor: pointer;
-	margin-top:2%;
-	margin-left:26%;
+	margin: 0 8px 15px 0;
 }
 .DialogWindow>span.active{
 	border:1px solid #1c9ae3;
@@ -20,12 +19,25 @@
 	color:#Fff;
 	cursor: pointer;
 	border-radius: 5px;
-	border: 1px solid #c4c4c4;
+	border: none;
+	width: 140px;
+	background: #1c9ae3;
+}
+.DialogWindow span.graphBtn{
+	position: relative;
+}
+.DialogWindow span.graphBtn i{
+	position: absolute;
+	top: 10px;
+	left: 33px;
+	z-index: 9;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: url(../../../src/component/imgs/breakImg.png) no-repeat;
 }
 .DialogWindow span.graphBtn input{
-	background: url(../../../src/component/imgs/breakImg.png) no-repeat 8px 8px;
-	background-color: #1c9ae3;
-	background-size: 16px;
+	padding-left: 26px;
 }
 .DialogWindow span.opacBtn input{
 	background-color: transparent;
@@ -115,3 +127,13 @@
 	border:1px solid #c4c4c4;
 	border-radius: 4px;
 }
+/* .c-colorWrapper{margin-right: 10px;} */
+#groupSkin{border-bottom: 1px solid #e0e0e0;}
+.label_slide{height: 32px;line-height: 32px;}
+#tipsDialog .picStyleSel{width: 92%;margin: 0 auto;border-bottom: 1px solid #d3dce6;}
+#tipsDialog .picStyleSel li{display: inline-block;padding: 13px 0; width: 100px;text-align: center;cursor: pointer;}
+#tipsDialog .picStyleSel li.sel{color:#1c9ae3;border-bottom: 2px solid #1c9ae3;}
+.btnDialog .pic_thumb{position: relative;width:81px;height:81px;line-height: 81px;}
+.btnDialog #userpic_file_upload{width: 81px;height: 81px;}
+.btnDialog #uploadifive-file_upload_pic{width: 77px;height: 77px;}
+.btnDialog #uploadifive-file_upload_pic .uploadifive-button{margin-top: 17px;height: 40px;}

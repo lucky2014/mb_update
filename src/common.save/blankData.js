@@ -2,7 +2,7 @@ define(function(require,exports,module){
    
    var data = {
         "components": [],
-        "templateName":"空白页",
+        "templateName":"首页",
         "backgroundColor":"#f0f0fa",
         "description":"",
         }

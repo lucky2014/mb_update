@@ -25,6 +25,9 @@ define(function(require,exports,module){
 				callback:function(me,e,componentClass,componentTpl,editTpl){
 					var userPicDialog = require("component/index/tpl/userPicDialog.tpl");
 					box.render($("#userPicDialog"), "", userPicDialog);
+
+					var commonZujian = require("componentsSpecial/commonZujian");
+					commonZujian.getData("#userPicList");
     				$("#userPicDialog").fadeIn(300);
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
@@ -33,6 +36,7 @@ define(function(require,exports,module){
 			            }
 			            var url = $(".pic_thumb.select").attr("data-url");
 			            $(me.dragTarget).find("img")[0]&&$(me.dragTarget).find("img").attr("src",url);
+			            $("#show_pic_url").attr("src",url);//右边编辑区图片
 			            $("#userPicDialog").fadeOut(300);
 			    	})
 				},
@@ -40,6 +44,8 @@ define(function(require,exports,module){
 					me.stopBubble(e)
 					var userPicDialog = require("component/index/tpl/userPicDialog.tpl");
 					box.render($("#userPicDialog"), "", userPicDialog);
+					var commonZujian = require("componentsSpecial/commonZujian");
+					commonZujian.getData("#userPicList");
     				$("#userPicDialog").fadeIn(300);
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
@@ -48,6 +54,7 @@ define(function(require,exports,module){
 			            }
 			            var url = $(".pic_thumb.select").attr("data-url");
 			            $(me.dragTarget).find("img")[0]&&$(me.dragTarget).find("img").attr("src",url);
+			            $("#show_pic_url").attr("src",url);//右边编辑区图片
 			            $("#userPicDialog").fadeOut(300);
 			    	})
 				},
@@ -295,21 +302,23 @@ define(function(require,exports,module){
 				callback:function(me,e,componentClass,componentTpl,editTpl){
 					var settingButtonDialog = require("componentsSpecial/buttonEdit/settingButtonDialog.tpl");
 					var url = "../src/component/imgs/btnIconsList.png";
-					var data = [
+					/*var data = [
 						{"left":0,"top":0},{"left":-45,"top":0},{"left":-91,"top":0},{"left":-138,"top":0},{"left":-185,"top":0},{"left":-233,"top":0},
 						{"left":0,"top":-42},{"left":-45,"top":-42},{"left":-91,"top":-42},{"left":-138,"top":-42},{"left":-185,"top":-42},{"left":-233,"top":-42},
 						{"left":0,"top":-86},{"left":-45,"top":-86},{"left":-91,"top":-86},{"left":-140,"top":-86},{"left":-187,"top":-86},{"left":-236,"top":-86},
 						{"left":0,"top":-131},{"left":-47,"top":-131},{"left":-95,"top":-131},{"left":-141,"top":-131},{"left":-187,"top":-131},{"left":-236,"top":-131}
-					]
-					box.render($("#userPicDialog"), data, settingButtonDialog);
+					]*/
+					box.render($("#userPicDialog"), "", settingButtonDialog);
+					var commonZujian = require("componentsSpecial/commonZujian");
+					commonZujian.getData(".myPics #userPicList");
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
 			                alert("请选择一张图片")
 			                return false;
 			            }
-			            var url = $(".pic_thumb.select i").attr("data-url");
-			            var pos = $(".pic_thumb.select i").attr("pos");
-			            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find("p").children("i").css({"background-image":"url("+url+")","background-position":pos});
+			            var url = $(".pic_thumb.select img").attr("src");
+			            //var pos = $(".pic_thumb.select i").attr("pos");
+			            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find("p").find("img").attr("src",url);
 				        $("#userPicDialog").fadeOut(300);
 			    	})
 				},
@@ -317,22 +326,24 @@ define(function(require,exports,module){
 					if($("#inpBtn span").eq(2).hasClass("active")){
 						var settingButtonDialog = require("componentsSpecial/buttonEdit/settingButtonDialog.tpl");
 						var url = "../src/component/imgs/btnIconsList.png";
-						var data = [
+						/*var data = [
 							{"left":0,"top":0},{"left":-45,"top":0},{"left":-91,"top":0},{"left":-138,"top":0},{"left":-185,"top":0},{"left":-233,"top":0},
 							{"left":0,"top":-42},{"left":-45,"top":-42},{"left":-91,"top":-42},{"left":-138,"top":-42},{"left":-185,"top":-42},{"left":-233,"top":-42},
 							{"left":0,"top":-86},{"left":-45,"top":-86},{"left":-91,"top":-86},{"left":-140,"top":-86},{"left":-187,"top":-86},{"left":-236,"top":-86},
 							{"left":0,"top":-131},{"left":-47,"top":-131},{"left":-95,"top":-131},{"left":-141,"top":-131},{"left":-187,"top":-131},{"left":-236,"top":-131}
-						]
-						box.render($("#userPicDialog"), data, settingButtonDialog);
+						]*/
+						box.render($("#userPicDialog"), "", settingButtonDialog);
+						var commonZujian = require("componentsSpecial/commonZujian");
+						commonZujian.getData(".myPics #userPicList");
 	    				$("#userPicDialog").fadeIn(300);
 	    				me.selectFn(function(){
 				    		if($("#userPicList .select").length==0){
 				                alert("请选择一张图片")
 				                return false;
 				            }
-				            var url = $(".pic_thumb.select i").attr("data-url");
-				            var pos = $(".pic_thumb.select i").attr("pos");
-				            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find("p").children("i").css({"background-image":"url("+url+")","background-position":pos});
+				            var url = $(".pic_thumb.select img").attr("src");
+				            //var pos = $(".pic_thumb.select i").attr("pos");
+				            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find("p").find("img").attr("src",url);
 				            $("#userPicDialog").fadeOut(300);
 				    	})
 					}

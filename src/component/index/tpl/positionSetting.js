@@ -85,7 +85,7 @@ define(function(require,exports,module){
                     }
                 })
             }
-            appExtend.rectForPos = me.load(appExtend.dragTarget,appExtend);
+            appExtend.rectForPos = me.load(appExtend);
         },
         checkPosition:function(target,appExtend){
             var id = $(appExtend.dragTarget).parents(".drag").parent().attr("id");
@@ -95,7 +95,7 @@ define(function(require,exports,module){
             $("input[name='module_height']").val(appExtend.rectForPos[id].height);
             $(appExtend.dragTarget).parents(".drag").css(appExtend.rectForPos[id]);
         },
-        load:function(target,appExtend){
+        load:function(appExtend){
             var id = $(appExtend.dragTarget).parents(".drag").parent().attr("id");
             if(appExtend.rectForPos[id]==undefined){
                 appExtend.rectForPos[id] = {};

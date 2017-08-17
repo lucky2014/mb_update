@@ -14,6 +14,8 @@ define(function(require,exports,module){
     var editSite = setup.getQueryString("editSite") || "";
     var initTemplateId = setup.getQueryString("templateId");
     var run = require("common.editAll/editBased/running");
+
+    var popUp = require("common.PopUp/index");
     
     var app = {
         getLinkData:function(){
@@ -33,17 +35,14 @@ define(function(require,exports,module){
 
             box.render($(".navbar-inner"), "", navbarTpl);//加载导航
 
+            me.pageList();
             if(editSite == "true"){
-                me.pageList();
+                /*me.pageList();*/
                 var _this = $(".new-icons-page").parents(".navi-btn");
                 _this.addClass("active");
-                if($(".itemsDraw li").length > 0){
-                    $(".itemsDraw .noData").hide();
-                }
                 $(".navi-btn-dropdown").hide();
                 _this.next().show();
-            }else{
-                $(".itemsDraw .noData").show();
+            }else{ 
                 var _that = $(".new-icons-tpl").parents(".navi-btn");
                  _that.addClass("active");
                 $(".navi-btn-dropdown").hide();
@@ -78,8 +77,9 @@ define(function(require,exports,module){
             me.pageInit();//网页模块小功能
 
             //左边滚动条美化
-            var mouseWheel = require("common.mouseWheel/index"); //滚动条美化
+            /*var mouseWheel = require("common.mouseWheel/index"); //滚动条美化
             mouseWheel.init(".navi-btn-dropdown.site-page-navi-list,.navi-btn-dropdown.templates-list,.navi-btn-dropdown.ext-app");
+            */       
         },
         //网页模块小功能
         pageInit: function(){
@@ -113,7 +113,6 @@ define(function(require,exports,module){
             $(".site-page-navi-add").click(function(){
                 var pageNum = $(".itemsDraw li").length+1;
                 $(".site-page-navi-list ul").append("<li><input type='text' value='第"+pageNum+"页'/><button>确认</button></li>");
-                $(".itemsDraw .noData").hide();
             });
         },
         // 点击重命名
@@ -164,12 +163,36 @@ define(function(require,exports,module){
             var me = this;
             $(".site-page-navi-list").delegate(".page-dele", "click", function(ev){
                 var self = $(this);
-                var moduelId = self.attr('moduelId');
-                $(".site-page-navi-list li[moduelId="+moduelId+"]").remove();
-                if($(".itemsDraw li").length < 2){
-                    $(".itemsDraw .noData").show();
-                }
-                me.getLinkData();
+                var pageId = self.attr('pageId');
+
+                popUp({
+                    "title": '提示<a class="cut"></a>',
+                    "content":"<div class='deleText'><b></b>此操作将永久删除页面，是否继续？</div>",
+                    showCancelButton: true,
+                    showConfirmButton: true,
+                }, function(){
+                    if(pageId){
+                        setup.commonAjax("delPage.do", {imgId:imgId}, function(msg){  
+                          popUp({
+                              "content":"删除成功！",
+                              showCancelButton: false,
+                              showConfirmButton: false,
+                              timer: 1000
+                          });
+                          self.parents("li").remove();
+                          me.getLinkData();
+                        });
+                    }else{
+                        popUp({
+                            "content":"删除成功！",
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                        self.parents("li").remove();
+                    }
+                    
+                });
             });
         },
         //点击设为模板
@@ -188,6 +211,12 @@ define(function(require,exports,module){
                 //加载新的li
                 box.render(self.parent(), val, webRenameTpl);
                 me.getLinkData();
+
+                var pageNum = $(".itemsDraw li").length;
+                loadTemplateData.getInfor();
+                $("#sky h1").html("第"+pageNum+"页");
+                $("#storeName").val("第"+pageNum+"页");
+
             });
         },
         pageList: function(){ //已创建页面接口
@@ -197,28 +226,42 @@ define(function(require,exports,module){
                 pageNum : 1,
                 pageSize : 10,
             }
-            console.log(setup.getQueryString("siteId"));
             setup.commonAjax("pageList.do", params, function(msg){  
-                console.log(JSON.stringify(msg,null,2));
                 var msg = msg.data;
+                var showDatas = {};
                 $.each(msg, function(i,v){
                     v.pageName = v.pageName ? v.pageName : "页面"+ (i+1);
+                    if(v.isHomePage == 1){
+                        showDatas = $.extend({}, JSON.parse(v.data));
+                        $(".left").attr("isHomePage", 1);
+                        //渲染中间的left
+                        if(showDatas){
+                            run.loadFn(showDatas,"",1);
+                        }
+                    }else{
+                        $(".left").attr("isHomePage");
+                        showDatas = {};
+                    }
                 });
 
                 var itemsTpl = require("component/index/tpl/items.tpl");
                 box.render($(".itemsDraw"), msg, itemsTpl);  
-                $(".itemsDraw li:first-child").addClass("activePage");  
-                $(".itemsDraw li:first-child span").attr("index",1);       
+                $(".itemsDraw li:first-child").addClass("activePage").attr("isHomePage","1");  
+                $(".itemsDraw li:first-child").find(".page-dele").remove();
+                $(".itemsDraw li:first-child span").attr("index",1); 
+
+                var homePageId = $(".itemsDraw li[isHomePage=1]").attr("pageId");
+                $(".left").attr("pageId", homePageId);      
                 //点击每个页面中间渲染
-                $(".itemsDraw").delegate(" li","click",function(){
-                    $(".left").html("");
-                    var self = $(this);
-                    self.addClass("activePage").siblings().removeClass("activePage");
-                    var pageId = self.attr("pageId");
-                    loadTemplateData.init("getPageInfo.do", "pageId", pageId, function(datas){
-                        run.running(datas);
-                    });
-                })                   
+                app.selectItems();         
+                
+                
+
+                //点击页面设计的保存
+                $(".right").delegate(".blueBtnSky", "click", function(){
+                    var datas = run.saveData(sky);
+                    run.cacheDatas = datas;
+                });
                 
             });
         },
@@ -268,7 +311,36 @@ define(function(require,exports,module){
                     run.running(datas);
                 });
             } 
-        }
+        }, 
+        //点击页面列表切换中间显示区
+        selectItems: function(){ 
+            var me = this;
+            $(".itemsDraw").delegate(" li a","click",function(){
+                
+                var self = $(this);
+                self.parent().addClass("activePage").siblings().removeClass("activePage");
+                var pageId = self.parent("li").attr("pageId");
+                
+                //先判断编辑区域有没有没有保存的内容
+                var oldDatas = run.saveData();
+                if(run.compareCacheDatas(oldDatas)){
+                    popUp({
+                        "title": '温馨提示<a class="cut"></a>',
+                        "content":"您有未保存的页面，请点击右上角保存页面，再进行其他操作！",
+                        showCancelButton: true,
+                        showConfirmButton: true,
+                    },function(){
+                        $("#pop").html("").hide();
+                    });
+                }else{
+                    $(".left").html("").attr("pageId", pageId);;
+                    loadTemplateData.init("getPageInfo.do", "pageId", pageId, function(datas){
+                        //console.log(JSON.stringify(datas,null,2));
+                        run.running(datas);
+                    });
+                }
+            })        
+        },
     }
     return app;
 });

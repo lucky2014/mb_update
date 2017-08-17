@@ -39,32 +39,46 @@
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
     background-color: #fff;
-    padding: 10px 16px;
+    padding: 10px 32px;
     color:#475669;
     text-align: left;
-    font-size: 1.1em; font-weight: bold;
+    font-size: 1.14rem; font-weight: bold;
 }
 .pop_content{
-    margin: 24px auto 10px;
+    margin: 24px 0 10px 32px;
     text-align: center; color: #617084;
 }
 .pop_content{
 	width:80%;
 }
 .pop_foot{
-    margin: 0 auto 10px;
     text-align: right;
-    width:80%;
+    margin-right: 32px;
 }
-.pop_foot span{ display: inline-block; margin:0 2%; width: 80px; padding: 6px 0; border-radius: 6px; text-align: center;}
+.pop_foot span{ display: inline-block; width: 80px; padding: 6px 0; border-radius: 3px; text-align: center;}
 .pop_confirm{
-	background-color:#57a2d6; 
     color: #fff;
-    border:1px solid #57a2d6;
+    background: #20a0ff;
+    border:1px solid #20a0ff;
+}
+.pop_confirm:hover{
+    background: #2badff;
+}
+.pop_confirm:active{
+    background: #0991f6;
 }
 .pop_cancel{
-    border:1px solid #8492a6;
-    color: #475669;
+    border:1px solid #9baabf;
+    color: #617084;
+    margin-right: 10px;
+}
+.pop_cancel:hover{
+    border:1px solid #2badff;
+    color: #2badff;
+}
+.pop_cancel:active{
+    border:1px solid #0991f6;
+    color: #0991f6;
 }
 .popNum{
     display: inline;
@@ -80,3 +94,35 @@
 span.lineIl{ padding-left: 10px;}
 
 .cut{ float: right; margin-top: 3px; cursor: pointer;}
+
+.cut{ background: url(../../imgs/close.png); width: 15px; height: 16px; position: absolute; right: 32px;
+top: 10px; display: block; cursor: pointer;}
+.cut:hover{ background-position: 0 -16px;}
+
+/*创建站点*/
+.publishBox{ clear: both; overflow: hidden;}
+.publishBox li{ clear: both; color: #617084; padding-bottom: 14px;}
+.publishBox li label{ float: left; width: 90px; text-align: left; height: 30px; line-height: 30px;}
+.publishBox li input{ float: left; width: 280px; border-radius: 4px; border: 1px solid #d3dce6; height: 30px; 
+line-height: 30px; padding: 0 8px;}
+.publishBox li input.siteDomain{
+     width: 180px;
+}
+.publishBox li span{ height: 30px; line-height: 30px; display: inline-block; text-align: left; float: left;}
+
+.tl{ text-align: left;}
+.pd20{ padding: 10px 0 20px;}
+
+
+.deleText{text-align: left;height: 40px;line-height: 40px;}
+#pop .deleText b{
+    float: left;
+    margin-right: 16px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: url(../component/imgs/new_navbar_header_4.png) no-repeat -6px -65px;
+ }
+/*  #border_color{padding-bottom: 32px;padding-top: 16px;    border-bottom: 1px solid #e0e0e0;} */
+ #border_color .select, #border_color .skin-colorSelector{margin-right: 10px;}
+ #background_color{display: block;height: 32px; padding: 8px 0 32px 0;}

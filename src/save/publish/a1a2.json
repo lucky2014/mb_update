@@ -1,0 +1,184 @@
+
+"{"elements ":{
+"button1502850759997 ":{"drag ":{"left ":"12.467532467532468px ","minHeight ":"51.94805194805195px ","position ":"absolute ","textAlign ":"center ","top ":"15.584415584415584px ","transformOrigin ":"center center 0px ","width ":"361.5584415584416px ","zIndex ":1021,"nodeName ":"DIV "},"dragBox_parent ":{"height ":"100 % ","nodeName ":"DIV "},"dragBox ":{"cursor ":"move ","height ":"100 % ","minHeight ":"51.94805194805195px ","minWidth ":"16.623376623376625px ","width ":"100 % ","nodeName ":"DIV ","html ":" < input type = \"button\" value=\"标准按钮\" style=\"width:100%;min-height:32px;height:100%;background-color: #1c9ae3;color:#fff;outline: none;border-color:transparent;\" name=\"\">"}
+},
+"text1502850761194": {
+    "drag": {
+        "left": "2.077922077922078px",
+        "minHeight": "51.94805194805195px",
+        "position": "absolute",
+        "textAlign": "center",
+        "top": "75.84415584415584px",
+        "transformOrigin": "center center 0px",
+        "width": "361.5584415584416px",
+        "zIndex": 1021,
+        "nodeName": "DIV"
+    },
+    "dragBox_parent": {
+        "height": "100%",
+        "nodeName": "DIV"
+    },
+    "dragBox": {
+        "cursor": "move",
+        "height": "100%",
+        "minHeight": "51.94805194805195px",
+        "minWidth": "16.623376623376625px",
+        "width": "100%",
+        "nodeName": "DIV",
+        "html": "<p style=\"width:100%;height:100%;border: 1px solid #ddd;\">双击编辑</p>"
+    }
+},
+"button1502870897141": {
+    "drag": {
+        "left": "0px",
+        "minHeight": "33.24675324675325px",
+        "position": "absolute",
+        "textAlign": "center",
+        "top": "62.33766233766234px",
+        "width": "187.012987012987px",
+        "zIndex": 519,
+        "nodeName": "DIV"
+    },
+    "dragBox_parent": {
+        "height": "100%",
+        "nodeName": "DIV"
+    },
+    "dragBox": {
+        "height": "100%",
+        "minHeight": "33.24675324675325px",
+        "minWidth": "16.623376623376625px",
+        "width": "100%",
+        "nodeName": "DIV",
+        "html": "<input type=\"button\" value=\"标准按钮\" style=\"width:100%;min-height:32px;height:100%;background-color: #1c9ae3;color:#fff;outline: none;border-color:transparent;\" name=\"\">"
+    }
+},
+"text1502870898373": {
+    "drag": {
+        "left": "51.94805194805195px",
+        "minHeight": "33.24675324675325px",
+        "position": "absolute",
+        "textAlign": "center",
+        "top": "189.0909090909091px",
+        "transformOrigin": "center center 0px",
+        "width": "187.012987012987px",
+        "zIndex": 519,
+        "nodeName": "DIV"
+    },
+    "dragBox_parent": {
+        "height": "100%",
+        "nodeName": "DIV"
+    },
+    "dragBox": {
+        "cursor": "move",
+        "height": "100%",
+        "minHeight": "33.24675324675325px",
+        "minWidth": "16.623376623376625px",
+        "width": "100%",
+        "nodeName": "DIV",
+        "html": "<p style=\"width:100%;height:100%;border: 1px solid #ddd;\">双击编辑</p>"
+    }
+}
+},
+"componentSort": 1, "symbol": "baseComponents", "templateName": "首页", "description": "", "backgroundColor": "#f0f0fa"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"{"elements ":{"button1502850759997 ":{"drag ":{"left ":"12.467532467532468px ","minHeight ":"51.94805194805195px ","position ":"absolute ","textAlign ":"center ","top ":"15.584415584415584px ","transformOrigin ":"center center 0px ","width ":"361.5584415584416px ","zIndex ":1021,"nodeName ":"DIV "},"dragBox_parent ":{"height ":"100 % ","nodeName ":"DIV "},"dragBox ":{"cursor ":"move ","height ":"100 % ","minHeight ":"51.94805194805195px ","minWidth ":"16.623376623376625px ","width ":"100 % ","nodeName ":"DIV ","html ":" < input type = \"button\" value=\"标准按钮\" style=\"width:100%;min-height:32px;height:100%;background-color: #1c9ae3;color:#fff;outline: none;border-color:transparent;\" name=\"\">"
+}
+},
+"text1502850761194": {
+    "drag": {
+        "left": "2.077922077922078px",
+        "minHeight": "51.94805194805195px",
+        "position": "absolute",
+        "textAlign": "center",
+        "top": "75.84415584415584px",
+        "transformOrigin": "center center 0px",
+        "width": "361.5584415584416px",
+        "zIndex": 1021,
+        "nodeName": "DIV"
+    },
+    "dragBox_parent": {
+        "height": "100%",
+        "nodeName": "DIV"
+    },
+    "dragBox": {
+        "cursor": "move",
+        "height": "100%",
+        "minHeight": "51.94805194805195px",
+        "minWidth": "16.623376623376625px",
+        "width": "100%",
+        "nodeName": "DIV",
+        "html": "<p style=\"width:100%;height:100%;border: 1px solid #ddd;\">双击编辑</p>"
+    }
+},
+"button1502870897141": {
+    "drag": {
+        "left": "0px",
+        "minHeight": "33.24675324675325px",
+        "position": "absolute",
+        "textAlign": "center",
+        "top": "62.33766233766234px",
+        "width": "187.012987012987px",
+        "zIndex": 519,
+        "nodeName": "DIV"
+    },
+    "dragBox_parent": {
+        "height": "100%",
+        "nodeName": "DIV"
+    },
+    "dragBox": {
+        "height": "100%",
+        "minHeight": "33.24675324675325px",
+        "minWidth": "16.623376623376625px",
+        "width": "100%",
+        "nodeName": "DIV",
+        "html": "<input type=\"button\" value=\"标准按钮\" style=\"width:100%;min-height:32px;height:100%;background-color: #1c9ae3;color:#fff;outline: none;border-color:transparent;\" name=\"\">"
+    }
+},
+"text1502870898373": {
+    "drag": {
+        "left": "51.94805194805195px",
+        "minHeight": "33.24675324675325px",
+        "position": "absolute",
+        "textAlign": "center",
+        "top": "189.0909090909091px",
+        "transformOrigin": "center center 0px",
+        "width": "187.012987012987px",
+        "zIndex": 519,
+        "nodeName": "DIV"
+    },
+    "dragBox_parent": {
+        "height": "100%",
+        "nodeName": "DIV"
+    },
+    "dragBox": {
+        "cursor": "move",
+        "height": "100%",
+        "minHeight": "33.24675324675325px",
+        "minWidth": "16.623376623376625px",
+        "width": "100%",
+        "nodeName": "DIV",
+        "html": "<p style=\"width:100%;height:100%;border: 1px solid #ddd;\">双击编辑</p>"
+    }
+}
+},
+"componentSort": 1, "symbol": "baseComponents"
+}

@@ -9,9 +9,7 @@ define(function(require,exports,module){
 
     var ajaxFileUpload = require("common.ajaxfileupload/index");
     var requireNormal = require("1/mb_index/requireNormal");
-    //加载滚动条js
-    var mouseWheel = require("common.mouseWheel/index");
-    var linkAdress = require("common.linkAdress/index");
+
     //数据列表
     var save = require("common.save/index");
     var blankData = require("common.save/blankData");
@@ -49,9 +47,9 @@ define(function(require,exports,module){
             return me.datas;
         },
         getInfor : function(datas){
-            $(".left").html("")
+            $(".left").html("").attr("ishomepage","").attr("pageid","");
             if(datas){
-                requireNormal.rightSet.ri0.img_edit(datas,this);
+                requireNormal.rightSet.ri0.img_edit(datas,this); //加载右边头部的配置
                 requireNormal.leftShow["show0"].img_show(datas);
                 $(".right").prepend('<div class="panelTitle"><p>组件设置</p></div>');
                 

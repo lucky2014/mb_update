@@ -189,6 +189,7 @@
     color: #617084; 
     text-decoration: none;
     margin-left: 26px;
+    width: 200px;
 }
 .site-page-navi-list li:first-child a{
     margin-left: 0;

@@ -32,7 +32,7 @@ define(function(require,exports,module){
           window.event.cancelBubble = true;
           }
         },
-        rectForPos:{
+        rectForPos: {
             
         },
         dragProgress:function(){
@@ -198,6 +198,7 @@ define(function(require,exports,module){
             var deltaY = (e.pageY-me.oldObj.y);
             var w = me.oldObj.w;
             var h = me.oldObj.h;
+            console.log(posDrag);
             var dataPos = $(posDrag).attr("pos");
             if(dataPos.indexOf("r")!="-1"){
                 deltaX = -deltaX;
@@ -575,13 +576,16 @@ define(function(require,exports,module){
             this.dragging(".dragBox",$(".dragBox").parent().parent(),function(){},function(e,target,changeDiv,old){
                 me.movePos(e,target,changeDiv,old);
                 var id = $(me.dragTarget).parents(".drag").parent().attr("id");
-                var rect = me.rectForPos[id];
-                rect.left = parseInt($(me.dragTarget).parents(".drag")[0].offsetLeft)||"auto";
-                rect.top = parseInt($(me.dragTarget).parents(".drag")[0].offsetTop)||"auto";
-                $("input[name='module_pos_left']").val(rect.left);
-                $("input[name='module_pos_top']").val(rect.top);
-                $("input[name='module_width']").val(rect.width);
-                $("input[name='module_height']").val(rect.height);
+
+                me.rectForPos[id] = {
+                    left: parseInt($(me.dragTarget).parents(".drag")[0].offsetLeft)||"auto",
+                    top: parseInt($(me.dragTarget).parents(".drag")[0].offsetTop)||"auto"
+                }
+
+                $("input[name='module_pos_left']").val(me.rectForPos[id].left);
+                $("input[name='module_pos_top']").val(me.rectForPos[id].top);
+                $("input[name='module_width']").val(me.rectForPos[id].width);
+                $("input[name='module_height']").val(me.rectForPos[id].height);
             });
             this.dragAll(function(){
                 var w = $(me.dragTarget).find("svg").width();
@@ -591,15 +595,19 @@ define(function(require,exports,module){
                 var r = Math.min(w,h)/2;
                 $(me.dragTarget).find("svg").children().width(w).height(h).attr("cx",r).attr("cy",r).attr("r",r);
                 var id = $(me.dragTarget).parents(".drag").parent().attr("id");
-                var rect = me.rectForPos[id];
-                rect.width = $(me.dragTarget).parents(".drag")[0].offsetWidth;
-                rect.height = $(me.dragTarget).parents(".drag")[0].offsetHeight;
-                rect.left = parseInt($(me.dragTarget).parents(".drag")[0].offsetLeft)||"auto";
-                rect.top = parseInt($(me.dragTarget).parents(".drag")[0].offsetTop)||"auto";
-                $("input[name='module_pos_left']").val(rect.left);
-                $("input[name='module_pos_top']").val(rect.top);
-                $("input[name='module_width']").val(rect.width);
-                $("input[name='module_height']").val(rect.height);
+
+                me.rectForPos[id] = {
+                    left: parseInt($(me.dragTarget).parents(".drag")[0].offsetLeft)||"auto",
+                    top: parseInt($(me.dragTarget).parents(".drag")[0].offsetTop)||"auto",
+                    width: $(me.dragTarget).parents(".drag")[0].offsetWidth,
+                    height: $(me.dragTarget).parents(".drag")[0].offsetHeight
+                }
+
+
+                $("input[name='module_pos_left']").val(me.rectForPos[id].left);
+                $("input[name='module_pos_top']").val(me.rectForPos[id].top);
+                $("input[name='module_width']").val(me.rectForPos[id].width);
+                $("input[name='module_height']").val(me.rectForPos[id].height);
             },function(){
                 pubsub.publish('dataChange');
             })

@@ -1,9 +1,18 @@
+//cacheDatas，缓存数据，是用来对比是否有编辑，有改动的数据
+
 define(function(require,exports,module){
+    
     var $ = require("jquery");
     var Engine = require("engine");
     var box = Engine.init();
     var setup = require("setup");
     var popUp = require("common.PopUp/index");
+    var now = require("save/pblTime");
+    var publish = require("save/publish/publish");
+    //预览
+    var previewPop = require("save/previewPop.tpl");
+        require("save/previewPop.css");
+
     require("common.lib/jquery.ui/jquery.qrcode.min");
 
     function IsPC(){  
@@ -14,7 +23,8 @@ define(function(require,exports,module){
            if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }  
        }  
        return flag;  
-    }
+    };
+
     var app = {
         siteId: setup.getQueryString("siteId") || 60,
         basedDevicedWidth:$(".leftOuter").width()||window.innerWidth,
@@ -32,6 +42,7 @@ define(function(require,exports,module){
             })
         },
         getStyle:function(element,id){
+
             if($(element)[0]){
                 element = $(element).children()[0];
                 var className = $(element).attr("name");
@@ -68,102 +79,202 @@ define(function(require,exports,module){
                 }
             }
         },
-        saveFn:function(){
+        compareCacheDatas: function(datas){
             var me = this;
-            $("body").delegate(" .nav-operate a", "click", function(e){
-                var datas = me.saveData(datas);
-
-                var type = $(this).attr("type");
-                if(datas && datas != {}){
-                    //判断是不是发布
-                    if(type == "publish"){
-                        var html = '';
-                        popUp({
-                            "title": "温馨提示<img src='../imgs/close.png' class='cut' />",
-                            "content": "" ,
-                            showCancelButton: true,
-                            showConfirmButton: true,
-                        }, function(){
-                         alert(0);
-                        });
-                        /*var publish = require("save/publish/publish");
-                        var htmlStr = publish.publishInit(datas);
-                        var params = {
-                           "pageId": me.pageId,
-                           "userId":me.userId,
-                           "templateName": me.templateName,
-                           "data": JSON.stringify({components: datas.components}),
-                           "siteId": me.siteId
-                        };
-                        setup.commonAjax("publish.html", params, function(msg){
-                            popUp({
-                                "content":"保存成功！",
-                                showCancelButton: false,
-                                showConfirmButton: false,
-                                timer: 2000
-                            });
-                        })*/
-                    }else{
-                        //保存、预览
-                        if(datas.pageId){
-                            var params = {
-                               "pageId": me.pageId,
-                               "templateName": me.templateName,
-                               "data": JSON.stringify({components: datas.components}),
-                               "siteId": me.siteId
-                            };
-                            setup.commonAjax("editPage.do", params, function(msg){
-                                popUp({
-                                    "content":"保存成功！",
-                                    showCancelButton: false,
-                                    showConfirmButton: false,
-                                    timer: 2000
-                                });
-                            })
-                        }else{
-                            var params = {
-                               "templateId": me.templateId || 0,
-                               "userId": me.userId,
-                               "templateName":me.templateName || 0,
-                               "data": JSON.stringify({components: datas.components}),
-                               "siteId": me.siteId
-                            };
-                            
-                            setup.commonAjax("addPage.do", params, function(msg){ 
-                                var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId="+me.returnObject+"&userId=" + me.userId;
-                                //console.log("http://"+ location.host+ "/mb_update2/preview/index.html?pageId="+me.returnObject+"&userId=" + me.userId);
-                                var previewPop = require("save/previewPop.tpl");
-                                    require("save/previewPop.css");
-                                box.render($("#previewPop"), {siteId: me.siteId}, previewPop); 
-                                $(".qrcode").html("");
-                                $("#previewPop").show();
-
-
-                                $(".qrcode").qrcode({
-                                    render: "canvas",
-                                    width: 200,
-                                    height: 200,
-                                    text: href
-                                });
-
-                                //预览功能：渲染左边手机
-                                //require("preview/src/app_index/index");
-                            });
-                        };
-                    }
+            //console.log(JSON.stringify(datas,null,2));
+            if(me.cacheDatas){
+                var a1 = JSON.stringify(datas);
+                var a2 = JSON.stringify(me.cacheDatas);
+                console.log(a1);
+                console.log(a2);
+                if(a1 == a2){
+                    return false;
                 }else{
-                    popUp({
-                        "title":"温馨提示<img src='../imgs/close.png' class='cut' />",
-                        "content":"<img src='../imgs/warn.png' class='lineIl' /><span class='lineIl'>您的页面是空的，请先编辑页面！</span>",
-                        showCancelButton: true,
-                        showConfirmButton: true,
-                    });
-                    return ;
+                    return true;
                 }
+            }             
+        },
+        //保存、预览功能，在running页面调用
+        pageSave: function(){
+            var me = this;
+            var datas = me.saveData();
+            //保存
+            if(datas.pageId){
+                var params = {
+                   "pageId": $(".left").attr("pageId"),
+                   "templateName": datas.templateName,
+                   "data": JSON.stringify({components: datas.components}),
+                   "siteId": me.siteId
+                };
+                setup.commonAjax("editPage.do", params, function(msg){
+                    popUp({
+                        "content":"保存成功！",
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                });
+            }else{
+                //新增
+                var params = {
+                   "templateId": me.templateId || 0,
+                   "templateName":me.templateName || 0,
+                   "data": JSON.stringify({components: datas.components}),
+                   "siteId": me.siteId
+                };
+                
+                setup.commonAjax("addPage.do", params, function(msg){ 
+                   // var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId="+me.returnObject;
+                    popUp({
+                        "content":"保存成功！",
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                });
+            };
+        },
+        pagePreview: function(){
+            var me = this;
+            var datas = me.saveData();
+            //渲染弹框
+            box.render($("#previewPop"), {siteId: me.siteId, pageId: datas.pageId}, previewPop); 
+            //保存、预览
+            if(datas.pageId){
+                var params = {
+                   "pageId": $(".left").attr("pageId"),
+                   "templateName": datas.templateName,
+                   "data": JSON.stringify({components: datas.components}),
+                   "siteId": me.siteId
+                };
+                setup.commonAjax("editPage.do", params, function(msg){
+                    var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId=" + datas.pageId;
+                    me.qrcodeInit(href,datas);
+                });
+            }else{
+                var params = {
+                   "templateId": me.templateId || 0,
+                   "templateName":me.templateName || 0,
+                   "data": JSON.stringify({components: datas.components}),
+                   "siteId": me.siteId
+                };
+                
+                setup.commonAjax("addPage.do", params, function(msg){ 
+                    var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId="+me.returnObject;
+                    me.qrcodeInit(href,datas);
+                });
+            };
+        },
+        qrcodeInit: function(href, datas){
+            var me = this;
+            
+            $(".qrcode").html("");
+            $("#previewPop").show();
+
+            $(".qrcode").qrcode({
+                render: "canvas",
+                width: 200,
+                height: 200,
+                text: href
+            });
+
+            //预览功能：渲染左边手机
+            app.loadFn(datas, "previewLeft");
+
+            //关闭按钮
+            $(".previewPopInit .cut").click(function(){
+                $("#previewPop").hide();
             });
         },
-        saveData:function(datas){
+        //发布，在running页面调用
+        pagePublish: function(){
             var me = this;
+            var datas = me.saveData();
+            if(me.compareCacheDatas(datas)){
+                popUp({
+                    "title": "温馨提示<a class='cut'></a>",
+                    "content": "您有未保持的数据，请先保存再发布！" ,
+                    showCancelButton: true,
+                    showConfirmButton: true,
+                }, function(){
+                    $("#pop").hide();
+                });
+                return ;
+            }else{
+                var pblTime = now.getDate();
+                //发布站点弹框
+                var html = '<ul class="publishBox">'+
+                  '<li><label>站点名称</label><input type="text" class="siteName" placeholder="请输入站点名称" /></li>'+
+                  '<li><label>站点域名</label><input type="text" value="" class="siteDomain" /><span>.iliujia.com</span></li>'+
+                  '<li><label>创建时间</label><span class="pblTime">'+pblTime+'</span></li>'+
+                '</ul>';
+                popUp({
+                    "title": "发布站点<a class='cut'></a>",
+                    "content": html ,
+                    width: 500,
+                    showCancelButton: true,
+                    showConfirmButton: true,
+                }, function(){
+                    var siteName = $(".siteName").val();
+                    var siteDomain = $(".siteDomain").val();
+
+                    if(!siteName){
+                        $(".pblTipBox").html('<div class="pblTip">请输入您的站点名称！</div>').show();
+                        setTimeout(function(){
+                            $(".pblTipBox").hide();
+                        },1000);
+                    }else if(!siteDomain){
+                        $(".pblTipBox").html('<div class="pblTip">请输入您的域名！</div>').show();
+                        setTimeout(function(){
+                            $(".pblTipBox").hide();
+                        },1000);
+                    }else{
+                        //发布前请求所有页面的数据
+                        setup.commonAjax("getSiteData.do", {"siteId": me.siteId}, function(msg){ 
+                            //组装html数组
+                            var htmlJson = [];
+                            $.each(msg, function(i,v){
+                                var htmlStr = publish.publishInit(v.data);
+                                htmlJson.push({
+                                    pageId: v.id, 
+                                    name: v.pageName, 
+                                    data: htmlStr, 
+                                    pageSort: v.sort,
+                                    isHomePage: v.isHomePage
+                                });
+                            });
+
+                            var params = {
+                               "htmlJson": JSON.stringify(htmlJson),
+                               "siteId": me.siteId,
+                               "siteName": $(".siteName").val(),
+                               "domain": $(".siteDomain").val(),
+                               "industryId": ""
+                            };
+                            setup.commonAjax("publish.do", params, function(msg){
+                                //渲染弹框
+                                box.render($("#previewPop"), {siteId: me.siteId, pageId: datas.pageId, publish: 1, url: msg}, previewPop); 
+                                me.qrcodeInit(msg,datas);
+
+                                function jsCopy(){
+                                    var e=document.getElementById("pblUrl");//对象是content 
+                                      e.select(); //选择对象 
+                                      document.execCommand("Copy"); //执行浏览器复制命令
+                                  }
+
+                                  $("#previewPop").delegate(".blueBtn", "click", function(){
+                                    jsCopy();
+                                  }); 
+                            });
+                        });
+                    }
+                });
+            }
+        },
+        saveData:function(sky){
+            //每一次都是重新取数值，所以默认data={}
+            var me = this;
+            var datas = me.cacheDatas; //缓存数据
             for(var i = 0;i<$(".drag").parent().length;i++){
                 var vAct_modexBox = $(".drag").parent().eq(i);
                 if(vAct_modexBox.attr("id")){
@@ -171,15 +282,24 @@ define(function(require,exports,module){
                 }
             }
 
-            //判断数据是不是空的
-            if(!datas){
+            //判断是不是保存有页面设置的配置，如果没有取缓存里的
+            if(sky){
+                var o = $(".left");
                 var components = [];
-                components.push({elements: this.elements,componentSort: components.length+1,symbol:"baseComponents"});
-                datas = $.extend({}, datas, {components: components});
+                components.push({elements: this.elements,componentSort: components.length+1,symbol:"baseComponents",templateName: $("#storeName").val(),description: $(".skySet .descript").val(),backgroundColor: $(".skySet .backColor i").attr("color")});
+                datas = $.extend({}, {components: components, pageId: o.attr("pageId"), isHomePage: o.attr("isHomePage")});
             }else{
-                var components = datas.components;
-                datas.components.push({elements: this.elements,componentSort: components.length+1,symbol:"baseComponents"})
+                delete datas.components[0].elements;
+
+                var components = [];
+                var newObj = $.extend({},{elements: this.elements},datas.components[0])
+
+                components.push(newObj);
+                datas = $.extend({},{components: components});
             }
+
+            //保存数据成功后
+            me.cacheDatas = datas;
 
             return datas;
         },
@@ -212,11 +332,31 @@ define(function(require,exports,module){
                 }
             }
         },
-        loadFn:function(datas){ //渲染html5
-            this.elements = datas.elements||{};
-            this.changeData();
-            var htmls = this.getSaved(datas);
-            $(".left").append(htmls);
+        loadFn:function(datas, ele, log){ //渲染html5
+            //目前components只有1个数组值
+            //console.log(JSON.stringify(datas,null,2));
+            var me = this;
+            if(ele){
+                this.elements = datas.components[0].elements||{};
+                this.changeData();
+                var htmls = this.getSaved();
+                $("." + ele + ">div").append(htmls);
+            }else{
+                this.elements = datas.elements||{};
+                this.changeData();
+                var htmls = this.getSaved();
+                $(".left").append(htmls);
+            } 
+
+            if(log){ //初始渲染
+                this.elements = datas.components[0].elements||{};
+                this.changeData();
+                var htmls = this.getSaved();
+                $(".left").append(htmls);
+            }
+            /**这个方法作为读取组件信息时的基础数据绑定js在component/index/index.js*/
+            me.rightEditComponentInitAll();
+            me.cacheDatas = datas;          
         },
         getSaved:function(){
             var me = this;

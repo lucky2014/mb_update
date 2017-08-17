@@ -4,8 +4,8 @@
           更换
       </div>
   </div>
-  <div id="button_text" class="colorSelectorWrapper clearfix none" style="display: block;margin-bottom:8px;">
-      <label class="label_slide" style="margin-top:5px;margin-left: 20px;margin-right:6px;">按钮文字</label>
+  <div id="button_text" class="colorSelectorWrapper clearfix none" style="display: block;">
+      <label class="label_slide" style="margin-left: 20px;margin-right:6px;">按钮文字</label>
       <div class="clearfix btnText" style="float:left;margin-bottom:20px;">
           <input type="value" name="" value="标准按钮" class="form-control">
       </div>

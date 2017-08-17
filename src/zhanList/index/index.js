@@ -26,7 +26,19 @@ define(function(require,exports,module){
         },
         siteList: function(){ //查询站点列表
             var me = this;
-            setup.commonAjax("siteList.do", "", function(msg){  
+            setup.commonAjax("siteList.do", "", function(msg){ 
+                //处理数据，publishStatus=0的时候，是编辑状态，否则是发布状态，发布状态有0已下线,1已发布
+                $.each(msg, function(i,v){
+                  if(v.publishStatus == 0){
+                    v.status = 0
+                  }else{
+                    if(v.status == 0){
+                      v.status = 1;
+                    }else{
+                      v.status = 2;
+                    }
+                  }
+                }); 
                 var indexTpl = require("zhanList/index/index.tpl");
                 box.render($(".microContainer dl"), msg, indexTpl, 1);
                 me.init(); 
@@ -37,20 +49,13 @@ define(function(require,exports,module){
     //执行页面逻辑
     app.siteList();
 
-    //新建站点
-    $(".section").delegate(".newSite","click",function(){ 
-         setup.commonAjax("addSite.do", "", function(msg){  
-             window.location.href = "../templateList/templateList.html?&siteId="+msg;  
-         });
-    });
-
     ////鼠标移上去图片，点击按钮
     $(".microContainer").delegate(".hover a","click",function(){ 
         var self = $(this);
         var siteId = self.parents("dd.microItem").attr("siteId");
         var url = self.parents("dd.microItem").attr("url") || "http://www.iliujia.com";
         var type = self.attr("class");
-        var html = '<div class="siteCode"></div>';
+        var html = '<a class="cut"></a><div class="siteCode"></div>';
 
         if(type == "edit"){ //编辑状态
           window.location.href = "../component/index.html?&siteId="+siteId+"&editSite=true";
@@ -84,22 +89,29 @@ define(function(require,exports,module){
         var type = self.attr('class');
 
         if(type == "del"){
-          setup.commonAjax("delSite.do", {siteId:siteId}, function(msg){  
             popUp({
-                "content":"删除成功！",
-                showCancelButton: false,
-                showConfirmButton: false,
-                timer: 2000
+                "title": '提示<a class="cut"></a>',
+                "content":"<div class='tl pd20 deleText'><b></b>此操作将永久删除该站点，是否继续？</div>",
+                showCancelButton: true,
+                showConfirmButton: true,
+            }, function(){
+                setup.commonAjax("delSite.do", {siteId:siteId}, function(msg){  
+                  popUp({
+                      "content":"删除成功！",
+                      showCancelButton: false,
+                      showConfirmButton: false,
+                      timer: 1000
+                  });
+                  thisLi.remove();
+                });
             });
-            thisLi.remove();
-          });
         }else if(type == "up"){ // 上线
           setup.commonAjax("changeSiteStatus.do", {siteId: siteId, status: 1}, function(msg){  
             popUp({
                 "content":"上线成功！",
                 showCancelButton: false,
                 showConfirmButton: false,
-                timer: 2000
+                timer: 1000
             });
 
             self.attr("class","down").html("<i></i>下线");
@@ -110,7 +122,7 @@ define(function(require,exports,module){
                 "content":"下线成功！",
                 showCancelButton: false,
                 showConfirmButton: false,
-                timer: 2000
+                timer: 1000
             });
             self.attr("class","up").html("<i></i>上线");
           });
@@ -119,7 +131,7 @@ define(function(require,exports,module){
           $(".siteEv").html("");
           $(".hover,.siteEv").hide();
           //再添加
-          var html = "<div>推广连接</div><input type='text' id='url1' value='"+url+"' /><button>复制</button>";
+          var html = "<a class='cut'></a><div>推广连接</div><input type='text' id='url1' value='"+url+"' /><button>复制</button>";
 
           self.parents("dd.microItem").find(".siteEv").html(html).show();
           $(".hover").hide();
@@ -135,7 +147,7 @@ define(function(require,exports,module){
           }); 
 
         }else if(type == "qrcode"){ // 二维码
-          var html = '<div class="siteCode"></div>';
+          var html = '<a class="cut"></a><div class="siteCode"></div>';
 
           $(".siteEv").html("");
           $(".hover,.siteEv").hide();
@@ -153,6 +165,9 @@ define(function(require,exports,module){
         return false;       
     });
 
-
+    //点击哟二维码的弹框
+    $(".microContainer").delegate(".siteEv .cut", "click", function(){
+      $(this).parent().hide();
+    });
 });
 

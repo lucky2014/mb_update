@@ -10,11 +10,18 @@
 
 .previewPopInit{ background: url(../../imgs/previewPop.png); width: 800px; height: 600px; position: absolute; left: 50%; 
 margin-left: -400px; background-size: 100% 100%; top: 50%; margin-top: -300px;}
-.previewPopInit .left{ float: left; width: 400px; height: 600px; background: none;}
-.previewPopInit .r{ float: right; width: 400px; position: relative; height: 600px;}
-.previewPopInit .cut{ background: url(../../imgs/close.png); width: 15px; height: 16px; position: absolute; right: 80px;
-top: 70px; display: block;}
-.previewPopInit .cut:hover{ background-position: 0 -16px;}
+.previewPopInit .previewLeft{ padding: 92px 126px 100px 62px;
+    float: left;
+    width: 230px;
+    height: 408px;
+    background: none;
+    position: relative;
+}
+.previewPopInit .previewLeft>div{ position: relative; width: 100%; height: 408px; overflow: hidden; background: #fff;}
+.previewPopInit .r{ float: right; width: 380px; position: relative; height: 600px;}
+.previewPopInit .r .cut{ background: url(../../imgs/close.png); width: 15px; height: 16px; position: absolute; right: 80px;
+top: 70px; display: block; cursor: pointer;}
+.previewPopInit .r .cut:hover{ background-position: 0 -16px;}
 
 
 .previewPopInit .qrcode{ border: 1px solid #e0e0e0; padding: 20px; width: 200px; height: 200px; margin-top: 140px;}
@@ -27,5 +34,28 @@ top: 70px; display: block;}
     background: #20a0ff;
     display: inline-block;
     margin: 40px 0 0 60px;
-    padding: 0;
+    padding: 0; cursor: pointer;
 }
+
+/*发布*/
+#pblBox{
+    padding:30px 0 0;
+}
+#pblBox span{ display: block;}
+#pblBox input{
+     display: block;  width: 160px; border-radius: 4px; border: 1px solid #d3dce6; height: 30px; 
+line-height: 30px; padding: 0 8px; margin-top: 10px; float: left;
+}
+#pblBox .blueBtn{ float: left; margin: 10px 0 0 -4px; width: 70px; cursor: pointer;}
+.pblTipBox{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,.6);
+    display: none;
+    z-index: 999;
+}
+.pblTip{height: 74px; line-height: 74px; background: #fff; border-radius: 6px; color: #617084; width: 250px;
+left: 50%; margin-left: -125px; top: 50%; margin-top: -37px; position: absolute; text-align: center;}

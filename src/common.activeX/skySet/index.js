@@ -39,7 +39,7 @@ define(function(require,exports,module){
             $(".backColor button").click(function(){
                 $(this).siblings("i").css("background",backcolorSet);
                 pubsub.publish('dataChange',"sky");
-            })
+            });
             
         },
 

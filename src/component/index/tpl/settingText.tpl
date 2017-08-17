@@ -2,8 +2,8 @@
   <a class="setting-panel-switch"></a>
   <div class="setting-panel-content">
       <div class="DialogWindow">
-          <div class="innerDialog" id="settingId" style="padding-bottom:0;">
-              <img src="http://fl.cdn.qq.com/transition/52/2000002552/687/9003040581620125681900724875.png">
+          <div class="innerDialog" id="settingId" style="padding-bottom:0;width:200px;height:37px;">
+              <img src="http://fl.cdn.qq.com/transition/52/2000002552/687/9003040581620125681900724875.png" style="float:left;margin-top:5px;">
 			  <div class="help btn-tooltip fr" data-message="文字较多的情况下，建议拆成几个8行以内的短文本"></div>
           </div>
       </div>
@@ -13,8 +13,8 @@
                 <div>
                   <div class="groupSkin-content">
                     <div id="border_color" class="colorSelectorWrapper clearfix none" style="display: block;">
-                      <label class="skin-label" style="width: 60px;height:37px;margin-right:20px;float: left;">边框</label>
-                      <div class="select" style="float:left;margin-top:-13px;margin-left:3px;">
+                      <label class="skin-label" style="width: 90px;height:32px;line-height:32px;float: left;">边框</label>
+                      <div class="select" style="float:left;">
                         <select id="border_width_select" style="width: 53px;text-align: center;">
                           <option value="0">0</option>
                           <option value="1">1</option>
@@ -43,17 +43,17 @@
                         <div class="fieldSkin-color colorConfig" style="background-color: rgb(104, 118, 131);" config="#687683" status="v_paragraph_style1_border_color"></div>
                         <div class="skin-colorSelector skin-colorSelector-border"></div>
                       </div>
-                      <div class="select" style="float:left;margin-top:-13px;margin-left:6px;">
+                      <div class="select" style="float:left;">
                         <select id="border_type_select" style="width: 53px;font-family: '微软雅黑';" status="v_paragraph_style1_border_style" config="solid">
                           <option value="solid">一</option>
                           <option value="dashed">--</option></select>
                       </div>
                     </div>
-                    <div id="background_color" class="colorSelectorWrapper none" style="height: 50px; display: block;">
+                    <div id="background_color" class="colorSelectorWrapper none" style="height: 32px;line-height:32px; display: block;padding-top:20px;">
                       <label class="skin-label" style="float: left">背景</label>
-                      <div class="c-colorWrapper n-c-colorWrapper" style="float:left;margin:-30px 0 0 0;">
+                      <div class="c-colorWrapper n-c-colorWrapper">
                         <div class="c-opacityBg"></div>
-                        <div class="fieldSkin-color colorConfig" style="background-color: none; " config="rgba(0,0,0,0)" status="v_paragraph_style1_background_color"></div>
+                        <div class="fieldSkin-color colorConfig" style="background-color: rgb(223, 223, 237); " config="rgba(0,0,0,0)" status="v_paragraph_style1_background_color"></div>
                         <div class="skin-colorSelector skin-colorSelector-bg"></div>
                       </div>
                     </div>

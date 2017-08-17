@@ -3,41 +3,50 @@
   <div class="setting-panel-content">
       <div class="DialogWindow">
           <div class="innerDialog" style="padding-bottom:0;">
-              <div id="show_pic_box"><img src="../src/component/imgs/logoTip.png" id="show_pic_url"></div>
-			<div class="groupSkin-content clearfix" style="text-align:center; margin-bottom: 15px;">
-				  <div id="file_upload" class="uploadify-button" style="float:left;margin-right:25px;margin-top:10px;cursor:pointer">
-				      更换
-				  </div>
-			</div>
-          <div>
-              <li class="linkAddress">
-                <span>链接</span>
-                <input type="text" readonly>
-                <i class="shclickI"></i>
-                <ul class="linkChoose" style="display:none;">
-                  <li class="selectedLi" urlname="">请选择</li>
-                </ul>
-              </li>
-              <li class="linkAddress commonAddress">
-                <span>链接地址</span>
-                <input type="text" value="{{value.linkName}}" class="shclickLi" selUrl="{{value.linkUrl}}" readonly>
-                <i class="shclickI"></i>
-                <ul class="linkChoose" style="display:none;">
-                  <li class="selectedLi" urlname="">请选择</li>
-                </ul>
-              </li>
-          </div>
+              <div id="show_pic_box">
+                  <img src="../src/component/imgs/logoTip.png" id="show_pic_url">
+              </div>
+        			<div class="groupSkin-content clearfix" style="text-align:center; margin-bottom: 15px;">
+          				  <div id="file_upload" class="uploadify-button" style="float:left;margin-right:25px;margin-top:10px;cursor:pointer">
+          				      更换
+          				  </div>
+        			</div>
 			</div>
           </div>
       </div>
-      <div class="innerDialog styleSetting" style="border-top:0px solid #ddd;margin-top: 16px;" hasmodified="1">
+      <div class="linkDemo">
+          <li class="linkStyle commonAddress">
+            <span>链接</span>
+            <input type="text" class="shclickLi" value="请选择" readonly>
+            <i class="shclickI"></i>
+            <ul class="linkChoose" style="display:none;">
+                <li class="selectedLi" sign="1">请选择</li>
+                <li sign="2">外部链接</li>
+                <li sign="3">站内链接</li>
+                <li sign="4">返回</li>
+            </ul>
+          </li>
+          <li class="linkAddress commonAddress" style="display:none;">
+            <span>链接地址</span>
+            <input type="text" placeholder="请输入链接地址" class="shclickLi" selUrl="">
+          </li>
+          <li class="selectAddress commonAddress" style="display:none;">
+            <span>链接地址</span>
+            <input type="text" readonly class="shclickLi" selUrl="" value="请选择">
+            <i class="shclickI"></i>
+            <ul class="linkChoose" style="display:none;">
+              <li class="selectedLi" urlname="">请选择</li>
+            </ul>
+          </li>
+      </div>
+      <div class="innerDialog styleSetting" hasmodified="1" style="margin-top:0;">
           <div>
               <div class="advanceskin-content">
                 <div>
                   <div class="groupSkin-content">
-                    <div id="border_color" class="colorSelectorWrapper clearfix none" style="display: block;">
-                      <label class="skin-label" style="width: 60px;height:37px;margin-right:20px;float: left;">边框</label>
-                      <div class="select" style="float:left;margin-top:-13px;margin-left:3px;">
+                    <div id="border_color" class="colorSelectorWrapper clearfix none" style="display: block;padding-bottom:32px; border-bottom: 1px solid #e0e0e0;">
+                      <label class="skin-label">边框</label>
+                      <div class="select" style="float:left;">
                         <select id="border_width_select" style="width: 53px;text-align: center;">
                           <option value="0">0</option>
                           <option value="1">1</option>
@@ -66,23 +75,23 @@
                         <div class="fieldSkin-color colorConfig" style="background-color: rgb(104, 118, 131);" config="#687683" status="v_paragraph_style1_border_color"></div>
                         <div class="skin-colorSelector skin-colorSelector-border"></div>
                       </div>
-                      <div class="select" style="float:left;margin-top:-13px;margin-left:6px;">
+                      <div class="select" style="float:left;">
                         <select id="border_type_select" style="width: 53px;font-family: '微软雅黑';" status="v_paragraph_style1_border_style" config="solid">
                           <option value="solid">一</option>
                           <option value="dashed">--</option></select>
                       </div>
                     </div>
-                    <div id="background_color" class="colorSelectorWrapper none" style="height: 50px; display: block;">
+                    <!-- <div id="background_color" class="colorSelectorWrapper none" style="height: 50px; display: block;">
                       <label class="skin-label" style="float: left">背景</label>
                       <div class="c-colorWrapper n-c-colorWrapper" style="float:left;margin:-30px 0 0 0;">
                         <div class="c-opacityBg"></div>
                         <div class="fieldSkin-color colorConfig" style="background-color: none; " config="rgba(0,0,0,0)" status="v_paragraph_style1_background_color"></div>
                         <div class="skin-colorSelector skin-colorSelector-bg"></div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
-                <span class="line"></span>
+                <!-- <span class="line"></span> -->
                 <div style="padding-bottom: 5px;padding-top: 30px;">
                   <div id="opacity" class="none" style="display: block;">
                     <!-- <div class="labelSkin-label">高级设置:</div> -->

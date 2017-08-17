@@ -13,6 +13,7 @@ define(function(require,exports,module){
     var publish = {
         html: html,
         publishInit: function(datas){
+            datas = JSON.parse(datas);
             var me = this;
             //渲染头部
             me.html += '<title>'+datas.templateName+'</title>'+
@@ -377,4 +378,7 @@ define(function(require,exports,module){
             return me.html ;
         }
     };
+
+
+    return publish;
 })

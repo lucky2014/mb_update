@@ -16,7 +16,7 @@
 				<img src="../src/templateList/imgs/erweima.png" alt="">
 				<i>扫码体验</i>
 			</div>
-			<button>立即使用</button>
+			<button templateId="{{templateId}}">立即使用</button>
 		</div>
 	</div>
 {{/if}}

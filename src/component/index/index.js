@@ -3,18 +3,19 @@ define(function(require,exports,module){
     require("image.dialog/index/index");
     
     var $ = require("jquery");
-
-    //导航js
-    var nav = require("component/index/nav");
-    nav.nav_init();
-
-    //左边基础组件点击
-    $("#VAct_navbar").delegate(".ext-items","click",function(e){
+    var app = require("common.editAll/editBased/running");
+    app.running();
+    app.rightEditComponentInit = function(e,me,targetObj){//第一个参数是event,第二个参数是当前选中对象,第三个参数是判断是否已经有这些对象
         var normal = require("common.editAll/editBased/normal");
-        var type = $(this).attr("data-status");
+        if(typeof me =="string"){
+            var type = me;
+        }else{
+            var type = $(me).attr("data-status");
+        }
         var tplObj = normal["base"][type+"Tpl"];
         var settingJs = tplObj.setting();
-        app.rightEditComponent(e,type,tplObj.componentTpl(),settingJs.tpl(),function(e,self,componentClass,componentTpl,editTpl){
+        e=e?e:undefined;
+        this.rightEditComponent(e,type,tplObj.componentTpl(),settingJs.tpl(),function(e,self,componentClass,componentTpl,editTpl){
             tplObj.callback(app,e,componentClass,componentTpl,editTpl)
             var w = $(app.dragTarget).children().width();
             pubsub.publish('dataChange');
@@ -24,14 +25,32 @@ define(function(require,exports,module){
             if(tplObj.callback3){
                 tplObj.callback3(app,e,self)
             }
-        });
+        },targetObj);
         if(!settingJs.isRender){
             settingJs.init(app);
             settingJs.isRender = true;
         }
-    }); 
+    }
+    function trimNumber(str){ 
+        return str.replace(/\d+/g,''); 
+    }
+    app.rightEditComponentInitAll = function(e){
+        var dragParent = $(".drag").parent();
+        for(var i = 0;i<dragParent.length;i++){
+            var str = dragParent.eq(i).attr("id");
+            console.log(str)
+            this.rightEditComponentInit(e,trimNumber(str),dragParent.eq(i))
+        }
+    }
+    //导航js
+    var nav = require("component/index/nav");
+    nav.nav_init();
 
 
+    //左边基础组件点击
+    $("#VAct_navbar").delegate(".ext-items","click",function(e){
+        app.rightEditComponentInit(e,this);
+    });
     $(".mobile-container").css({"overflow":"hidden","overflow-y":"scroll","padding-top":"20px"});
                 
     //中间编辑区域的高度

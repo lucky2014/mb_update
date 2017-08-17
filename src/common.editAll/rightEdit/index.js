@@ -31,18 +31,18 @@ define(function(require,exports,module){
             });*/
             
             $("body").delegate("#file_upload","click",function(e){
-                me.stopBubble(e)
+                e&&me.stopBubble(e)
                 $("#userPicDialog").fadeIn(300);
             })
             $("body").delegate(".dragBox","blur",function(e){
-                me.stopBubble(e)
+                e&&me.stopBubble(e)
                 $(this).removeAttr("contenteditable");
                 me.isEdit = false;
                 $(this).select();
                 $(".setting-panel-title,.setting-panel-content").hide();
             })
             $("body").delegate("#border_width_select","change",function(e){
-                me.stopBubble(e)
+                e&&me.stopBubble(e)
                 var value = $(this).find("option:selected").val();
                 if($(".drag_selected").find("svg")[0]){
                     $(".drag_selected").find("svg").children().css("stroke-width",value);
@@ -51,7 +51,7 @@ define(function(require,exports,module){
                 }
             })
             $("body").delegate("#border_type_select","change",function(e){
-                me.stopBubble(e)
+                e&&me.stopBubble(e)
                 var value = $(this).find("option:selected").val();
                 if($(".drag_selected").find("svg")[0]){
                     $(".drag_selected").find("svg").children().css("stroke-style",value);

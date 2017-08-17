@@ -32,15 +32,33 @@ body{
     z-index: 999;
 }
 .pic_thumb{
-    display: table;
+    position: relative;
+    display: block;
     width: 124px;
     height: 105px;
+    text-align: center;
+    line-height: 105px;
     display: inline-block;
     margin-right: 20px;
     margin-bottom: 10px;
 }
 .pic_thumb p{
     padding: 48px 24px;
+}
+.pic_thumb img{
+    max-width: 100%;
+    max-height: 97%;
+    vertical-align: middle;
+}
+.pic_thumb .delPic{
+    position: absolute;
+    top: 2px;
+    right: 2px; 
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: url(../imgs/new_navbar_header_4.png) no-repeat -110px -4px;
 }
 .phoneBtn{
     display: table;
@@ -234,7 +252,6 @@ body{
 .DialogWindow .innerDialog {
     padding: 15px 0 24px 24px;
     height: auto;
-    overflow: hidden;
 }
 .DialogWindow .advanceskin-content {
     font-size: 12px;
@@ -278,35 +295,7 @@ body{
     top: 0%;
     width: 60px;
     height: 37px;
-    margin-right: 23px !important;
     float: left;
-    margin-left: 24px;
-}
-.select {
-    padding-bottom: 6px;
-}
-.c-colorWrapper {
-    width: 70px;
-    /* height: 26px; */
-    position: relative;
-    display: inline-block;
-}
-.styleSetting .c-colorWrapper {
-    margin-top: -13px;
-    float: right;
-    top: 50%;
-    position: relative;
-    right: -3px;
-}
-.c-opacityBg {
-    background: url(../imgs/transparency.gif) repeat scroll 0 0 transparent;
-    /* height: 20px; */
-    /* margin: 3px 0 0 3px; */
-    /* width: 46px; */
-    width: 52px;
-    height: 38px;
-    float: none;
-    border-radius: 3px;
 }
 .fieldSkin-color {
     height: 18px;
@@ -316,16 +305,6 @@ body{
     top: 7px;
     width: 18px;
     /* border-radius: 4px; */
-}
-.skin-colorSelector {
-    background: url(../imgs/olor_input.png) no-repeat scroll 0 0 transparent;
-    cursor: pointer;
-    height: 40px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 54px;
-    border-radius: 3px;
 }
 .select>select {
     font-size: 14px;
@@ -351,15 +330,8 @@ body{
     position: relative;
     margin-bottom: 10px;
 }
-.styleSetting .c-colorWrapper {
-    margin-top: -13px;
-    float: right;
-    top: 50%;
-    position: relative;
-    right: -3px;
-}
 .c-colorWrapper {
-    width: 70px;
+    width: 74px;
     /* height: 26px; */
     position: relative;
     display: inline-block;
@@ -370,7 +342,7 @@ body{
     /* margin: 3px 0 0 3px; */
     /* width: 46px; */
     width: 52px;
-    height: 38px;
+    height: 32px;
     float: none;
     border-radius: 3px;
 }
@@ -379,7 +351,7 @@ body{
     left: 5px;
     margin: 3px 0 0 3px;
     position: absolute;
-    top: 7px;
+    top: 5px;
     width: 18px;
     /* border-radius: 4px; */
 }
@@ -388,8 +360,9 @@ body{
 }
 .skin-colorSelector {
     background: url(../imgs/color_input.png) no-repeat scroll 0 0 transparent;
+    background-size: 100% 100%;
     cursor: pointer;
-    height: 40px;
+    height: 34px;
     left: 0;
     position: absolute;
     top: 0;
@@ -468,9 +441,8 @@ body{
 }
 .label_slide{
 	display: inline-block;
-	width:80px;
+	width:90px;
 	float: left;
-	margin-left: 24px;
 }
 .progress-circle{
 	display: inline-block;
@@ -565,7 +537,7 @@ html|* > svg {
 } */
 .input-item {
     position: relative;
-    margin: 6px 0;
+    margin: 6px 0 24px 0;
     /* padding: 4px 0; */
 }
 .input-item .input-item-left {
@@ -577,6 +549,7 @@ html|* > svg {
 .input-item label {
     float: left;
     margin: 8px 0 0 0;
+    width: 66px;
 }
 .input-item .input-item-right {
     width: 175px;
@@ -625,8 +598,8 @@ input.inputSkin-input-mid {
     font-size: 14px;
     cursor: pointer;
     width: 159px;
-    height: 40px;
-    line-height: 40px;
+    height: 32px;
+    line-height: 32px;
     padding: 0 12px;
     margin: 0;
     border-radius: 4px;
@@ -670,5 +643,6 @@ input.inputSkin-input-mid {
     height:100%;
 }
 .itemsDraw .noData{display: none; text-align: center;color: #999;margin-top: 25px;}
-.linkAddress span{display: inline-block;width: 100px;}
-.linkAddress{width: 260px;}
+.innerDialog.styleSetting{border-top:0px solid #ddd;margin-top: 16px;margin-left: 24px;}
+.innerDialog.styleSetting .skin-label{width: 90px;height:32px;line-height: 32px; float: left;}
+

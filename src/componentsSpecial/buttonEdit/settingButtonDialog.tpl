@@ -1,18 +1,42 @@
-<div id="tipsDialog" class="modal layout-common" style="width:920px;">
-	  <div class="modal-header"><a class="close icon-popclose closeBtn"></a><h3> 选择图片</h3></div>
-	  <div class="modal-body">
-	    <div id="userPicList" class="picList" style="padding-top:10px;">
-	        <div id="svgBox" style="float: left;">
-	        	{{#each this}}
-		        	<div style="width:80px;height:80px;margin-top:23px;margin-left:23px;position: relative;" class="pic_thumb" data-type="rect"><i data-url="../src/component/imgs/btnIconsList.png" pos="{{left}}px {{top}}px" style="display: block;position: absolute;left:50%;top:50%;transform:scale(2);margin-left:-16px;margin-top:-16px;width:32px;height:32px;background:url(../src/component/imgs/btnIconsList.png) {{left}}px {{top}}px"></i></div>
-		        {{/each}}
-		    </div>
-	        
-	    </div>
-	    <div id="userPicFooter">
-	        <div id="uploadifive-upload_pic_btn" class="uploadifive-button" style="height: 40px; line-height: 40px; overflow: hidden; position: relative; text-align: center; width: 100px;"><input type="file" title="" style="font-size: 40px; opacity: 0; position: absolute; right: -3px; top: -3px; z-index: 999;" multiple="multiple"></div>
-	        <div id="btn-cancel" class="btn-cancel" style="right: 130px; bottom: 10px;">取 消</div>
-	        <div id="selectPic" class="picBtn active">确 定</div>
+<div id="tipsDialog" class="modal layout-common btnDialog">
+	  <div class="modal-header">
+		  	<a class="close icon-popclose closeBtn"></a>
+		  	<h3>组件设置</h3>
+	  </div>
+	  <ul class="picStyleSel">
+		  	<li class="sel" indNum = "1">系统图库</li>
+		  	<li indNum = "2">我的图片</li>
+	  </ul>
+	  <div class="modal-body sysPics" indNum = "1">
+	    <div id="userPicList" class="picList">
+	        		<div class="pic_thumb" data-url="../src/1/images/addPic1.png"><img src="../src/1/images/addPic1.png">
+	        			<span class="pic_select"></span>
+	        			<!-- <i class="delPic" style="display:none;"></i> -->
+	        		</div>
+	        		<div class="pic_thumb" data-url="../src/1/images/delectCha.png"><img src="../src/1/images/delectCha.png">
+	        			<span class="pic_select"></span>
+	        			<!-- <i class="delPic" style="display:none;"></i> -->
+	        		</div>
+	        		<div class="pic_thumb" data-url="../src/1/images/delectCha2.png"><img src="../src/1/images/delectCha2.png">
+	        			<span class="pic_select"></span>
+	        			<!-- <i class="delPic" style="display:none;"></i> -->
+	        		</div>
 	    </div>
 	  </div>
+	  <div class="modal-body myPics" style="display:none;" indNum = "2">
+	    <div id="userPicList" class="picList">
+         	 <div id="userpic_file_upload">
+              	  <div id="uploadifive-file_upload_pic" class="uploadifive-button">
+ 		              	<div class="uploadifive-button" id="file_upload_pic" title="上传图片" style="display: inline-block;">
+ 		              	</div>
+ 	              		<input type="button" value="上传">
+ 	              		<input type="file" multiple="multiple" name="myfiles" id="picAdd">
+ 	              </div>
+ 	        </div>
+	    </div>
+	  </div>
+	  <div id="userPicFooter">
+         <div id="btn-cancel" class="btn-cancel">取 消</div>
+         <div id="selectPic" class="picBtn active">确 定</div>
+      </div>
 </div>

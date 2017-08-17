@@ -8,7 +8,7 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, sub, sup, b, i, dl, d
     font-weight: normal;
     font-style: normal;
     font-weight:100;
-    font-size:1rem;
+    font-size:14px;
     text-decoration: none;
 }
 /*浮动清除*/

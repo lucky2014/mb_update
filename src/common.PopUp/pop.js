@@ -10,8 +10,13 @@ define(function(require,exports,module){
 	function popShow(config,callback){
 		if(config){
 			if(config.title){
-				$(".popUp_box").css({"width":"420px", "margin-left": "-210px"});
-				$(".pop_title").html(config.title);
+				if(config.width){
+					$(".popUp_box").css({"width": config.width + "px", "margin-left": "-"+ config.width/2 + "px"});
+				}else{
+					$(".popUp_box").css({"width":"420px", "margin-left": "-210px"});
+				}
+				
+				$(".pop_title").html(config.title).css({border: "1px solid #d3dce6", "padding": "10px 32px"});
 			}else{
 				$(".popUp_box").css({"width":"250px","margin-left": "-125px"});
 				$(".pop_title").html("").css({border: "none", "padding":0});

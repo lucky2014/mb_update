@@ -11,7 +11,7 @@
 				<span>添加页面</span>
 			</div>
 			<ul class="itemsDraw">
-				<p class='noData'>你还没有创建页面哦~</p>
+				
 			</ul>
 		</div>
 	</div>

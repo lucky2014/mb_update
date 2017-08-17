@@ -88,6 +88,9 @@ font-size: 13px; z-index: 4; padding-left: 10px; line-height: 30px;}
 .microItem .siteEv input{ width: 96%; color: #617084; font-size: 12px; border-radius: 4px; background: #fff; border: none;
 margin: 6px 0 10px; height: 26px; padding: 0 2%;}
 .microItem .siteEv button{ background: #20a0ff; color: #fff; display: block; border: none; height: 26px;  width: 70px; border-radius: 4px;}
+.microItem .siteEv a.cut{ background: url(../../imgs/close.png); width: 15px; height: 16px; position: absolute; right: 10px;
+top: 10px; display: block;}
+.microItem .siteEv a.cut:hover{ background-position: 0 -16px;}
 
 .microItem .miContent{
     padding: 0 10px;

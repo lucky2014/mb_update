@@ -10,8 +10,8 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title>微官网主页</title></head>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=g7UqdqYFme62tLfzp1PpEfba"></script>
-    <script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>
+    <!--script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=g7UqdqYFme62tLfzp1PpEfba"></script>
+    <script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script-->
   <body ng-app="myApp" ng-controller="myCtrl">
       <div id="VAct_navbar">
           <div class="navbar-inner">
@@ -107,8 +107,10 @@
           
       </div>
       <div id="dialog"></div>
-      <div id="pop"></div>
+      <div id="pop">
+      </div>
       <div id="previewPop"></div>
+      <div class="pblTipBox"></div><!--发布时用-->
       <!-- <input type="button" value="撤销" id="undo" style="width:120px;height:32px;background-color: #0f0;color:#fff;position: fixed;left:700px;top:200px;" name=""> -->
       <script type="text/javascript" src="../src/common.lib/sea.js"></script>
       <script type="text/javascript" src="../src/common.lib/seajs-text/seajs-text-1.1.1/seajs-text.js"></script>

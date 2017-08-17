@@ -6,7 +6,6 @@ define(function(require,exports,module){
   var Engine = require("engine");
   var box = Engine.init();
   
-  var siteId = setup.getQueryString("siteId");
   //页面逻辑
   var app = {
       templateList: function(){ //查询站点列表
@@ -15,7 +14,7 @@ define(function(require,exports,module){
         box.render($(".microTemplate"), "", indexTpl);
           var me = this;
           var params = {
-            type : 2,
+            type : 2,  //1单页模板，2多页模板
             pageNum : 1,
             pageSize : 10,
           }
@@ -29,10 +28,6 @@ define(function(require,exports,module){
               var temPicTpl = require("templateList/temPic.tpl");
 
               box.render($(".temsContainer"), msg.data, temPicTpl,"0");
-
-              $(".previewCon").delegate("button","click",function(){
-                  app.useNow($(this));
-              })
          });
       },
       clickLi: function(self){
@@ -51,16 +46,33 @@ define(function(require,exports,module){
       useNow: function(self){
         var templateId = "";
         var blank = self.parents(".tempOuter").attr("blank");
-        var temLi =self.parents(".previewCon").siblings("ul").find("li:first-child").attr("templateId");
+        var temLi =self.attr("templateId");
 
         templateId = (blank==1) ?  "000" : temLi;
 
-        window.location.href = "../component/index.html?&siteId="+siteId+"&templateId="+templateId;
+        setup.commonAjax("addSite.do", "", function(msg){ 
+            var siteData = msg; 
+            var params = {
+               "templateId": templateId,
+               "templateName":"首页",
+               "data": JSON.stringify({components: [{"elements":{},"componentSort":1,"symbol":"baseComponents","templateName":"首页","description":"","backgroundColor":"#f0f0fa"}]}),
+               "siteId": msg,
+               "isHomePage": "1",
+            };
+            setup.commonAjax("addPage.do", params, function(msg){ 
+               window.location.href = "../component/index.html?templateId="+templateId + "&siteId="+siteData;
+            })  
+        });
       },
   }
   app.templateList();
   $(".classify").delegate("li","click",function(){
     app.clickLi($(this));
+  })
+
+  //点击立即使用
+  $(".previewCon").delegate("button","click",function(){
+      app.useNow($(this));
   })
  
 });

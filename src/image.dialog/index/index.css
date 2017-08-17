@@ -2,7 +2,7 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, 
     font-family: "Microsoft YaHei", å¾®è½¯é›…é»‘, å®‹ä½“, Arial, sans-serif;
 }
 #userPicDialog{
-    z-index: 1000000001;
+    z-index: 999;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -25,9 +25,8 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, 
 }
 .modal {
     position: fixed;
-    top: 65px;
+    top: 10px;
     left: 50%;
-    z-index: 1050;
     width: 800px;
     border-radius: 5px;
     margin-left: -400px;
@@ -207,6 +206,7 @@ a {
     background-repeat:no-repeat;
     background-position:center center;
     background-color:rgb(241, 241, 241);
+    float: left;
 }
 .picList .pic_thumb.select,.picList .pic_thumb:hover,#userpic_file_upload:hover{
     border-color: #1c9ae3;
