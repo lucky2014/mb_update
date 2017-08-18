@@ -69,4 +69,18 @@ define(function(require,exports,module){
     $(".dragLine").css({left: w2+"px"});
     $("#showHeight").css({left: (w2-30)+"px"}).html(h3+50);
 
+    //左边页面的高度
+    var hlUl = $(window).height()-120;
+    
+    var len = $(".site-page-navi-list ul li").length;
+    if(len>11){
+        $(".navi-btn-dropdown ul").css({
+        "height": hlUl+"px", 
+        "overflow": hidden,
+        "overflow-y":scroll
+        });
+    }else{
+        $(".navi-btn-dropdown ul").css({height: hlUl+"px"});
+    }
+    
 });

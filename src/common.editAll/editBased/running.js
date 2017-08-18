@@ -27,7 +27,6 @@ define(function(require,exports,module){
     //保存与读取数据
     var save = require("save/index.js");
     //引入模板编辑的功能
-	var saveDataIndex = require("1/mb_index/index");
     require("common.editAll/dialog/bootstrap-popover-x.min.css");
     //超链接编辑弹框
     var dialogTpl = require("common.editAll/dialog/index.tpl");
@@ -87,7 +86,7 @@ define(function(require,exports,module){
                 me.stopBubble(e)
                 callback&&callback()
             })
-            $("#userPicList").delegate(".pic_thumb","click",function(e){
+            $("body").delegate(".pic_thumb","click",function(e){
                 me.stopBubble(e)
                 $(".pic_thumb").removeClass("select");
                 $(this).addClass("select");
@@ -104,7 +103,7 @@ define(function(require,exports,module){
         }  
 	}
 	var appExtend = $.extend(app,dragObject,editTextObj,createElementNodeObj,
-                          editBased,colorPicker,rightEdit,save,rotateObject,dragMoveObj,saveDataIndex,redoOrUndo);
+                          editBased,colorPicker,rightEdit,save,rotateObject,dragMoveObj,redoOrUndo);
 	
 
 
@@ -127,8 +126,8 @@ define(function(require,exports,module){
             var componentClass = $(targetObj).attr("id");
         }else{
             var componentClass = clkClass+new Date().getTime();
+            me.createElementNode(".left",componentClass,componentTpl);
         }
-        me.createElementNode(".left",componentClass,componentTpl);
         box.render($(".right"), "", editTpl);
         $(".line").width(window.innerWidth-860);
         $(".skin-colorSelector-border,.skin-colorSelector-bg").unbind();
@@ -166,6 +165,11 @@ define(function(require,exports,module){
         });
         me.changeCursor();
     };
+
+
+
+
+    
     //点击head右上角的保存
     $("body").delegate(".site_save", "click", function(e){
         appExtend.pageSave();

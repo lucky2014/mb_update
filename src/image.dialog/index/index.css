@@ -212,6 +212,12 @@ a {
     border-color: #1c9ae3;
     padding: 0;
 }
+#uploadifive-file_upload_pic:hover #file_upload_pic{
+     background-image: url(../imgs/add_pic1.png);
+}
+#uploadifive-file_upload_pic:active #file_upload_pic{
+     background-image: url(../imgs/add_pic2.png);
+}
 .picList .pic_thumb.select .pic_select {
     width: 22px;
     height: 22px;

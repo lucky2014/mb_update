@@ -1,1 +1,1 @@
-<p style="width:100%;height:100%;border: 1px solid #ddd;">双击编辑</p>
+<p style="width:100%;height:100%;border: 1px solid #ddd;color:#000;font-weight:bold;">右击此处开始编辑</p>

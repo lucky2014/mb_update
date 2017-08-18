@@ -7,12 +7,12 @@ define(function(require,exports,module){
     var box = Engine.init();
 
     require("common.activeX/skySet/index.css");
+    require("common.activexShow/sky/index.css");
     require("common.colorpicker/jquery.colorpicker");
 
 
     //页面逻辑
     var app = {
-
         //sky
         img_edit: function(v){
             var me = this;

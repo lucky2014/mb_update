@@ -302,8 +302,8 @@ define(function(require,exports,module){
             return datas;
         },
         changeData:function(w,h){
-            w = w || this.basedDevicedWidth;
-            h = h || 55;
+            w = w ? w:308;
+            h = h ? h : 55;
             for(var id in this.elements){
                 var idValue = this.elements[id]
                 for(var className in idValue){
@@ -312,7 +312,9 @@ define(function(require,exports,module){
                             if(idValue[className][style].indexOf("%")==-1){
                                 if(!isNaN(parseInt(idValue[className][style]))){
                                     if(!IsPC()){
-                                        idValue[className][style] = parseInt((parseInt(idValue[className][style])-h)/308*w)+"px"
+                                        idValue[className][style] = parseInt((parseInt(idValue[className][style])+55)/308*this.basedDevicedWidth)+"px"
+                                    }else{
+                                        idValue[className][style] = parseInt((parseInt(idValue[className][style])+h)/308*w)+"px"
                                     }
                                 }
                             }
@@ -320,6 +322,8 @@ define(function(require,exports,module){
                             if(idValue[className][style].indexOf("%")==-1){
                                 if(!isNaN(parseInt(idValue[className][style]))){
                                     if(!IsPC()){
+                                        idValue[className][style] = parseInt(parseInt(idValue[className][style])/308*this.basedDevicedWidth)+"px";
+                                    }else{
                                         idValue[className][style] = parseInt(parseInt(idValue[className][style])/308*w)+"px";
                                     }
                                 }
@@ -332,14 +336,12 @@ define(function(require,exports,module){
                 }
             }
         },
-        loadFn:function(datas, ele, log){ //渲染html5
+        loadFn:function(datas, ele, log){ //渲染html5 //1说明返回的数据是包括components
             //目前components只有1个数组值
-            
-            $(".left").html("");
-            if(ele) $("."+ele).html("");
-            
+            //console.log(JSON.stringify(datas,null,2));
             var me = this;
-            if(ele){
+            if(ele){ //说明是预览或者发布
+                $("."+ele).html("");
                 this.elements = datas.components[0].elements||{};
                 this.changeData(230,41);
                 var htmls = '<div><div class="skyHeader">'+datas.components[0].templateName+'</div>';
@@ -347,21 +349,22 @@ define(function(require,exports,module){
                 $("." + ele).html(htmls);
                 $("." + ele+">div").css({"backgroundColor": datas.components[0].backgroundColor})
             }else{
+                $(".left").html("");
                 if(log){ //初始渲染
                     this.elements = datas.components[0].elements||{};
-                    this.changeData();
+                    //this.changeData();
                     var htmls = this.getSaved();
                     $(".left").html(htmls);
                 }else{
                     this.elements = datas.elements||{};
-                    this.changeData();
+                    //this.changeData();
                     var htmls = this.getSaved();
                     $(".left").html(htmls);
                 }
+                /**这个方法作为读取组件信息时的基础数据绑定js在component/index/index.js*/
+                me.rightEditComponentInitAll();
             } 
 
-            /**这个方法作为读取组件信息时的基础数据绑定js在component/index/index.js*/
-            me.rightEditComponentInitAll();
             me.cacheDatas = datas;          
         },
         getSaved:function(){

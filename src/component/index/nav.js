@@ -1,12 +1,15 @@
 define(function(require,exports,module){
+    require("1/css/base.css");
     require("component/index/nav.css");
+    require("1/css/common.css");
+    
+    require("1/css/index.css");
 
     var $ = require("jquery");
     
     var Engine = require("engine");
     var box = Engine.init();
     var navbarTpl = require("component/index/tpl/nav.tpl");
-    var loadTemplateData = require("1/mb_index/index");
 
     var webRenameTpl = require("component/index/tpl/webRename.tpl");
 
@@ -16,6 +19,7 @@ define(function(require,exports,module){
     var run = require("common.editAll/editBased/running");
 
     var popUp = require("common.PopUp/index");
+    var pageSet = require("common.activeX/skySet/index");
     
     var app = {
         getLinkData:function(){
@@ -115,6 +119,7 @@ define(function(require,exports,module){
             //点击时，如果有没有保存的修改，则保存
             $(".site-page-navi-list").delegate(".page-edit", "click", function(ev){
                 var self = $(this);
+                var editNow = self.parents("li").attr("editNow");
                 self.parents("li").find("a,.page-control").hide();
                 self.parents("li").siblings().find("input,button,.noMarginI").hide();
                 self.parents("li").siblings().find("a").show();
@@ -123,12 +128,14 @@ define(function(require,exports,module){
                 var index = self.attr("index");
                 var html ="<input type='text' value='"+ val +"' /><button>确认</button>";
                 var html2 ="<input class='noMargin' type='text' value='"+ val +"' /><button>确认</button>";
-                if(index == 1){
-                    self.parents("li").append('<i class="homeIcon noMarginI"></i>'+html2)
-                }else{
-                    self.parents("li").append(html)
+                if(!editNow || editNow == "0"){ //避免重复append编辑框
+                    if(index == 1){
+                        self.parents("li").append('<i class="homeIcon noMarginI"></i>'+html2)
+                    }else{
+                        self.parents("li").append(html)
+                    }
+                    self.parents("li").attr("editNow","1");
                 }
-
                 me.getLinkData();
             });
         },
@@ -202,15 +209,16 @@ define(function(require,exports,module){
                     text: self.siblings("input").val(),
                     link:"https://www.iliujia.com",
                 };
+                self.parent("li").attr("editNow","0");//编辑状态置0
                 //加载新的li
                 box.render(self.parent(), val, webRenameTpl);
                 me.getLinkData();
 
                 var pageNum = $(".itemsDraw li").length;
-                loadTemplateData.getInfor();
+                    pageSet.img_edit("");
                 $("#sky h1").html("第"+pageNum+"页");
                 $("#storeName").val("第"+pageNum+"页");
-
+               
             });
         },
         pageList: function(){ //已创建页面接口
@@ -227,11 +235,13 @@ define(function(require,exports,module){
                 $.each(msg, function(i,v){
                     v.pageName = v.pageName ? v.pageName : "页面"+ (i+1);
                     if(v.isHomePage == 1){
+                        $("#sky h1").html(v.pageName);
                         showDatas = $.extend({}, JSON.parse(v.data));
                         $(".left").attr("isHomePage", 1).attr("pageId", v.id);
+                        pageSet.img_edit(v);
                         //渲染中间的left
                         if(showDatas){
-                            run.loadFn(showDatas,"",1);
+                            run.loadFn(showDatas,"",1); //有第二个参数是预览效果，
                         }
                     }
                 });
@@ -249,6 +259,12 @@ define(function(require,exports,module){
                 $(".right").delegate(".blueBtnSky", "click", function(){
                     var datas = run.saveData(sky);
                     run.cacheDatas = datas;
+                    popUp({
+                        "content":"保存成功！",
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
                 });
                 
             });
@@ -273,7 +289,7 @@ define(function(require,exports,module){
                     self.addClass("active").siblings().removeClass("active");
                     var userId = self.attr("userId");
                     var templateId = self.attr("templateId");
-                    me.selectTemp(templateId,me);
+                    //me.selectTemp(templateId,me);
                 })
             });
         },
@@ -281,22 +297,18 @@ define(function(require,exports,module){
         componentList: function(){ 
             setup.commonAjax("componentList.do", "", function(msg){ 
                 var extsTpl = require("component/index/tpl/exts.tpl"); 
-                /*var extsFastTpl = require("component/index/tpl/extsFast.tpl");*/
                 box.render($(".extsDraw1"), msg, extsTpl);               
-                /*box.render($(".extsDraw2"), "", extsFastTpl);*/               
             });
         },
         //加载模板页面（空白或非空白）
-        selectTemp: function(templateId,me){
+        selectTemp: function(templateId){
             if(templateId == "000"){
-                loadTemplateData.init("");
                 $(".left").css("background", "#fff");
             }else{
-                loadTemplateData.init("templateData.do", "templateId", templateId,function(datas){
-                    me.datas = datas;
-                    $(".left").css("background", "#f4f5fa");
-                    //console.log(JSON.stringify(run,null,2));
-                    run.running(datas);
+                setup.commonAjax("templateData.do", {templateId:templateId}, function(msg){  
+                    //$(".left").css("background", "#f4f5fa");
+                    //run.loadFn(JSON.parse(msg.data),"",1); //1说明返回的数据是包括components
+                    //run.running(JSON.parse(msg.data));
                 });
             } 
         }, 
@@ -309,13 +321,29 @@ define(function(require,exports,module){
                 self.parent().addClass("activePage").siblings().removeClass("activePage");
                 var pageId = self.parent("li").attr("pageId");
                 
-                $(".left").html("").attr("pageId", pageId);;
-                loadTemplateData.init("getPageInfo.do", "pageId", pageId, function(datas){
-                    //console.log(JSON.stringify(datas,null,2));
-                    run.running(datas);
+                $(".left").html("").attr("pageId", pageId);
+
+                setup.commonAjax("getPageInfo.do", {pageId:pageId}, function(msg){  
+                    console.log(JSON.stringify(msg,null,2));
+                    $("#sky h1").html(msg.pageName);
+                    //$(".left").css("background", "#f4f5fa");
+                    run.loadFn(JSON.parse(msg.data),"",1); //1说明返回的数据是包括components
+                    //run.running(JSON.parse(msg.data));
+                    //渲染右边页面设置
+                    pageSet.img_edit(msg);
                 });
             })        
         },
     }
+
+
+
+    $("#sky.leftDiv").click(function(){
+        var pageId = $(".left").attr("pageId");
+        setup.commonAjax("getPageInfo.do", {pageId:pageId}, function(msg){  
+            //渲染右边页面设置
+            pageSet.img_edit(msg);
+        });
+    });
     return app;
 });

@@ -611,17 +611,6 @@ input.inputSkin-input-mid {
     -webkit-appearance: none;
     background: white url(../imgs/select_arrow.png) no-repeat right center;
 }
-.VACT_main .leftOuter{
-    width:318px;
-    margin-left:0;
-    background:none;
-}
-#sky,#sky .selectB{
-    background-size: 100% 100% !important;
-}
-.VACT_main .leftOuter .left{
-    height:100%;
-}
 .leftOuter .dragLine{
     position: fixed;
     bottom: 14px;

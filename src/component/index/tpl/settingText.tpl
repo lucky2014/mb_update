@@ -2,9 +2,9 @@
   <a class="setting-panel-switch"></a>
   <div class="setting-panel-content">
       <div class="DialogWindow">
-          <div class="innerDialog" id="settingId" style="padding-bottom:0;width:200px;height:37px;">
+          <!-- <div class="innerDialog" id="settingId" style="padding-bottom:0;width:200px;height:37px;">
               <img src="http://fl.cdn.qq.com/transition/52/2000002552/687/9003040581620125681900724875.png" style="float:left;margin-top:5px;">
-			  <div class="help btn-tooltip fr" data-message="文字较多的情况下，建议拆成几个8行以内的短文本"></div>
+                  <div class="help btn-tooltip fr" data-message="文字较多的情况下，建议拆成几个8行以内的短文本"></div> -->
           </div>
       </div>
       <div class="innerDialog styleSetting" style="border-top:0px solid #ddd;" hasmodified="1">
