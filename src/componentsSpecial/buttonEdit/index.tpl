@@ -1,1 +1,1 @@
-<input type="button" value="标准按钮" style="width:100%;min-height:32px;height:100%;background-color: #1c9ae3;color:#fff;outline: none;border-color:transparent;" name="">
+<input type="button" value="标准按钮" style="width: 100%; min-height: 32px; height: 100%; background-color: rgb(28, 154, 227); color: rgb(255, 255, 255); outline: none; border-color: rgb(198, 198, 230);border-width:1px;" name="">

@@ -1,5 +1,6 @@
 define(function(require, exports, module) {
 	var $ = require("jquery");
+    var popUp = require("common.PopUp/index");
 
     var setupApp = {
         url:"http://"+(location.host||"wx.yinnima.com:8088")+"/template/official/", //测试
@@ -22,16 +23,9 @@ define(function(require, exports, module) {
                 async:async||true,  
                 success: function(msg){
                     if(msg.resultCode == 1000){
-                        //console.log(JSON.stringify(msg,null,2));
                         msg && succCallback(msg.returnObject);
-                    }else if(msg.resultCode == 9998){ //系统异常或故障
-                        /*popUp({
-                            "title":"错误提示",
-                            "content":"卡券创建不成功！",
-                            showCancelButton: false,
-                            showConfirmButton: false,
-                            timer: 2000
-                        });*/
+                    }else if(msg.resultCode == 8001){ //域名已被占用
+                        $(".pblErr").show();
                     }
                 }, 
                 complete: function (XHR, TS) { XHR = null },

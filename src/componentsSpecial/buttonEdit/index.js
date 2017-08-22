@@ -12,12 +12,10 @@ define(function(require,exports,module){
   var button2 = require("componentsSpecial/buttonEdit/index2.tpl");
   var button3 = require("componentsSpecial/buttonEdit/index3.tpl");
 
-  var linkAdress = require("common.linkAdress/index");
   var commonZujian = require("componentsSpecial/commonZujian");
   //页面逻辑
   var app = {
     init:function(app){
-      linkAdress.init();
       var me = this;
     	$("body").delegate("#inpBtn span","click",function(){  //按钮类型选择
           var ind = $(this).index();
@@ -42,7 +40,7 @@ define(function(require,exports,module){
               app.colorPicker(".skin-colorSelector-bgTp");
               app.colorPicker(".skin-colorSelector-bgBtm");
           }
-          linkAdress.init();
+          commonZujian.init();
           $(this).parent().find("span").eq(ind).addClass("active").siblings("span").removeClass("active");
     	})
       $("body").delegate("#font_type_select .before","click",function(){
@@ -66,17 +64,6 @@ define(function(require,exports,module){
             }
             $(this).addClass("active");
         }
-      })
-      $("body").delegate("#fontConfig select","change",function(){ //字体大小选择
-          var self = $(this).find("option:selected");
-          $(app.dragTarget).find("input").css("font-size",self.html())
-      })
-      $(".right").delegate(".progress-circle","mouseover",function(){ //鼠标上移显示进度条百分比
-        var self = $(this);
-        self.addClass("hover");
-        self.siblings(".percent").html(self.parents("p").attr("value"));
-        self.siblings("span").show();
-
       })
       $(".right").delegate(".progress-circle","mouseout",function(){
         var self = $(this);

@@ -76,20 +76,26 @@
 	background:url(../../../src/component/imgs/T.png) no-repeat 12px center;
 }
 #fontConfig{
-	width: 180px;
+	position: relative;
+	width: 152px;
     border: 1px solid #1c9ae3;
     position: absolute;
-    top: 42px;
-    z-index: 999;
+    top: 40px;
+    z-index: 9999;
     background-color: #fff;
-    left: -125px;
+    left: -69px;
     border-radius: 4px;
-    display: none;
+    padding: 5px 20px;
+    height: 36px;
 }
 #fontConfig i{
 	text-align: center;
-	margin-left:3%;
+	margin-left:15px;
 	padding: 6px;
+	padding-bottom: 0;
+	width: 10px;
+	display:inline-block;
+	cursor: pointer;
 }
 #font_color .c-colorWrapper{
 	width:54px;
@@ -126,7 +132,7 @@
 	border:1px solid #cccccc;
 }
 .form-control{
-	padding: 6px 12px;
+	padding: 6px 10px;
 	color:#c4c4c4;
 	border:1px solid #c4c4c4;
 	border-radius: 4px;

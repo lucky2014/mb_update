@@ -1,7 +1,7 @@
 <div id="tipsDialog" class="modal layout-common">
 	  <div class="modal-header">
 	  	<h3> 选择图片</h3>
-	  	<i class="close icon-popclose closeBtn"></i>
+	  	<i class="icon-popclose closeBtn"></i>
 	  </div>
 	  <div class="modal-body">
 	    <div id="userPicList" class="picList">

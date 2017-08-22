@@ -21,6 +21,10 @@ define(function(require,exports,module){
     var popUp = require("common.PopUp/index");
     var pageSet = require("common.activeX/skySet/index");
     
+    var dataBlank = {
+        "components": [{"elements":""}],
+        "symbol": "baseComponents",
+        }
     var app = {
         getLinkData:function(){
           var temp = "<option data-link='a1'>a2</option>";
@@ -205,20 +209,24 @@ define(function(require,exports,module){
             var me = this;
             $(".site-page-navi-list ul").delegate(" button", "click", function(){
                 var self = $(this);
+                var thisLi = self.parent();
                 var val = {
                     text: self.siblings("input").val(),
                     link:"https://www.iliujia.com",
                 };
-                self.parent("li").attr("editNow","0");//编辑状态置0
+                thisLi.attr("editNow","0");//编辑状态置0
                 //加载新的li
-                box.render(self.parent(), val, webRenameTpl);
+                box.render(thisLi, val, webRenameTpl);
                 me.getLinkData();
 
-                var pageNum = $(".itemsDraw li").length;
-                    pageSet.img_edit("");
-                $("#sky h1").html("第"+pageNum+"页");
-                $("#storeName").val("第"+pageNum+"页");
-               
+                if(!thisLi.attr("pageId")){
+                    thisLi.addClass("activePage").siblings("li").removeClass("activePage");
+                    $(".left").html("").attr("pageId","").attr("isHomePage", "");
+                }
+                pageSet.img_edit();
+                $("#sky h1").html(val.text);
+                $("#storeName").val(val.text);
+                /*$(".left").attr("pageId","").attr("isHomePage", "").html("");*/
             });
         },
         pageList: function(){ //已创建页面接口
@@ -233,7 +241,7 @@ define(function(require,exports,module){
                 var showDatas = {};
                 $(".left").html("");
                 $.each(msg, function(i,v){
-                    v.pageName = v.pageName ? v.pageName : "页面"+ (i+1);
+                    v.pageName = v.pageName ? v.pageName : "第"+ (i+1)+"页";
                     if(v.isHomePage == 1){
                         $("#sky h1").html(v.pageName);
                         showDatas = $.extend({}, JSON.parse(v.data));
@@ -321,17 +329,23 @@ define(function(require,exports,module){
                 self.parent().addClass("activePage").siblings().removeClass("activePage");
                 var pageId = self.parent("li").attr("pageId");
                 
-                $(".left").html("").attr("pageId", pageId);
-
-                setup.commonAjax("getPageInfo.do", {pageId:pageId}, function(msg){  
-                    console.log(JSON.stringify(msg,null,2));
-                    $("#sky h1").html(msg.pageName);
-                    //$(".left").css("background", "#f4f5fa");
-                    run.loadFn(JSON.parse(msg.data),"",1); //1说明返回的数据是包括components
-                    //run.running(JSON.parse(msg.data));
-                    //渲染右边页面设置
-                    pageSet.img_edit(msg);
-                });
+                if(pageId){
+                    $(".left").html("").attr("pageId", pageId);
+                    setup.commonAjax("getPageInfo.do", {pageId:pageId}, function(msg){  
+                        //console.log(JSON.stringify(JSON.parse(msg.data),null,2));
+                        $("#sky h1").html(msg.pageName);
+                        //$(".left").css("background", "#f4f5fa");
+                        run.loadFn(JSON.parse(msg.data),"",1); //1说明返回的数据是包括components
+                        //run.running(JSON.parse(msg.data));
+                        //渲染右边页面设置
+                        pageSet.img_edit(msg);
+                    });
+                }else{
+                    $(".left").html("")
+                    var title = self.attr("title");
+                     dataBlank.pageName = title;
+                     pageSet.img_edit(dataBlank);
+                }
             })        
         },
     }

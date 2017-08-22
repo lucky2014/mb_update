@@ -8,8 +8,8 @@ define(function(require,exports,module){
     var commonZujian = require("componentsSpecial/commonZujian");
 	var app = {
 	    init:function(){
+	    	var me = this;
 	    	commonZujian.init();
-	    	
 	    },
 	    tpl:function(){
 	    	return require("component/index/tpl/settingImage.tpl")

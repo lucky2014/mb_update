@@ -112,7 +112,8 @@
                     return false;
                 },
                 onChange: function (hsb, hex, rgb) {
-                    $(currEle).css('backgroundColor', '#' + hex);
+                    $(currEle).css("backgroundColor",'#fff');
+                    $(currEle).siblings("b").css("backgroundColor",'#' + hex);
                     if(currEle==".skin-colorSelector-border"){
                         if($(me.dragTarget).find("svg")[0]){
                             $(me.dragTarget).find("svg").children().css("stroke",'#' + hex);

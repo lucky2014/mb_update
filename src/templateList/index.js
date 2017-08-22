@@ -48,14 +48,14 @@ define(function(require,exports,module){
         var blank = self.parents(".tempOuter").attr("blank");
         var temLi =self.attr("templateId");
 
-        templateId = (blank==1) ?  "000" : temLi;
+        templateId = (blank==1) ?  "0" : temLi;
 
         setup.commonAjax("addSite.do", "", function(msg){ 
             var siteData = msg; 
             var params = {
                "templateId": templateId,
-               "templateName":"首页",
-               "data": JSON.stringify({components: [{"elements":{},"componentSort":1,"symbol":"baseComponents","templateName":"首页","description":"","backgroundColor":"#f0f0fa"}]}),
+               "pageName":"首页",
+               "data": JSON.stringify({components: [{"elements":{},"componentSort":1,"symbol":"baseComponents","pageName":"首页","description":"","backgroundColor":"#f0f0fa"}]}),
                "siteId": msg,
                "isHomePage": "1",
             };

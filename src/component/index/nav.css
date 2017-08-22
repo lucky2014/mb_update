@@ -25,22 +25,21 @@
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url(../imgs/new_navbar_header_2.png) no-repeat -258px -48px;
+    background: url(../imgs/new_navbar_header_4.png) no-repeat -41px -112px;
     vertical-align: sub;
-    margin-right: 4px;
 }
 .new-icons-tpl {
     display: inline-block;
     width: 24px;
     height: 20px;
-    background: url(../imgs/new_navbar_header_2.png) no-repeat -164px -87px;
+    background: url(../imgs/new_navbar_header_4.png) no-repeat -105px -112px;
     vertical-align: text-bottom;
 }
 .new-icons-add {
     display: inline-block;
     width: 26px;
     height: 24px;
-    background: url(../imgs/new_navbar_header_2.png) no-repeat -307px -45px;
+    background: url(../imgs/new_navbar_header_4.png) no-repeat -173px -109px;
     vertical-align: text-bottom;
 }
 .navi-btn.active {
@@ -60,23 +59,22 @@
     display: inline-block;
     width: 26px;
     height: 24px;
-    background: url(../imgs/new_navbar_header_3.png) no-repeat -307px -45px;
+    background: url(../imgs/new_navbar_header_4.png) no-repeat -141px -110px;
     vertical-align: text-bottom;
 }
 .navi-btn.active .new-icons-tpl {
     display: inline-block;
     width: 24px;
     height: 20px;
-    background: url(../imgs/new_navbar_header_2.png) no-repeat -283px -48px;
+    background: url(../imgs/new_navbar_header_4.png) no-repeat -71px -112px;
     vertical-align: text-bottom;
 }
 .navi-btn.active .new-icons-page {
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url(../imgs/new_navbar_header_3.png) no-repeat -255px -48px;
-    vertical-align: sub;
-    margin-right: 4px;
+    background: url(../imgs/new_navbar_header_4.png) no-repeat -10px -112px;
+    vertical-align: text-bottom;
 }
 .navi-btn-dropdown{ 
     position: fixed; 

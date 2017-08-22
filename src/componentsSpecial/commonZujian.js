@@ -8,6 +8,7 @@ define(function(require,exports,module){
     var ajaxFileUpload = require("common.ajaxfileupload/index");
 	var linkAdress = require("common.linkAdress/index");
     var popUp = require("common.PopUp/index");
+     require("componentsSpecial/commonZujian.css");
 	var app = {
 	    init:function(){
 	    	/*app.getData();*/
@@ -27,7 +28,7 @@ define(function(require,exports,module){
 	    	});
 	    	
 	    },
-	    getData: function(className){
+	    getData: function(className){//获取历史上传图片
 
 	    	var params = {
 	    		pageNum : 1,
@@ -41,7 +42,7 @@ define(function(require,exports,module){
 	    		app.delFn();
 	    	})
 	    },
-	    delFn : function(){
+	    delFn : function(){	//删除图片
 	    	$("#tipsDialog .pic_thumb").mouseover(function(){
 	    		$(this).find(".delPic").show();
 	    	}).mouseout(function(){
@@ -68,7 +69,7 @@ define(function(require,exports,module){
 	    		    });
 	    		});
 	    	})
-	    }
+	    },
 	}
 	return app;
 })

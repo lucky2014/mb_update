@@ -331,10 +331,7 @@ body{
     margin-bottom: 10px;
 }
 .c-colorWrapper {
-    width: 74px;
-    /* height: 26px; */
-    position: relative;
-    display: inline-block;
+    margin-top: 1px;
 }
 .c-opacityBg {
     background: url(../imgs/transparency.gif) repeat scroll 0 0 transparent;
@@ -359,13 +356,13 @@ body{
     float: left;
 }
 .skin-colorSelector {
-    background: url(../imgs/color_input.png) no-repeat scroll 0 0 transparent;
-    background-size: 100% 100%;
+    /* background: url(../imgs/color_input.png) no-repeat scroll 0 0 transparent;
+    background-size: 100% 100%; */
     cursor: pointer;
     height: 34px;
-    left: 0;
+    left: -1px;
     position: absolute;
-    top: 0;
+    top: -1px;
     width: 54px;
     border-radius: 3px;
 }
@@ -638,3 +635,4 @@ input.inputSkin-input-mid {
 .innerDialog.styleSetting{border-top:0px solid #ddd;margin-top: 16px;margin-left: 24px;}
 .innerDialog.styleSetting .skin-label{width: 90px;height:32px;line-height: 32px; float: left;}
 
+/* .groupSkin-content{ border-bottom: 1px solid #e0e0e0;} */

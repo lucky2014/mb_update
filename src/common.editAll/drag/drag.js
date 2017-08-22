@@ -174,11 +174,11 @@ define(function(require,exports,module){
                 }
                 me.scrollH+=2;
                 me.scrollDeltaH+=2;
-                $(".VACT_main_page_index_box").mCustomScrollbar("scrollTo",me.scrollH);
+                //$(".VACT_main_page_index_box").mCustomScrollbar("scrollTo",me.scrollH);
             }else if(e.clientY<=scrollTop){
                 me.scrollH-=2;
                 me.scrollDeltaH-=2;
-                $(".VACT_main_page_index_box").mCustomScrollbar("scrollTo",me.scrollH);
+                //$(".VACT_main_page_index_box").mCustomScrollbar("scrollTo",me.scrollH);
             }
             if(me.dragStatus){
                 $(changeDiv).css({"left":lf+deltaX,"top":tp+deltaY+me.scrollDeltaH});

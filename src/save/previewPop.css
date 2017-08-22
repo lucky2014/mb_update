@@ -10,18 +10,20 @@
 
 .previewPopInit{ background: url(../../imgs/previewPop.png); width: 800px; height: 600px; position: absolute; left: 50%; 
 margin-left: -400px; background-size: 100% 100%; top: 50%; margin-top: -300px;}
-.previewPopInit .previewLeft{ padding: 92px 126px 100px 62px;
+.previewPopInit .previewLeft{     padding: 32px 90px 50px 30px;
     float: left;
-    width: 230px;
-    height: 408px;
+    width: 308px;
+    height: 528px;
     background: none;
-    position: relative; cursor: default; pointer-events: none;
+    position: relative;
+    cursor: default;
+    pointer-events: none;
 }
-.previewPopInit .previewLeft>div{ position: relative; width: 100%; height: 408px; overflow: hidden; background: #fff; 
+.previewPopInit .previewLeft>div{ position: relative; width: 100%; height: 528px; overflow: hidden; background: #fff; 
 cursor: default; pointer-events: none;}
-.previewPopInit .r{ float: right; width: 380px; position: relative; height: 600px;}
-.previewPopInit .r .cut{ background: url(../../imgs/close.png); width: 15px; height: 16px; position: absolute; right: 80px;
-top: 70px; display: block; cursor: pointer;}
+.previewPopInit .r{ float: right; width: 350px; position: relative; height: 600px;}
+.previewPopInit .r .cut{ background: url(../../imgs/close.png); width: 15px; height: 16px; position: absolute; right: 70px;
+top: 86px; display: block; cursor: pointer;}
 .previewPopInit .r .cut:hover{ background-position: 0 -16px;}
 
 
@@ -63,7 +65,9 @@ left: 50%; margin-left: -125px; top: 50%; margin-top: -37px; position: absolute;
 
 .skyHeader{ background: url(../../imgs/titleBk.png); background-size: 100% 100%; width: 100%;     text-align: center;
     color: #fff;
-    padding-top: 11px;
-    height: 30px;
-    line-height: 30px;
+    padding-top: 15px;
+    height: 40px;
+    line-height: 40px; font-size: 16px;
 }
+.publishBox li.pblErr{ padding-bottom: 0; display: none;}
+#errMsg{ color: red;}

@@ -105,25 +105,25 @@ define(function(require,exports,module){
 				}
 			},
 			createElementNode:function(currEle,className,tpl){
-					var me = this;
-		            var oFlag = document.createDocumentFragment();
-		            var dragStyle = "position: absolute;width: 180px;text-align: center;min-height:32px;z-index: 500;left:0;top:60px;";
-		            var dragBoxStyle = "min-width: 16px;min-height: 32px;height: 100%;width: 100%;";
-		            var id = "vAct_modexBox_"+new Date().getTime();
-		            var vAct_modexBox_paragraph = document.createElement("div");
-	                vAct_modexBox_paragraph.id = className;
-	                vAct_modexBox_paragraph.className = className;
-		            if(!$(".sizeControl_parent")[0]){
-		            	var str = me.createSizeControl();
-			            vAct_modexBox_paragraph.innerHTML = "<div style='"+dragStyle+"' class='drag' name='drag'><div class='dragBox_parent' name='dragBox_parent' style='height:100%'><div class='dragBox' name='dragBox' style='"+dragBoxStyle+"'>"+tpl+"</div><div class='sizeControl_parent'>"+str+"</div></div></div>";
-		            }
-		            for(var key in this.styleSheet){
-		                vAct_modexBox_paragraph.style[key] = this.styleSheet[key];
-		            }
-		            oFlag.appendChild(vAct_modexBox_paragraph);
-		            this.elements[vAct_modexBox_paragraph.id] = {};
-		            this.getStyle(vAct_modexBox_paragraph,vAct_modexBox_paragraph.id)
-		            $(currEle)[0].appendChild(oFlag)
+				var me = this;
+	            var oFlag = document.createDocumentFragment();
+	            var dragStyle = "position: absolute;width: 180px;text-align: center;min-height:32px;z-index: 100;left:0;top:60px;";
+	            var dragBoxStyle = "min-width: 16px;min-height: 32px;height: 100%;width: 100%;";
+	            var id = "vAct_modexBox_"+new Date().getTime();
+	            var vAct_modexBox_paragraph = document.createElement("div");
+                vAct_modexBox_paragraph.id = className;
+                vAct_modexBox_paragraph.className = className;
+	            if(!$(".sizeControl_parent")[0]){
+	            	var str = me.createSizeControl();
+		            vAct_modexBox_paragraph.innerHTML = "<div style='"+dragStyle+"' class='drag' name='drag'><div class='dragBox_parent' name='dragBox_parent' style='height:100%'><div class='dragBox' name='dragBox' style='"+dragBoxStyle+"'>"+tpl+"</div><div class='sizeControl_parent'>"+str+"</div></div></div>";
+	            }
+	            for(var key in this.styleSheet){
+	                vAct_modexBox_paragraph.style[key] = this.styleSheet[key];
+	            }
+	            oFlag.appendChild(vAct_modexBox_paragraph);
+	            this.elements[vAct_modexBox_paragraph.id] = {};
+	            this.getStyle(vAct_modexBox_paragraph,vAct_modexBox_paragraph.id)
+	            $(currEle)[0].appendChild(oFlag)
 	        }
 		}
 		return app;

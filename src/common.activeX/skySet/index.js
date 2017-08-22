@@ -18,20 +18,29 @@ define(function(require,exports,module){
             var me = this;
             var backcolorSet = "#f0f0fa"; //初始化背景颜色
             var img_showTpl = require("common.activeX/skySet/index.tpl");
-            box.render($(".right"), v, img_showTpl);
+            if(v){
+               box.render($(".right"), v, img_showTpl);
+               //console.log(JSON.stringify(v,null,2));
+               $(".sky h1").html(v.pageName);
 
-            $(".sky h1").html(v.templateName);
-            //页面名称change监控
-            $(".skySet").delegate(".navInput","keyup",function(){
-                $(".sky h1").html($("#storeName").val());
-            })
+               var backgroundColor = JSON.parse(v.data).components[0].backgroundColor;
+               $("#sky,#cp3").attr("color",backgroundColor);
+               $("#cp3").css("background",backgroundColor);
+               //页面名称change监控
+               $(".skySet").delegate(".navInput","keyup",function(){
+                   $(".sky h1").html($("#storeName").val());
+               }) 
+           }else{
+                box.render($(".right"), "", img_showTpl);
+           }
+           
 
             //sky背景颜色选择
             $("#cp3").colorpicker({
                 fillcolor:true,
                 success:function(o,color){
                     $("#cp3").css("background",color);
-                    $("#cp3").attr("color",color);
+                    $("#sky,#cp3").attr("color",color);
                     pubsub.publish('dataChange',"sky");
                 }
             });

@@ -15,8 +15,8 @@ define(function(require,exports,module){
                     var thei  = $(this).height();  //控件本身的高
                     var tleft = $(this).offset().left;    //控件的定位点宽
                     $("#colorpanel").css({
-                        top:ttop+thei+5,
-                        left:tleft
+                        top:ttop+thei+13,
+                        left:tleft-25
                     }).show();
                     var target = opts.target ? $(opts.target) : obj;
                     if(target.data("color") == null){

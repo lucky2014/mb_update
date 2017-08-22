@@ -11,55 +11,67 @@
           <div>
               <div class="advanceskin-content">
                 <div>
-                  <div class="groupSkin-content">
+                  <div class="groupSkin-content" style="border-bottom: 1px solid #e0e0e0;">
                     <div id="border_color" class="colorSelectorWrapper clearfix none" style="display: block;">
                       <label class="skin-label" style="width: 90px;height:32px;line-height:32px;float: left;">边框</label>
-                      <div class="select" style="float:left;">
-                        <select id="border_width_select" style="width: 53px;text-align: center;">
-                          <option value="0">0</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                          <option value="11">11</option>
-                          <option value="12">12</option>
-                          <option value="13">13</option>
-                          <option value="14">14</option>
-                          <option value="15">15</option>
-                          <option value="16">16</option>
-                          <option value="17">17</option>
-                          <option value="18">18</option>
-                          <option value="19">19</option>
-                          <option value="20">20</option></select>
+                      <div class="borderWidth selectCommon">
+                          <input type="text" readonly value="1" dataValue="1">
+                          <i></i>
+                          <ul class="borWUi selectUl" style="display:none;"> 
+                            <li>0</li>
+                            <li class="selected">1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                            <li>6</li>
+                            <li>7</li>
+                            <li>8</li>
+                            <li>9</li>
+                            <li>10</li>
+                            <li>11</li>
+                            <li>12</li>
+                            <li>13</li>
+                            <li>14</li>
+                            <li>15</li>
+                            <li>16</li>
+                            <li>17</li>
+                            <li>18</li>
+                            <li>19</li>
+                            <li>20</li>
+                          </ul>
                       </div>
-                      <div class="c-colorWrapper" style="float: left;">
+
+                      <div class="c-colorWrapper selectCommon" style="float: left;">
                         <div class="c-opacityBg"></div>
-                        <div class="fieldSkin-color colorConfig" style="background-color: rgb(104, 118, 131);" config="#687683" status="v_paragraph_style1_border_color"></div>
-                        <div class="skin-colorSelector skin-colorSelector-border"></div>
+                        <div class="fieldSkin-color colorConfig" style="background-color: rgb(196, 196, 196);" config="#687683" status="v_paragraph_style1_border_color"></div>
+                        <input type="text" readonly class="skin-colorSelector skin-colorSelector-border">
+                        <i class="skin-colorSelector-border"></i>
+                        <b class="skin-colorSelector-border" style="background-color: rgb(196, 196, 196);"></b>
+                        <!-- <div class="skin-colorSelector skin-colorSelector-border"></div> -->
                       </div>
-                      <div class="select" style="float:left;">
-                        <select id="border_type_select" style="width: 53px;font-family: '微软雅黑';" status="v_paragraph_style1_border_style" config="solid">
-                          <option value="solid">一</option>
-                          <option value="dashed">--</option></select>
+
+                      <div class="borderStyle selectCommon">
+                          <input type="text" readonly value="一" dataValue="solid">
+                          <i></i>
+                          <ul class="borSUi selectUl" style="display:none;"> 
+                            <li class="selected" value="solid">一</li>
+                            <li value="dashed">--</li>
+                          </ul>
                       </div>
                     </div>
                     <div id="background_color" class="colorSelectorWrapper none" style="height: 32px;line-height:32px; display: block;padding-top:20px;">
                       <label class="skin-label" style="float: left">背景</label>
-                      <div class="c-colorWrapper n-c-colorWrapper">
-                        <div class="c-opacityBg"></div>
-                        <div class="fieldSkin-color colorConfig" style="background-color: rgb(223, 223, 237); " config="rgba(0,0,0,0)" status="v_paragraph_style1_background_color"></div>
-                        <div class="skin-colorSelector skin-colorSelector-bg"></div>
-                      </div>
+                       <div class="c-colorWrapper n-c-colorWrapper selectCommon" style="float: left;">
+                           <div class="c-opacityBg"></div>
+                           <div class="fieldSkin-color colorConfig" style="background-color: rgb(223, 223, 237);" config="rgba(0,0,0,0)" status="v_paragraph_style1_border_color"></div>
+                           <input type="text" readonly class="skin-colorSelector skin-colorSelector-bg">
+                           <i class="skin-colorSelector-bg"></i>
+                           <b class="skin-colorSelector-bg" style="background-color: rgb(223, 223, 237);"></b>
+                       </div>
                     </div>
                   </div>
                 </div>
-                <span class="line"></span>
                 <div style="padding-bottom: 5px;padding-top: 30px;">
                   <div id="opacity" class="none" style="display: block;">
                     <!-- <div class="labelSkin-label">高级设置:</div> -->

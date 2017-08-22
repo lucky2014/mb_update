@@ -30,106 +30,132 @@
                       <div id="button_text" class="colorSelectorWrapper clearfix none" style="display: block;">
                           <label class="label_slide" style="width:90px;">按钮文字</label>
                           <div class="clearfix btnText" style="float:left;margin-bottom:20px;">
-                              <input type="text" name="" value="标准按钮" class="form-control">
+                              <input type="text" name="" value="图文按钮" class="form-control">
                           </div>
                       </div>
-                      <div class="linkDemo" style="margin-left:0;">
+                      <div class="linkDemo">
                           <li class="linkStyle commonAddress">
                             <span>链接</span>
-                            <input type="text" class="shclickLi" value="请选择" readonly>
+                            <input type="text" class="shclickLi" value="站内链接" readonly>
                             <i class="shclickI"></i>
                             <ul class="linkChoose" style="display:none;">
-                                <li class="selectedLi" sign="1">请选择</li>
-                                <li sign="2">外部链接</li>
-                                <li sign="3">站内链接</li>
-                                <li sign="4">返回</li>
+                                <!-- <li class="selectedLi" sign="1">请选择</li> -->
+                                <li sign="1">外部链接</li>
+                                <li sign="2" class="selectedLi">站内链接</li>
+                                <li sign="3">返回</li>
                             </ul>
                           </li>
-                          <li class="linkAddress commonAddress" style="display:none;">
+                          <li class="linkAddress commonAddress">
                             <span>链接地址</span>
                             <input type="text" placeholder="请输入链接地址" class="shclickLi" selUrl="">
                           </li>
-                          <li class="selectAddress commonAddress" style="display:none;">
+                          <li class="selectAddress commonAddress">
                             <span>链接地址</span>
-                            <input type="text" readonly class="shclickLi" selUrl="" value="请选择">
+                            <input type="text" readonly class="shclickLi" value="" placeholder="请选择链接地址">
                             <i class="shclickI"></i>
                             <ul class="linkChoose" style="display:none;">
-                              <li class="selectedLi" urlname="">请选择</li>
+                              <li class="selectedLi" urlname="">无</li> 
                             </ul>
+                          </li>
+                          <li class="backAddress commonAddress">
+                            <span>链接地址</span>
+                            <input type="text" readonly class="shclickLi" urlName="history.back()">
                           </li>
                       </div>
                       <div id="font_color" class="colorSelectorWrapper clearfix none" style="display: block;margin-bottom:8px;">
                         <label class="skin-label" style="width: 90px;height:37px;float: left;">文本</label>
-                        <div class="c-colorWrapper" style="float: left;">
-                          <div class="c-opacityBg"></div>
-                          <div class="fieldSkin-color colorConfig" style="background-color: rgb(104, 118, 131);" config="#687683" status="v_paragraph_style1_font_color"></div>
-                          <div class="skin-colorSelector skin-colorSelector-font"></div>
+
+                        <div class="c-colorWrapper selectCommon" style="float: left;">
+                            <div class="c-opacityBg"></div>
+                            <div class="fieldSkin-color colorConfig" style="background-color: rgb(255, 255, 255);" config="#687683" status="v_paragraph_style1_border_color"></div>
+                            <input type="text" readonly class="skin-colorSelector skin-colorSelector-font">
+                            <i class="skin-colorSelector-font"></i>
+                            <b class="skin-colorSelector-font" style="background-color: rgb(255, 255, 255);"></b>
                         </div>
-                        <div class="select" style="float:left;margin-left:10px;">
-                          <div id="font_type_select" style="width: 25px;font-family: '微软雅黑';" status="v_paragraph_style1_font_style" config="solid">
-                            <i class="before"></i>
-                            <div id="fontConfig">
-                                <select>
-                                    <option>14px</option>
-                                    <option>16px</option>
-                                    <option>18px</option>
-                                    <option>20px</option>
-                                    <option>22px</option>
-                                    <option>24px</option>
-                                    <option>26px</option>
-                                    <option>28px</option>
-                                </select>
-                                <i type="font-weight" config="bold"><img src="../src/component/imgs/f032.png" style="width:12px;"></i>
-                                <i type="font-style" config="italic"><img src="../src/component/imgs/f033.png" style="width:12px;"></i>
+
+                        <div class="textStyle selectCommon">
+                            <input type="text" readonly dataValue="1" class="textInput">
+                            <i class="textInput"></i>
+                            <i class="textIn textInput"></i>
+                            <div class="textType" style="display:none;" id="fontConfig"> 
+                                <button>14px</button>
+                                <b class="arrowDown"></b>
+                                <i type="font-weight" config="bold">
+                                 <img src="../src/component/imgs/f032.png" style="width:12px;">
+                               </i>
+                                <i type="font-style" config="italic">
+                                 <img src="../src/component/imgs/f033.png" style="width:12px;">
+                               </i>
+                               <ul style="display:none;">
+                                 <li class="selected">14px</li>
+                                 <li>16px</li>
+                                 <li>18px</li>
+                                 <li>20px</li>
+                                 <li>22px</li>
+                                 <li>24px</li>
+                                 <li>26px</li>
+                                 <li>28px</li>
+                               </ul>
                             </div>
-                          </div>
                         </div>
                       </div>
                       <div id="border_color" class="colorSelectorWrapper clearfix none" style="display: block;">
                         <label class="skin-label" style="width: 90px;height:37px;float: left;">边框</label>
-                        <div class="select" style="float:left;">
-                          <select id="border_width_select" style="width: 53px;text-align: center;">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option></select>
+                        <div class="borderWidth selectCommon">
+                            <input type="text" readonly value="1" dataValue="1">
+                            <i></i>
+                            <ul class="borWUi selectUl" style="display:none;"> 
+                              <li>0</li>
+                              <li class="selected">1</li>
+                              <li>2</li>
+                              <li>3</li>
+                              <li>4</li>
+                              <li>5</li>
+                              <li>6</li>
+                              <li>7</li>
+                              <li>8</li>
+                              <li>9</li>
+                              <li>10</li>
+                              <li>11</li>
+                              <li>12</li>
+                              <li>13</li>
+                              <li>14</li>
+                              <li>15</li>
+                              <li>16</li>
+                              <li>17</li>
+                              <li>18</li>
+                              <li>19</li>
+                              <li>20</li>
+                            </ul>
                         </div>
-                        <div class="c-colorWrapper" style="float: left;">
+
+                        <div class="c-colorWrapper selectCommon" style="float: left;">
                           <div class="c-opacityBg"></div>
-                          <div class="fieldSkin-color colorConfig" style="background-color: rgb(104, 118, 131);" config="#687683" status="v_paragraph_style1_border_color"></div>
-                          <div class="skin-colorSelector skin-colorSelector-border"></div>
+                          <div class="fieldSkin-color colorConfig" style="background-color: rgb(198, 198, 230);" config="#687683" status="v_paragraph_style1_border_color"></div>
+                          <input type="text" readonly class="skin-colorSelector skin-colorSelector-border">
+                          <i class="skin-colorSelector-border"></i>
+                          <b class="skin-colorSelector-border" style="background-color: rgb(198, 198, 230);"></b>
+                          <!-- <div class="skin-colorSelector skin-colorSelector-border"></div> -->
                         </div>
-                        <div class="select" style="float:left;">
-                          <select id="border_type_select" style="width: 53px;font-family: '微软雅黑';" status="v_paragraph_style1_border_style" config="solid">
-                            <option value="solid">一</option>
-                            <option value="dashed">--</option></select>
+
+                        <div class="borderStyle selectCommon">
+                            <input type="text" readonly value="一" dataValue="solid">
+                            <i></i>
+                            <ul class="borSUi selectUl" style="display:none;"> 
+                              <li class="selected" value="solid">一</li>
+                              <li value="dashed">--</li>
+                            </ul>
                         </div>
                       </div>
                       <div id="background_color" class="colorSelectorWrapper none" style="height:32px; display: block;">
                         <label class="skin-label" style="float: left">背景</label>
-                        <div class="c-colorWrapper n-c-colorWrapper">
-                          <div class="c-opacityBg"></div>
-                          <div class="fieldSkin-color colorConfig" style="background-color: rgb(104, 118, 131); " config="rgba(0,0,0,0)" status="v_paragraph_style1_background_color"></div>
-                          <div class="skin-colorSelector skin-colorSelector-bg"></div>
-                        </div>
-                      </div>
+                       <div class="c-colorWrapper selectCommon" style="float: left;">
+                           <div class="c-opacityBg"></div>
+                           <div class="fieldSkin-color colorConfig" style="background-color: rgb(28, 154, 227);" config="#687683" status="v_paragraph_style1_border_color"></div>
+                           <input type="text" readonly class="skin-colorSelector skin-colorSelector-bg">
+                           <i class="skin-colorSelector-bg"></i>
+                           <b class="skin-colorSelector-bg" style="background-color: rgb(28, 154, 227);"></b>
+                       </div>
                   </div>
                 </div>
                 <div style="padding-bottom: 5px;padding-top: 28px;">

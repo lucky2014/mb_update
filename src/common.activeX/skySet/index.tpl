@@ -4,10 +4,10 @@
 			<span  class="navSpan"><i>*</i>页面名称</span>
 			<input type="text" class="navInput" value="{{pageName}}" placeholder="请输入页面名称" id="storeName">
 		</li>
-		<li>
+		<!-- <li>
 			<span >页面描述</span>
 			<input type="text" class="descript" value="{{description}}" placeholder="">
-		</li>
+		</li> -->
 		<li class="backColor">
 			<span  class="">背景颜色</span>
 			<input type="text"  readonly>

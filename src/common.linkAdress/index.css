@@ -1,20 +1,25 @@
 .linkDemo{margin-left: 24px;}
+#groupSkin .linkDemo{margin-left: 0;}
 .linkDemo li{margin-bottom: 20px;}
 .shclickLi{cursor:pointer;background: #fff;}
 .commonAddress i{position: absolute;
     top: 14px;
-    right: 15px;
+    right: 20px;
     width: 12px;
     height: 6px;
     background: url(../1/images/arrowDown.png) no-repeat top left;
     display: block;
     z-index: 12;
     cursor: pointer;}
- .commonAddress{position: relative;text-align: left;width: 260px;}
+ .commonAddress{position: relative;text-align: left;width: 272px;}
  .commonAddress span{display: inline-block;width: 85px;}
- .commonAddress input{padding: 0 5px;width: 150px;height: 32px;line-height: 32px;border-radius: 5px;border: 1px solid #c4c4c4;}
+ .commonAddress input{padding: 0 10px;width: 155px;height: 32px;line-height: 32px;border-radius: 4px;border: 1px solid #c4c4c4;}
+ .linkAddress{display: none;}
  .linkAddress input{cursor: auto;}
- ul.linkChoose{ position: absolute;width: 160px;left: 89px;top: 31px;z-index:99;border: 1px solid #bdc6d5;border-radius:0 0 5px 5px;background: #fff;}
+ .backAddress{display: none;}
+ .backAddress input{background: #eff2f7;cursor: inherit;}
+ .backAddress input:focus{border:1px solid #c4c4c4 !important;}
+ ul.linkChoose{ position: absolute;width: 176px;left: 89px;top: 31px;z-index:9999;border: 1px solid #bdc6d5;border-radius:0 0 5px 5px;background: #fff;max-height: 200px;overflow-y:auto; }
  ul.linkChoose li{text-indent:10px;height:23px !important;;line-height:23px !important;;cursor:pointer;margin:0 !important;padding:5px;}
  ul.linkChoose li.selectedLi{background:#1d8ce0;color:#fff;}
  ul.linkChoose li:hover{background: #617084;color: #fff;}

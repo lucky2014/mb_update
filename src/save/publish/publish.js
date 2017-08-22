@@ -1,4 +1,5 @@
 define(function(require,exports,module){
+    var $ = require("jquery");
 	//发布生成静态页面
     var html = '<!doctype HTML><html><head>'+
         '<meta charset="utf-8"/>'+
@@ -16,12 +17,12 @@ define(function(require,exports,module){
             datas = JSON.parse(datas);
             var me = this;
             //渲染头部
-            me.html += '<title>'+datas.templateName+'</title>'+
-            '<link rel="stylesheet" href="http://'+ location.host+ '/mb_update2/src/save/publish/style.css" />'+
-            '<link rel="stylesheet" href="http://'+ location.host+ '/mb_update2/src/save/publish/swiper.min.css" />'+
-            '<script src="http://'+ location.host+ '/mb_update2/src/save/publish/jquery.min.js"></script>'+
-            '<script src="http://'+ location.host+ '/mb_update2/src/save/publish/swiper.min.js"></script>'+
-            '</head><body>';
+            me.html += '<link rel="stylesheet" href="http://wx.yinnima.com/mb_update2/src/save/publish/style.css" />'+
+            '<link rel="stylesheet" href="http://wx.yinnima.com/mb_update2/src/save/publish/swiper.min.css" />'+
+            '<script src="http://wx.yinnima.com/mb_update2/src/save/publish/jquery.min.js"></script>'+
+            '<script src="http://wx.yinnima.com/mb_update2/src/save/publish/swiper.min.js"></script>'+
+            '<title>'+datas.components[0].templateName+'</title>'+
+            '</head><body style="background:'+datas.components[0].backgroundColor+'">';
 
             //渲染中间
             var obj = datas.components;
@@ -32,7 +33,7 @@ define(function(require,exports,module){
                     for(var j=0; j<obj[i].attrList.length; j++){
                         me.html += '<div class="swiper-slide" w="'+obj[i].attrList[j].width+'" h="'+obj[i].attrList[j].height+'"><img src="'+obj[i].attrList[j].value.value+'" /></div>'
                     }
-                    me.html += '</div><div class="swiper-pagination"></div></div><script src="http://'+ location.host+ '/mb_update2/src/save/publish/bannerSwiper.js"></script>';
+                    me.html += '</div><div class="swiper-pagination"></div></div><script src="http://wx.yinnima.com/mb_update2/src/save/publish/bannerSwiper.js"></script>';
                 }
 
                 //首页企业介绍
@@ -75,7 +76,7 @@ define(function(require,exports,module){
                             }
                             me.html += '</div>';
                             me.html += '<div class="swiper-button-prev"><img src="/imgs/scrollL.png" /></div><div class="swiper-button-next"><img src="/imgs/scrollR.png" /></div>';
-                            me.html += '<div class="swiper-pagination"></div></div></div><script src="http://'+ location.host+ '/mb_update2/src/save/publish/newsSwiper.js"></script>';
+                            me.html += '<div class="swiper-pagination"></div></div></div><script src="http://wx.yinnima.com/mb_update2/src/save/publish/newsSwiper.js"></script>';
                         }
                     }
                 }
@@ -93,7 +94,7 @@ define(function(require,exports,module){
                     }
                     me.html += '</div>';
                     me.html += '<div class="swiper-button-prev"><img src="/imgs/scrollL.png" /></div><div class="swiper-button-next"><img src="/imgs/scrollR.png" /></div>';
-                    me.html += '</div></div><script src="http://'+ location.host+ '/mb_update2/src/save/publish/productSwiper.js"></script>';
+                    me.html += '</div></div><script src="http://wx.yinnima.com/mb_update2/src/save/publish/productSwiper.js"></script>';
                 }
 
                 //首页企业风采
@@ -124,7 +125,7 @@ define(function(require,exports,module){
                         className = v[j].className ? v[j].className : "";
                         me.html += '<li class="'+className+'"><a href=users?pageId='+v[j].id+'><i><img src="'+v[j].value+'"></i><span>'+v[j].description+'</span></a></li>'
                     }
-                    me.html += '</ul></div><script src="http://'+ location.host+ '/mb_update2/src/save/publish/footernav.js"></script>'
+                    me.html += '</ul></div><script src="http://wx.yinnima.com/mb_update2/src/save/publish/footernav.js"></script>'
                 }
 
                 //组件类
@@ -150,16 +151,45 @@ define(function(require,exports,module){
                                         }else{
                                             child += "<"+children[childEle].nodeName+" class='"+childEle+"' name='"+childEle+"'";
                                         }
+
                                         var childrens = children[childEle];
                                         var style = "";
+                                        var top = '';
                                         for(var childsEle in childrens){
                                             if(childsEle!="nodeName"&&childsEle!="html"){
-                                                style+=(childsEle.replace(/([A-Z])/g,"-$1").toLowerCase()+":"+childrens[childsEle]+";")
+                                                if(childsEle=="top"){
+                                                    var t = childrens.top;
+                                                    child += 'top='+ t;
+                                                }else if(childsEle=="width"){
+                                                    var w = childrens[childsEle];
+                                                    if(w.indexOf("px")>-1){
+                                                        w = w.replace(/px/,"");
+                                                        style += "width:" + (w/308).toFixed(3)*100 + "%;";
+                                                    }else{
+                                                        style += "width:" + childrens[childsEle];
+                                                    }
+                                                    
+                                                }else if(childsEle=="left"){
+                                                    var w = childrens[childsEle];
+                                                    if(w.indexOf("px")>-1){
+                                                        w = w.replace(/px/,"");
+                                                        style += "left:" + (w/308).toFixed(3)*100 + "%;";
+                                                    }else{
+                                                        style += "left:" + childrens[childsEle];
+                                                    }
+                                                }else if(childsEle=="zIndex"){
+                                                    var w = childrens[childsEle];
+                                                    w = w.replace(/px/,"");
+                                                    style += "z-index:" + w;
+                                                }else{
+                                                    style+=(childsEle.replace(/([A-Z])/g,"-$1").toLowerCase()+":"+childrens[childsEle]+";")
+                                                }
+                                                
                                             }
                                         }
                                         if(childEle=="dragBox"){
                                             htmlStr = childrens.html;
-                                            child+=" style='"+style+"'>";
+                                            child += " style='"+style+"'>";
                                         }else{
                                             if(children[childEle].nodeName!="IMG"){
                                                 child+=" style='"+style+"'>";
@@ -167,9 +197,9 @@ define(function(require,exports,module){
                                         }
                                     }
                                     if(nodeArr.length==4){
-                                        vAct_modexBox_paragraph+=(child+htmlStr+"</"+nodeArr[2]+"></"+nodeArr[0]+">"+"</div>")
+                                        vAct_modexBox_paragraph+=(child + htmlStr+"</"+nodeArr[2]+"></"+nodeArr[0]+">"+"</div>")
                                     }else{
-                                        vAct_modexBox_paragraph+=(child+htmlStr+"</"+nodeArr[2]+"></"+nodeArr[1]+"></"+nodeArr[0]+">"+"</div>")
+                                        vAct_modexBox_paragraph+=(child + htmlStr+"</"+nodeArr[2]+"></"+nodeArr[1]+"></"+nodeArr[0]+">"+"</div>")
                                     }
                                     vAct_modexBoxArr.push(vAct_modexBox_paragraph)
                                 }
@@ -179,7 +209,7 @@ define(function(require,exports,module){
 
                         var htmls = loadComponents.getSaved();
 
-                        me.html += htmls;
+                        me.html += htmls +'<script src="http://wx.yinnima.com/mb_update2/src/save/publish/changeTop.js"></script>';
 
                     }
                 }
@@ -206,7 +236,7 @@ define(function(require,exports,module){
                     }
                     me.html += '</div>';
                     me.html += '<div class="swiper-button-prev"><img src="/imgs/scrollL.png" /></div><div class="swiper-button-next"><img src="/imgs/scrollR.png" /></div>';
-                    me.html += '</div></div><script src="http://'+ location.host+ '/mb_update2/src/save/publish/productSwiper.js"></script>';
+                    me.html += '</div></div><script src="http://wx.yinnima.com/mb_update2/src/save/publish/productSwiper.js"></script>';
                 }
 
 

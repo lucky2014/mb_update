@@ -338,5 +338,6 @@ a {
     text-shadow:none;
     opacity:1;
     margin-top: 7px;
+    cursor: pointer;
 }
 #tipsDialog .closeBtn:hover{background: url(../imgs/backIcon.png) no-repeat -41px -11px;}

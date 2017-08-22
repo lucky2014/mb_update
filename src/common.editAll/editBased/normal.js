@@ -1,7 +1,19 @@
+/*=======================
+textTpl: 组件名称
+callback：单击点中组件名称（第一栏）回调函数
+callback2： 编辑的时候，点击（点击left里的组件）
+callback3：
+componentTpl： 中间栏组件
+setting：最右栏配置信息
+
+=======================*/
+
 define(function(require,exports,module){
 	var $ = require("jquery");
 	var Engine = require("engine");
     var box = Engine.init();
+
+    var popUp = require("common.PopUp/index");
 	var setting = {
 		base:{
 			textTpl:{
@@ -9,8 +21,7 @@ define(function(require,exports,module){
 					
 				},
 				callback2:function(me,e,self){
-					 // var userPicDialog = require("component/index/tpl/userPicDialog.tpl");
-					 // box.render($("#userPicDialog"), "", userPicDialog);
+					 
 					 me.stopBubble(e)
 	                 me.choseAll(self)
 				},
@@ -28,10 +39,14 @@ define(function(require,exports,module){
 
 					var commonZujian = require("componentsSpecial/commonZujian");
 					commonZujian.getData("#userPicList");
-    				$("#userPicDialog").fadeIn(300);
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
-			                alert("请选择一张图片")
+			                popUp({
+                                "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
 			                return false;
 			            }
 			            var url = $(".pic_thumb.select").attr("data-url");
@@ -49,7 +64,12 @@ define(function(require,exports,module){
     				$("#userPicDialog").fadeIn(300);
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
-			                alert("请选择一张图片")
+			                popUp({
+                               "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                               showCancelButton: false,
+                               showConfirmButton: false,
+                               timer: 1000
+                           });
 			                return false;
 			            }
 			            var url = $(".pic_thumb.select").attr("data-url");
@@ -72,7 +92,12 @@ define(function(require,exports,module){
     				$("#userPicDialog").fadeIn(300);
 		            me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
-			                alert("请选择一张图片")
+			                popUp({
+                                "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
 			                return false;
 			            }
 			            var url = $("#userPicDialog .select img").attr("src");
@@ -96,7 +121,12 @@ define(function(require,exports,module){
     				$("#userPicDialog").fadeIn(300);
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
-			                alert("请选择一张图片")
+			                 popUp({
+                                "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
 			                return false;
 			            }
 			            var url = $("#userPicDialog .select img").attr("src");
@@ -127,7 +157,12 @@ define(function(require,exports,module){
     				$("#userPicDialog").fadeIn(300);
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
-			                alert("请选择一张图片")
+			                 popUp({
+                                "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
 			                return false;
 			            }
 			            var url = $(".pic_thumb.select").attr("data-url");
@@ -143,7 +178,12 @@ define(function(require,exports,module){
     				$("#userPicDialog").fadeIn(300);
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
-			                alert("请选择一张图片")
+			                 popUp({
+                                "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
 			                return false;
 			            }
 			            var url = $(".pic_thumb.select").attr("data-url");
@@ -302,18 +342,18 @@ define(function(require,exports,module){
 				callback:function(me,e,componentClass,componentTpl,editTpl){
 					var settingButtonDialog = require("componentsSpecial/buttonEdit/settingButtonDialog.tpl");
 					var url = "../src/component/imgs/btnIconsList.png";
-					/*var data = [
-						{"left":0,"top":0},{"left":-45,"top":0},{"left":-91,"top":0},{"left":-138,"top":0},{"left":-185,"top":0},{"left":-233,"top":0},
-						{"left":0,"top":-42},{"left":-45,"top":-42},{"left":-91,"top":-42},{"left":-138,"top":-42},{"left":-185,"top":-42},{"left":-233,"top":-42},
-						{"left":0,"top":-86},{"left":-45,"top":-86},{"left":-91,"top":-86},{"left":-140,"top":-86},{"left":-187,"top":-86},{"left":-236,"top":-86},
-						{"left":0,"top":-131},{"left":-47,"top":-131},{"left":-95,"top":-131},{"left":-141,"top":-131},{"left":-187,"top":-131},{"left":-236,"top":-131}
-					]*/
+			
 					box.render($("#userPicDialog"), "", settingButtonDialog);
 					var commonZujian = require("componentsSpecial/commonZujian");
 					commonZujian.getData(".myPics #userPicList");
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
-			                alert("请选择一张图片")
+			                 popUp({
+                                "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
 			                return false;
 			            }
 			            var url = $(".pic_thumb.select img").attr("src");
@@ -326,23 +366,22 @@ define(function(require,exports,module){
 					if($("#inpBtn span").eq(2).hasClass("active")){
 						var settingButtonDialog = require("componentsSpecial/buttonEdit/settingButtonDialog.tpl");
 						var url = "../src/component/imgs/btnIconsList.png";
-						/*var data = [
-							{"left":0,"top":0},{"left":-45,"top":0},{"left":-91,"top":0},{"left":-138,"top":0},{"left":-185,"top":0},{"left":-233,"top":0},
-							{"left":0,"top":-42},{"left":-45,"top":-42},{"left":-91,"top":-42},{"left":-138,"top":-42},{"left":-185,"top":-42},{"left":-233,"top":-42},
-							{"left":0,"top":-86},{"left":-45,"top":-86},{"left":-91,"top":-86},{"left":-140,"top":-86},{"left":-187,"top":-86},{"left":-236,"top":-86},
-							{"left":0,"top":-131},{"left":-47,"top":-131},{"left":-95,"top":-131},{"left":-141,"top":-131},{"left":-187,"top":-131},{"left":-236,"top":-131}
-						]*/
+						
 						box.render($("#userPicDialog"), "", settingButtonDialog);
 						var commonZujian = require("componentsSpecial/commonZujian");
 						commonZujian.getData(".myPics #userPicList");
 	    				$("#userPicDialog").fadeIn(300);
 	    				me.selectFn(function(){
 				    		if($("#userPicList .select").length==0){
-				                alert("请选择一张图片")
+				                 popUp({
+                                "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
 				                return false;
 				            }
 				            var url = $(".pic_thumb.select img").attr("src");
-				            //var pos = $(".pic_thumb.select i").attr("pos");
 				            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find(".picBut").css("background-image","url("+url+")");
 				            $("#userPicDialog").fadeOut(300);
 				    	})
