@@ -1,4 +1,4 @@
 	<b class="selectB"></b>
 	{{#with this}}
-		<h1>{{templateName}}</h1>
+		<h1>{{pageName}}</h1>
 	{{/with}}

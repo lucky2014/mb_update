@@ -281,14 +281,14 @@ border-radius: 4px; color: #6b798c; padding-left: 6px; width: 140px;}
     margin-right: 10px;
     cursor: pointer;
 }
-.header .nav-operate li:hover{border: 1px solid #2badff;}
-.header .nav-operate li:active{border: 1px solid #0991f5;}
-.header .nav-operate li:hover a{color: #2badff;}
-.header .nav-operate li:active a{color: #0991f5;}
-.header .nav-operate li:last-child{background:#fff;color: #0a679b;}
-.header .nav-operate li:last-child:hover{background:#2badff;}
+.header .nav-operate li:hover{border: 1px solid #ffd97f;}
+.header .nav-operate li:active{border: 1px solid #f7ba2a;}
+.header .nav-operate li:hover a{color: #ffd97f;}
+.header .nav-operate li:active a{color: #f7ba2a;}
+.header .nav-operate li:last-child{background:#fff;color: #1dbce0;}
+.header .nav-operate li:last-child:hover{background:#ffd97f;}
 .header .nav-operate li:last-child:hover a{color: #fff;}
-.header .nav-operate li:last-child:active{background:#0991f6;}
+.header .nav-operate li:last-child:active{background:#f7ba2a;}
 .header .nav-operate li:last-child:active a{color: #fff;}
 .header .nav-operate li a{color: #fff;}
 /* .header .nav-operate li a:hover{color: #2badff;} */
@@ -305,7 +305,7 @@ border-radius: 4px; color: #6b798c; padding-left: 6px; width: 140px;}
     background: #262626;
     box-shadow: none;
 }
-.header .nav-operate li a.fBlue{ color: #0a679b;}
+.header .nav-operate li a.fBlue{ color: #1d8ce0;}
 .btn-with-text{
     display: inline-block;
     height: 30px;

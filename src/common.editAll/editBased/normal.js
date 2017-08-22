@@ -14,6 +14,7 @@ define(function(require,exports,module){
     var box = Engine.init();
 
     var popUp = require("common.PopUp/index");
+    var rightEdit = require("common.editAll/rightEdit/index");
 	var setting = {
 		base:{
 			textTpl:{
@@ -37,8 +38,7 @@ define(function(require,exports,module){
 					var userPicDialog = require("component/index/tpl/userPicDialog.tpl");
 					box.render($("#userPicDialog"), "", userPicDialog);
 
-					var commonZujian = require("componentsSpecial/commonZujian");
-					commonZujian.getData("#userPicList");
+					rightEdit.getData("#userPicList");
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
 			                popUp({
@@ -59,8 +59,8 @@ define(function(require,exports,module){
 					me.stopBubble(e)
 					var userPicDialog = require("component/index/tpl/userPicDialog.tpl");
 					box.render($("#userPicDialog"), "", userPicDialog);
-					var commonZujian = require("componentsSpecial/commonZujian");
-					commonZujian.getData("#userPicList");
+
+					rightEdit.getData("#userPicList");
     				$("#userPicDialog").fadeIn(300);
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
@@ -344,8 +344,8 @@ define(function(require,exports,module){
 					var url = "../src/component/imgs/btnIconsList.png";
 			
 					box.render($("#userPicDialog"), "", settingButtonDialog);
-					var commonZujian = require("componentsSpecial/commonZujian");
-					commonZujian.getData(".myPics #userPicList");
+					
+					rightEdit.getData(".myPics #userPicList");
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
 			                 popUp({
@@ -368,8 +368,8 @@ define(function(require,exports,module){
 						var url = "../src/component/imgs/btnIconsList.png";
 						
 						box.render($("#userPicDialog"), "", settingButtonDialog);
-						var commonZujian = require("componentsSpecial/commonZujian");
-						commonZujian.getData(".myPics #userPicList");
+						
+						rightEdit.getData(".myPics #userPicList");
 	    				$("#userPicDialog").fadeIn(300);
 	    				me.selectFn(function(){
 				    		if($("#userPicList .select").length==0){

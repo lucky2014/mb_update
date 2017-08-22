@@ -33,7 +33,7 @@ define(function(require,exports,module){
             setup.commonAjax("showPage.do", params, function(msg){  
                 console.log(JSON.stringify(msg,null,2)); 
                 $("body").attr("style","background-color: "+msg.components[0].backgroundColor);
-                $("title").html(msg.components[0].templateName);
+                $("title").html(msg.components[0].pageName);
 
                 run.loadFn(msg,"",1); //有第二个参数是预览效果，
             });

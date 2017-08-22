@@ -10,7 +10,7 @@
 			{{/each}}
 		</ul>
 		<div class="previewCon">
-			<span>{{templateName}}</span>
+			<span>{{pageName}}</span>
 			<p>{{description}}</p>
 			<div>
 				<img src="../src/templateList/imgs/erweima.png" alt="">

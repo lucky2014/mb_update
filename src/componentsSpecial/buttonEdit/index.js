@@ -3,6 +3,7 @@ define(function(require,exports,module){
   var Engine = require("engine");
   var box = Engine.init();
   require("componentsSpecial/buttonEdit/index.css");
+  require("common.editAll/rightEdit/index.css");
   var linkByOut = require("componentsSpecial/buttonEdit/linkByOut.tpl");
   var linkByInner = require("componentsSpecial/buttonEdit/linkByInner.tpl");
   var settingButton = require("componentsSpecial/buttonEdit/settingButton.tpl");
@@ -12,7 +13,7 @@ define(function(require,exports,module){
   var button2 = require("componentsSpecial/buttonEdit/index2.tpl");
   var button3 = require("componentsSpecial/buttonEdit/index3.tpl");
 
-  var commonZujian = require("componentsSpecial/commonZujian");
+  var linkAdress = require("common.linkAdress/index");
   //页面逻辑
   var app = {
     init:function(app){
@@ -40,7 +41,7 @@ define(function(require,exports,module){
               app.colorPicker(".skin-colorSelector-bgTp");
               app.colorPicker(".skin-colorSelector-bgBtm");
           }
-          commonZujian.init();
+          linkAdress.init();
           $(this).parent().find("span").eq(ind).addClass("active").siblings("span").removeClass("active");
     	})
       $("body").delegate("#font_type_select .before","click",function(){
@@ -86,7 +87,7 @@ define(function(require,exports,module){
       $("body").delegate(".form-control","keyup",function(){
           $(app.dragTarget).find("input").val($(this).val());
       })
-      commonZujian.init();
+      linkAdress.init();
     },
     tpl:function(){return require("componentsSpecial/buttonEdit/settingButton.tpl")}
   }

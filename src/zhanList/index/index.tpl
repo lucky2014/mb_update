@@ -1,5 +1,5 @@
 {{#each this}}
-	<dd class="microItem" siteId={{id}}  url="{{url}}">
+	<dd class="microItem" siteId={{id}}  url="{{url}}" status={{status}}>
 		<span class="{{siteStatusClass status}} siteStatus">{{siteStatus status}}</span>
 		<img src="../imgs/zhanPics2.png" alt="" />
 		<div class="hover">

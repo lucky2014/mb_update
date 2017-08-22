@@ -145,15 +145,17 @@ define(function(require,exports,module){
         pagePreview: function(){
             var me = this;
             var datas = me.saveData();
+            var ishomepage = $("li.activePage").attr("isHomePage");
             //渲染弹框
             box.render($("#previewPop"), {siteId: me.siteId, pageId: $(".left").attr("pageId")}, previewPop); 
             //保存、预览
             if($(".left").attr("pageId")){
                 var params = {
                    "pageId": $(".left").attr("pageId"),
-                   "pageName": datas.pageName,
+                   "pageName": $("#sky h1").html(),
                    "data": JSON.stringify({components: datas.components}),
-                   "siteId": me.siteId
+                   "siteId": me.siteId,
+                   "isHomePage": ishomepage,
                 };
                 setup.commonAjax("editPage.do", params, function(msg){
                     var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId=" + $(".left").attr("pageId");
@@ -163,7 +165,7 @@ define(function(require,exports,module){
             }else{
                 var params = {
                    "templateId": me.templateId || 0,
-                   "pageName":me.pageName || 0,
+                   "pageName":$("#sky h1").html(),
                    "data": JSON.stringify({components: datas.components}),
                    "siteId": me.siteId
                 };
@@ -211,112 +213,120 @@ define(function(require,exports,module){
                 });
                 return ;
             }else{
-
-
-                var pblTime = now.getDate();
-                //发布站点弹框
-                var html = '<ul class="publishBox">'+
-                  '<li><label>站点名称</label><input type="text" class="siteName" placeholder="请输入站点名称" /></li>'+
-                  '<li><label>站点域名</label><input type="text" value="" class="siteDomain" /><span>.iliujia.com</span></li>'+
-                  '<li class="pblErr"><label></label><span id="errMsg">此域名已被占用，请重新设置您的域名！</span></li>'+
-                  '<li><label>创建时间</label><span class="pblTime">'+pblTime+'</span></li>'+
-                '</ul>';
-                popUp({
-                    "title": "发布站点<a class='cut'></a>",
-                    "content": html ,
-                    width: 500,
-                    showCancelButton: true,
-                    showConfirmButton: true,
+                //先请求看是否已经发布过
+                me.getSiteInfo(me.siteId, function(msg){
+                    /////此处为曾经发布过
+                    me.publish(me.siteId, msg.siteName, msg.domain, datas, 1);
                 }, function(){
-                    var siteName = $(".siteName").val();
-                    var siteDomain = $(".siteDomain").val();
 
-                    if(!siteName){
-                        $(".pblTipBox").html('<div class="pblTip">请输入您的站点名称！</div>').show();
-                        setTimeout(function(){
-                            $(".pblTipBox").hide();
-                        },1000);
-                    }else if(!siteDomain){
-                        $(".pblTipBox").html('<div class="pblTip">请输入您的域名！</div>').show();
-                        setTimeout(function(){
-                            $(".pblTipBox").hide();
-                        },1000);
-                    }else{
-                        me.getSiteInfo(me.siteId, function(){
+                    /////////此处为未发布
 
-                            /////次处为曾经发布过
-                            var params = {
-                               "htmlJson": JSON.stringify(htmlJson),
-                               "siteId": me.siteId,
-                               "siteName": $(".siteName").val(),
-                               "domain": $(".siteDomain").val(),
-                               "industryId": ""
-                            };
-                            me.publish(params, datas, previewPop);
+                    var pblTime = now.getDate();
+                    //发布站点弹框
+                    var html = '<ul class="publishBox">'+
+                      '<li><label>站点名称</label><input type="text" class="siteName" placeholder="请输入站点名称" /></li>'+
+                      '<li><label>站点域名</label><input type="text" value="" class="siteDomain" /><span>.iliujia.com</span></li>'+
+                      '<li class="pblErr"><label></label><span id="errMsg">此域名已被占用，请重新设置您的域名！</span></li>'+
+                      '<li><label>创建时间</label><span class="pblTime">'+pblTime+'</span></li>'+
+                    '</ul>';
+                    popUp({
+                        "title": "发布站点<a class='cut'></a>",
+                        "content": html ,
+                        width: 500,
+                        showCancelButton: true,
+                        showConfirmButton: true,
+                    }, function(){
+                        var siteName = $(".siteName").val();
+                        var siteDomain = $(".siteDomain").val();
 
-                            /////
-                        }, function(){
-                            /////////次处为未发布
-
-
+                        if(!siteName){
+                            $(".pblTipBox").html('<div class="pblTip">请输入您的站点名称！</div>').show();
+                            setTimeout(function(){
+                                $(".pblTipBox").hide();
+                            },1000);
+                        }else if(!siteDomain){
+                            $(".pblTipBox").html('<div class="pblTip">请输入您的域名！</div>').show();
+                            setTimeout(function(){
+                                $(".pblTipBox").hide();
+                            },1000);
+                        }else{
                             //检查域名是否被占用
                             me.checkDomain({domain: siteDomain},function(){
                                 //发布前请求所有页面的数据
-                                setup.commonAjax("getSiteData.do", {"siteId": me.siteId}, function(msg){ 
-                                    //组装html数组
-                                    var htmlJson = [];
-                                    $.each(msg, function(i,v){
-                                        var htmlStr = publish.publishInit(v.data);
-                                        htmlJson.push({
-                                            pageId: v.id, 
-                                            name: v.pageName, 
-                                            data: htmlStr, 
-                                            pageSort: v.sort,
-                                            isHomePage: v.isHomePage
-                                        });
-                                    });
-
-                                    var params = {
-                                       "htmlJson": JSON.stringify(htmlJson),
-                                       "siteId": me.siteId,
-                                       "siteName": $(".siteName").val(),
-                                       "domain": $(".siteDomain").val(),
-                                       "industryId": ""
-                                    };
-                                    
-                                    me.publish(params, datas, previewPop);
-                                });
+                                me.publish(me.siteId, $(".siteName").val(), $(".siteDomain").val(), datas);
                             });
+                        }
 
-
-                            ///////为发布结束
+                        $(".siteDomain").focus(function(){
+                            $(".pblErr").hide();
                         });
-                        
-                    }
-
-                    $(".siteDomain").focus(function(){
-                        $(".pblErr").hide();
                     });
+
+                    ///////为发布结束
                 });
+
+                
             }
         },
         //调发布接口
-        publish: function(params, datas, previewPop){ //previewPop为tpl
+        publish: function(siteId, siteName, domain, datas, publishStatus){ //previewPop为tpl
             var me = this;
-            setup.commonAjax("publish.do", params, function(msg){
-                //渲染弹框
-                box.render($("#previewPop"), {siteId: me.siteId, pageId: datas.pageId, publish: 1, url: msg}, previewPop); 
-                me.qrcodeInit(msg,datas);
+            //发布前请求所有页面的数据
+            setup.commonAjax("getSiteData.do", {"siteId": siteId}, function(msg){ 
+                //组装html数组
+                var htmlJson = [];
+                $.each(msg, function(i,v){
+                    var htmlStr = publish.publishInit(v.data);
+                    htmlJson.push({
+                        pageId: v.id, 
+                        name: v.pageName, 
+                        data: htmlStr, 
+                        pageSort: v.sort,
+                        isHomePage: v.isHomePage
+                    });
+                });
 
-                function jsCopy(){
-                    var e=document.getElementById("pblUrl");//对象是content 
-                      e.select(); //选择对象 
-                      document.execCommand("Copy"); //执行浏览器复制命令
-                  }
+                var params = {
+                   "htmlJson": JSON.stringify(htmlJson),
+                   "siteId": siteId,
+                   "siteName": siteName,
+                   "domain": domain,
+                   "industryId": ""
+                };
+                
+                setup.commonAjax("publish.do", params, function(msg){
+                    
+                    if(publishStatus){
+                        popUp({
+                            "content":"发布成功！",
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }else{
+                        //渲染弹框
+                        box.render($("#previewPop"), {
+                            siteId: siteId, 
+                            pageName: datas.pageName, 
+                            pageId: $(".left").attr("pageId"), 
+                            publish: 1, 
+                            url: msg
+                        }, previewPop); 
 
-                  $("#previewPop").delegate(".blueBtn", "click", function(){
-                    jsCopy();
-                  }); 
+                        me.qrcodeInit(msg,datas);
+
+                        function jsCopy(){
+                            var e=document.getElementById("pblUrl");//对象是content 
+                              e.select(); //选择对象 
+                              document.execCommand("Copy"); //执行浏览器复制命令
+                        }
+
+                        $("#previewPop").delegate(".blueBtn", "click", function(){
+                            jsCopy();
+                        }); 
+                    }
+                    
+                });
             });
         },
         //检查域名是否被占用
@@ -327,11 +337,11 @@ define(function(require,exports,module){
         },
         //判断是否已经发布过站点
         getSiteInfo: function(siteId, cb1, cb2){ //cb1已发布，cb2未发布
-            setup.commonAjax("checkDomain.do", {siteId: siteId}, function(msg){
-                if(msg.status == 1){
-                    cb1();
+            setup.commonAjax("getSiteInfo.do", {siteId: siteId}, function(msg){
+                if(msg.publishStatus == 1){
+                    cb1(msg);
                 }else{
-                    cb2();
+                    cb2(msg);
                 }
             });
         },

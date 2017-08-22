@@ -5,11 +5,11 @@ define(function(require,exports,module){
 	var Engine = require("engine");
 	var box = Engine.init();
 
-    var commonZujian = require("componentsSpecial/commonZujian");
+    var linkAdress = require("common.linkAdress/index");
 	var app = {
 	    init:function(){
 	    	var me = this;
-	    	commonZujian.init();
+	    	linkAdress.init();
 	    },
 	    tpl:function(){
 	    	return require("component/index/tpl/settingImage.tpl")

@@ -21,7 +21,7 @@ define(function(require,exports,module){
             '<link rel="stylesheet" href="http://wx.yinnima.com/mb_update2/src/save/publish/swiper.min.css" />'+
             '<script src="http://wx.yinnima.com/mb_update2/src/save/publish/jquery.min.js"></script>'+
             '<script src="http://wx.yinnima.com/mb_update2/src/save/publish/swiper.min.js"></script>'+
-            '<title>'+datas.components[0].templateName+'</title>'+
+            '<title>'+datas.components[0].pageName+'</title>'+
             '</head><body style="background:'+datas.components[0].backgroundColor+'">';
 
             //渲染中间

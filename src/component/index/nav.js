@@ -20,11 +20,12 @@ define(function(require,exports,module){
 
     var popUp = require("common.PopUp/index");
     var pageSet = require("common.activeX/skySet/index");
-    
-    var dataBlank = {
-        "components": [{"elements":""}],
-        "symbol": "baseComponents",
-        }
+
+    var dataBlank={
+      "data": "{\"components\":[{\"elements\":{},\"componentSort\":1,\"symbol\":\"baseComponents\",\"pageName\":\"\",\"description\":\"\",\"backgroundColor\":\"#f0f0fa\"}]}",
+      "pageName": "",
+      "templateId": 0
+    }
     var app = {
         getLinkData:function(){
           var temp = "<option data-link='a1'>a2</option>";
@@ -100,7 +101,7 @@ define(function(require,exports,module){
                 self.find(".page-control").hide();
                 return false;
             });
-          
+            
             me.selectTemp(initTemplateId,me);
             me.addPage(); //点击新增页面
             me.okBtn();  //点击新增页面的确认按钮
@@ -222,8 +223,9 @@ define(function(require,exports,module){
                 if(!thisLi.attr("pageId")){
                     thisLi.addClass("activePage").siblings("li").removeClass("activePage");
                     $(".left").html("").attr("pageId","").attr("isHomePage", "");
+                  
+                    pageSet.img_edit(dataBlank);
                 }
-                pageSet.img_edit();
                 $("#sky h1").html(val.text);
                 $("#storeName").val(val.text);
                 /*$(".left").attr("pageId","").attr("isHomePage", "").html("");*/
@@ -343,8 +345,9 @@ define(function(require,exports,module){
                 }else{
                     $(".left").html("")
                     var title = self.attr("title");
-                     dataBlank.pageName = title;
                      pageSet.img_edit(dataBlank);
+                     $("#sky h1").html(title);
+                     $("#storeName").val(title);
                 }
             })        
         },

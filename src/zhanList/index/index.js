@@ -53,29 +53,39 @@ define(function(require,exports,module){
     $(".microContainer").delegate(".hover a","click",function(){ 
         var self = $(this);
         var siteId = self.parents("dd.microItem").attr("siteId");
-        var url = self.parents("dd.microItem").attr("url") || "http://www.iliujia.com";
+        var url = self.parents("dd.microItem").attr("url");
         var type = self.attr("class");
         var html = '<a class="cut"></a><div class="siteCode"></div>';
+        var status = self.parents("dd").attr("status");
 
         if(type == "edit"){ //编辑状态
           window.location.href = "../component/index.html?&siteId="+siteId+"&editSite=true";
         }else if(type == "manage"){ //站点管理
 
         }else{ //预览
-          $(".siteEv").html("");
-          $(".hover,.siteEv").hide();
-          self.parents(".hover").siblings(".siteEv").html(html).show();
+          if(status == 0){
+            popUp({
+                "content":"请先发布站点！",
+                showCancelButton: false,
+                showConfirmButton: false,
+                timer: 1000
+            });
+          }else{
+              $(".siteEv").html("");
+              $(".hover,.siteEv").hide();
+              self.parents(".hover").siblings(".siteEv").html(html).show();
 
-          $(".siteCode").qrcode({
-              render: "canvas",
-              width: 100,
-              height: 100,
-              text: url
-          });
+              $(".siteCode").qrcode({
+                  render: "canvas",
+                  width: 100,
+                  height: 100,
+                  text: url
+              });
 
-        }
-
-        return false;
+            }
+            return false;
+          }
+          
         
     });
     
@@ -126,12 +136,12 @@ define(function(require,exports,module){
             });
             self.attr("class","up").html("<i></i>上线");
           });
-        }else if(type == "link"){ // 连接
+        }else if(type == "link"){ // 链接
           //先清除相同位置可能出现的杂质
           $(".siteEv").html("");
           $(".hover,.siteEv").hide();
           //再添加
-          var html = "<a class='cut'></a><div>推广连接</div><input type='text' id='url1' value='"+url+"' /><button>复制</button>";
+          var html = "<a class='cut'></a><div>推广链接</div><input type='text' id='url1' value='"+url+"' /><button>复制</button>";
 
           self.parents("dd.microItem").find(".siteEv").html(html).show();
           $(".hover").hide();

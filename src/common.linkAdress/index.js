@@ -5,6 +5,7 @@ define(function(require,exports,module){
     var box = Engine.init();
 
     require("common.linkAdress/index.css");
+    var siteId = setup.getQueryString("siteId") || "";
     var selectAdress = {
         init : function(){ 
             var isGetLink = 0;//判断是否调过内部链接接口
@@ -42,7 +43,7 @@ define(function(require,exports,module){
                 self.siblings(".linkChoose").toggle();
                 self.parent("li").siblings("li").find(".linkChoose").hide();
                 if(isGetLink == 0){
-                     setup.commonAjax("getCreatedUrlList.do", "", function(msg){
+                     setup.commonAjax("getCreatedUrlList.do", {siteId:siteId}, function(msg){
                         var linkTpl = require("common.linkAdress/linkSelect.tpl");
                         box.render($(".selectAddress .linkChoose"), msg, linkTpl);
                         $(".selectAddress .linkChoose").prepend('<li class="selectedLi" urlname="">无</li>');

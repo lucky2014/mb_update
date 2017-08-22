@@ -37,7 +37,7 @@ define(function(require, exports, module) {
 	Handlebars.registerHelper("siteQl",function(v){ 
 		var h0 = "<dt><a class='qrcode'></dt><dt><a class='link'></a></dt><dd><a class='del'><i></i>删除</a></dd><dd><a class='down'></a></dd>";
 		var h1 = "<dt><a class='qrcode'></a></dt><dt><a class='link'></dt><dd><a class='del'><i></i>删除</a></dd><dd><a class='up'><i></i>上线</a></dd>";
-		var h2 = "<dt><a class='qrcode'><i></i>二维码</a></dt><dt><a class='link'><i></i>连接</a></dt><dd><a class='del'><i></i>删除</a></dd><dd><a class='down'><i></i>下线</a></dd>";
+		var h2 = "<dt><a class='qrcode'><i></i>二维码</a></dt><dt><a class='link'><i></i>链接</a></dt><dd><a class='del'><i></i>删除</a></dd><dd><a class='down'><i></i>下线</a></dd>";
 		if(v == "0" ){
 			return h0;
 		}else if(v == "1"){

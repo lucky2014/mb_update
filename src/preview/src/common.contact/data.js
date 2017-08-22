@@ -126,6 +126,6 @@ define(function(require,exports,module){
         ],
         "description": "",
         "templateId": 301,
-        "templateName": "首页"
+        "pageName": "首页"
     }
 });
