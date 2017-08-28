@@ -1,1 +1,0 @@
-<img src='../src/component/imgs/logoTip.png' style='width:100%;height:100%;padding:0;border: 1px solid #e0e0e0;'/>

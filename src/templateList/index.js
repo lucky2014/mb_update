@@ -49,13 +49,13 @@ define(function(require,exports,module){
         var temLi =self.attr("templateId");
 
         templateId = (blank==1) ?  "0" : temLi;
-
+        
         setup.commonAjax("addSite.do", "", function(msg){ 
             var siteData = msg; 
             var params = {
                "templateId": templateId,
                "pageName":"首页",
-               "data": JSON.stringify({components: [{"elements":{},"componentSort":1,"symbol":"baseComponents","pageName":"首页","description":"","backgroundColor":"#f0f0fa"}]}),
+               "data": JSON.stringify({components: [{"elements":{},"backgroundColor":"#f0f0fa","pageName":"首页"}]}),
                "siteId": msg,
                "isHomePage": "1",
             };

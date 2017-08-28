@@ -20,7 +20,7 @@
     width: 12px;
     height: 6px;
     display: inline-block;
-    background: url(../../1/images/arrowDown.png) no-repeat top left;
+    background: url(../../../imgs/arrowDown.png) no-repeat top left;
     cursor: pointer;
 }
 .selectCommon b.arrowDown{

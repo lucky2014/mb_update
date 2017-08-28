@@ -1,10 +1,15 @@
 define(function(require,exports,module){
     var $ = require("jquery");
     require("common.editAll/editText/editText.css");
-
+    var Engine = require("engine");
+    var box = Engine.init();
+    var popUp = require("common.PopUp/index");
+    var linkAdressTpl = require("common.linkAdress/linkAdress.tpl");
     //文本编辑器
     var editText = {
         dragTarget:null,
+        selectionObj:null,
+        rangeObj:null,
         delHtmlTag:function(str,tag){
                 var reg = new RegExp("<([\/]?)("+tag+")((:?\s*)(:?[^>]*)(:?\s*))>","ig");
                 return str.replace(reg,"");//去掉所有的html标记
@@ -23,7 +28,12 @@ define(function(require,exports,module){
             $(".fontSize select").change(function(){
                 var value = $(this).find("option:selected").val();
                 var text = $(me.dragTarget)[0];
-                var selectionObj = window.getSelection();
+                if(window.getSelection().focusNode){
+                    var selectionObj = window.getSelection();
+                }else{
+                    var selectionObj = me.selectionObj;
+                }
+                me.selectionObj = selectionObj;
                 var rangeObj = selectionObj.getRangeAt(0);
 　　　　        var docFragment = rangeObj.cloneContents();
                 var testDiv = document.createElement("div");
@@ -40,7 +50,12 @@ define(function(require,exports,module){
             $(".lineHeight select").change(function(){
                 var value = $(this).find("option:selected").val();
                 var text = $(me.dragTarget)[0];
-                var selectionObj = window.getSelection();
+                if(window.getSelection().focusNode){
+                    var selectionObj = window.getSelection();
+                }else{
+                    var selectionObj = me.selectionObj;
+                }
+                me.selectionObj = selectionObj;
                 var rangeObj = selectionObj.getRangeAt(0);
 　　　　        var docFragment = rangeObj.cloneContents();
                 var testDiv = document.createElement("div");
@@ -59,7 +74,12 @@ define(function(require,exports,module){
             $(".bold").click(function(e){
                 me.stopBubble(e)
                 var text = $(me.dragTarget)[0];
-                var selectionObj = window.getSelection();
+                if(window.getSelection().focusNode){
+                    var selectionObj = window.getSelection();
+                }else{
+                    var selectionObj = me.selectionObj;
+                }
+                me.selectionObj = selectionObj;
                 var rangeObj = selectionObj.getRangeAt(0);
 　　　　        var docFragment = rangeObj.cloneContents();
                 var testDiv = document.createElement("div");
@@ -85,10 +105,22 @@ define(function(require,exports,module){
                     $(text).html(newValue)
                 }
             })
+            $("body").delegate(".dragBox","mouseup",function(){
+                if(window.getSelection().focusNode){
+                    var selectionObj = window.getSelection();
+                }else{
+                    var selectionObj = me.selectionObj;
+                }
+            })
             $(".italic").click(function(e){
                 me.stopBubble(e)
                 var text = $(me.dragTarget)[0];
-                var selectionObj = window.getSelection();
+                if(window.getSelection().focusNode){
+                    var selectionObj = window.getSelection();
+                }else{
+                    var selectionObj = me.selectionObj;
+                }
+                me.selectionObj = selectionObj;
                 var rangeObj = selectionObj.getRangeAt(0);
 　　　　        var docFragment = rangeObj.cloneContents();
                 var testDiv = document.createElement("div");
@@ -116,9 +148,40 @@ define(function(require,exports,module){
             var text = "";
             $(".link").click(function(e){
                 me.stopBubble(e)
-                $("#myPopover1").show();
+                /*$("#myPopover1").show();*/
+                popUp({
+                    "title": '链接设置<a class="cut"></a>',
+                    "content":'<div class="linkDemo textLink">',
+                    showCancelButton: true,
+                    showConfirmButton: true,
+                }, function(){
+                    var sign = $(".linkStyle").attr("sign");
+                    var linkVal = $(".commonAddress[remark="+sign+"] input").attr("urlname");
+                    
+                    var textValue = $(text).html();
+                    if(!$(this).hasClass("drag_active")){
+                        $(this).addClass("drag_active");
+                        var selectHtml2 = me.delHtmlTag(selectHtml,"a");
+                        var newValue = textValue.replace(selectHtml,"<a data-url='"+linkVal+"'>"+selectHtml2+"</a>");
+                        $(text).html(newValue)
+                    }else{
+                        $(this).removeClass("drag_active");
+                        var selectHtml2 = me.delHtmlTag(selectHtml,"a");
+                        var newValue = textValue.replace(selectHtml,selectHtml2);
+                        $(text).html(newValue)
+                    }
+                    $(".popUp").css("display","none");
+                });
+                
+                box.render($(".linkDemo"), "", linkAdressTpl);
+
                 text = $(me.dragTarget)[0];
-                var selectionObj = window.getSelection();
+                if(window.getSelection().focusNode){
+                    var selectionObj = window.getSelection();
+                }else{
+                    var selectionObj = me.selectionObj;
+                }
+                me.selectionObj = selectionObj;
                 var rangeObj = selectionObj.getRangeAt(0);
 　　　　        var docFragment = rangeObj.cloneContents();
                 var testDiv = document.createElement("div");
@@ -143,27 +206,9 @@ define(function(require,exports,module){
                 var url = $(this).val();
                 $(".select_rt").attr("data-url",url)
             })
-            $(".btn-primary").click(function(){
-                if(selectHtml==""){
-                    return;
-                }
+            /*$(".btn-default,.close").click(function(){
                 $("#myPopover1").hide();
-                var textValue = $(text).html();
-                if(!$(this).hasClass("drag_active")){
-                    $(this).addClass("drag_active");
-                    var selectHtml2 = me.delHtmlTag(selectHtml,"a");
-                    var newValue = textValue.replace(selectHtml,"<a href='"+$(".select_rt").attr("data-url")+"'>"+selectHtml2+"</a>");
-                    $(text).html(newValue)
-                }else{
-                    $(this).removeClass("drag_active");
-                    var selectHtml2 = me.delHtmlTag(selectHtml,"a");
-                    var newValue = textValue.replace(selectHtml,selectHtml2);
-                    $(text).html(newValue)
-                }
-            })
-            $(".btn-default,.close").click(function(){
-                $("#myPopover1").hide();
-            })
+            })*/
             $(".edit_left,.edit_center,.edit_right").click(function(e){
                 me.stopBubble(e)
                 var align = $(this).find("a").attr("data-align");
@@ -213,7 +258,7 @@ define(function(require,exports,module){
         choseAll:function(self){
             var lf = $(self).parents(".drag").offset().left;
             var tp = $(self).parents(".drag").offset().top;
-            $("#dialog_paragraph").show();
+            $("#dialog_paragraph,#cke_vAct_modexBox_paragraph_content").show();
             $("#cke_vAct_modexBox_paragraph_content").css({"left":lf,"top":tp-$("#cke_vAct_modexBox_paragraph_content").height()});
             $(self).attr("contenteditable",true);
             if (document.body.createTextRange) {

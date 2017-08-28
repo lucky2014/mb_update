@@ -1,11 +1,11 @@
 define(function(require,exports,module){
-	var colorPicker = require("common.color/index");
+	var colorPicker = require("common.colorpicker/indexbk");
 	var $ = require("jquery");
 	var Engine = require("engine");
     var box = Engine.init();
     var setup = require("setup");
-    var settingText = require("component/index/tpl/settingText.tpl");
-    var settingImage = require("component/index/tpl/settingImage.tpl");
+    var settingText = require("componentsSpecial/text/settingText.tpl");
+    var settingImage = require("componentsSpecial/picture/settingImage.tpl");
 	//加载拖拽对象
 	var positionSetting = require("component/index/tpl/positionSetting.js");
 	//加载拖拽对象
@@ -30,6 +30,8 @@ define(function(require,exports,module){
     require("common.editAll/dialog/bootstrap-popover-x.min.css");
     //超链接编辑弹框
     var dialogTpl = require("common.editAll/dialog/index.tpl");
+
+    var linkAdressTpl = require("common.linkAdress/linkAdress.tpl");
     
     box.render($("#dialog"), "", dialogTpl);
     function cloneObj(oldObj) { //复制对象方法
@@ -129,6 +131,7 @@ define(function(require,exports,module){
             me.createElementNode(".left",componentClass,componentTpl);
         }
         box.render($(".right"), "", editTpl);
+        box.render($(".linkDemo"), "", linkAdressTpl);
         $(".line").width(window.innerWidth-860);
         $(".skin-colorSelector-border,.skin-colorSelector-bg").unbind();
         $("#settingId").css({"margin-bottom":"0","height":"50px"})
@@ -149,6 +152,7 @@ define(function(require,exports,module){
             	callback3&&callback3(e,self);
             	dragBoxFn(this,appExtend)
                 box.render($(".right"), "", editTpl);
+                box.render($(".linkDemo"), "", linkAdressTpl);
                 $(".line").width(window.innerWidth-860);
                 $(".skin-colorSelector-border,.skin-colorSelector-bg").unbind();
                 me.colorPicker(".skin-colorSelector-border");
@@ -158,7 +162,7 @@ define(function(require,exports,module){
             me.changeCursor();
             positionSetting.init($(me.dragTarget).parents(".drag"),"#groupSkin-content",me);
         });
-        $("body").delegate("."+componentClass+" .dragBox","contextmenu",function(e){
+        $("body").delegate("."+componentClass+" .dragBox","contextmenu dblclick",function(e){
         	var self = this;
             callback2&&callback2(e,self)
             return false;
@@ -188,10 +192,9 @@ define(function(require,exports,module){
                 tplObj.callback3(app,e,self)
             }
         },targetObj);
-        if(!settingJs.isRender){
-            settingJs.init(app);
-            settingJs.isRender = true;
-        }
+        settingJs.init(app);
+        settingJs.isRender = true;
+
     }
     function trimNumber(str){ 
         return str.replace(/\d+/g,''); 
@@ -203,8 +206,8 @@ define(function(require,exports,module){
             this.rightEditComponentInit(e,trimNumber(str),dragParent.eq(i))
         }
     }
-
-    
+    var linkAdress = require("common.linkAdress/index");
+    linkAdress.init(appExtend);
     //点击head右上角的保存
     $("body").delegate(".site_save", "click", function(e){
         appExtend.pageSave();

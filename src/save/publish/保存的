@@ -1,0 +1,59 @@
+{
+  "components": [
+    {
+      "elements": {
+        "picture1503537410209": {
+          "drag": {
+            "height": "19.999999999999996px",
+            "left": "35px",
+            "minHeight": "32px",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": "27px",
+            "transformOrigin": "center center 0px",
+            "width": "180px",
+            "nodeName": "DIV"
+          },
+          "dragBox_parent": {
+            "height": "100%",
+            "nodeName": "DIV"
+          },
+          "dragBox": {
+            "cursor": "move",
+            "height": "100%",
+            "minWidth": "16px",
+            "width": "100%",
+            "nodeName": "DIV",
+            "html": "<img src=\"http://122.224.218.61:8001/group1/M00/00/60/wKgCClmTuf-Aa7K0AAJLyZtekjU839.jpg\" style=\"width:100%;height:100%;padding:0;border: 1px solid #e0e0e0;\">"
+          }
+        },
+        "picture1503537428664": {
+          "drag": {
+            "left": "87px",
+            "minHeight": "32px",
+            "position": "absolute",
+            "textAlign": "center",
+            "top": "231px",
+            "transformOrigin": "center center 0px",
+            "width": "180px",
+            "nodeName": "DIV"
+          },
+          "dragBox_parent": {
+            "height": "100%",
+            "nodeName": "DIV"
+          },
+          "dragBox": {
+            "cursor": "move",
+            "height": "100%",
+            "minWidth": "16px",
+            "width": "100%",
+            "nodeName": "DIV",
+            "html": "<img src=\"http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb5hGAa2VQAAAiT0rQQYc016.png\" style=\"width:100%;height:100%;padding:0;border: 1px solid #e0e0e0;\">"
+          }
+        }
+      },
+      "backgroundColor": "#f0f0fa",
+      "pageName": "首页"
+    }
+  ]
+}

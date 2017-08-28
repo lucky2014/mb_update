@@ -1,0 +1,59 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form, 
+fieldset,input,textarea,p,blockquote,th,td,button{ 
+margin:0; 
+padding:0; 
+font-family: 微软雅黑;
+word-break: break-all;
+}
+button{
+	cursor: pointer;
+}
+a{
+text-decoration: none;
+color:#617084;
+}
+ol,ul { 
+list-style:none; 
+}
+i{font-style: normal;}
+html{font-size:14px;}
+body{margin: 0 auto;color: #617084;background: #f4f5fa;font-size:14px; min-width: 1186px; overflow: hidden; overflow-x:scroll;}
+/* .section{background: #f4f5fa;} */
+.section{min-width:1100px;width:98%;background-color: #fff;margin-left: 2%; overflow: hidden;margin-top: 64px;}
+
+/* ::-webkit-scrollbar{width: 0;} */
+/************************×ó±ßÏÔÊ¾ÑùÊ½begin****************************/
+.leftOuter{width: 308px; margin: 0 auto;}
+.left{position: relative;width: 308px;background: #fff; margin: 0;}
+
+/************************¹²ÓÃÑùÊ½begin****************************/
+
+.dn{display: none !important;}
+.select2-container{width: 158px;}
+.loadingBox{position:fixed;top:0;bottom:0;left:0;right:0;background-color:rgba(0,0,0,.6);z-index:9999;}
+.loadingBox img{width:60px;height:60px;position:absolute;top:50%;left:50%;margin-top:-30px;margin-left:-30px;}
+
+.arrowTip{z-index: 99; display: none; position: fixed;left: 45%;top: 55%;color: red;background: #fff;border: 1px solid #e1e9f3;padding: 16px 60px;border-radius: 5px;}
+
+
+/* ::-webkit-scrollbar{width: 0;} */
+
+/************************脳贸卤脽脧脭脢戮脩霉脢陆begin****************************/
+.leftDiv{position: relative;}
+.selectB{display: block;width: 304px;height:51px;position: absolute;left: 0;top: 0;z-index: 99;}
+.active .selectB{border: 2px solid #ff7373;}
+
+.right{margin-top: 52px; color:#617084; background: #fafbfc; float: right; width: 440px; overflow: hidden; overflow-y:scroll }
+
+/************************鹿虏脫脙脩霉脢陆begin****************************/
+
+.right .panelTitle{height: 60px;border-bottom: 1px solid #0a679b;}
+.right .panelTitle p{ color: #0a679b;height: 60px;line-height: 60px;font-size: 1.14rem;margin-left: 24px;}
+.right .setOuter{padding-left: 24px;}
+
+.right input,.right p.editText,p.companyText{color: #324057;font-size: 1rem;}
+.right .lastDtP{color: #ffa200;font-size: 1rem;}
+.right .lastDtspan{color:#2193d3;font-size: 0.86rem;}
+
+
+

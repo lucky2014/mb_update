@@ -57,7 +57,7 @@ define(function(require,exports,module){
 		});
 
 		$("#pop").delegate(".cut","click", function(){
-			$("#pop").hide();
+			$(".popUp").hide();
 		});
 	}
 	return popShow;

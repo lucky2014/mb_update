@@ -1,6 +1,5 @@
 define(function(require,exports,module){
     var $ = require("jquery");
-    var Swiper = require("swiper");
 
     //var data = require("app_index/data");
     var Engine = require("engine");

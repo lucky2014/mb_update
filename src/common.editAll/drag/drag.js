@@ -1,5 +1,6 @@
 define(function(require,exports,module){
     var $ = require("jquery");
+    require("../changePageHeight/changePageHeight.js");
     function watch(obj, attr, callback){
        if(typeof obj.defaultValues == 'undefined'){
           obj.defaultValues = {};
@@ -55,10 +56,13 @@ define(function(require,exports,module){
                     w = w<$(target).children().width()/2?$(target).children().width()/2:w;
                     $(target).width(w)
                     var maxValue = $(target).parent().attr("maxValue");
-                    $(target).parent().attr("value",($(target).width()-$(target).children().width()/2)/($(target).parent().width())*maxValue);
+                    console.log($(target).width()+","+$(target).children().width())
+                    $(target).parent().attr("value",(($(target).width()-$(target).children().width()/2)/($(target).parent().width()-10)*maxValue).toFixed(0));
                     if($(target).hasClass("opacity")){
+                        $(target).find(".percent").html($(target).parent().attr("value"));
                         $(me.dragTarget).children().css("opacity",$(target).parent().attr("value")/100)
                     }else{
+                        $(target).find(".percent").html($(target).parent().attr("value"));
                         $(me.dragTarget).children().css("border-radius",$(target).parent().attr("value")+"px")
                     }
                 }
@@ -167,19 +171,19 @@ define(function(require,exports,module){
             var w = $(changeDiv).width()/2;
             var h = $(changeDiv).height()/2;
             var scrollTop = parseInt($(".mCSB_dragger").css("top"));
-            if(e.clientY>=(window.innerHeight-$(changeDiv).height())){
-                if(($(".mobile-container")[0].clientHeight+me.scrollH)>=$(".mCSB_container>.left").height()){
-                    var height = $(".mCSB_container>.left").height();
-                    $(".mCSB_container>.left").height(height+2);
-                }
-                me.scrollH+=2;
-                me.scrollDeltaH+=2;
-                //$(".VACT_main_page_index_box").mCustomScrollbar("scrollTo",me.scrollH);
-            }else if(e.clientY<=scrollTop){
-                me.scrollH-=2;
-                me.scrollDeltaH-=2;
-                //$(".VACT_main_page_index_box").mCustomScrollbar("scrollTo",me.scrollH);
-            }
+            // if(e.clientY>=(window.innerHeight-$(changeDiv).height())){
+            //     if(($(".mobile-container")[0].clientHeight+me.scrollH)>=$(".mCSB_container>.left").height()){
+            //         var height = $(".mCSB_container>.left").height();
+            //         $(".mCSB_container>.left").height(height+2);
+            //     }
+            //     me.scrollH+=2;
+            //     me.scrollDeltaH+=2;
+            //     //$(".VACT_main_page_index_box").mCustomScrollbar("scrollTo",me.scrollH);
+            // }else if(e.clientY<=scrollTop){
+            //     me.scrollH-=2;
+            //     me.scrollDeltaH-=2;
+            //     //$(".VACT_main_page_index_box").mCustomScrollbar("scrollTo",me.scrollH);
+            // }
             if(me.dragStatus){
                 $(changeDiv).css({"left":lf+deltaX,"top":tp+deltaY+me.scrollDeltaH});
             }else{
@@ -578,14 +582,30 @@ define(function(require,exports,module){
                 var id = $(me.dragTarget).parents(".drag").parent().attr("id");
 
                 me.rectForPos[id] = {
-                    left: parseInt($(me.dragTarget).parents(".drag")[0].offsetLeft)||"auto",
-                    top: parseInt($(me.dragTarget).parents(".drag")[0].offsetTop)||"auto"
+                    left: parseFloat($(me.dragTarget).parents(".drag")[0].offsetLeft)||"auto",
+                    top: parseFloat($(me.dragTarget).parents(".drag")[0].offsetTop)||"auto"
                 }
-
+                var theData={
+                    eleHeight:$("input[name='module_height']").val()*1.0,//移动的元素的高度
+                    parentsDivHeight:$(".left").height(),//最外层父元素的高度
+                    scrollDivHeight:$(".mobile-container").height()+20,//可视区域的高度
+                    scrollTop:$(".mobile-container").scrollTop(),//滚动的距离
+                }
+                if(me.rectForPos[id].top+theData.eleHeight>theData.parentsDivHeight){
+                    $(".left").height(me.rectForPos[id].top+theData.eleHeight);
+                    $(".mobile-container").scrollTop(me.rectForPos[id].top+theData.eleHeight)
+                }else{
+                    if(theData.scrollTop-75>me.rectForPos[id].top){
+                        $(".mobile-container").scrollTop(me.rectForPos[id].top+75)
+                    }else if(theData.scrollDivHeight-75+theData.scrollTop-theData.eleHeight<me.rectForPos[id].top){
+                        $(".mobile-container").scrollTop(me.rectForPos[id].top+theData.eleHeight+75-theData.scrollDivHeight)
+                    }
+                }
+                //console.log($(".mobile-container").scrollTop()+","+me.rectForPos[id].top+","+($(".mobile-container").scrollTop()-75>me.rectForPos[id].top))
                 $("input[name='module_pos_left']").val(me.rectForPos[id].left);
                 $("input[name='module_pos_top']").val(me.rectForPos[id].top);
-                $("input[name='module_width']").val(me.rectForPos[id].width);
-                $("input[name='module_height']").val(me.rectForPos[id].height);
+                //$("input[name='module_width']").val(me.rectForPos[id].width);
+                //$("input[name='module_height']").val(me.rectForPos[id].height);
             });
             this.dragAll(function(){
                 var w = $(me.dragTarget).find("svg").width();

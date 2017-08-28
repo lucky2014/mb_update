@@ -31,6 +31,9 @@ define(function(require,exports,module){
 			changeCursor:function(){
 				var me = this;
 				var drag = $(me.dragTarget).parents(".drag");
+				if(!drag[0]){
+					return;
+				}
 				var tlPoint = {left:drag.offset().left+drag[0].offsetWidth/2,top:drag.offset().top+drag[0].offsetHeight/2};
 				for(var i = 0;i<$(".sizeControl").length;i++){
 					var control = $(".sizeControl").eq(i);
@@ -107,12 +110,13 @@ define(function(require,exports,module){
 			createElementNode:function(currEle,className,tpl){
 				var me = this;
 	            var oFlag = document.createDocumentFragment();
-	            var dragStyle = "position: absolute;width: 180px;text-align: center;min-height:32px;z-index: 100;left:0;top:60px;";
-	            var dragBoxStyle = "min-width: 16px;min-height: 32px;height: 100%;width: 100%;";
+	            var dragStyle = "position: absolute;width: 180px;text-align: center;left:0;top:60px;";
+	            var dragBoxStyle = "height: 100%;width: 100%;";
 	            var id = "vAct_modexBox_"+new Date().getTime();
 	            var vAct_modexBox_paragraph = document.createElement("div");
                 vAct_modexBox_paragraph.id = className;
                 vAct_modexBox_paragraph.className = className;
+                vAct_modexBox_paragraph.style.border = "1px solid #ccc";
 	            if(!$(".sizeControl_parent")[0]){
 	            	var str = me.createSizeControl();
 		            vAct_modexBox_paragraph.innerHTML = "<div style='"+dragStyle+"' class='drag' name='drag'><div class='dragBox_parent' name='dragBox_parent' style='height:100%'><div class='dragBox' name='dragBox' style='"+dragBoxStyle+"'>"+tpl+"</div><div class='sizeControl_parent'>"+str+"</div></div></div>";

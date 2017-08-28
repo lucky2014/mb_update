@@ -9,18 +9,7 @@
 	  </ul>
 	  <div class="modal-body sysPics" indNum = "1">
 	    <div id="userPicList" class="picList">
-	        		<div class="pic_thumb" data-url="../src/1/images/addPic1.png"><img src="../src/1/images/addPic1.png">
-	        			<span class="pic_select"></span>
-	        			<!-- <i class="delPic" style="display:none;"></i> -->
-	        		</div>
-	        		<div class="pic_thumb" data-url="../src/1/images/delectCha.png"><img src="../src/1/images/delectCha.png">
-	        			<span class="pic_select"></span>
-	        			<!-- <i class="delPic" style="display:none;"></i> -->
-	        		</div>
-	        		<div class="pic_thumb" data-url="../src/1/images/delectCha2.png"><img src="../src/1/images/delectCha2.png">
-	        			<span class="pic_select"></span>
-	        			<!-- <i class="delPic" style="display:none;"></i> -->
-	        		</div>
+	        		
 	    </div>
 	  </div>
 	  <div class="modal-body myPics" style="display:none;" indNum = "2">

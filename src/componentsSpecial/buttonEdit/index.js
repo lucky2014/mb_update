@@ -13,7 +13,7 @@ define(function(require,exports,module){
   var button2 = require("componentsSpecial/buttonEdit/index2.tpl");
   var button3 = require("componentsSpecial/buttonEdit/index3.tpl");
 
-  var linkAdress = require("common.linkAdress/index");
+  var linkAdressTpl = require("common.linkAdress/linkAdress.tpl");
   //页面逻辑
   var app = {
     init:function(app){
@@ -23,25 +23,27 @@ define(function(require,exports,module){
           if(ind==0){
               $(app.dragTarget).html(button1);
               $(".setting-panel").html(settingButton);
+              $(".linkDemo").html(linkAdressTpl);
               app.colorPicker(".skin-colorSelector-bg");
               app.colorPicker(".skin-colorSelector-border");
               app.colorPicker(".skin-colorSelector-font");
           }else if(ind==2){
               $(app.dragTarget).html(button2);
               $(".setting-panel").html(settingPicButton);
+              $(".linkDemo").html(linkAdressTpl);
               app.colorPicker(".skin-colorSelector-border");
               app.colorPicker(".skin-colorSelector-bg");
               app.colorPicker(".skin-colorSelector-font");
           }else if(ind==1){
               $(app.dragTarget).html(button3);
               $(".setting-panel").html(settingGridentButton);
+              $(".linkDemo").html(linkAdressTpl);
               app.colorPicker(".skin-colorSelector-border");
               app.colorPicker(".skin-colorSelector-bg");
               app.colorPicker(".skin-colorSelector-font");
               app.colorPicker(".skin-colorSelector-bgTp");
               app.colorPicker(".skin-colorSelector-bgBtm");
           }
-          linkAdress.init();
           $(this).parent().find("span").eq(ind).addClass("active").siblings("span").removeClass("active");
     	})
       $("body").delegate("#font_type_select .before","click",function(){
@@ -87,7 +89,6 @@ define(function(require,exports,module){
       $("body").delegate(".form-control","keyup",function(){
           $(app.dragTarget).find("input").val($(this).val());
       })
-      linkAdress.init();
     },
     tpl:function(){return require("componentsSpecial/buttonEdit/settingButton.tpl")}
   }

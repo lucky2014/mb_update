@@ -8,7 +8,6 @@
 			"engine": "common.lib/setup/engine", //模板引擎
 			"setup": "common.lib/setup/setup", //ajax配置
 			/*"wxShare": "https://res.wx.qq.com/open/js/jweixin-1.0.0.js",*/
-			"swiper": "common.swiper/swiper.min",
 		}
 	};
 

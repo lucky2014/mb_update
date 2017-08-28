@@ -9,19 +9,21 @@ define(function(require,exports,module){
         '<meta name="format-detection" content="telephone=no">'+
         '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />'+
         '<meta http-equiv="Pragma" content="no-cache" />'+
-        '<meta http-equiv="Expires" content="0" />';
+        '<meta http-equiv="Expires" content="0" />'+
+        '<link rel="stylesheet" href="http://wx.yinnima.com/mb_update2/src/save/publish/style.css" />'+
+        '<link rel="stylesheet" href="http://wx.yinnima.com/mb_update2/src/save/publish/swiper.min.css" />'+
+        '<script src="http://wx.yinnima.com/mb_update2/src/save/publish/jquery.min.js"></script>'+
+        '<script src="http://wx.yinnima.com/mb_update2/src/save/publish/swiper.min.js"></script>';
         
     var publish = {
         html: html,
         publishInit: function(datas){
-            datas = JSON.parse(datas);
             var me = this;
+            datas = JSON.parse(datas);
+            
+            me.html = html;
             //渲染头部
-            me.html += '<link rel="stylesheet" href="http://wx.yinnima.com/mb_update2/src/save/publish/style.css" />'+
-            '<link rel="stylesheet" href="http://wx.yinnima.com/mb_update2/src/save/publish/swiper.min.css" />'+
-            '<script src="http://wx.yinnima.com/mb_update2/src/save/publish/jquery.min.js"></script>'+
-            '<script src="http://wx.yinnima.com/mb_update2/src/save/publish/swiper.min.js"></script>'+
-            '<title>'+datas.components[0].pageName+'</title>'+
+            me.html += '<title>'+datas.components[0].pageName+'</title>'+
             '</head><body style="background:'+datas.components[0].backgroundColor+'">';
 
             //渲染中间
@@ -126,92 +128,6 @@ define(function(require,exports,module){
                         me.html += '<li class="'+className+'"><a href=users?pageId='+v[j].id+'><i><img src="'+v[j].value+'"></i><span>'+v[j].description+'</span></a></li>'
                     }
                     me.html += '</ul></div><script src="http://wx.yinnima.com/mb_update2/src/save/publish/footernav.js"></script>'
-                }
-
-                //组件类
-                else if(obj[i].symbol == "baseComponents"){
-                    var datas = obj[i].elements;
-                    if(datas){
-
-                        var loadComponents = {
-                            elements: datas,
-                            getSaved:function(){
-                                var me = this;
-                                var vAct_modexBoxArr = [];
-                                for(var key in me.elements){
-                                    var child = "";
-                                    var vAct_modexBox_paragraph="<div id='"+key+"' class='"+key+"'>";
-                                    var children = me.elements[key];
-                                    var nodeArr = [];
-                                    var htmlStr = "";
-                                    for(var childEle in children){
-                                        nodeArr.push(children[childEle].nodeName)
-                                        if(children[childEle].nodeName=="IMG"){
-                                            child += "";
-                                        }else{
-                                            child += "<"+children[childEle].nodeName+" class='"+childEle+"' name='"+childEle+"'";
-                                        }
-
-                                        var childrens = children[childEle];
-                                        var style = "";
-                                        var top = '';
-                                        for(var childsEle in childrens){
-                                            if(childsEle!="nodeName"&&childsEle!="html"){
-                                                if(childsEle=="top"){
-                                                    var t = childrens.top;
-                                                    child += 'top='+ t;
-                                                }else if(childsEle=="width"){
-                                                    var w = childrens[childsEle];
-                                                    if(w.indexOf("px")>-1){
-                                                        w = w.replace(/px/,"");
-                                                        style += "width:" + (w/308).toFixed(3)*100 + "%;";
-                                                    }else{
-                                                        style += "width:" + childrens[childsEle];
-                                                    }
-                                                    
-                                                }else if(childsEle=="left"){
-                                                    var w = childrens[childsEle];
-                                                    if(w.indexOf("px")>-1){
-                                                        w = w.replace(/px/,"");
-                                                        style += "left:" + (w/308).toFixed(3)*100 + "%;";
-                                                    }else{
-                                                        style += "left:" + childrens[childsEle];
-                                                    }
-                                                }else if(childsEle=="zIndex"){
-                                                    var w = childrens[childsEle];
-                                                    w = w.replace(/px/,"");
-                                                    style += "z-index:" + w;
-                                                }else{
-                                                    style+=(childsEle.replace(/([A-Z])/g,"-$1").toLowerCase()+":"+childrens[childsEle]+";")
-                                                }
-                                                
-                                            }
-                                        }
-                                        if(childEle=="dragBox"){
-                                            htmlStr = childrens.html;
-                                            child += " style='"+style+"'>";
-                                        }else{
-                                            if(children[childEle].nodeName!="IMG"){
-                                                child+=" style='"+style+"'>";
-                                            }
-                                        }
-                                    }
-                                    if(nodeArr.length==4){
-                                        vAct_modexBox_paragraph+=(child + htmlStr+"</"+nodeArr[2]+"></"+nodeArr[0]+">"+"</div>")
-                                    }else{
-                                        vAct_modexBox_paragraph+=(child + htmlStr+"</"+nodeArr[2]+"></"+nodeArr[1]+"></"+nodeArr[0]+">"+"</div>")
-                                    }
-                                    vAct_modexBoxArr.push(vAct_modexBox_paragraph)
-                                }
-                                return vAct_modexBoxArr.join("")
-                            }
-                        };
-
-                        var htmls = loadComponents.getSaved();
-
-                        me.html += htmls +'<script src="http://wx.yinnima.com/mb_update2/src/save/publish/changeTop.js"></script>';
-
-                    }
                 }
 
                 //产品页面广告
@@ -400,12 +316,112 @@ define(function(require,exports,module){
                     }
                     me.html += '</div></div>';
                 }
+
+
+                //组件类
+                else if(obj[i].symbol == "baseComponents" || !obj[i].symbol){
+                    var datas = obj[i].elements;
+                    if(datas){
+                        var loadComponents = {
+                            elements: datas,
+                            getSaved:function(){
+                                var me = this;
+                                var vAct_modexBoxArr = [];
+                                for(var key in me.elements){
+                                    var child = "";
+                                    var vAct_modexBox_paragraph="<div id='"+key+"' class='"+key+"'>";
+                                    var children = me.elements[key];
+                                    var nodeArr = [];
+                                    var htmlStr = "";
+                                    for(var childEle in children){
+                                        nodeArr.push(children[childEle].nodeName)
+                                        if(children[childEle].nodeName=="IMG"){
+                                            child += "";
+                                        }else{
+                                            child += "<"+children[childEle].nodeName+" class='"+childEle+"' name='"+childEle+"'";
+                                        }
+
+                                        var childrens = children[childEle];
+                                        var style = "";
+                                        var top = '';
+                                        var attr = "";
+                                        for(var childsEle in childrens){
+                                            if(childsEle!="nodeName"&&childsEle!="html"&&childsEle!="attributes"){
+                                                if(childsEle=="top"){
+                                                    var t = childrens.top;
+                                                    child += ' top='+ t;
+                                                }else if(childsEle=="height"){
+                                                    var t = childrens.height;
+                                                    child += ' height='+ t;
+                                                }else if(childsEle=="width"){
+                                                    var w = childrens[childsEle];
+                                                    if(w.indexOf("px")>-1){
+                                                        w = w.replace(/px/,"");
+                                                        style += "width:" + (w/308).toFixed(3)*100 + "%;";
+                                                    }else{
+                                                        style += "width:" + childrens[childsEle];
+                                                    }
+                                                    
+                                                }else if(childsEle=="left"){
+                                                    var w = childrens[childsEle];
+                                                    if(w.indexOf("px")>-1){
+                                                        w = w.replace(/px/,"");
+                                                        style += "left:" + (w/308).toFixed(3)*100 + "%;";
+                                                    }else{
+                                                        style += "left:" + childrens[childsEle];
+                                                    }
+                                                }else if(childsEle=="zIndex"){
+                                                    var w = childrens[childsEle];
+                                                    w = w.replace(/px/,"");
+                                                    style += "z-index:" + w;
+                                                }else{
+                                                    style+=(childsEle.replace(/([A-Z])/g,"-$1").toLowerCase()+":"+childrens[childsEle]+";")
+                                                }
+                                                
+                                            }
+                                            if(childsEle=="attributes"){
+                                                for(var key2 in childrens[childsEle]){
+                                                    attr+=(" "+key2+"="+childrens[childsEle][key2].replace(/"/g,"'"))
+                                                }
+                                            }
+                                        }
+                                        if(childEle=="dragBox"){
+                                            htmlStr = childrens.html;
+                                            child += " style='"+style+"' "+attr+">";
+                                        }else{
+                                            if(children[childEle].nodeName!="IMG"){
+                                                child+=" style='"+style+"' "+attr+">";
+                                            }
+                                        }
+                                    }
+                                    if(nodeArr.length==4){
+                                        vAct_modexBox_paragraph+=(child + htmlStr+"</"+nodeArr[2]+"></"+nodeArr[0]+">"+"</div>")
+                                    }else{
+                                        vAct_modexBox_paragraph+=(child + htmlStr+"</"+nodeArr[2]+"></"+nodeArr[1]+"></"+nodeArr[0]+">"+"</div>")
+                                    }
+                                    vAct_modexBoxArr.push(vAct_modexBox_paragraph)
+                                }
+                                return vAct_modexBoxArr.join("")
+                            },
+                            urlChangeFn:function(val){
+                                var reg = new RegExp("data-click","ig");
+                                return val.replace(reg,"onclick")
+                            },
+                        };
+
+                        var htmls = loadComponents.urlChangeFn(loadComponents.getSaved());
+
+                        me.html += htmls +'<script src="http://wx.yinnima.com/mb_update2/src/save/publish/changeTop.js"></script>';
+
+                    }
+                }
             }
 
             //渲染完毕，结束标签
             me.html += '</body></html>';
 
-            return me.html ;
+            return me.html;
+           
         }
     };
 

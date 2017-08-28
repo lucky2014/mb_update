@@ -17,10 +17,10 @@
                           <div class="clearfix btnPic" style="float:left;margin-bottom:20px;text-align: left;">
                              <!--  <img src="../src/component/imgs/picIcon.png" style="margin-left:0"> -->
                              <ul class="picButFast">
-                               <li><img src="../src/component/imgs/button1.png"></li>
-                               <li><img src="../src/component/imgs/button2.png"></li>
-                               <li><img src="../src/component/imgs/button3.png"></li>
-                               <li><img src="../src/component/imgs/button4.png"></li>
+                               <li><img src="http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb6rOACbYxAAAE2wy7hXk965.png"></li>
+                               <li><img src="http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb6suAcj-BAAAE8HgIIEw495.png"></li>
+                               <li><img src="http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb6tGAaAm7AAAFQSO8K0A923.png"></li>
+                               <li><img src="http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb6tSAXor2AAAFgT8z2-M805.png"></li>
                              </ul>
                           </div>
                           <div id="file_upload" class="uploadify-button" style="float:left;margin-left:15px;margin-top:3px;cursor:pointer;line-height: 24px;color:#1c9ae3;">
@@ -34,33 +34,35 @@
                           </div>
                       </div>
                       <div class="linkDemo">
-                          <li class="linkStyle commonAddress">
-                            <span>链接</span>
-                            <input type="text" class="shclickLi" value="站内链接" readonly>
-                            <i class="shclickI"></i>
-                            <ul class="linkChoose" style="display:none;">
-                                <!-- <li class="selectedLi" sign="1">请选择</li> -->
-                                <li sign="1">外部链接</li>
-                                <li sign="2" class="selectedLi">站内链接</li>
-                                <li sign="3">返回</li>
-                            </ul>
-                          </li>
-                          <li class="linkAddress commonAddress">
-                            <span>链接地址</span>
-                            <input type="text" placeholder="请输入链接地址" class="shclickLi" selUrl="">
-                          </li>
-                          <li class="selectAddress commonAddress">
-                            <span>链接地址</span>
-                            <input type="text" readonly class="shclickLi" value="" placeholder="请选择链接地址">
-                            <i class="shclickI"></i>
-                            <ul class="linkChoose" style="display:none;">
-                              <li class="selectedLi" urlname="">无</li> 
-                            </ul>
-                          </li>
-                          <li class="backAddress commonAddress">
-                            <span>链接地址</span>
-                            <input type="text" readonly class="shclickLi" urlName="history.back()">
-                          </li>
+                          <!-- <div class="linkDemo"> -->
+                                <!-- <li class="linkStyle commonAddress" sign="2">
+                                  <span>链接</span>
+                                  <input type="text" class="shclickLi" value="站内链接" readonly>
+                                  <i class="shclickI"></i>
+                                  <ul class="linkChoose" style="display:none;">
+                                      <li class="selectedLi" sign="1">请选择</li>
+                                      <li sign="1">外部链接</li>
+                                      <li sign="2" class="selectedLi">站内链接</li>
+                                      <li sign="3">返回</li>
+                                  </ul>
+                                </li>
+                                <li class="linkAddress commonAddress" remark="1">
+                                  <span>链接地址</span>
+                                  <input type="text" placeholder="请输入链接地址" class="shclickLi" urlname="">
+                                </li>
+                                <li class="selectAddress commonAddress" remark="2">
+                                  <span>链接地址</span>
+                                  <input type="text" readonly class="shclickLi" value="" placeholder="请选择链接地址" urlname="">
+                                  <i class="shclickI"></i>
+                                  <ul class="linkChoose" style="display:none;">
+                                    <li class="selectedLi" urlname="">无</li> 
+                                  </ul>
+                                </li>
+                                <li class="backAddress commonAddress" remark="3">
+                                  <span>链接地址</span>
+                                  <input type="text" readonly class="shclickLi" urlName="history.back()">
+                                </li> -->
+                            <!-- </div> -->
                       </div>
                       <div id="font_color" class="colorSelectorWrapper clearfix none" style="display: block;margin-bottom:8px;">
                         <label class="skin-label" style="width: 90px;height:37px;float: left;">文本</label>
@@ -102,11 +104,11 @@
                       <div id="border_color" class="colorSelectorWrapper clearfix none" style="display: block;">
                         <label class="skin-label" style="width: 90px;height:37px;float: left;">边框</label>
                         <div class="borderWidth selectCommon">
-                            <input type="text" readonly value="1" dataValue="1">
+                            <input type="text" readonly value="0" dataValue="0">
                             <i></i>
                             <ul class="borWUi selectUl" style="display:none;"> 
-                              <li>0</li>
-                              <li class="selected">1</li>
+                              <li class="selected">0</li>
+                              <li>1</li>
                               <li>2</li>
                               <li>3</li>
                               <li>4</li>

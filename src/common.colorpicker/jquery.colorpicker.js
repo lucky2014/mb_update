@@ -1,6 +1,6 @@
 define(function(require,exports,module){
     var $ = require("jquery");
-    require("common.color/colorpicker.css");
+    require("common.colorpicker/colorpicker.css");
     (function($) {
         var ColorHex=new Array('00','33','66','99','CC','FF');
         var SpColorHex=new Array('FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF');

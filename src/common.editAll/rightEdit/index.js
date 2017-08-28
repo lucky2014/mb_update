@@ -3,9 +3,9 @@ define(function(require,exports,module){
     var Engine = require("engine");
     var box = Engine.init();
     var setup = require("setup");
-    var settingText = require("component/index/tpl/settingText.tpl");
-    var settingImage = require("component/index/tpl/settingImage.tpl");
-    var text = require("component/index/tpl/text.tpl");
+    var settingText = require("componentsSpecial/text/settingText.tpl");
+    var settingImage = require("componentsSpecial/picture/settingImage.tpl");
+    var text = require("componentsSpecial/text/text.tpl");
     var ajaxFileUpload = require("common.ajaxfileupload/index");
     var popUp = require("common.PopUp/index");
     //文本编辑器
@@ -85,17 +85,35 @@ define(function(require,exports,module){
                 self.addClass("selected").siblings("li").removeClass("selected");
                 self.parent().hide();
                 if(self.parent().hasClass("borWUi")){
-                    $(me.dragTarget).children().css("border-width",value+"px");//改变显示区线宽
+                    $(me.dragTarget).css("border-width",value+"px");//改变显示区线宽
                 }else if(self.parent().hasClass("borSUi")){
                      var valHtml = self.attr("value");
                      if($(me.dragTarget).find("svg")[0]){
-                         $(me.dragTarget).find("svg").children().css("stroke-style",valHtml);
+                         $(me.dragTarget).find("svg").css("stroke-style",valHtml);
                      }else{
-                         $(me.dragTarget).children().css("border-style",valHtml);
+                         $(me.dragTarget).css("border-style",valHtml);
                      }
                 }
                 
              });
+             function getHeight(_this){
+                if($(_this).find(".dragBox").attr("contenteditable")){
+                    var StartH = $(_this).height();
+                    $(_this).height("auto");
+                    var h = $(_this).height();
+                    h = Math.max(h,StartH)
+                    $(_this).height(h);
+                }
+             }
+             $("body").delegate(".drag","keydown",function(){
+                getHeight(this)
+             })
+             $("body").delegate(".drag","mouseup",function(){
+                getHeight(this)
+             })
+             $("body").delegate(".drag","click",function(){
+                getHeight(this)
+             })
              $("body").delegate(".selectCommon .textType ul li","click",function(e){//选择字体大小
                 e&&me.stopBubble(e)
                 var self = $(this);
@@ -119,15 +137,26 @@ define(function(require,exports,module){
             $("#userPicDialog").delegate("input[name=myfiles]", "change", function() { //上传图片
                 var meInput = $(this);
                 var id = meInput.attr("id");
+                var size = this.files[0].size;
                 
-                ajaxFileUpload(id, "uploadImg.do", function(msg){
-                    //console.log(JSON.stringify(msg,null,2))
-                    var idd = meInput.attr("fileElementId"); 
-                    $("#" + idd ).parents("#userpic_file_upload").after('<div imgId = "'+msg[2]+'" class="pic_thumb firstly" data-url="'+msg[0]+'"><img src="'+msg[0]+'"><span class="pic_select"></span><i class="delPic" style="display:none;"></i></div>')
-                    $(".pic_thumb.firstly").addClass("select").siblings(".pic_thumb").removeClass("select");
-                    $(".pic_thumb").removeClass("firstly");
-                    app.delFn();
-                }); 
+                if(size>1*1024*1024){
+                  popUp({
+                      "title": '提示<a class="cut"></a>',
+                      "content":"<div class='deleText'><b></b>图片过大，请重新上传1M以内的图片！</div>",
+                      showCancelButton: false,
+                      showConfirmButton: false,
+                      timer: 2500,
+                  });
+                }else{
+                  ajaxFileUpload(id, "uploadImg.do", function(msg){
+                      //console.log(JSON.stringify(msg,null,2))
+                      var idd = meInput.attr("fileElementId"); 
+                      $("#" + idd ).parents("#userpic_file_upload").after('<div imgId = "'+msg[2]+'" class="pic_thumb firstly" data-url="'+msg[0]+'"><img src="'+msg[0]+'"><span class="pic_select"></span><i class="delPic" style="display:none;"></i></div>')
+                      $(".pic_thumb.firstly").addClass("select").siblings(".pic_thumb").removeClass("select");
+                      $(".pic_thumb").removeClass("firstly");
+                      app.delFn();
+                  }); 
+                }
             });
         },
         getData: function(className){//获取历史上传图片
@@ -138,7 +167,7 @@ define(function(require,exports,module){
             setup.commonAjax("uploadImgRecord.do", params, function(msg){
                 var msg = msg.data;
                 //console.log(JSON.stringify(msg,null,2))
-                var addTpl = require("component/index/tpl/addPictures.tpl")
+                var addTpl = require("componentsSpecial/picture/addPictures.tpl")
                 box.render($(className), msg, addTpl,"0");
                 app.delFn();
             })

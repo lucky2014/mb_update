@@ -7,12 +7,15 @@ define(function(require,exports,module){
                 var reg = new RegExp("<([\/]?)("+tag+")((:?\s*)(:?[^>]*)(:?\s*))>","ig");
                 return str.replace(reg,"");//去掉所有的html标记
         },
+        selectionObj:null,
+        rangeObj:null,
         textEdit:function(){
             var me = this;
             $(".fontSize select").change(function(){
                 var value = $(this).find("option:selected").val();
                 var text = $(me.dragTarget)[0];
-                var selectionObj = window.getSelection();
+                var selectionObj = window.getSelection()||me.selectionObj;
+                me.selectionObj = selectionObj;
                 var rangeObj = selectionObj.getRangeAt(0);
 　　　　        var docFragment = rangeObj.cloneContents();
                 var testDiv = document.createElement("div");
@@ -29,7 +32,8 @@ define(function(require,exports,module){
             $(".lineHeight select").change(function(){
                 var value = $(this).find("option:selected").val();
                 var text = $(me.dragTarget)[0];
-                var selectionObj = window.getSelection();
+                var selectionObj = window.getSelection()||me.selectionObj;
+                me.selectionObj = selectionObj;
                 var rangeObj = selectionObj.getRangeAt(0);
 　　　　        var docFragment = rangeObj.cloneContents();
                 var testDiv = document.createElement("div");
@@ -48,7 +52,8 @@ define(function(require,exports,module){
             $(".bold").click(function(e){
                 me.stopBubble(e)
                 var text = $(me.dragTarget)[0];
-                var selectionObj = window.getSelection();
+                var selectionObj = window.getSelection()||me.selectionObj;
+                me.selectionObj = selectionObj;
                 var rangeObj = selectionObj.getRangeAt(0);
 　　　　        var docFragment = rangeObj.cloneContents();
                 var testDiv = document.createElement("div");
@@ -77,7 +82,8 @@ define(function(require,exports,module){
             $(".italic").click(function(e){
                 me.stopBubble(e)
                 var text = $(me.dragTarget)[0];
-                var selectionObj = window.getSelection();
+                var selectionObj = window.getSelection()||me.selectionObj;
+                me.selectionObj = selectionObj;
                 var rangeObj = selectionObj.getRangeAt(0);
 　　　　        var docFragment = rangeObj.cloneContents();
                 var testDiv = document.createElement("div");

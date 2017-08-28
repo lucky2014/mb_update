@@ -72,7 +72,7 @@ define(function(require,exports,module){
         	pubsub.subscribe('dataChange', function (topics, data) {
 			    me.stateDo.push(me.stateDo[me.stateDo.length-1]);
 			    if(data){
-			    	me.updateData(data,me)
+			    	/*me.updateData(data,me)*/
 			    }
 			});
 			   

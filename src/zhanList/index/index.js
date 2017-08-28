@@ -101,7 +101,7 @@ define(function(require,exports,module){
         if(type == "del"){
             popUp({
                 "title": '提示<a class="cut"></a>',
-                "content":"<div class='tl pd20 deleText'><b></b>此操作将永久删除该站点，是否继续？</div>",
+                "content":"<div class='deleText'><b></b>此操作将永久删除该站点，是否继续？</div>",
                 showCancelButton: true,
                 showConfirmButton: true,
             }, function(){

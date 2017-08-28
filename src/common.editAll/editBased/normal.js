@@ -27,15 +27,15 @@ define(function(require,exports,module){
 	                 me.choseAll(self)
 				},
 				componentTpl:function(){
-					return require("component/index/tpl/text.tpl")
+					return require("componentsSpecial/text/text.tpl")
 				},
 				setting:function(){
-					return require("component/index/tpl/settingText.js")
+					return require("componentsSpecial/text/settingText.js")
 				},
 			},
 			pictureTpl:{
 				callback:function(me,e,componentClass,componentTpl,editTpl){
-					var userPicDialog = require("component/index/tpl/userPicDialog.tpl");
+					var userPicDialog = require("componentsSpecial/picture/userPicDialog.tpl");
 					box.render($("#userPicDialog"), "", userPicDialog);
 
 					rightEdit.getData("#userPicList");
@@ -57,7 +57,7 @@ define(function(require,exports,module){
 				},
 				callback2:function(me,e,componentClass,componentTpl,editTpl){
 					me.stopBubble(e)
-					var userPicDialog = require("component/index/tpl/userPicDialog.tpl");
+					var userPicDialog = require("componentsSpecial/picture/userPicDialog.tpl");
 					box.render($("#userPicDialog"), "", userPicDialog);
 
 					rightEdit.getData("#userPicList");
@@ -79,15 +79,15 @@ define(function(require,exports,module){
 			    	})
 				},
 				componentTpl:function(){
-					return require("component/index/tpl/image.tpl")
+					return require("componentsSpecial/picture/image.tpl")
 				},
 				setting:function(){
-					return require("component/index/tpl/settingImage.js")
+					return require("componentsSpecial/picture/settingImage.js")
 				}
 			},
 			graphTpl:{
 				callback:function(me,e,componentClass,componentTpl,editTpl){
-					var svgPicDialog = require("component/index/tpl/svgPicDialog.tpl");
+					var svgPicDialog = require("componentsSpecial/imageSvg/svgPicDialog.tpl");
 					box.render($("#userPicDialog"), "", svgPicDialog);
     				$("#userPicDialog").fadeIn(300);
 		            me.selectFn(function(){
@@ -105,7 +105,7 @@ define(function(require,exports,module){
 			            var w = $("#userPicDialog .select img").width()-parseInt($("#userPicDialog .select img").css("margin-left"))-3;
 			            var h = $("#userPicDialog .select img").height()-parseInt($("#userPicDialog .select img").css("margin-top"))-3;
 			            $(me.dragTarget).parents(".drag").css({"width":w,"height":h});
-			            var svgJs = require("common.svg/index.js");
+			            var svgJs = require("componentsSpecial/imageSvg/common.svg/index.js");
 			            $(me.dragTarget).html(svgJs[type]());
 			            var newW = $(me.dragTarget).children().width();
 			            var newH = $(me.dragTarget).children().height();
@@ -116,7 +116,7 @@ define(function(require,exports,module){
 				},
 				callback2:function(me,e,componentClass,componentTpl,editTpl){
 					me.stopBubble(e)
-					var svgPicDialog = require("component/index/tpl/svgPicDialog.tpl");
+					var svgPicDialog = require("componentsSpecial/imageSvg/svgPicDialog.tpl");
 					box.render($("#userPicDialog"), "", svgPicDialog);
     				$("#userPicDialog").fadeIn(300);
     				me.selectFn(function(){
@@ -134,7 +134,7 @@ define(function(require,exports,module){
 			            var w = $("#userPicDialog .select img").width()-parseInt($("#userPicDialog .select img").css("margin-left"))-3;
 			            var h = $("#userPicDialog .select img").height()-parseInt($("#userPicDialog .select img").css("margin-top"))-3;
 			            $(me.dragTarget).parents(".drag").css({"width":w,"height":h});
-			            var svgJs = require("common.svg/index.js");
+			            var svgJs = require("componentsSpecial/imageSvg/common.svg/index.js");
 			            $(me.dragTarget).html(svgJs[type]());
 			            var newW = $(me.dragTarget).children().width();
 			            var newH = $(me.dragTarget).children().height();
@@ -144,10 +144,10 @@ define(function(require,exports,module){
 			    	})
 				},
 				componentTpl:function(){
-					return require("component/index/tpl/image.tpl")
+					return require("componentsSpecial/imageSvg/image.tpl")
 				},
 				setting:function(){
-					return require("component/index/tpl/settingSvg.js")
+					return require("componentsSpecial/imageSvg/settingSvg.js")
 				}
 			},
 			phoneTpl:{
@@ -199,114 +199,6 @@ define(function(require,exports,module){
 					return require("componentsSpecial/phoneTpl/settingPhone.js")
 				}
 			},
-			picText1Tpl: { //图文集
-					callback:function(me,e,componentClass,componentTpl,editTpl){
-						$(".drag").css("width","308px")
-					},
-					callback2:function(me,e,componentClass,componentTpl,editTpl){
-						
-					},
-					componentTpl:function(){
-						return require("componentsSpecial/picText1/picText1Show/index.tpl");
-					},
-					setting:function(){
-						return require("componentsSpecial/picText1/picText1Set/index.js")
-					},
-					callback3:function(){
-						var app = require("componentsSpecial/picText1/picText1Set/index.js");
-						app.init();
-					}
-			},
-			picText2Tpl: {
-					callback:function(me,e,componentClass,componentTpl,editTpl){
-						$(".drag").css("width","308px")
-					},
-					callback2:function(me,e,componentClass,componentTpl,editTpl){
-						
-					},
-					componentTpl:function(){
-						return require("componentsSpecial/picText2/picText2Show/index.tpl");
-					},
-					setting:function(){
-						return require("componentsSpecial/picText2/picText2Set/index.js")
-					},
-					callback3:function(){
-						var app = require("componentsSpecial/picText2/picText2Set/index.js");
-						app.init();
-					}
-			},
-			picText3Tpl: {
-					callback:function(me,e,componentClass,componentTpl,editTpl){
-						$(".drag").css("width","308px")
-					},
-					callback2:function(me,e,componentClass,componentTpl,editTpl){
-						
-					},
-					componentTpl:function(){
-						return require("componentsSpecial/picText3/picText3Show/index.tpl");
-					},
-					setting:function(){
-						return require("componentsSpecial/picText3/picText3Set/index.js")
-					},
-					callback3:function(){
-						var app = require("componentsSpecial/picText3/picText3Set/index.js");
-						app.init();
-					}
-			},
-			picText4Tpl: {
-					callback:function(me,e,componentClass,componentTpl,editTpl){
-						$(".drag").css("width","308px")
-					},
-					callback2:function(me,e,componentClass,componentTpl,editTpl){
-						
-					},
-					componentTpl:function(){
-						return require("componentsSpecial/picText4/picText4Show/index.tpl");
-					},
-					setting:function(){
-						return require("componentsSpecial/picText4/picText4Set/index.js")
-					},
-					callback3:function(){
-						var app = require("componentsSpecial/picText4/picText4Set/index.js");
-						app.init();
-					}
-			},
-			picText5Tpl: {
-					callback:function(me,e,componentClass,componentTpl,editTpl){
-						$(".drag").css("width","308px")
-					},
-					callback2:function(me,e,componentClass,componentTpl,editTpl){
-						
-					},
-					componentTpl:function(){
-						return require("componentsSpecial/picText5/picText5Show/index.tpl");
-					},
-					setting:function(){
-						return require("componentsSpecial/picText5/picText5Set/index.js")
-					},
-					callback3:function(){
-						var app = require("componentsSpecial/picText5/picText5Set/index.js");
-						app.init();
-					}
-			},
-			waterfallTpl: { //瀑布流
-					callback:function(me,e,componentClass,componentTpl,editTpl){
-						$(".drag").css("width","308px")
-					},
-					callback2:function(me,e,componentClass,componentTpl,editTpl){
-						
-					},
-					componentTpl:function(){
-						return require("componentsSpecial/waterfall/waterfallShow/index.tpl");
-					},
-					setting:function(){
-						return require("componentsSpecial/waterfall/waterfallSet/index.js")
-					},
-					callback3:function(){
-						var app = require("componentsSpecial/waterfall/waterfallSet/index.js");
-						app.init();
-					}
-			},
 			cuttingLineTpl: { //分割线
 					callback:function(me,e,componentClass,componentTpl,editTpl){
 					},
@@ -324,27 +216,16 @@ define(function(require,exports,module){
 						app.init();
 					}
 			},
-			baiduMapTpl: {
-				callback:function(me,e,componentClass,componentTpl,editTpl){
-					$(".drag").css("width","308px")
-				},
-				callback2:function(me,e,componentClass,componentTpl,editTpl){
-					
-				},
-				componentTpl:function(){
-					return require("componentsSpecial/baiduMap/baiduMapShow/index.tpl");
-				},
-				setting:function(){
-					return require("componentsSpecial/baiduMap/baiduMapSet/index.js")
-				}
-			},
 			buttonTpl: {
 				callback:function(me,e,componentClass,componentTpl,editTpl){
 					var settingButtonDialog = require("componentsSpecial/buttonEdit/settingButtonDialog.tpl");
+					var systemIconTpl = require("componentsSpecial/buttonEdit/systemIcon.tpl");
+					var systemIcon = require("componentsSpecial/buttonEdit/systemIcon.js");
 					var url = "../src/component/imgs/btnIconsList.png";
 			
 					box.render($("#userPicDialog"), "", settingButtonDialog);
-					
+					box.render($(".sysPics #userPicList"), systemIcon, systemIconTpl);
+
 					rightEdit.getData(".myPics #userPicList");
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
@@ -365,12 +246,14 @@ define(function(require,exports,module){
 				callback2:function(me,e,componentClass,componentTpl,editTpl){
 					if($("#inpBtn span").eq(2).hasClass("active")){
 						var settingButtonDialog = require("componentsSpecial/buttonEdit/settingButtonDialog.tpl");
+						var systemIconTpl = require("componentsSpecial/buttonEdit/systemIcon.tpl");
+						var systemIcon = require("componentsSpecial/buttonEdit/systemIcon.js");
 						var url = "../src/component/imgs/btnIconsList.png";
-						
+				
 						box.render($("#userPicDialog"), "", settingButtonDialog);
-						
+						box.render($(".sysPics #userPicList"), systemIcon, systemIconTpl);
+
 						rightEdit.getData(".myPics #userPicList");
-	    				$("#userPicDialog").fadeIn(300);
 	    				me.selectFn(function(){
 				    		if($("#userPicList .select").length==0){
 				                 popUp({

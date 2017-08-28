@@ -6,7 +6,7 @@ i *,i{
     font-style: italic;
 }
 strong *,strong{
-    font-style: bold;
+    font-weight: bold;
 }
 #cke_vAct_modexBox_paragraph_content{
     background-color: #06c293;

@@ -7,7 +7,7 @@
     right: 20px;
     width: 12px;
     height: 6px;
-    background: url(../1/images/arrowDown.png) no-repeat top left;
+    background: url(../../imgs/arrowDown.png) no-repeat top left;
     display: block;
     z-index: 12;
     cursor: pointer;}
@@ -23,3 +23,9 @@
  ul.linkChoose li{text-indent:10px;height:23px !important;;line-height:23px !important;;cursor:pointer;margin:0 !important;padding:5px;}
  ul.linkChoose li.selectedLi{background:#1d8ce0;color:#fff;}
  ul.linkChoose li:hover{background: #617084;color: #fff;}
+
+ .linkDemo.textLink .linkStyle{margin-bottom: 12px;}
+ .linkDemo.textLink .commonAddress{width: 310px;}
+ .linkDemo.textLink .commonAddress input{width: 222px;}
+ .linkDemo.textLink .commonAddress span{width: 60px;}
+  .linkDemo.textLink ul.linkChoose{width: 242px;left: 64px;}

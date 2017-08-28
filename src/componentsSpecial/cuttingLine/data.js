@@ -21,7 +21,6 @@ define(function(require,exports,module){
                   }
                 },
               ],
-              "componentSort": "",
               "componentTitle": "分割线",
               "symbol": "cuttingLine",
             },
