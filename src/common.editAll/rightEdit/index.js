@@ -37,11 +37,15 @@ define(function(require,exports,module){
                 $("#userPicDialog").fadeIn(300);
             })
             $("body").delegate(".dragBox","blur",function(e){
-                e&&me.stopBubble(e)
-                $(this).removeAttr("contenteditable");
+                e&&me.stopBubble(e);
                 me.isEdit = false;
                 $(this).select();
                 $(".setting-panel-title,.setting-panel-content").hide();
+            })
+            $("body").click(function(e){
+              if(!$(e.target).parents("#cke_vAct_modexBox_paragraph_content")[0]){
+                  $(me.dragTarget).removeAttr("contenteditable");
+              }
             })
             $("body").delegate(".selectCommon>input,.selectCommon>i","click",function(e){ //ul下拉框显示or隐藏
                 $(".selectCommon ul,.textInput ul").hide();
@@ -123,16 +127,16 @@ define(function(require,exports,module){
                 self.addClass("selected").siblings("li").removeClass("selected");
                 self.parent().hide();
 
-                $(me.dragTarget).find("input").css("font-size",value);//改变显示区线宽
+                $(me.dragTarget).parents(".drag").css("font-size",value);//改变显示区字体大小
              });
              //鼠标上移显示进度条百分比
-             $(".right").delegate(".progress-circle","mouseover",function(){ 
+             /*$(".right").delegate(".progress-circle","mouseover",function(){ 
                var self = $(this);
                self.addClass("hover");
                self.siblings(".percent").html(self.parents("p").attr("value"));
                self.siblings("span").show();
 
-             })
+             })*/
              //上传图片
             $("#userPicDialog").delegate("input[name=myfiles]", "change", function() { //上传图片
                 var meInput = $(this);
@@ -149,7 +153,6 @@ define(function(require,exports,module){
                   });
                 }else{
                   ajaxFileUpload(id, "uploadImg.do", function(msg){
-                      //console.log(JSON.stringify(msg,null,2))
                       var idd = meInput.attr("fileElementId"); 
                       $("#" + idd ).parents("#userpic_file_upload").after('<div imgId = "'+msg[2]+'" class="pic_thumb firstly" data-url="'+msg[0]+'"><img src="'+msg[0]+'"><span class="pic_select"></span><i class="delPic" style="display:none;"></i></div>')
                       $(".pic_thumb.firstly").addClass("select").siblings(".pic_thumb").removeClass("select");
@@ -166,7 +169,6 @@ define(function(require,exports,module){
             }
             setup.commonAjax("uploadImgRecord.do", params, function(msg){
                 var msg = msg.data;
-                //console.log(JSON.stringify(msg,null,2))
                 var addTpl = require("componentsSpecial/picture/addPictures.tpl")
                 box.render($(className), msg, addTpl,"0");
                 app.delFn();
@@ -200,13 +202,6 @@ define(function(require,exports,module){
                 });
             })
         },
-        renderRightEdit:function(target,bgColor,brColor,brStyle,opacity,radius,brWidth){
-            $(".skin-colorSelector-border").css("background-color",(brColor||"#000"));
-            $(".skin-colorSelector-bg").css("background-color",(bgColor||"#000"));
-            $("#border_width_select option[selected],#border_width_select option[selected]").removeAttr("selected");
-            $("#border_type_select option[value="+(brStyle||"solid")+"]").prop("selected",true);
-            $("#border_width_select option[value="+(parseInt(brWidth)||"1")+"]").prop("selected",true);
-        }
     }
     return app;
 })

@@ -1,0 +1,4 @@
+body{ background:#fff; }
+.offlineDiv{ max-width:750px; margin:0 auto; }
+.offlineDiv i{ display:block; width:52%; margin:0 auto; padding:15% 0 15px; }
+.offlineDiv p{ text-align:center; font-size:14px; color:#475669; }

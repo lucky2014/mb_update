@@ -56,13 +56,16 @@ define(function(require,exports,module){
                     w = w<$(target).children().width()/2?$(target).children().width()/2:w;
                     $(target).width(w)
                     var maxValue = $(target).parent().attr("maxValue");
-                    console.log($(target).width()+","+$(target).children().width())
-                    $(target).parent().attr("value",(($(target).width()-$(target).children().width()/2)/($(target).parent().width()-10)*maxValue).toFixed(0));
+                    $(target).parent().attr("value",parseInt(($(target).width()-$(target).children().width()/2)/($(target).parent().width()-10)*maxValue));
+
                     if($(target).hasClass("opacity")){
                         $(target).find(".percent").html($(target).parent().attr("value"));
-                        $(me.dragTarget).children().css("opacity",$(target).parent().attr("value")/100)
+                            $(me.dragTarget).children().css("opacity",$(target).parent().attr("value")/100)
+                            $(me.dragTarget).css("opacity",$(target).parent().attr("value")/100)
+                        
                     }else{
                         $(target).find(".percent").html($(target).parent().attr("value"));
+                        $(me.dragTarget).css("border-radius",$(target).parent().attr("value")+"px")
                         $(me.dragTarget).children().css("border-radius",$(target).parent().attr("value")+"px")
                     }
                 }
@@ -70,6 +73,19 @@ define(function(require,exports,module){
             $(document).mouseup(function(e){
                 me.dragProgressStatus = false;
             })
+            $(".right").delegate(".progress-circle","mouseover",function(){ 
+               var self = $(this);
+               self.addClass("hover");
+               self.siblings(".percent").html(self.parents("p").attr("value"));
+               self.siblings("span").show();
+
+             })
+            $(".right").delegate(".progress-circle","mouseout",function(){ 
+               var self = $(this);
+               self.removeClass("hover");
+               self.siblings("span").hide();
+
+             })
         },
         dragHeight:function(){
             var oldObj = {};
@@ -109,6 +125,7 @@ define(function(require,exports,module){
             var old = {};
             $(".mobile-container").delegate(target,"mousedown",function(e){
                 me.scrollDeltaH = 0;
+                me.dragTarget = this;
                 if(me.edit==true){
                     return;
                 }
@@ -117,7 +134,6 @@ define(function(require,exports,module){
                 }
                 e.preventDefault();
                 me.dragStatus = true;
-                me.dragTarget = this;
                 $(this).addClass("drag_selected");
                 old.lf = parseInt($(this).parents(".drag").css("left"));
                 old.tp = parseInt($(this).parents(".drag").css("top"));
@@ -202,63 +218,62 @@ define(function(require,exports,module){
             var deltaY = (e.pageY-me.oldObj.y);
             var w = me.oldObj.w;
             var h = me.oldObj.h;
-            console.log(posDrag);
             var dataPos = $(posDrag).attr("pos");
             if(dataPos.indexOf("r")!="-1"){
                 deltaX = -deltaX;
-                var newW = ((w+deltaX)<60?60:(w+deltaX));
-                var newH = (newW*h/w)<16?"auto":(newW*h/w);
+                var newW = w+deltaX;
+                var newH = newW*h/w;
                 if(dataPos!="mr"){
                     $(me.dragTarget).parents(".drag").css({"width":newW,"height":newH});
                 }else{
-                    var newW = ((w+deltaX)<60?60:(w+deltaX));
+                    var newW = w+deltaX;
                     if($(posDrag).css("cursor")=="n-resize"){
                         if(Math.sin(me._radian)<0){
-                            var newW = ((w+deltaY)<60?60:(w+deltaY));
+                            var newW = w+deltaY;
                         }else{
-                            var newW = ((w-deltaY)<60?60:(w-deltaY));
+                            var newW = w-deltaY;
                         }
                     }
                     $(me.dragTarget).parents(".drag").css({"width":newW});
                 }
                 
             }else if(dataPos.indexOf("l")!="-1"){
-                var newW = ((w+deltaX)<60?60:(w+deltaX));
-                var newH = (newW*h/w)<16?"auto":(newW*h/w);
+                var newW = w+deltaX;
+                var newH = newW*h/w;
                 if(dataPos!="ml"){
                     $(me.dragTarget).parents(".drag").css({"width":newW,"height":newH});
                 }else{
-                    var newW = ((w+deltaX)<60?60:(w+deltaX));
+                    var newW = w+deltaX;
                     if($(posDrag).css("cursor")=="n-resize"){
                         if(Math.sin(me._radian)<0){
-                            var newW = ((w-deltaY)<60?60:(w-deltaY));
+                            var newW = w-deltaY;
                         }else{
-                            var newW = ((w+deltaY)<60?60:(w+deltaY));
+                            var newW = w+deltaY;
                         }
                     }
                     $(me.dragTarget).parents(".drag").css({"width":newW});
                 }
             }else if(dataPos.indexOf("bm")!="-1"){
-                var newH = ((h-deltaY)<16?16:(h-deltaY));
+                var newH = h-deltaY;
                 if($(posDrag).css("cursor")=="e-resize"){
                     if(Math.sin(me._radian)<0){
-                        var newH = ((h-deltaX)<16?16:(h-deltaX));
+                        var newH = h-deltaX;
                     }else{
-                        var newH = ((h+deltaX)<16?16:(h+deltaX));
+                        var newH = h+deltaX;
                     }
                 }else{
-                   var newH = ((h-deltaY)<16?16:(h-deltaY));
+                   var newH = h-deltaY;
                 }
                 $(me.dragTarget).parents(".drag").css({"height":newH});
             }else if(dataPos.indexOf("tm")!="-1"){
                 if($(posDrag).css("cursor")=="e-resize"){
                     if(Math.sin(me._radian)<0){
-                        var newH = ((h+deltaX)<16?16:(h+deltaX));
+                        var newH = h+deltaX;
                     }else{
-                        var newH = ((h-deltaX)<16?16:(h-deltaX));
+                        var newH = h-deltaX;
                     }
                 }else{
-                   var newH = ((h+deltaY)<16?16:(h+deltaY));
+                   var newH = h+deltaY;
                 }
                 $(me.dragTarget).parents(".drag").css({"height":newH});
             }

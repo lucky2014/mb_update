@@ -4,7 +4,7 @@
 		<img src="../imgs/zhanPics2.png" alt="" />
 		<div class="hover">
 			<a href="#" class="visit"><img src="../imgs/site1.png"><span>访问站点</span></a>
-			<a href="#" class="manage"><img src="../imgs/site2.png"><span>站点管理</span></a>
+			<!--a href="#" class="manage"><img src="../imgs/site2.png"><span>站点管理</span></a-->
 			<a href="#" class="edit"><img src="../imgs/site3.png"><span>编辑</span></a>
 		</div>
 		

@@ -186,6 +186,9 @@
     text-decoration: none;
     margin-left: 26px;
     width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .site-page-navi-list li:first-child a{
     margin-left: 0;
@@ -194,7 +197,7 @@
     position: absolute;
     top: 12px;
     right: 10px;
-    padding: 0 0 0 20px;
+    padding: 0 0 0 0px;
 }
 .site-page-navi-list li .page-control span{position: relative; float: left; color: #888; line-height: 16px; padding: 0 4px;}
 .site-page-navi-list li .page-control span b{
@@ -251,7 +254,7 @@
 .site-page-navi-list li.activePage .page-control .page-dele i{
     background:url(../imgs/new_navbar_header_4.png) no-repeat -262px -9px;
 } */
-.site-page-navi-list li input{ height: 26px; line-height: 26px; margin-left: 24px; border: 1px solid #d6dee8; 
+.site-page-navi-list li input{ height: 26px; line-height: 26px; margin-left: 15px; border: 1px solid #d6dee8; 
 border-radius: 4px; color: #6b798c; padding-left: 6px; width: 140px;}
 .site-page-navi-list li button{display: inline-block;
     height: 28px; color: #fff; background: #20a0ff; border: none;

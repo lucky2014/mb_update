@@ -19,10 +19,13 @@ define(function(require,exports,module){
                 var self = $(this);
                 var sign = self.attr("sign");
                 var meInput = self.parents(".linkChoose").siblings(".shclickLi");
-                
+               
                 meInput.attr("value",self.html())
+                meInput.val(self.html())
                 self.parents(".linkChoose").hide();
                 self.addClass("selectedLi").siblings("li").removeClass("selectedLi");
+
+                $(app.dragTarget).attr("sign",sign);
 
                 if(sign == 1){
                     $(".linkAddress").show();
@@ -45,6 +48,7 @@ define(function(require,exports,module){
             //内部链接下拉框
             $("body").delegate(".selectAddress .shclickLi,.selectAddress .shclickI","click",function(){
                 var self = $(this);
+                $(app.dragTarget).attr("sign","2");
                 self.siblings(".linkChoose").toggle();
                 self.parent("li").siblings("li").find(".linkChoose").hide();
                  setup.commonAjax("getCreatedUrlList.do", {siteId:siteId}, function(msg){
@@ -61,16 +65,19 @@ define(function(require,exports,module){
                 var urlname = self.attr("urlname");
 
                 meInput.attr("value",self.html())
+                meInput.val(self.html())
                 meInput.attr("urlname",urlname)
                 self.parents(".linkChoose").hide();
                 self.addClass("selectedLi").siblings("li").removeClass("selectedLi");
-                $(app.dragTarget).attr("data-click","location.href='"+urlname+"'");
+                $(app.dragTarget).attr("data-click","location.href=pageId'"+urlname+"'");
+                $(app.dragTarget).attr("linkName",self.html());
             })
             $("body").delegate(".linkAddress .shclickLi","keyup",function(){
                 var self = $(this);
                 self.attr("urlname",self.val());
                 var urlname = self.val();
                 $(app.dragTarget).attr("data-click","location.href='"+urlname+"'");
+                $(app.dragTarget).attr("linkName",self.val());
             })
             //点击其它区域隐藏下拉框
              $(document).on('mousedown',function(e){

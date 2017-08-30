@@ -222,7 +222,7 @@ define(function(require,exports,module){
 					var systemIconTpl = require("componentsSpecial/buttonEdit/systemIcon.tpl");
 					var systemIcon = require("componentsSpecial/buttonEdit/systemIcon.js");
 					var url = "../src/component/imgs/btnIconsList.png";
-			
+
 					box.render($("#userPicDialog"), "", settingButtonDialog);
 					box.render($(".sysPics #userPicList"), systemIcon, systemIconTpl);
 
@@ -244,7 +244,8 @@ define(function(require,exports,module){
 			    	})
 				},
 				callback2:function(me,e,componentClass,componentTpl,editTpl){
-					if($("#inpBtn span").eq(2).hasClass("active")){
+
+					/*if($("#inpBtn span").eq(2).hasClass("active")){
 						var settingButtonDialog = require("componentsSpecial/buttonEdit/settingButtonDialog.tpl");
 						var systemIconTpl = require("componentsSpecial/buttonEdit/systemIcon.tpl");
 						var systemIcon = require("componentsSpecial/buttonEdit/systemIcon.js");
@@ -268,8 +269,11 @@ define(function(require,exports,module){
 				            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find(".picBut").css("background-image","url("+url+")");
 				            $("#userPicDialog").fadeOut(300);
 				    	})
-					}
+					}*/
 				},
+				/*callback3:function(me,e,componentClass,componentTpl,editTpl){
+					alert(1)
+				},*/
 				componentTpl:function(){
 					return require("componentsSpecial/buttonEdit/index.tpl");
 				},

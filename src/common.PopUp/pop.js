@@ -1,13 +1,7 @@
 define(function(require,exports,module){
 	var $ = require("jquery");
-	$("#pop").delegate(".pop_cancel,.cancel","click",function(){
-		$(".pop_title").html("");
-		$(".pop_confirm").html("确定");
-		$(".pop_cancel").html("取消");
-		$(".pop_content").html("");
-		$(".popUp").hide();
-	});
-	function popShow(config,callback){
+	
+	function popShow(config,callback,cb2){
 		if(config){
 			if(config.title){
 				if(config.width){
@@ -36,6 +30,14 @@ define(function(require,exports,module){
 			$(".popUp").show();
 
 
+			if(config.showButton){
+				$(".pop_confirm").html(config.showButton);
+			}
+
+			if(config.cancelButton){
+				$(".pop_cancel").html(config.cancelButton);
+			}
+
 			if(config.showCancelButton == "" || config.showConfirmButton == ""){
 				$(".pop_foot").hide();
 			}else{
@@ -58,6 +60,15 @@ define(function(require,exports,module){
 
 		$("#pop").delegate(".cut","click", function(){
 			$(".popUp").hide();
+		});
+
+		$("#pop").delegate(".pop_cancel,.cancel","click",function(){
+			$(".pop_title").html("");
+			$(".pop_confirm").html("确定");
+			$(".pop_cancel").html("取消");
+			$(".pop_content").html("");
+			$(".popUp").hide();
+			cb2 && cb2();
 		});
 	}
 	return popShow;

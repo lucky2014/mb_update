@@ -6,10 +6,13 @@ define(function(require,exports,module){
     var popUp = require("common.PopUp/index");
     var linkAdressTpl = require("common.linkAdress/linkAdress.tpl");
     //文本编辑器
+    function getSelection($a){var $b,$c,$d;$b=$a.value.length;$c=$a.value.length;$d="";if($a.selectionStart){$b=$a.selectionStart;$c=$a.selectionEnd;$d=$a.value.substring($b,$c);}else{var $e=document.selection.createRange();if($e.parentElement()==$a){$d=$e.text;var $f=$d.length;$e.moveStart("character",-event.srcElement.value.length);$b=$e.text.length-$f;$c=$e.text.length;}};return{"selStart":$b,"selEnd":$c,"selText":$d};};
+    function setSelection($a,$b,$c){if($a.selectionStart){$a.selectionStart=$b;$a.selectionEnd=$c;$a.setSelectionRange($b,$c);}else{var $e=$a.createTextRange();$e.collapse();$e.moveEnd('character',$c);$e.moveStart('character',$b);$e.select();};return getSelection($a);}
     var editText = {
         dragTarget:null,
         selectionObj:null,
-        rangeObj:null,
+        rangeTxt:null,
+        rememberText:"",
         delHtmlTag:function(str,tag){
                 var reg = new RegExp("<([\/]?)("+tag+")((:?\s*)(:?[^>]*)(:?\s*))>","ig");
                 return str.replace(reg,"");//去掉所有的html标记
@@ -23,80 +26,65 @@ define(function(require,exports,module){
                 }
                 return html;   
         },
-        textEdit:function(){
+        setFocus:function(obj,posLen){//设置鼠标指针位置
+          if(obj.setSelectionRange){ // IE浏览器  
+                  obj.setSelectionRange(posLen, posLen);     
+          }else if(obj.createTextRange){ // 非IE浏览器  
+              var range=obj.createTextRange();    
+              range.collapse(true);     
+              range.moveStart('character', posLen);    
+              range.moveEnd('character', posLen);  
+              range.select();    
+          } 
+        },
+        getSelectionHtml:function(){
             var me = this;
-            $(".fontSize select").change(function(){
-                var value = $(this).find("option:selected").val();
-                var text = $(me.dragTarget)[0];
-                if(window.getSelection().focusNode){
-                    var selectionObj = window.getSelection();
-                }else{
-                    var selectionObj = me.selectionObj;
+            var selectionObj = window.getSelection();
+            if(selectionObj.getRangeAt){
+                try{
+                    var rangeObj = selectionObj.getRangeAt(0);
+                }catch(error){
+                    return;
                 }
-                me.selectionObj = selectionObj;
                 var rangeObj = selectionObj.getRangeAt(0);
 　　　　        var docFragment = rangeObj.cloneContents();
                 var testDiv = document.createElement("div");
         　　　　testDiv.appendChild(docFragment);
         　　　　var selectHtml = testDiv.innerHTML;
-                if(selectHtml==""){
-                    return;
-                }
+                return selectHtml;
+            }else{
+                return "";
+            }
+        },
+        textEdit:function(){
+            var me = this;
+            $(".fontSize select").change(function(){
+                var text = $(me.dragTarget)[0];
+                var selectHtml = me.getSelectionHtml()||me.rememberText;
                 var textValue = $(text).html();
                 var selectHtml2 = me.delHtmlTag(selectHtml,"sup");
+                var value = $(this).find("option:selected").attr("value");
                 var newValue = textValue.replace(selectHtml,"<sup style='font-size:"+value+"px'>"+selectHtml2+"</sup>");
                 $(text).html(newValue)
             })
             $(".lineHeight select").change(function(){
-                var value = $(this).find("option:selected").val();
                 var text = $(me.dragTarget)[0];
-                if(window.getSelection().focusNode){
-                    var selectionObj = window.getSelection();
-                }else{
-                    var selectionObj = me.selectionObj;
-                }
-                me.selectionObj = selectionObj;
-                var rangeObj = selectionObj.getRangeAt(0);
-　　　　        var docFragment = rangeObj.cloneContents();
-                var testDiv = document.createElement("div");
-
-        　　　　testDiv.appendChild(docFragment);
-
-        　　　　var selectHtml = testDiv.innerHTML;
-                if(selectHtml==""){
-                    return;
-                }
+                var selectHtml = me.getSelectionHtml()||me.rememberText;
                 var selectHtml2 = me.delHtmlTag(selectHtml,"sub");
                 var textValue = $(text).html();
+                var value = $(this).find("option:selected").attr("value");
                 var newValue = textValue.replace(selectHtml,"<sub style='line-height:"+value+"'>"+selectHtml2+"</sub>");
                 $(text).html(newValue)
             })
             $(".bold").click(function(e){
-                me.stopBubble(e)
+                me.stopBubble(e);
                 var text = $(me.dragTarget)[0];
-                if(window.getSelection().focusNode){
-                    var selectionObj = window.getSelection();
-                }else{
-                    var selectionObj = me.selectionObj;
-                }
-                me.selectionObj = selectionObj;
-                var rangeObj = selectionObj.getRangeAt(0);
-　　　　        var docFragment = rangeObj.cloneContents();
-                var testDiv = document.createElement("div");
-
-        　　　　testDiv.appendChild(docFragment);
-
-        　　　　var selectHtml = testDiv.innerHTML;
-                var selectText = testDiv.innerText;
+                var selectHtml = me.getSelectionHtml()||me.rememberText;
                 var textValue = $(text).html();
-                if(selectHtml==""){
-                    return;
-                }
                 if(!$(this).hasClass("drag_active")){
                     $(this).addClass("drag_active");
                     var selectHtml2 = me.delHtmlTag(selectHtml,"strong");
-                    //console.log(selectHtml)
-                    var newValue = textValue.replace(selectHtml,"<strong>"+selectHtml2+"</strong>");
+                    var newValue = textValue.replace(selectHtml,"<strong class='hasBold'>"+selectHtml2+"</strong>");
                     $(text).html(newValue)
                 }else{
                     $(this).removeClass("drag_active");
@@ -105,37 +93,42 @@ define(function(require,exports,module){
                     $(text).html(newValue)
                 }
             })
-            $("body").delegate(".dragBox","mouseup",function(){
-                if(window.getSelection().focusNode){
-                    var selectionObj = window.getSelection();
-                }else{
-                    var selectionObj = me.selectionObj;
+            var bodyDrag = false;
+            $("body").delegate(".dragBox","mousedown",function(){
+                bodyDrag = true;
+            })
+            $("body").delegate(".dragBox","mousemove",function(){
+                if(bodyDrag == true){
+                    
+                }
+            })
+            $("body").delegate(".dragBox","blur",function(){
+                if(bodyDrag){
+                    if(me.getSelectionHtml()!=""){
+                        me.rememberText = me.getSelectionHtml();
+                        if(me.rememberText.indexOf("hasBold")!=-1){
+                            $(".bold").addClass("drag_active");
+                        }else{
+                            $(".bold").removeClass("drag_active");
+                        }
+                        if(me.rememberText.indexOf("hasItalic")!=-1){
+                            $(".italic").addClass("drag_active");
+                        }else{
+                            $(".italic").removeClass("drag_active");
+                        }
+                    }
+                    bodyDrag = false;
                 }
             })
             $(".italic").click(function(e){
                 me.stopBubble(e)
                 var text = $(me.dragTarget)[0];
-                if(window.getSelection().focusNode){
-                    var selectionObj = window.getSelection();
-                }else{
-                    var selectionObj = me.selectionObj;
-                }
-                me.selectionObj = selectionObj;
-                var rangeObj = selectionObj.getRangeAt(0);
-　　　　        var docFragment = rangeObj.cloneContents();
-                var testDiv = document.createElement("div");
-
-        　　　　testDiv.appendChild(docFragment);
-
-        　　　　var selectHtml = testDiv.innerHTML;
-                if(selectHtml==""){
-                    return;
-                }
+                var selectHtml = me.getSelectionHtml()||me.rememberText;
                 var textValue = $(text).html();
                 if(!$(this).hasClass("drag_active")){
                     $(this).addClass("drag_active");
                     var selectHtml2 = me.delHtmlTag(selectHtml,"i");
-                    var newValue = textValue.replace(selectHtml,"<i style='font-style:italic;'>"+selectHtml2+"</i>");
+                    var newValue = textValue.replace(selectHtml,"<i class='hasItalic' style='font-style:italic;'>"+selectHtml2+"</i>");
                     $(text).html(newValue)
                 }else{
                     $(this).removeClass("drag_active");
@@ -187,7 +180,6 @@ define(function(require,exports,module){
                 var testDiv = document.createElement("div");
         　　　　testDiv.appendChild(docFragment);
                 selectHtml = testDiv.innerHTML;
-                //console.log(selectHtml)
             })
             $(".popover-content>select").change(function(){
                 var ind = $(this).find("option:selected").index();
@@ -216,36 +208,6 @@ define(function(require,exports,module){
                 $(this).addClass("drag_active");
                 $(me.dragTarget).css("text-align",align);
             })
-            /*$("body").delegate(".vAct_modexBox_paragraphId .dragBox","dblclick",function(e){
-                me.stopBubble(e)
-                var text = this;
-                var lf = $(this).parents(".drag").offset().left;
-                var tp = $(this).parents(".drag").offset().top;
-                $("#dialog_paragraph").show();
-                $("#cke_vAct_modexBox_paragraph_content").css({"left":lf,"top":tp-$("#cke_vAct_modexBox_paragraph_content").height()});
-                $(this).attr("contenteditable",true);
-                if (document.body.createTextRange) {
-                    var range = document.body.createTextRange();
-                    range.moveToElementText(text);
-                    range.select();
-                } else if (window.getSelection) {
-                    var selection = window.getSelection();
-                    var range = document.createRange();
-                    range.selectNodeContents(text);
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-                } else {
-                    
-                }
-            });*/
-
-            //右键功能
-            // $("body").delegate(".vAct_modexBox_paragraphId .dragBox","contextmenu",function(e){
-            //     me.stopBubble(e)
-            //     var text = this;
-            //     me.choseAll(text)
-            //     return false;
-            // }); 
 
             $("body").click(function(e){
                 me.stopBubble(e)

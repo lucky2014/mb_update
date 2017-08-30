@@ -10,7 +10,6 @@ define(function(require,exports,module){
   var app = {
       templateList: function(){ //查询站点列表
         var indexTpl = require("templateList/index.tpl");
-        //console.log(indexTpl)
         box.render($(".microTemplate"), "", indexTpl);
           var me = this;
           var params = {

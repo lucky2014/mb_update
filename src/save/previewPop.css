@@ -69,5 +69,6 @@ left: 50%; margin-left: -125px; top: 50%; margin-top: -37px; position: absolute;
     height: 40px;
     line-height: 40px; font-size: 16px;
 }
+.skyHeader span{width: 230px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;margin: 0 auto;display: inline-block;}
 .publishBox li.pblErr{ padding-bottom: 0; display: none;}
 #errMsg{ color: red;}

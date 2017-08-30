@@ -32,7 +32,9 @@ define(function(require,exports,module){
     var dialogTpl = require("common.editAll/dialog/index.tpl");
 
     var linkAdressTpl = require("common.linkAdress/linkAdress.tpl");
-    
+
+    require("common.contextmenu/jquery.contextmenu.js");
+
     box.render($("#dialog"), "", dialogTpl);
     function cloneObj(oldObj) { //复制对象方法
         if (typeof(oldObj) != 'object') return oldObj;
@@ -54,6 +56,7 @@ define(function(require,exports,module){
         return temp;
     }
 	var app = {
+        parentBox:".left",
 		running:function(msg){
             var me = this;
             var basedArr = me.basedArr;
@@ -120,7 +123,6 @@ define(function(require,exports,module){
         var opacity = $(me.dragTarget).css("opacity");
         var radius = $(me.dragTarget).css("radius");
         var brWidth = $(me.dragTarget).css("border-width");
-        me.renderRightEdit(me.dragTarget,bgColor,brColor,brStyle,opacity,radius,brWidth)
     }
 	appExtend.rightEditComponent = function(e,clkClass,componentTpl,editTpl,callback,callback2,callback3,targetObj){
         var me = this;
@@ -128,7 +130,7 @@ define(function(require,exports,module){
             var componentClass = $(targetObj).attr("id");
         }else{
             var componentClass = clkClass+new Date().getTime();
-            me.createElementNode(".left",componentClass,componentTpl);
+            me.createElementNode(me.parentBox,componentClass,componentTpl);
         }
         box.render($(".right"), "", editTpl);
         box.render($(".linkDemo"), "", linkAdressTpl);
@@ -148,26 +150,45 @@ define(function(require,exports,module){
         }
         $("body").delegate("."+componentClass+" .dragBox","click",function(e){
             me.stopBubble(e)
+
+            var settingButton = require("componentsSpecial/buttonEdit/settingButton.tpl");
+            var settingPicButton = require("componentsSpecial/buttonEdit/settingPicButton.tpl");
+            var settingGridentButton = require("componentsSpecial/buttonEdit/settingGridentButton.tpl");
+            var btntype = $(appExtend.dragTarget).find("input").attr("btntype");
+            
+            if(btntype == 2){
+                $(".right").html(settingGridentButton);
+            }else if(btntype == 3){
+                $(".right").html(settingPicButton);
+            }else{
+                $(".right").html(settingButton);
+            }
             if($(".setting-panel").attr("data-id")!=id){
+                var btntype = $(appExtend.dragTarget).find("input").attr("btntype");
             	callback3&&callback3(e,self);
             	dragBoxFn(this,appExtend)
-                box.render($(".right"), "", editTpl);
+                if(!btntype){
+                    box.render($(".right"), "", editTpl);
+                }
                 box.render($(".linkDemo"), "", linkAdressTpl);
                 $(".line").width(window.innerWidth-860);
                 $(".skin-colorSelector-border,.skin-colorSelector-bg").unbind();
                 me.colorPicker(".skin-colorSelector-border");
                 me.colorPicker(".skin-colorSelector-bg");
                 me.colorPicker(".skin-colorSelector-font");
+                $("#colorpanel").hide();
             }
             me.changeCursor();
             positionSetting.init($(me.dragTarget).parents(".drag"),"#groupSkin-content",me);
         });
-        $("body").delegate("."+componentClass+" .dragBox","contextmenu dblclick",function(e){
+        $("body").delegate("."+componentClass+" .dragBox","dblclick",function(e){
         	var self = this;
             callback2&&callback2(e,self)
             return false;
         });
         me.changeCursor();
+        var rightClickMenu = require("common.contextmenu/index.js");
+        rightClickMenu($("#"+id),this);
     };
 
 
@@ -194,7 +215,6 @@ define(function(require,exports,module){
         },targetObj);
         settingJs.init(app);
         settingJs.isRender = true;
-
     }
     function trimNumber(str){ 
         return str.replace(/\d+/g,''); 
@@ -202,8 +222,8 @@ define(function(require,exports,module){
     appExtend.rightEditComponentInitAll = function(e){
         var dragParent = $(".drag").parent();
         for(var i = 0;i<dragParent.length;i++){
-            var str = dragParent.eq(i).attr("id");
-            this.rightEditComponentInit(e,trimNumber(str),dragParent.eq(i))
+            var id = dragParent.eq(i).attr("id");
+            this.rightEditComponentInit(e,trimNumber(id),dragParent.eq(i))
         }
     }
     var linkAdress = require("common.linkAdress/index");

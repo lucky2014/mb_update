@@ -1,6 +1,7 @@
 sub,sup,b{
     font-style: normal;
     font-weight: normal;
+    font-size: inherit;
 }
 i *,i{
     font-style: italic;
@@ -8,6 +9,7 @@ i *,i{
 }
 strong *,strong{
     font-weight: bold;
+    font-size: inherit;
 }
 #cke_vAct_modexBox_paragraph_content{
     background-color: #188acc;
@@ -76,4 +78,10 @@ strong *,strong{
     border:1px solid #ddd;
     border-radius: 5px;
     background-color: #000;
+}
+*[contenteditable]{
+    cursor: text !important;
+}
+.dragBox span{
+    background-color: transparent;
 }

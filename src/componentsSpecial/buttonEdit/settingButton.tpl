@@ -75,14 +75,14 @@
                                   <img src="../src/component/imgs/f033.png" style="width:12px;">
                                 </i>
                                 <ul style="display:none;">
-                                  <li class="selected">14px</li>
-                                  <li>16px</li>
-                                  <li>18px</li>
-                                  <li>20px</li>
-                                  <li>22px</li>
-                                  <li>24px</li>
-                                  <li>26px</li>
-                                  <li>28px</li>
+                                  <li class="selected" value="14px">14px</li>
+                                  <li value="16px">16px</li>
+                                  <li value="18px">18px</li>
+                                  <li value="20px">20px</li>
+                                  <li value="22px">22px</li>
+                                  <li value="24px">24px</li>
+                                  <li value="26px">26px</li>
+                                  <li value="28px">28px</li>
                                 </ul>
                              </div>
                          </div>

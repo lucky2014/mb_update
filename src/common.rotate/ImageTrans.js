@@ -126,7 +126,6 @@ ImageTrans.modes = function(){
 	}
 	//获取变换参数函数
 	function getMatrix(radian, x, y) {
-		//console.log(radian)
 		var Cos = Math.cos(radian), Sin = Math.sin(radian);
 		return {
 			M11: Cos * x, M12:-Sin * y,

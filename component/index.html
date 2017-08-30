@@ -9,6 +9,12 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript">
+      function doNothing(){
+        window.event.returnValue=false;
+        return false;
+      }
+    </script>
     <title>微官网主页</title></head>
   <body ng-app="myApp" ng-controller="myCtrl">
       <div id="VAct_navbar">
@@ -20,7 +26,6 @@
           <div class="VACT_main_page_index_box leftOuter">
               <div class="sky leftDiv active" id="sky">
                   <h1></h1>
-                  <b class="selectB"></b>
               </div>
               <div class="left">
                   
@@ -58,7 +63,7 @@
                 </div>
                 <div class="cke_vAct_modexBox_paragraph_list lineHeight">
                   <select>
-                    <option>行高</option>
+                    <option value="行高">行高</option>
                     <option value="1" style="line-height: 1">1</option>
                     <option value="1.2" style="line-height: 1.2">1.2</option>
                     <option value="1.4" style="line-height: 1.4;">1.4</option>

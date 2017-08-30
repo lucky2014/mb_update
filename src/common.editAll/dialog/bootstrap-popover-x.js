@@ -28,11 +28,11 @@
     var kvLog, addCss, handler, raise, PopoverButton, PopoverX, NAMESPACE = '.popoverX';
     kvLog = function (msg) {
         msg = 'bootstrap-popover-x: ' + msg;
-        if (window.console && window.console.log) {
+       /* if (window.console && window.console.log) {
             window.console.log(msg);
         } else {
             window.alert(msg);
-        }
+        }*/
     };
     addCss = function ($el, css) {
         $el.removeClass(css).addClass(css);

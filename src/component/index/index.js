@@ -10,6 +10,8 @@ define(function(require,exports,module){
     var nav = require("component/index/nav");
     nav.nav_init();
 
+    require("common.contextmenu/index.js");
+
 
     //左边基础组件点击
     $("#VAct_navbar").delegate(".ext-items","click",function(e){
@@ -20,6 +22,9 @@ define(function(require,exports,module){
     //中间编辑区域的高度
     var h = $(window).height()-70;
     var h3 = $(window).height()-130;
+    if(h3>500){
+        h3=500;
+    }
     $(".mobile-container").css({"height": h+"px"});
     $(".left").css({"min-height": h3+"px"});
     //右边区域的高度

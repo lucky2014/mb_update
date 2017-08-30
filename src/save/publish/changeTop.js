@@ -7,10 +7,12 @@ $(function(){
 		//转换高度
 		var height = $(v).attr("height") ? $(v).attr("height").replace(/px/g,"") : "";
 		var h = height/308*$(window).width().toFixed(2)+ "px";
-
-
-		$(v).css({"top": t, "height": h});
-		$(v).find("img").css({"height": h});
+		if(height==0){
+			$(v).css({"top": t});
+		}else{
+			$(v).css({"top": t, "height": h});
+		}
+		//$(v).find("img").css({"height": h});
 	});
 });
 

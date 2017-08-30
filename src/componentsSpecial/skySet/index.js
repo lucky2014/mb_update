@@ -29,6 +29,11 @@ define(function(require,exports,module){
                //页面名称change监控
                $(".skySet").delegate(".navInput","keyup",function(){
                    $(".sky h1").html($("#storeName").val());
+                   if( $(".itemsDraw li.activePage").attr("ishomepage") == 1){
+                      $(".itemsDraw li.activePage a").html('<i class="homeIcon"></i>'+$("#storeName").val())
+                   }else{
+                      $(".itemsDraw li.activePage a").html($("#storeName").val())
+                   }
                }) 
            }else{
                 box.render($(".right"), "", img_showTpl);

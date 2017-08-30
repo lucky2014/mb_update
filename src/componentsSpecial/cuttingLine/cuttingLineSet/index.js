@@ -23,7 +23,6 @@ define(function(require,exports,module){
             cuttingLineShow.img_show();
             
             var v = data.returnObject.components[0];
-            //console.log(JSON.stringify(v.attrList[0],null,2))
             var cuttingLineSet = require("componentsSpecial/cuttingLine/cuttingLineSet/content.tpl");
             box.render($(".cuttingLineSet"), v.attrList[0], cuttingLineSet);
 

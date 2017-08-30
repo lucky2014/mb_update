@@ -31,7 +31,7 @@ define(function(require,exports,module){
 		    		  "dragInit","deleteFn","dragMoveFn",
 		    		  "dragProgress","rightEditEvt","dragHeight",
 		    		  "textEdit","selectPicture",
-		    		  "deleteFn","nav_init","redoFunc","undoFunc"]
+		    		  "deleteFn","nav_init","redoFunc","undoFunc","ctrlCopy","ctrlPaste"]
 		}
 		return app;
 })

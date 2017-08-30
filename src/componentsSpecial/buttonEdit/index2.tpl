@@ -1,1 +1,1 @@
-<input type="button" value="图文按钮" style="width: 100%; min-height: 32px; height: 100%; background-color: rgb(28, 154, 227); color: rgb(255, 255, 255); outline: none; border-color: rgb(198, 198, 230); border-width: 1px;" name="" class="picBut">
+<input type="button" value="按钮文字" style="width: 100%; min-height: 32px; height: 100%; background-color: rgb(28, 154, 227); border-width:0px;border-style:solid;border-color:transparent;color: rgb(255, 255, 255); outline: none;font-size: inherit;" name="" class="picBut" btnType="3">

@@ -11,6 +11,7 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, sub, sup, b, i, dl, d
     text-decoration: none;
     font-family: "微软雅黑"
 }
+p{white-space:normal !important;}
 body{background: #f4f5fa;}
 /*浮动清除*/
 div:before, div before, div:after, div after, ul:before, ul before, ul:after, ul after, li:after, li after, li:before, li before, h3:before, h3 before, h3:after, h3 after {

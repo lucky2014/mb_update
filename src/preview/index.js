@@ -31,7 +31,6 @@ define(function(require,exports,module){
             }
             
             setup.commonAjax("showPage.do", params, function(msg){  
-                console.log(JSON.stringify(msg,null,2)); 
                 $("body").attr("style","background-color: "+msg.components[0].backgroundColor);
                 $("title").html(msg.components[0].pageName);
 
@@ -76,7 +75,7 @@ define(function(require,exports,module){
                                     t = t.replace(/px/,"");
                                     style += "top:" + (t*$(window).width()/308).toFixed(2) + "px;";
                                 }else{
-                                    style += "top:" + childrens[childsEle];
+                                    style += "top:" + childrens[childsEle]+";";
                                 }
                             }else if(childsEle=="height"){
                                 var t = childrens.height;
@@ -84,7 +83,7 @@ define(function(require,exports,module){
                                     t = t.replace(/px/,"");
                                     style += "height:" + (t*$(window).width()/308).toFixed(2) + "px;";
                                 }else{
-                                    style += "height:" + childrens[childsEle];
+                                    style += "height:" + childrens[childsEle]+";";
                                 }
                             }else if(childsEle=="width"){
                                 var w = childrens[childsEle];
@@ -92,7 +91,7 @@ define(function(require,exports,module){
                                     w = w.replace(/px/,"");
                                     style += "width:" + (w/308).toFixed(3)*100 + "%;";
                                 }else{
-                                    style += "width:" + childrens[childsEle];
+                                    style += "width:" + childrens[childsEle]+";";
                                 }
                                 
                             }else if(childsEle=="left"){
@@ -101,16 +100,19 @@ define(function(require,exports,module){
                                     w = w.replace(/px/,"");
                                     style += "left:" + (w/308).toFixed(3)*100 + "%;";
                                 }else{
-                                    style += "left:" + childrens[childsEle];
+                                    style += "left:" + childrens[childsEle]+";";
                                 }
                             }else if(childsEle=="zIndex"){
                                 var w = childrens[childsEle];
                                 w = w.replace(/px/,"");
-                                style += "z-index:" + w;
+                                style += "z-index:" + w+";";
+                            }else if(childsEle=="fontSize"){
+                                var f = childrens[childsEle];
+                                f = f.replace(/px/,"");
+                                style += "font-size:" + (f*$(window).width()/308).toFixed(2) +"px;"
                             }else{
                                 style+=(childsEle.replace(/([A-Z])/g,"-$1").toLowerCase()+":"+childrens[childsEle]+";")
                             }
-                            
                         }
                         if(childsEle=="attributes"){
                             for(var key2 in childrens[childsEle]){
@@ -127,6 +129,7 @@ define(function(require,exports,module){
                         }
                     }
                 }
+                //console.log(htmlStr)
                 if(nodeArr.length==4){
                     vAct_modexBox_paragraph+=(child + htmlStr+"</"+nodeArr[2]+"></"+nodeArr[0]+">"+"</div>")
                 }else{
@@ -135,6 +138,7 @@ define(function(require,exports,module){
                 vAct_modexBoxArr.push(vAct_modexBox_paragraph)
             }
             return vAct_modexBoxArr.join("")
+
         }
     }
     //执行页面逻辑

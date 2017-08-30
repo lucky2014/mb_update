@@ -1,8 +1,9 @@
+<div class="panelTitle"><p>页面设置</p></div>
 <div class="skySet rightDiv" id="skySet" ind="0">
 	<ul class="commonStyle">
 		<li class="mustInput">
 			<span  class="navSpan"><i>*</i>页面名称</span>
-			<input type="text" class="navInput" value="{{pageName}}" placeholder="请输入页面名称" id="storeName">
+			<input type="text" class="navInput" value="{{pageName}}" placeholder="请输入页面名称" id="storeName" maxlength="16">
 		</li>
 		<!-- <li>
 			<span >页面描述</span>

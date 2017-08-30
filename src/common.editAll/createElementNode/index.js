@@ -22,7 +22,7 @@ define(function(require,exports,module){
 	                      '<div class="sizeControl bl"></div>'+
 	                      '<div class="sizeControl bm"></div>'+
 	                      '<div class="sizeControl br"></div>'+
-	                      '<div class="rotateControl-point ui-draggable" title="旋转"></div>';
+	                      '<div class="rotateControl-point ui-draggable" title="拖动旋转图标，组件可旋转"></div>';
 	                      if(me.dragTarget){
 	                      		positionSetting.load(me);
 	                      }
@@ -110,8 +110,8 @@ define(function(require,exports,module){
 			createElementNode:function(currEle,className,tpl){
 				var me = this;
 	            var oFlag = document.createDocumentFragment();
-	            var dragStyle = "position: absolute;width: 180px;text-align: center;left:0;top:60px;";
-	            var dragBoxStyle = "height: 100%;width: 100%;";
+	            var dragStyle = "position: absolute;width: 180px;text-align: center;left:0;top:60px;z-index:100;width:120px;font-size:14px;";
+	            var dragBoxStyle = "height: 100%;width: 100%;border:0px solid transparent;overflow: hidden;min-height:1px;font-size:inherit;";
 	            var id = "vAct_modexBox_"+new Date().getTime();
 	            var vAct_modexBox_paragraph = document.createElement("div");
                 vAct_modexBox_paragraph.id = className;
@@ -119,7 +119,7 @@ define(function(require,exports,module){
                 vAct_modexBox_paragraph.style.border = "1px solid #ccc";
 	            if(!$(".sizeControl_parent")[0]){
 	            	var str = me.createSizeControl();
-		            vAct_modexBox_paragraph.innerHTML = "<div style='"+dragStyle+"' class='drag' name='drag'><div class='dragBox_parent' name='dragBox_parent' style='height:100%'><div class='dragBox' name='dragBox' style='"+dragBoxStyle+"'>"+tpl+"</div><div class='sizeControl_parent'>"+str+"</div></div></div>";
+		            vAct_modexBox_paragraph.innerHTML = "<div style='"+dragStyle+"' class='drag' name='drag'><div class='dragBox_parent' name='dragBox_parent' style='height:100%;font-size:inherit;'><div class='dragBox' name='dragBox' style='"+dragBoxStyle+"'>"+tpl+"</div><div class='sizeControl_parent'>"+str+"</div></div></div>";
 	            }
 	            for(var key in this.styleSheet){
 	                vAct_modexBox_paragraph.style[key] = this.styleSheet[key];

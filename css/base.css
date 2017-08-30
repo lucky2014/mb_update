@@ -40,8 +40,6 @@ body{margin: 0 auto;color: #617084;background: #f4f5fa;font-size:14px; min-width
 
 /************************脳贸卤脽脧脭脢戮脩霉脢陆begin****************************/
 .leftDiv{position: relative;}
-.selectB{display: block;width: 304px;height:51px;position: absolute;left: 0;top: 0;z-index: 99;}
-.active .selectB{border: 2px solid #ff7373;}
 
 .right{margin-top: 52px; color:#617084; background: #fafbfc; float: right; width: 440px; overflow: hidden; overflow-y:scroll }
 

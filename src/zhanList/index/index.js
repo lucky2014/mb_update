@@ -118,23 +118,25 @@ define(function(require,exports,module){
         }else if(type == "up"){ // 上线
           setup.commonAjax("changeSiteStatus.do", {siteId: siteId, status: 1}, function(msg){  
             popUp({
-                "content":"上线成功！",
+                "content":"下线成功！",
                 showCancelButton: false,
                 showConfirmButton: false,
                 timer: 1000
             });
 
             self.attr("class","down").html("<i></i>下线");
+            window.location.reload();
           });
         }else if(type == "down"){ // 下线
           setup.commonAjax("changeSiteStatus.do", {siteId: siteId, status: 0}, function(msg){  
             popUp({
-                "content":"下线成功！",
+                "content":"上线成功！",
                 showCancelButton: false,
                 showConfirmButton: false,
                 timer: 1000
             });
             self.attr("class","up").html("<i></i>上线");
+            window.location.reload();
           });
         }else if(type == "link"){ // 链接
           //先清除相同位置可能出现的杂质
@@ -150,10 +152,22 @@ define(function(require,exports,module){
             var e=document.getElementById("url1");//对象是content 
               e.select(); //选择对象 
               document.execCommand("Copy"); //执行浏览器复制命令
+              popUp({
+                  "content":"复制成功！",
+                  showCancelButton: false,
+                  showConfirmButton: false,
+                  timer: 1000
+              });
           }
 
           $(".microContainer").delegate(".siteEv button", "click", function(){
             jsCopy();
+            popUp({
+                "content":"复制成功！",
+                showCancelButton: false,
+                showConfirmButton: false,
+                timer: 1000
+            });
           }); 
 
         }else if(type == "qrcode"){ // 二维码

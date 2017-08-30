@@ -6,7 +6,6 @@ define(function(require,exports,module){
     var Engine = require("engine");
     var box = Engine.init();
     var setup = require("setup");
-    //console.log(indexTpl)
     box.render($("#userPicDialog"), "", indexTpl);
     function getMatrix(radian, x, y) {
         var Cos = Math.cos(radian), Sin = Math.sin(radian);

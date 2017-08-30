@@ -1,4 +1,4 @@
-  <div class="setting-panel">
+  <div class="setting-panel buttonSetting">
   <a class="setting-panel-switch"></a>
   <div class="setting-panel-content">
       <div class="DialogWindow" id="inpBtn" style="min-height: 120px;display: table;width:100%;position: relative;">

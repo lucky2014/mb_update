@@ -69,7 +69,6 @@ define(function(require,exports,module){
                 if(!$(this).hasClass("drag_active")){
                     $(this).addClass("drag_active");
                     var selectHtml2 = me.delHtmlTag(selectHtml,"strong");
-                    //console.log(selectHtml)
                     var newValue = textValue.replace(selectHtml,"<strong>"+selectHtml2+"</strong>");
                     $(text).html(newValue)
                 }else{

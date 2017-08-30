@@ -8,16 +8,33 @@ define(function(require,exports,module){
     var setup = require("setup");
     var popUp = require("common.PopUp/index");
     var now = require("save/pblTime");
+    var normal = require("common.editAll/editBased/normal");
     var publish = require("save/publish/publish");
     //预览
     var previewPop = require("save/previewPop.tpl");
         require("save/previewPop.css");
-
+    var clearSlct= "getSelection" in window ? function(){
+　　　　window.getSelection().removeAllRanges();
+　　} : function(){
+　　　　document.selection.empty();
+　　};
     require("common.lib/jquery.ui/jquery.qrcode.min");
 
     var app = {
         siteId: setup.getQueryString("siteId") || 60,
         templateId: setup.getQueryString("templateId"),
+        deleteEle:function(){
+            var me = this;
+            $(me.dragTarget).parents(".drag").parent().remove();
+            var vAct_modexBox = $(me.dragTarget).parents(".drag").parent();
+            if(vAct_modexBox.attr("id")){
+                delete me.elements[vAct_modexBox.attr("id")]
+            }
+        },
+        delAllTag:function(str,tag){
+                var reg = new RegExp("<([\/]?)([a-zA-Z]*)((:?\s*)(:?[^>]*)(:?\s*))>","ig");
+                return str.replace(reg,"");//去掉所有的html标记
+        },
         deleteFn:function(){
             var me = this;
             $("body").keydown(function(e){
@@ -28,17 +45,77 @@ define(function(require,exports,module){
                         return;
                     }
                     if(code=="46"||code=="8"){
-                        $(me.dragTarget).parents(".drag").parent().remove();
-                        var vAct_modexBox = $(me.dragTarget).parents(".drag").parent();
-                        if(vAct_modexBox.attr("id")){
-                            delete me.elements[vAct_modexBox.attr("id")]
+                        me.deleteEle();
+                        return false;
+                    }
+                }
+            })
+        },
+        temporary:{},
+        ctrlCopyFn:function(){
+            var me = this;
+            var vAct_modexBox = $(me.dragTarget).parents(".drag").parent();
+            if(vAct_modexBox.attr("id")){
+                var id = vAct_modexBox.attr("id");
+                var type = id.replace(/\d+/g,'');
+                me.temporary = {};
+                me.getStyle(vAct_modexBox,id);
+                for(var key in me.elements[id]){
+                    me.temporary[key] = me.elements[id][key]
+                }
+                me.temporary["type"] = type;
+            }
+        },
+        ctrlCopy:function(){
+            var me = this;
+            $("body").keydown(function(e){
+                var code = e.keyCode;
+                var ctrlKey = e.ctrlKey;
+                if($(".sizeControl_parent")[0]){
+                    if($(me.dragTarget).attr("contenteditable")){
+                        return;
+                    }
+                    if(ctrlKey&&code=="67"){
+                        me.ctrlCopyFn();
+                    }
+                }
+            })
+        },
+        ctrlPasteFn:function(){
+            var me = this;
+            var type = me.temporary["type"];
+            delete me.temporary["type"];
+            var tplObj = normal["base"][type+"Tpl"];
+            var settingJs = tplObj.setting();
+            var componentTpl = tplObj.componentTpl();
+            var id = type+new Date().getTime();
+            me.elements[id] = {};
+            for(var key in me.temporary){
+                me.elements[id][key] = me.temporary[key]
+            }
+            var htmls = me.getDataById(id);
+            $(me.parentBox).append(htmls);
+        },
+        ctrlPaste:function(){
+            var me = this;
+            $("body").keydown(function(e){
+                var code = e.keyCode;
+                var ctrlKey = e.ctrlKey;
+                if($(".sizeControl_parent")[0]){
+                    if(ctrlKey&&code=="86"){
+                        if($(me.dragTarget).attr("contenteditable")){
+                            clearSlct
+                            if(me.getSelectionHtml()!=""){
+                                clearSlct();
+                            }
+                            return;
                         }
+                        me.ctrlPasteFn();
                     }
                 }
             })
         },
         getStyle:function(element,id){  //取到element   drag
-            //console.log(JSON.stringify(this.elements,null,2))
             if($(element)[0]){
                 element = $(element).children()[0];
                 var className = $(element).attr("name");
@@ -53,7 +130,7 @@ define(function(require,exports,module){
                         for(var key in element.style){
                             if(element.style[key]&&typeof element.style[key] == "string"){
                                 var val = Number(key)
-                                if(isNaN(val)&&key!="cssText"){
+                                if(isNaN(val)&&key!="cssText"&&key!="borderImage"){
                                     classObj[key] = element.style[key]
                                 }
                             }
@@ -80,27 +157,29 @@ define(function(require,exports,module){
                     this.getStyle(element,id)
                 }
             }
-           // console.log(JSON.stringify(this.elements,null,2))
         },
         compareCacheDatas: function(datas,callBack){
             var me = this;
             if(me.cacheDatas && datas){
                 var a1 = JSON.stringify(datas);
-                var a2 = JSON.stringify(me.cacheDatas);
-                //console.log(a1);
-                //console.log(a2);
+                var a2 = me.cacheDatas;
                 if(a1 == a2){
                     callBack && callBack();
                 }else{
                     popUp({
                         "title": "提示<a class='cut'></a>",
-                        "content": "<div class='deleText'><b></b>您有未保存的数据，点确定按钮保存数据？</div>" ,
+                        "content": "<div class='deleText savePop'><b></b><span>您有未保存的数据，直接离开会丢失编辑的数据，是否保存？</span></div>" ,
+                        showButton: "是 , 保存",
+                        cancelButton: "否 , 离开",
                         showCancelButton: true,
                         showConfirmButton: true,
                     }, function(){
                         me.pageSave();
                         callBack && callBack();
                         $(".popUp").hide();
+                    }, function(){
+                        //点击取消
+                        callBack && callBack();
                     });
                     return ;
                 }
@@ -113,7 +192,6 @@ define(function(require,exports,module){
         pageSave: function(){
             var me = this;
             var datas = me.saveData();
-            //console.log(datas);
             var thisLi = $("li.activePage");
             var ishomepage = $("li.activePage").attr("isHomePage");
 
@@ -126,7 +204,6 @@ define(function(require,exports,module){
                    "siteId": me.siteId,
                    "isHomePage": ishomepage,
                 };
-                //console.log(JSON.stringify(datas,null,2))
                 setup.commonAjax("editPage.do", params, function(msg){
                     popUp({
                         "content":"保存成功！",
@@ -157,7 +234,7 @@ define(function(require,exports,module){
             };
         
             me.cacheDatas = {};
-            me.cacheDatas = $.extend({},datas);
+            me.cacheDatas = JSON.stringify($.extend({},datas));
         },
         pagePreview: function(){
             var me = this;
@@ -177,7 +254,6 @@ define(function(require,exports,module){
                 };
                 setup.commonAjax("editPage.do", params, function(msg){
                     var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId=" + $(".left").attr("pageId");
-                    //console.log(href)
                     me.qrcodeInit(href,datas);
                 });
             }else{
@@ -192,7 +268,6 @@ define(function(require,exports,module){
                     var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId="+msg.returnObject;
                     thisLi.attr("pageId",msg);
                     $(".left").attr("pageId",msg);
-                    //console.log(href)
                     // 预览弹框
                     me.qrcodeInit(href,datas);
                 });
@@ -283,7 +358,6 @@ define(function(require,exports,module){
             var me = this;
             //发布前请求所有页面的数据
             setup.commonAjax("getSiteData.do", {"siteId": siteId}, function(msg){ 
-                //console.log(JSON.stringify(msg,null,2));
                 //组装html数组
                 var htmlJson = [];
                 var htmlStr = "";
@@ -336,6 +410,12 @@ define(function(require,exports,module){
 
                         $("#previewPop").delegate(".blueBtn", "click", function(){
                             jsCopy();
+                            popUp({
+                                "content":"复制成功！",
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
                         }); 
                     }
                     
@@ -360,7 +440,6 @@ define(function(require,exports,module){
         },
         saveData:function(){
             var me = this;
-
             this.elements={};
             var len = $(".left .drag").length;
             if(len>0){
@@ -374,7 +453,6 @@ define(function(require,exports,module){
                     }
                 }
             }
-                
             //保持编辑框的新数据
             var components = [];
             var newObj = $.extend({},{elements: this.elements})
@@ -410,12 +488,12 @@ define(function(require,exports,module){
                 $("."+ele).html("");
                 this.elements = datas.components[0].elements||{};
                 this.changeData(); //预览的时候才需要改变数据的top值，减去55的sky header
-                var htmls = '<div><div class="skyHeader">'+datas.components[0].pageName+'</div>';
+                var htmls = '<div><div class="skyHeader"><span>'+datas.components[0].pageName+'</span></div>';
                 htmls += me.urlChangeFn(this.getSaved())+'</div>';
                 $("." + ele).html(htmls);
                 $("." + ele+">div").css({"backgroundColor": datas.components[0].backgroundColor});
                 me.cacheDatas = {};
-                me.cacheDatas = $.extend({},datas);
+                me.cacheDatas = JSON.stringify($.extend({},datas));
             }else{
                 $(".left").html("");
                 if(log){ //初始渲染
@@ -428,9 +506,9 @@ define(function(require,exports,module){
                     $(".left").html(htmls);
                 }
                 /**这个方法作为读取组件信息时的基础数据绑定js在component/index/index.js*/
+                me.cacheDatas = null; 
+                me.cacheDatas = JSON.stringify($.extend({},datas)); 
                 me.rightEditComponentInitAll(null,true);
-                me.cacheDatas = null, 
-                me.cacheDatas = $.extend({}, datas); 
             } 
         },
         urlChangeFn:function(val){
@@ -441,49 +519,54 @@ define(function(require,exports,module){
             var reg = new RegExp("onclick","ig");
             return val.replace(reg,"data-click")
         },
+        getDataById:function(key){
+            var me = this;
+            var child = "";
+            var vAct_modexBox_paragraph="<div id='"+key+"' class='"+key+"'>";
+            var children = me.elements[key];
+            var nodeArr = [];
+            var html = "";
+            for(var childEle in children){
+                nodeArr.push(children[childEle].nodeName)
+                if(children[childEle].nodeName=="IMG"){
+                    child += "";
+                }else{
+                    child += "<"+children[childEle].nodeName+" class='"+childEle+"' name='"+childEle+"'";
+                }
+                var childrens = children[childEle];
+                var style = "";
+                var attr = "";
+                for(var childsEle in childrens){
+                    if(childsEle!="nodeName"&&childsEle!="html"&&childsEle!="attributes"){
+                        style+=(childsEle.replace(/([A-Z])/g,"-$1").toLowerCase()+":"+childrens[childsEle]+";")
+                    }
+                    if(childsEle=="attributes"){
+                        for(var key2 in childrens[childsEle]){
+                            attr+=(" "+key2+"="+childrens[childsEle][key2].replace(/"/g,"'"))
+                        }
+                    }
+                }
+                if(childEle=="dragBox"){
+                    html = childrens.html;
+                    child+=(" style='"+style+"'"+attr+">");
+                }else{
+                    if(children[childEle].nodeName!="IMG"){
+                        child+=(" style='"+style+""+attr+"'>");
+                    }
+                }
+            }
+            if(nodeArr.length==4){
+                vAct_modexBox_paragraph+=(child+html+"</"+nodeArr[2]+"></"+nodeArr[0]+">"+"</div>")
+            }else{
+                vAct_modexBox_paragraph+=(child+html+"</"+nodeArr[2]+"></"+nodeArr[1]+"></"+nodeArr[0]+">"+"</div>")
+            }
+            return vAct_modexBox_paragraph;
+        },
         getSaved:function(){//判断是否需要转换url为可点击跳转
             var me = this;
             var vAct_modexBoxArr = [];
             for(var key in me.elements){
-                var child = "";
-                var vAct_modexBox_paragraph="<div id='"+key+"' class='"+key+"'>";
-                var children = me.elements[key];
-                var nodeArr = [];
-                var html = "";
-                for(var childEle in children){
-                    nodeArr.push(children[childEle].nodeName)
-                    if(children[childEle].nodeName=="IMG"){
-                        child += "";
-                    }else{
-                        child += "<"+children[childEle].nodeName+" class='"+childEle+"' name='"+childEle+"'";
-                    }
-                    var childrens = children[childEle];
-                    var style = "";
-                    var attr = "";
-                    for(var childsEle in childrens){
-                        if(childsEle!="nodeName"&&childsEle!="html"&&childsEle!="attributes"){
-                            style+=(childsEle.replace(/([A-Z])/g,"-$1").toLowerCase()+":"+childrens[childsEle]+";")
-                        }
-                        if(childsEle=="attributes"){
-                            for(var key2 in childrens[childsEle]){
-                                attr+=(" "+key2+"="+childrens[childsEle][key2].replace(/"/g,"'"))
-                            }
-                        }
-                    }
-                    if(childEle=="dragBox"){
-                        html = childrens.html;
-                        child+=(" style='"+style+"'"+attr+">");
-                    }else{
-                        if(children[childEle].nodeName!="IMG"){
-                            child+=(" style='"+style+""+attr+"'>");
-                        }
-                    }
-                }
-                if(nodeArr.length==4){
-                    vAct_modexBox_paragraph+=(child+html+"</"+nodeArr[2]+"></"+nodeArr[0]+">"+"</div>")
-                }else{
-                    vAct_modexBox_paragraph+=(child+html+"</"+nodeArr[2]+"></"+nodeArr[1]+"></"+nodeArr[0]+">"+"</div>")
-                }
+                var vAct_modexBox_paragraph = me.getDataById(key);
                 vAct_modexBoxArr.push(vAct_modexBox_paragraph)
             }
             return vAct_modexBoxArr.join("")

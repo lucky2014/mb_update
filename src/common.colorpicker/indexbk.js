@@ -239,13 +239,7 @@
                 onShow: function (colpkr) {
                     $(colpkr).fadeIn(500);
                     var text = $(me.dragTarget)[0];
-                    var selectionObj = window.getSelection();
-                    var rangeObj = selectionObj.getRangeAt(0);
-    　　　　        var docFragment = rangeObj.cloneContents();
-                    var testDiv = document.createElement("div");
-
-            　　　　testDiv.appendChild(docFragment);
-            　　　　colorText = testDiv.innerHTML;
+            　　　　colorText = me.getSelectionHtml()||me.rememberText;
                     colorText2 = me.delHtmlTag(colorText,"b");
                     return false;
                 },
@@ -270,6 +264,7 @@
                             $(me.dragTarget).find("svg").css("fill",'#' + hex);
                         }else if($(me.dragTarget).find("input")[0]){
                             $(me.dragTarget).find("input").css("backgroundColor",'#' + hex);
+                            $(me.dragTarget).css("backgroundColor",'#' + hex);
                         }else{
                             $(me.dragTarget).css("backgroundColor",'#' + hex)
                         }
