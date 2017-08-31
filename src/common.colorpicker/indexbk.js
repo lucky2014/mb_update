@@ -8,14 +8,17 @@
  */
  define(function(require,exports,module){
  	var $ = require("jquery");
- 	require("common.colorpicker/colorpicker");
+ 	//require("common.colorpicker/colorpicker");
     // require("common.color/spectrum.css");
     // require("common.color/jquery-ui-1.8.16.custom.css");
     // require("common.color/spectrum");
+    require("common.colorpicker/spectrum.css");
+    //require("common.colorpicker/jquery-ui-1.8.16.custom.css");
+    require("common.colorpicker/spectrum.js");
     var browser = function () {   
-    var agent = navigator.userAgent.toLowerCase(),  
-    opera = window.opera,  
-    browser = {  
+        var agent = navigator.userAgent.toLowerCase(),  
+        opera = window.opera,  
+        browser = {  
             //检测当前浏览器是否为IE  
             ie: /(msie\s|trident.*rv:)([\w.]+)/.test(agent), 
      
@@ -119,147 +122,53 @@
             return that;      
         }  
     }
+    $("body").click(function(){
+        if(isShow==1){
+            $(".sp-active").click();
+            $(".sp-container").addClass("sp-hidden");
+            isShow=0;
+        }
+    });
+    var isShow=0;
  	var app = {
- 		colorPicker:function(currEle){
+ 		colorPicker:function(currEle,initialColor){
+            //console.log(currEle)
             var me = this;
             var colorText = "";
             var colorText2 = "";
-    //         $(currEle).spectrum({
-    //             allowEmpty:true,
-    //             color: "#ECC",
-    //             showInput: true,
-    //             containerClassName: currEle,
-    //             showInitial: true,
-    //             showPalette: true,
-    //             showSelectionPalette: true,
-    //             showAlpha: true,
-    //             maxPaletteSize: 10,
-    //             preferredFormat: "hex",
-    //             localStorageKey: "spectrum.demo",
-    //             move: function (color) {
-    //                 hex = color.toHex();
-    //                 $(currEle).css("backgroundColor",'#fff');
-    //                 $(currEle).siblings("b").css("backgroundColor",'#' + hex);
-    //                 if(currEle==".skin-colorSelector-border"){
-    //                     if($(me.dragTarget).find("svg")[0]){
-    //                         $(me.dragTarget).find("svg").css("stroke",'#' + hex);
-    //                     }else{
-    //                         $(me.dragTarget).css("border-color",'#' + hex);
-    //                     }
-    //                 }else if(currEle==".skin-colorSelector-bg"){
-    //                     if($(me.dragTarget).find("svg")[0]){
-    //                         $(me.dragTarget).find("svg").css("fill",'#' + hex);
-    //                     }else{
-    //                         $(me.dragTarget).css("backgroundColor",'#' + hex)
-    //                     }
-    //                 }else if(currEle == ".color"){
-    //                     var text = $(me.dragTarget)[0];
-    //                     var textValue = $(text).html();
-    //                     if(!colorText){
-    //                         return;
-    //                     }
-    //                     if(!$(me.dragTarget).find(".changeColor")[0]){
-    //                         var newValue = textValue.replace(colorText,"<b class='changeColor colorSpan' style='color:#"+hex+"'>"+colorText2+"</b>");
-    //                         $(text).html(newValue)
-    //                     }else{
-    //                         $(me.dragTarget).find(".changeColor").css("color","#"+hex)
-    //                     }
-    //                 }else if(currEle==".skin-colorSelector-font"){
-    //                     $(me.dragTarget).find("*").css("color",'#' + hex);
-    //                 }else if(currEle==".skin-colorSelector-bgTp"){
-    //                     var temp1 = '#' + hex;
-    //                     var temp2 = $(".skin-colorSelector-bgBtm").attr("data-color");
-    //                     $(".skin-colorSelector-bgTp").attr("data-color",temp1);
-    //                     if(browser.webkit){
-    //                         $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient("+temp1+", "+temp2+")";
-    //                     }else if(browser.mac){
-    //                         $(me.dragTarget).find("input")[0].style.background = "-o-linear-gradient("+temp1+", "+temp2+")";
-    //                     }else{
-    //                         $(me.dragTarget).find("input")[0].style.background = "linear-gradient("+temp1+", "+temp2+")";
-    //                     }
-    //                 }else if(currEle==".skin-colorSelector-bgBtm"){
-    //                     var temp1 = $(".skin-colorSelector-bgTp").attr("data-color");
-    //                     var temp2 = '#' + hex;
-    //                     $(".skin-colorSelector-bgBtm").attr("data-color",temp2);
-    //                     $(me.dragTarget).find("input")[0].style.background = "linear-gradient("+temp1+", "+temp2+")";
-    //                     if(browser.webkit){
-    //                         $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient("+temp1+", "+temp2+")";
-    //                     }else if(browser.mac){
-    //                         $(me.dragTarget).find("input")[0].style.background = "-o-linear-gradient("+temp1+", "+temp2+")";
-    //                     }else{
-    //                         $(me.dragTarget).find("input")[0].style.background = "linear-gradient("+temp1+", "+temp2+")";
-    //                     }
-    //                 }
-    //             },
-    //             show: function (colpkr) {
-    //                 colpkr = colpkr.toHex();
-    //                 $(colpkr).fadeIn(500);
-    //                 var text = $(me.dragTarget)[0];
-    //                 var selectionObj = window.getSelection();
-    //                 var rangeObj = selectionObj.getRangeAt(0);
-    // 　　　　        var docFragment = rangeObj.cloneContents();
-    //                 var testDiv = document.createElement("div");
-
-    //         　　　　testDiv.appendChild(docFragment);
-    //         　　　　colorText = testDiv.innerHTML;
-    //                 colorText2 = me.delHtmlTag(colorText,"b");
-    //             },
-    //             beforeShow: function () {
-
-    //             },
-    //             hide: function (colpkr) {
-    //                 colpkr = colpkr.toHex();
-    //                 $(colpkr).fadeOut(500);
-    //                 colorText = "";
-    //                 colorText2 = "";
-    //                 $(me.dragTarget).find(".changeColor").removeClass("changeColor")
-    //             },
-
-    //             palette: [
-    //                 ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)", /*"rgb(153, 153, 153)","rgb(183, 183, 183)",*/
-    //                 "rgb(204, 204, 204)", "rgb(217, 217, 217)", /*"rgb(239, 239, 239)", "rgb(243, 243, 243)",*/ "rgb(255, 255, 255)"],
-    //                 ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
-    //                 "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
-    //                 ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
-    //                 "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
-    //                 "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
-    //                 "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
-    //                 "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
-    //                 "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
-    //                 "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
-    //                 "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
-    //                 /*"rgb(133, 32, 12)", "rgb(153, 0, 0)", "rgb(180, 95, 6)", "rgb(191, 144, 0)", "rgb(56, 118, 29)",
-    //                 "rgb(19, 79, 92)", "rgb(17, 85, 204)", "rgb(11, 83, 148)", "rgb(53, 28, 117)", "rgb(116, 27, 71)",*/
-    //                 "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
-    //                 "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
-    //             ]
-    //         });
-            $(currEle).ColorPicker({
-                color: '#0000ff',
-                onShow: function (colpkr) {
-                    $(colpkr).fadeIn(500);
+            if(!initialColor){
+                initialColor=$(currEle).attr("theColor");
+            }
+            $(currEle).spectrum({
+                //allowEmpty:true,
+                color: initialColor,
+                showInput: true,
+                containerClassName: currEle,
+                //showInitial: true,
+                showPalette: true,
+                showSelectionPalette: true,
+                //showAlpha: true,
+                //maxPaletteSize: 10,
+                preferredFormat: "hex",
+                localStorageKey: "spectrum.demo",
+                show:function(colpkr){
+                    isShow=1;
                     var text = $(me.dragTarget)[0];
-            　　　　colorText = me.getSelectionHtml()||me.rememberText;
+                    colorText = me.getSelectionHtml()||me.rememberText;
                     colorText2 = me.delHtmlTag(colorText,"b");
                     return false;
                 },
-                onHide: function (colpkr) {
-                    $(colpkr).fadeOut(500);
-                    colorText = "";
-                    colorText2 = "";
-                    $(me.dragTarget).find(".changeColor").removeClass("changeColor")
-                    return false;
-                },
-                onChange: function (hsb, hex, rgb) {
-                    $(currEle).css("backgroundColor",'#fff');
-                    $(currEle).siblings("b").css("backgroundColor",'#' + hex);
-                    if(currEle==".skin-colorSelector-border"){
+                move: function (color) {
+                    hex = color.toHex();
+                    $(currEle).attr("theColor",hex)
+                    if(currEle==".skin-colorSelector-border"){//边框
                         if($(me.dragTarget).find("svg")[0]){
                             $(me.dragTarget).find("svg").css("stroke",'#' + hex);
                         }else{
                             $(me.dragTarget).css("border-color",'#' + hex);
                         }
-                    }else if(currEle==".skin-colorSelector-bg"){
+                    }else if(currEle==".skin-colorSelector-bg"){//背景
+                        //console.log($(me.dragTarget).find("svg")[0]);
                         if($(me.dragTarget).find("svg")[0]){
                             $(me.dragTarget).find("svg").css("fill",'#' + hex);
                         }else if($(me.dragTarget).find("input")[0]){
@@ -274,17 +183,69 @@
                         if(!colorText){
                             return;
                         }
-                        if(!$(me.dragTarget).find(".changeColor")[0]){
-                            var newValue = textValue.replace(colorText,"<b class='changeColor colorSpan' style='color:#"+hex+"'>"+colorText2+"</b>");
-                            $(text).html(newValue)
-                        }else{
-                            $(me.dragTarget).find(".changeColor").css("color","#"+hex)
-                        }
-                    }else if(currEle==".skin-colorSelector-font"){
+                        var timeClass = "fontColor"+new Date().getTime();
+                        var colorText2 = me.delHtmlTag(colorText,"b");
+                        var newValue = textValue.replace(colorText,"<b class='changeColor colorSpan "+timeClass+"' style='color:#"+hex+"'>"+colorText2+"</b>");
+                        $(text).html(newValue)
+                         me.choseAllFocus($("."+timeClass)[0])
+                    }else if(currEle==".skin-colorSelector-font"){//字体颜色
                         $(me.dragTarget).find("*").css("color",'#' + hex);
                     }else if(currEle==".skin-colorSelector-bgTp"){
                         var temp1 = '#' + hex;
                         var temp2 = $(".skin-colorSelector-bgBtm").attr("data-color");
+                        $(me.dragTarget).find("input").attr("beginBg",temp1);
+                        $(".skin-colorSelector-bgTp").attr("data-color",temp1);
+                        $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient("+temp1+", "+temp2+");"+
+                        +"-o-linear-gradient("+temp1+", "+temp2+");"+
+                        +"-moz-linear-gradient("+temp1+", "+temp2+");"+
+                        +"linear-gradient("+temp1+", "+temp2+");"+
+                        +"filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='"+temp1+"',endColorstr='"+temp2+"');*background:#DDD; }";
+                    }else if(currEle==".skin-colorSelector-bgBtm"){
+                        var temp1 = $(".skin-colorSelector-bgTp").attr("data-color");
+                        var temp2 = '#' + hex;
+                        $(".skin-colorSelector-bgBtm").attr("data-color",temp2);
+                        $(me.dragTarget).find("input").attr("endBg",temp2);
+                        $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient("+temp1+", "+temp2+");"+
+                        +"-o-linear-gradient("+temp1+", "+temp2+");"+
+                        +"-moz-linear-gradient("+temp1+", "+temp2+");"+
+                        +"linear-gradient("+temp1+", "+temp2+");"+
+                        +"filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='"+temp1+"',endColorstr='"+temp2+"');*background:#DDD; }";
+                    }
+                },
+                hide: function (colpkr) {
+                    isShow=0;
+                    hex = colpkr.toHex();
+                    $(currEle).attr("theColor",hex)
+                    if(currEle==".skin-colorSelector-border"){//边框
+                        if($(me.dragTarget).find("svg")[0]){
+                            $(me.dragTarget).find("svg").css("stroke",'#' + hex);
+                        }else{
+                            $(me.dragTarget).css("border-color",'#' + hex);
+                        }
+                    }else if(currEle==".skin-colorSelector-bg"){//背景
+                        //console.log($(me.dragTarget).find("svg")[0]);
+                        if($(me.dragTarget).find("svg")[0]){
+                            $(me.dragTarget).find("svg").css("fill",'#' + hex);
+                        }else if($(me.dragTarget).find("input")[0]){
+                            $(me.dragTarget).find("input").css("backgroundColor",'#' + hex);
+                            $(me.dragTarget).css("backgroundColor",'#' + hex);
+                        }else{
+                            $(me.dragTarget).css("backgroundColor",'#' + hex)
+                        }
+                    }else if(currEle == ".color"){
+                        var text = $(me.dragTarget)[0];
+                        var textValue = $(text).html();
+                        if(!colorText){
+                            return;
+                        }
+                        var newValue = textValue.replace(colorText,"<b class='changeColor colorSpan' style='color:#"+hex+"'>"+colorText2+"</b>");
+                        $(text).html(newValue)
+                    }else if(currEle==".skin-colorSelector-font"){//字体颜色
+                        $(me.dragTarget).find("*").css("color",'#' + hex);
+                    }else if(currEle==".skin-colorSelector-bgTp"){
+                        var temp1 = '#' + hex;
+                        var temp2 = $(".skin-colorSelector-bgBtm").attr("data-color");
+                        $(me.dragTarget).find("input").attr("beginBg",temp1);
                         $(".skin-colorSelector-bgTp").attr("data-color",temp1);
                         if(browser.webkit){
                             $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient("+temp1+", "+temp2+")";
@@ -297,6 +258,7 @@
                         var temp1 = $(".skin-colorSelector-bgTp").attr("data-color");
                         var temp2 = '#' + hex;
                         $(".skin-colorSelector-bgBtm").attr("data-color",temp2);
+                        $(me.dragTarget).find("input").attr("endBg",temp2);
                         $(me.dragTarget).find("input")[0].style.background = "linear-gradient("+temp1+", "+temp2+")";
                         if(browser.webkit){
                             $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient("+temp1+", "+temp2+")";
@@ -306,7 +268,24 @@
                             $(me.dragTarget).find("input")[0].style.background = "linear-gradient("+temp1+", "+temp2+")";
                         }
                     }
-                }
+                },
+
+                palette: [
+                    ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)", 
+                    "rgb(204, 204, 204)", "rgb(217, 217, 217)",  "rgb(255, 255, 255)"],
+                    ["rgb(152, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 153, 0)", "rgb(255, 255, 0)", "rgb(0, 255, 0)",
+                    "rgb(0, 255, 255)", "rgb(74, 134, 232)", "rgb(0, 0, 255)", "rgb(153, 0, 255)", "rgb(255, 0, 255)"],
+                    ["rgb(230, 184, 175)", "rgb(244, 204, 204)", "rgb(252, 229, 205)", "rgb(255, 242, 204)", "rgb(217, 234, 211)",
+                    "rgb(208, 224, 227)", "rgb(201, 218, 248)", "rgb(207, 226, 243)", "rgb(217, 210, 233)", "rgb(234, 209, 220)",
+                    "rgb(221, 126, 107)", "rgb(234, 153, 153)", "rgb(249, 203, 156)", "rgb(255, 229, 153)", "rgb(182, 215, 168)",
+                    "rgb(162, 196, 201)", "rgb(164, 194, 244)", "rgb(159, 197, 232)", "rgb(180, 167, 214)", "rgb(213, 166, 189)",
+                    "rgb(204, 65, 37)", "rgb(224, 102, 102)", "rgb(246, 178, 107)", "rgb(255, 217, 102)", "rgb(147, 196, 125)",
+                    "rgb(118, 165, 175)", "rgb(109, 158, 235)", "rgb(111, 168, 220)", "rgb(142, 124, 195)", "rgb(194, 123, 160)",
+                    "rgb(166, 28, 0)", "rgb(204, 0, 0)", "rgb(230, 145, 56)", "rgb(241, 194, 50)", "rgb(106, 168, 79)",
+                    "rgb(69, 129, 142)", "rgb(60, 120, 216)", "rgb(61, 133, 198)", "rgb(103, 78, 167)", "rgb(166, 77, 121)",
+                    "rgb(91, 15, 0)", "rgb(102, 0, 0)", "rgb(120, 63, 4)", "rgb(127, 96, 0)", "rgb(39, 78, 19)",
+                    "rgb(12, 52, 61)", "rgb(28, 69, 135)", "rgb(7, 55, 99)", "rgb(32, 18, 77)", "rgb(76, 17, 48)"]
+                ]
             });
         }
  	}

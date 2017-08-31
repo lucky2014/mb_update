@@ -7,7 +7,7 @@
                   <img src="http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb5hGAa2VQAAAiT0rQQYc016.png" id="show_pic_url">
               </div>
         			<div class="groupSkin-content clearfix" style="text-align:center; margin-bottom: 15px;">
-          				  <div id="file_upload" class="uploadify-button" style="float:left;margin-right:25px;margin-top:10px;cursor:pointer">
+          				  <div id="file_upload" class="uploadify-button picDia" style="float:left;margin-right:25px;margin-top:10px;cursor:pointer">
           				      更换
           				  </div>
         			</div>
@@ -53,11 +53,11 @@
                       </div>
 
                       <div class="c-colorWrapper selectCommon" style="float: left;">
-                        <div class="c-opacityBg"></div>
-                        <div class="fieldSkin-color colorConfig" style="background-color: rgb(196, 196, 196);" config="#687683" status="v_paragraph_style1_border_color"></div>
-                        <input type="text" readonly class="skin-colorSelector skin-colorSelector-border">
-                        <i class="skin-colorSelector-border"></i>
-                        <b class="skin-colorSelector-border" style="background-color: rgb(196, 196, 196);"></b>
+                        <!-- <div class="c-opacityBg"></div>
+                        <div class="fieldSkin-color colorConfig" style="background-color: rgb(196, 196, 196);" config="#687683" status="v_paragraph_style1_border_color"></div> -->
+                        <input type="text" theColor="#fff" readonly class="skin-colorSelector skin-colorSelector-border">
+                        <!-- <i class="skin-colorSelector-border"></i>
+                        <b class="skin-colorSelector-border" style="background-color: rgb(196, 196, 196);"></b> -->
                         <!-- <div class="skin-colorSelector skin-colorSelector-border"></div> -->
                       </div>
 

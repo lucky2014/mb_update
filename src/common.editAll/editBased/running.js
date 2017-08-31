@@ -32,8 +32,9 @@ define(function(require,exports,module){
     var dialogTpl = require("common.editAll/dialog/index.tpl");
 
     var linkAdressTpl = require("common.linkAdress/linkAdress.tpl");
-
+    //右键功能
     require("common.contextmenu/jquery.contextmenu.js");
+
 
     box.render($("#dialog"), "", dialogTpl);
     function cloneObj(oldObj) { //复制对象方法
@@ -141,6 +142,7 @@ define(function(require,exports,module){
         me.dragTarget = $("."+componentClass+" .dragBox")[0];
         var id = $(me.dragTarget).parents(".drag").parent().attr("id");
         if($(".setting-panel").attr("data-id")!=id){
+            $(".sp-container").addClass("sp-hidden");
         	callback&&callback(e,self,componentClass,componentTpl,editTpl);
         	positionSetting.init($(me.dragTarget).parents(".drag"),$(me.dragTarget).parents(".drag"),me);
         	$(".setting-panel").attr("data-id",id);
@@ -149,6 +151,7 @@ define(function(require,exports,module){
             me.colorPicker(".skin-colorSelector-font");
         }
         $("body").delegate("."+componentClass+" .dragBox","click",function(e){
+            $(".sp-active").click();
             me.stopBubble(e)
 
             var settingButton = require("componentsSpecial/buttonEdit/settingButton.tpl");
@@ -158,6 +161,10 @@ define(function(require,exports,module){
             
             if(btntype == 2){
                 $(".right").html(settingGridentButton);
+                var bgTpColor=$(me.dragTarget).children().attr("beginBg");
+                var bgBtmColor=$(me.dragTarget).children().attr("endBg");
+                me.colorPicker(".skin-colorSelector-bgTp",bgTpColor);
+                me.colorPicker(".skin-colorSelector-bgBtm",bgBtmColor);
             }else if(btntype == 3){
                 $(".right").html(settingPicButton);
             }else{
@@ -172,14 +179,20 @@ define(function(require,exports,module){
                 }
                 box.render($(".linkDemo"), "", linkAdressTpl);
                 $(".line").width(window.innerWidth-860);
-                $(".skin-colorSelector-border,.skin-colorSelector-bg").unbind();
-                me.colorPicker(".skin-colorSelector-border");
-                me.colorPicker(".skin-colorSelector-bg");
-                me.colorPicker(".skin-colorSelector-font");
+                // $(".skin-colorSelector-border,.skin-colorSelector-bg").unbind();
                 $("#colorpanel").hide();
             }
             me.changeCursor();
             positionSetting.init($(me.dragTarget).parents(".drag"),"#groupSkin-content",me);
+            var borderColor = $(me.dragTarget).css("border-color");
+            if(borderColor=="rgba(0, 0, 0, 0)"){
+                borderColor="rgba(0, 0, 0)";
+            }
+            var bgColor = $(me.dragTarget).children().css("background-color");
+            var fontColor = $(me.dragTarget).children().css("color");
+            me.colorPicker(".skin-colorSelector-border",borderColor);
+            me.colorPicker(".skin-colorSelector-bg",bgColor);
+            me.colorPicker(".skin-colorSelector-font",fontColor);
         });
         $("body").delegate("."+componentClass+" .dragBox","dblclick",function(e){
         	var self = this;

@@ -9,24 +9,21 @@ define(function(require,exports,module){
     //导航js
     var nav = require("component/index/nav");
     nav.nav_init();
-
+    //右键功能
     require("common.contextmenu/index.js");
-
 
     //左边基础组件点击
     $("#VAct_navbar").delegate(".ext-items","click",function(e){
         app.rightEditComponentInit(e,this);
     });
     $(".mobile-container").css({"overflow":"hidden","overflow-y":"scroll","padding-top":"20px"});
-                
     //中间编辑区域的高度
     var h = $(window).height()-70;
     var h3 = $(window).height()-130;
     if(h3>500){
         h3=500;
     }
-    $(".mobile-container").css({"height": h+"px"});
-    $(".left").css({"min-height": h3+"px"});
+    $(".mobile-container,.left").css({"height": h+"px"});
     //右边区域的高度
     var h2 = $(window).height()-54;
     $(".right").css({"height": h2+"px"});

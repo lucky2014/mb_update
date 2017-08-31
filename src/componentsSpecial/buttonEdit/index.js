@@ -28,11 +28,11 @@ define(function(require,exports,module){
           var btnName = $(app.dragTarget).find("input").val();
 
           sessionStorage.setItem("backgColor1","-webkit-linear-gradient(top, rgb(121, 205, 255), rgb(29, 155, 227))");
-          sessionStorage.setItem("backImage","url(http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb6rOACbYxAAAE2wy7hXk965.png)");
+          //sessionStorage.setItem("backImage","url(http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb6rOACbYxAAAE2wy7hXk965.png)");
           var preInd = $("#inpBtn span.active").index();
           if(preInd == 2){
-            var backImage = $(app.dragTarget).find("input").css("background-image");
-            sessionStorage.setItem("backImage",backImage);
+            //var backImage = $(app.dragTarget).find("input").css("background-image");
+            //sessionStorage.setItem("backImage",backImage);
           }else if(preInd == 1){
             var backgColor1 = $(app.dragTarget).find("input").css("background");
              sessionStorage.setItem("backgColor1",backgColor1);
@@ -55,7 +55,7 @@ define(function(require,exports,module){
               $(app.dragTarget).html(button2);
               $(app.dragTarget).find("input").val(btnName);
               $(app.dragTarget).find("input").attr("style",thisStyle);
-              $(app.dragTarget).find("input").css("background-image",sessionStorage.getItem("backImage"));
+              //$(app.dragTarget).find("input").css("background-image",sessionStorage.getItem("backImage"));
               if(preInd == 1){
                 $(app.dragTarget).find("input").css("background-color"," rgb(28, 154, 227)");
               }
@@ -121,7 +121,7 @@ define(function(require,exports,module){
       $("body").delegate(".picButFast li","click",function(){ //快速更换按钮图标
           var self = $(this);
           var url = self.find("img").attr("src");
-          $(app.dragTarget).find(".picBut").css("background-image","url("+url+")");
+          $(app.dragTarget).find("img").attr("src",url);
       })
       $("body").delegate(".form-control","keyup",function(){
           $(app.dragTarget).find("input").val($(this).val());

@@ -15,7 +15,9 @@ define(function(require,exports,module){
 				$(".popUp_box").css({"width":"250px","margin-left": "-125px"});
 				$(".pop_title").html("").css({border: "none", "padding":0});
 			}
-			
+			if($(".pop_foot").html()==""){
+				$(".pop_foot").html('<span class="btnBig pop_cancel">取消</span><span class="btnBig pop_confirm">确定</span>')
+			}
 			$(".pop_content").html(config.content);
 
 
@@ -32,10 +34,14 @@ define(function(require,exports,module){
 
 			if(config.showButton){
 				$(".pop_confirm").html(config.showButton);
+			}else{
+				$(".pop_confirm").html("确定");
 			}
 
 			if(config.cancelButton){
 				$(".pop_cancel").html(config.cancelButton);
+			}else{
+				$(".pop_cancel").html("取消");
 			}
 
 			if(config.showCancelButton == "" || config.showConfirmButton == ""){
@@ -61,13 +67,13 @@ define(function(require,exports,module){
 		$("#pop").delegate(".cut","click", function(){
 			$(".popUp").hide();
 		});
-
-		$("#pop").delegate(".pop_cancel,.cancel","click",function(){
+		$(".pop_cancel,.cancel").click(function(){
 			$(".pop_title").html("");
 			$(".pop_confirm").html("确定");
 			$(".pop_cancel").html("取消");
 			$(".pop_content").html("");
 			$(".popUp").hide();
+			$(".pop_foot").html("");
 			cb2 && cb2();
 		});
 	}

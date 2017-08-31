@@ -1,3 +1,3 @@
 {{#each this}}
-	<li urlName="{{pageInfo.id}}">{{pageInfo.pageName}}</li>
+	<li urlName="{{pageInfo.id}}" url="{{url}}" name="{{pageInfo.pageName}}">{{pageInfo.pageName}}</li>
 {{/each}}

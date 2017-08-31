@@ -34,18 +34,18 @@ define(function(require,exports,module){
             box.render($(".navbar-inner"), "", navbarTpl);//加载导航
 
             me.pageList();
-            if(editSite == "true"){
+            /*if(editSite == "true"){*/
                 /*me.pageList();*/
-                var _this = $(".new-icons-page").parents(".navi-btn");
-                _this.addClass("active");
-                $(".navi-btn-dropdown").hide();
-                _this.next().show();
-            }else{ 
+            var _this = $(".new-icons-page").parents(".navi-btn");
+            _this.addClass("active");
+            $(".navi-btn-dropdown").hide();
+            _this.next().show();
+            /*}else{ 
                 var _that = $(".new-icons-tpl").parents(".navi-btn");
                  _that.addClass("active");
                 $(".navi-btn-dropdown").hide();
                 _that.next().show();
-            }
+            }*/
 
             me.componentList();
 
@@ -78,11 +78,9 @@ define(function(require,exports,module){
             //鼠标移上去，出来网页重命名、复制、设为模板功能
             $(".site-page-navi-list").delegate("li", "mouseover", function(ev){
                 var self = $(this);
-                if($(".site-page-navi-list .itemsDraw li").length>1){
-                     $(".page-control").hide();
+                    $(".page-control").hide();
                     self.find(".page-control").show();
                     return false;
-                }
             });
             //鼠标移开，隐藏网页重命名、复制、设为模板功能
             $(".site-page-navi-list").delegate("li", "mouseout", function(ev){
@@ -92,14 +90,13 @@ define(function(require,exports,module){
                 return false;
             });
             
-            me.selectTemp(initTemplateId,me);
+            //me.selectTemp(initTemplateId,me);
             me.addPage(); //点击新增页面
             me.okBtn();  //点击新增页面的确认按钮
             me.reName(); //点击重命名
-            me.hovereName();
+            //me.hovereName();
             me.copy();  //点击复制
             me.dele();//点击删除
-            me.setModuel();//点击设为模板
         },
         //点击新增页面
         addPage: function(){
@@ -121,8 +118,8 @@ define(function(require,exports,module){
 
                 var val = self.parent(".page-control").siblings("a").attr("title");
                 var index = self.attr("index");
-                var html ="<input type='text' value='"+ val +"' /><button>确认</button>";
-                var html2 ="<input class='noMargin' type='text' value='"+ val +"' /><button>确认</button>";
+                var html ="<input type='text' value='"+ val +"' maxlength='16' /><button>确认</button>";
+                var html2 ="<input class='noMargin' type='text' value='"+ val +"' maxlength='16'/><button>确认</button>";
                 if(!editNow || editNow == "0"){ //避免重复append编辑框
                     if(index == 1){
                         self.parents("li").append('<i class="homeIcon noMarginI"></i>'+html2)
@@ -130,6 +127,8 @@ define(function(require,exports,module){
                         self.parents("li").append(html)
                     }
                     self.parents("li").attr("editNow","1");
+                }else{
+                    self.parents("li").find("input,button,.noMarginI").show();
                 }
             });
         },
@@ -194,10 +193,6 @@ define(function(require,exports,module){
                 });
             });
         },
-        //点击设为模板
-        setModuel: function(){
-
-        },
         //点击确认
         okBtn: function(){
             var me = this;
@@ -206,7 +201,6 @@ define(function(require,exports,module){
                 if(!$(this).parents("li").hasClass("activePage")){
                     $(this).parents("li").click();
                 }
-                $(".left").height($(".left").css("min-height"))
                 var self = $(this);
                 var thisLi = self.parent();
                 var val = {
@@ -229,15 +223,10 @@ define(function(require,exports,module){
                     $(".left").attr("ishomepage",0);
                 }else{
                     thisLi.find("a").prepend('<i class="homeIcon"></i>');
+                    $(".itemsDraw li:first-child").find(".page-dele").remove();
                 }
-                run.pageSave();
-                var components = [];
-                var newObj = $.extend({},{elements: {}})
-                newObj.backgroundColor = $("#sky").attr("color");
-                newObj.pageName = $("#sky h1").html();
                 
-                components.push(newObj);
-                run.cacheDatas = JSON.stringify($.extend({},{components: components}));
+                run.pageSave(1);
             });
         },
         pageList: function(){ //已创建页面接口
@@ -251,23 +240,23 @@ define(function(require,exports,module){
                 var msg = msg.data;
                 var showDatas = {};
                 $(".left").html("");
+
                 $.each(msg, function(i,v){
                     v.pageName = v.pageName ? v.pageName : "第"+ (i+1)+"页";
                     if(v.isHomePage == 1){
                         $("#sky h1").html(v.pageName);
                         showDatas = $.extend({}, JSON.parse(v.data));
-                        $(".left").attr("isHomePage", 1).attr("pageId", v.id);
-
+                        $(".left").attr("isHomePage", 1).attr("pageId",v.id);
                         //渲染中间的left
                         if(showDatas){
                             run.loadFn(showDatas,"",1); //有第二个参数是预览效果，
-                            run.cacheDatas = JSON.stringify(showDatas);
                         }
                         $(".right").html("");
                         pageSet.img_edit(v);
                     }
                 });
-
+                
+                run.cacheDatas = JSON.stringify(run.saveData());
                 var itemsTpl = require("component/index/tpl/items.tpl");
                 box.render($(".itemsDraw"), msg, itemsTpl);  
                 $(".itemsDraw li:first-child").addClass("activePage").attr("isHomePage","1");  
@@ -307,7 +296,6 @@ define(function(require,exports,module){
                 //编辑区的有需要保存的内容才弹框
                 if(datas.components[0].elements){
                     run.compareCacheDatas(datas, function(){
-                    //console.log(datas);
                         me.pageListClick(self);
                     });
                 }else{
@@ -326,6 +314,7 @@ define(function(require,exports,module){
                 run.loadFn(JSON.parse(msg.data),"",1); //1说明返回的数据是包括components
                 //渲染右边页面设置
                 pageSet.img_edit(msg);
+                run.cacheDatas = JSON.stringify(run.saveData());
             });
         },
 
@@ -363,6 +352,8 @@ define(function(require,exports,module){
 
                     $(".itemsDraw li").removeClass("activePage");
                     thisLi.next().addClass("activePage").attr("pageId",newPageId);
+                    thisLi.next().removeAttr("ishomepage");
+                    thisLi.next().find(".page-control").append('<span class="page-share set-page-tpl page-dele"><i></i></span>');
                 });
 
             });

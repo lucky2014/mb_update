@@ -39,7 +39,6 @@ strong *,strong{
     margin-top:6px;
     margin-left: 8px;
     border-radius: 2px;
-    border: 1px solid #d4d6db;
     text-align: center;
     position: relative;
     color: #ffffff;
@@ -49,6 +48,7 @@ strong *,strong{
     width:24px;
     margin-left: 0;
     height: 26px;
+    margin-top: 4px;
 }
 .edit_left,.edit_center,.edit_right{
     width:32px;
@@ -84,4 +84,22 @@ strong *,strong{
 }
 .dragBox span{
     background-color: transparent;
+}
+.cke_vAct_modexBox_paragraph_list .selectCommon{
+    width: 49px;
+    height: 20px;
+}
+.cke_vAct_modexBox_paragraph_list .selectCommon li{
+    color:#617084;
+}
+.cke_vAct_modexBox_paragraph_list .selectCommon>i,.cke_vAct_modexBox_paragraph_list .selectCommon b.arrowDown{
+    top: 9px;
+}
+.cke_vAct_modexBox_paragraph_list .selectCommon ul.selectUl,.cke_vAct_modexBox_paragraph_list .selectCommon .textType ul{
+    width: 90px;
+}
+
+.cke_vAct_modexBox_paragraph_list .selectCommon ul.selectUl li,.cke_vAct_modexBox_paragraph_list .selectCommon .textType ul li{
+    height: 32px;
+    line-height: 32px;
 }

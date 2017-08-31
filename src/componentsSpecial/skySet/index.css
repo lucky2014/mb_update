@@ -1,16 +1,25 @@
 .skySet{padding: 15px;}
-.skySet button{background:#20a0ff;color:#fff;height:30px;border: none;border-radius:5px;width:50px;outline:none;}
+.skySet button{background:#20a0ff;color:#fff;height:32px;border: none;border-radius:5px;width:50px;outline:none;}
 .skySet button:hover{background: #2badff;}
 .skySet button:active{background: #0991f6;}
 .skySet ul{width: 100%;padding-bottom: 50px;}
 .skySet li.backColor{position:relative; margin-bottom:10px;width: 445px;}
-.skySet li.backColor p{text-indent:90px;line-height:30px;color:#ffa200;font-size:1rem;margin: 12px 0 0 74px;}
+.skySet .backTip{text-indent:90px;line-height:30px;color:#ffa200;font-size:1rem;margin: 12px 0 0 74px;}
 .skySet li.backColor i{position:absolute;top:18px;left:87px;height:15px;background:#f0f0fa; display:inline-block;width:190px;cursor:pointer;}
 
 .skySet .commonStyle li {height: 50px;color: #617084;margin-left: 10px;}
 .skySet .commonStyle li.mustInput {margin-left: 0;}
 .skySet .commonStyle li.mustInput span i {width: 10px;color: red;display: inline-block;font-style: normal;}
-.skySet .commonStyle li input {width: 210px;height: 30px;color: #324057;padding:0 10px;border: 1px solid #a3b4cc;border-radius: 5px;margin-top: 10px;}
+.skySet .commonStyle li input {width: 210px;height: 30px;color: #324057;padding:0 10px;border: 1px solid #c4c4c4;border-radius: 5px;margin-top: 10px;}
 .skySet .commonStyle li span{margin-right: 10px;}
 
 .skySet button.blueBtnSky{ clear: both; display: block; width: 90px; margin: 0 auto;}
+.skySet .mustInput .inNumber{color: #ffa200;display: inline-block;}
+.skySet .mustInput .inNumber i{font-style: normal;}
+
+.skySet .skin-label{margin: 0 10px;line-height: 32px;}
+
+/* .skySet #background_color{overflow: hidden;}
+.skySet .selectCommon{float: left;width: 170px;}
+.skySet .sp-replacer{width: 141px;padding-left: 12px;}
+.skySet .sp-preview{width: 129px;} */

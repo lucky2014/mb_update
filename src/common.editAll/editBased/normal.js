@@ -24,7 +24,8 @@ define(function(require,exports,module){
 				callback2:function(me,e,self){
 					 
 					 me.stopBubble(e)
-	                 me.choseAll(self)
+					 console.log(e)
+	                 me.choseAll(self,e)
 				},
 				componentTpl:function(){
 					return require("componentsSpecial/text/text.tpl")

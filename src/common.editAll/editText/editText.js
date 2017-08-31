@@ -8,6 +8,9 @@ define(function(require,exports,module){
     //文本编辑器
     function getSelection($a){var $b,$c,$d;$b=$a.value.length;$c=$a.value.length;$d="";if($a.selectionStart){$b=$a.selectionStart;$c=$a.selectionEnd;$d=$a.value.substring($b,$c);}else{var $e=document.selection.createRange();if($e.parentElement()==$a){$d=$e.text;var $f=$d.length;$e.moveStart("character",-event.srcElement.value.length);$b=$e.text.length-$f;$c=$e.text.length;}};return{"selStart":$b,"selEnd":$c,"selText":$d};};
     function setSelection($a,$b,$c){if($a.selectionStart){$a.selectionStart=$b;$a.selectionEnd=$c;$a.setSelectionRange($b,$c);}else{var $e=$a.createTextRange();$e.collapse();$e.moveEnd('character',$c);$e.moveStart('character',$b);$e.select();};return getSelection($a);}
+    function getStyle(obj,attr){
+        return window.getComputedStyle(obj,null)[attr]
+    }
     var editText = {
         dragTarget:null,
         selectionObj:null,
@@ -58,38 +61,50 @@ define(function(require,exports,module){
         },
         textEdit:function(){
             var me = this;
-            $(".fontSize select").change(function(){
+            $(".fontSize li").click(function(){
                 var text = $(me.dragTarget)[0];
                 var selectHtml = me.getSelectionHtml()||me.rememberText;
                 var textValue = $(text).html();
                 var selectHtml2 = me.delHtmlTag(selectHtml,"sup");
-                var value = $(this).find("option:selected").attr("value");
-                var newValue = textValue.replace(selectHtml,"<sup style='font-size:"+value+"px'>"+selectHtml2+"</sup>");
-                $(text).html(newValue)
+                var value = $(this).attr("value");
+                var className = "fontSize"+new Date().getTime();
+                if(value){
+                    var newValue = textValue.replace(selectHtml,"<sup class='"+className+"' style='font-size:"+value+"px'>"+selectHtml2+"</sup>");
+                    $(text).html(newValue)
+                    me.choseAllFocus($("."+className)[0])
+                }
+                
             })
-            $(".lineHeight select").change(function(){
+            $(".lineHeight li").click(function(){
                 var text = $(me.dragTarget)[0];
                 var selectHtml = me.getSelectionHtml()||me.rememberText;
                 var selectHtml2 = me.delHtmlTag(selectHtml,"sub");
                 var textValue = $(text).html();
-                var value = $(this).find("option:selected").attr("value");
-                var newValue = textValue.replace(selectHtml,"<sub style='line-height:"+value+"'>"+selectHtml2+"</sub>");
-                $(text).html(newValue)
+                var value = $(this).attr("value");
+                var className = "lineHeight"+new Date().getTime();
+                if(value){
+                    var newValue = textValue.replace(selectHtml,"<sub class='"+className+"' style='line-height:"+value+"'>"+selectHtml2+"</sub>");
+                    $(text).html(newValue)
+                    me.choseAllFocus($("."+className)[0])
+                }
             })
+            var boldClass = "";
             $(".bold").click(function(e){
                 me.stopBubble(e);
                 var text = $(me.dragTarget)[0];
                 var selectHtml = me.getSelectionHtml()||me.rememberText;
                 var textValue = $(text).html();
+                var boldClass = "hasBold"+new Date().getTime();
                 if(!$(this).hasClass("drag_active")){
                     $(this).addClass("drag_active");
                     var selectHtml2 = me.delHtmlTag(selectHtml,"strong");
-                    var newValue = textValue.replace(selectHtml,"<strong class='hasBold'>"+selectHtml2+"</strong>");
+                    var newValue = textValue.replace(selectHtml,"<strong class='"+boldClass+"'>"+selectHtml2+"</strong>");
                     $(text).html(newValue)
+                    me.choseAllFocus($("."+boldClass)[0])
                 }else{
                     $(this).removeClass("drag_active");
                     var selectHtml2 = me.delHtmlTag(selectHtml,"strong");
-                    var newValue = textValue.replace(selectHtml,selectHtml2);
+                    var newValue = me.delHtmlTag(textValue,"strong");
                     $(text).html(newValue)
                 }
             })
@@ -103,6 +118,9 @@ define(function(require,exports,module){
                 }
             })
             $("body").delegate(".dragBox","blur",function(){
+                if($(me.dragTarget).attr("contenteditable")){
+                    $("#dialog_paragraph,#cke_vAct_modexBox_paragraph_content").show();
+                }
                 if(bodyDrag){
                     if(me.getSelectionHtml()!=""){
                         me.rememberText = me.getSelectionHtml();
@@ -120,20 +138,40 @@ define(function(require,exports,module){
                     bodyDrag = false;
                 }
             })
+            function focusVal(className,val){
+               $(className+" li").removeClass("selected");
+               $(className+" input").val(val);
+               $(className+" li[value='"+val+"']").addClass("selected");
+            }
+            $("body").delegate(".dragBox","click",function(e){
+               var fontSize = parseInt($(e.target).css("font-size"));
+               var lineHeight = $(e.target).css("line-height");
+               lineHeight = parseFloat(parseFloat(lineHeight).toFixed(1)/fontSize)?parseFloat(parseFloat(lineHeight).toFixed(1)/fontSize).toFixed(1):1.0;
+               focusVal(".fontSize",fontSize)
+               focusVal(".lineHeight",lineHeight)
+            })
+            $("body").delegate(".dragBox","dblclick",function(e){
+               var fontSize = parseInt($(e.target).css("font-size"));
+               var lineHeight = $(e.target).css("line-height");
+               lineHeight = parseFloat(parseFloat(lineHeight).toFixed(1)/fontSize)?parseFloat(parseFloat(lineHeight).toFixed(1)/fontSize).toFixed(1):1.0;
+               focusVal(".fontSize",fontSize)
+               focusVal(".lineHeight",lineHeight)
+            })
             $(".italic").click(function(e){
                 me.stopBubble(e)
                 var text = $(me.dragTarget)[0];
                 var selectHtml = me.getSelectionHtml()||me.rememberText;
                 var textValue = $(text).html();
+                var italicClass = "hasItalic"+new Date().getTime();
                 if(!$(this).hasClass("drag_active")){
                     $(this).addClass("drag_active");
                     var selectHtml2 = me.delHtmlTag(selectHtml,"i");
-                    var newValue = textValue.replace(selectHtml,"<i class='hasItalic' style='font-style:italic;'>"+selectHtml2+"</i>");
+                    var newValue = textValue.replace(selectHtml,"<i class='"+italicClass+"' style='font-style:italic;'>"+selectHtml2+"</i>");
                     $(text).html(newValue)
+                    me.choseAllFocus($("."+italicClass)[0])
                 }else{
                     $(this).removeClass("drag_active");
-                    var selectHtml2 = me.delHtmlTag(selectHtml,"i");
-                    var newValue = textValue.replace(selectHtml,selectHtml2);
+                    var newValue = me.delHtmlTag(textValue,"i");;
                     $(text).html(newValue)
                 }
             })
@@ -167,6 +205,30 @@ define(function(require,exports,module){
                 });
                 
                 box.render($(".linkDemo"), "", linkAdressTpl);
+                var sign = $(me.dragTarget).attr("sign"); //链接类型判断
+                
+                var linkName = $(me.dragTarget).attr("linkName"); //链接名称
+                if(sign == 1){
+                    $(".linkAddress").show();
+                    $(".selectAddress,.backAddress").hide();
+
+                    $(".linkStyle input").val("外部链接");
+                    $(".linkAddress input").val(linkName);
+                    /*$(".selectAddress .linkChoose").html("");*/
+                }else if(sign == 2){
+                    $(".linkAddress,.backAddress").hide();
+                    $(".selectAddress").show();
+
+                    $(".linkStyle input").val("站内链接");
+                    $(".selectAddress input").val(linkName);
+                }else if(sign == 3){
+                    $(".linkAddress,.selectAddress").hide();
+                    $(".backAddress").show();
+
+                    $(".linkStyle input").val("返回");
+                }
+                $(".linkChoose li").removeClass("selectedLi");
+                $(".linkChoose li[sign="+sign+"]").addClass("selectedLi");
 
                 text = $(me.dragTarget)[0];
                 if(window.getSelection().focusNode){
@@ -217,25 +279,33 @@ define(function(require,exports,module){
                 $("#dialog_paragraph").hide();
             })
         },
+        choseAllFocus:function(target){
+            try{
+                if (document.body.createTextRange) {
+                    var range = document.body.createTextRange();
+                    range.moveToElementText(target);
+                    range.select();
+                } else if (window.getSelection) {
+                    var selection = window.getSelection();
+                    var range = document.createRange();
+                    range.selectNodeContents(target);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                } else {
+                    
+                }
+            }catch(err){
+                //错误提示
+            }
+            
+        },
         choseAll:function(self){
             var lf = $(self).parents(".drag").offset().left;
             var tp = $(self).parents(".drag").offset().top;
             $("#dialog_paragraph,#cke_vAct_modexBox_paragraph_content").show();
             $("#cke_vAct_modexBox_paragraph_content").css({"left":lf,"top":tp-$("#cke_vAct_modexBox_paragraph_content").height()});
             $(self).attr("contenteditable",true);
-            if (document.body.createTextRange) {
-                var range = document.body.createTextRange();
-                range.moveToElementText(self);
-                range.select();
-            } else if (window.getSelection) {
-                var selection = window.getSelection();
-                var range = document.createRange();
-                range.selectNodeContents(self);
-                selection.removeAllRanges();
-                selection.addRange(range);
-            } else {
-                
-            }
+            this.choseAllFocus(self)
         }
     }
     return editText;

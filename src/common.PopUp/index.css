@@ -122,9 +122,9 @@ line-height: 30px; padding: 0 8px;}
     width: 40px;
     height: 40px;
     background: url(../component/imgs/new_navbar_header_4.png) no-repeat -6px -65px;
- }
- #pop .deleText.savePop b{margin-top: 4px;}
- .deleText.savePop{line-height: 23px;height: 50px;}
-/*  #border_color{padding-bottom: 32px;padding-top: 16px;    border-bottom: 1px solid #e0e0e0;} */
- #border_color .select, #border_color .skin-colorSelector{margin-right: 10px;}
- #background_color{display: block;height: 32px; padding: 8px 0 32px 0;}
+}
+#pop .deleText span{ float: left; width: 280px;}
+#pop .deleText.savePop b{margin-top: 4px;}
+.deleText.savePop{line-height: 23px;height: 50px;}
+#border_color .select, #border_color .skin-colorSelector{margin-right: 10px;}
+#background_color{display: block;height: 32px; padding: 8px 0 32px 0;}

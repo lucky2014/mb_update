@@ -164,7 +164,11 @@ define(function(require,exports,module){
           $(".borWUi li").eq(borWidth).addClass("selected");
 
           var borColor = $(appExtend.dragTarget).css("border-left-color"); //边框颜色
-          $("#border_color .c-colorWrapper b").css("background-color",borColor); //边框颜色
+          if(borColor=="rgba(0, 0, 0, 0)"){
+            borColor="rgba(255, 255, 255)";
+          }
+          //$("#border_color .c-colorWrapper b").css("background-color",borColor); //边框颜色
+          $(".skin-colorSelector-border").attr("theColor",borColor).siblings(".sp-replacer").find(".sp-preview-inner").css("background-color",borColor); //边框颜色
 
           var borStyle = $(appExtend.dragTarget).css("border-left-style"); //边框类型
               borVal = $(".borSUi li[value="+borStyle+"]").html();
@@ -179,14 +183,27 @@ define(function(require,exports,module){
           var radius = parseInt($(appExtend.dragTarget).css("border-top-right-radius")); //圆角
           $("#border_radius .clearfix.progress p").attr("value",radius); //圆角
           $("#border_radius .clearfix.progress p b").css("width",(radius/24)*($(".clearfix.progress p").width())+10)
-          var backColor =  $(appExtend.dragTarget).css("background-color"); //背景颜色
-          $("b.skin-colorSelector-bg").css("background-color",backColor);
+          var backColor =  $(appExtend.dragTarget).find("input").css("background-color"); //背景颜色
+          
+          $(".innerDialog .skin-colorSelector-bg").attr("theColor",backColor).siblings(".sp-replacer").find(".sp-preview-inner").css("background-color",backColor);
+
+          var skyBackcolor = $("#sky").attr("color");
+          $("#skySet .skin-colorSelector-bg").siblings(".sp-replacer").find(".sp-preview-inner").css("background-color",skyBackcolor);
+          $("#sky").attr("color",skyBackcolor);
 
           var butName = $(appExtend.dragTarget).children().val();//按钮文字
           $("#button_text .form-control").val(butName);
 
           var textColor = $(appExtend.dragTarget).children().css("color");//字体颜色
-          $("#font_color b.skin-colorSelector-font").css("background-color",textColor);
+
+          //$("#font_color b.skin-colorSelector-font").css("background-color",textColor);
+          $(".skin-colorSelector-font").attr("theColor",textColor).siblings(".sp-replacer").find(".sp-preview-inner").css("background-color",textColor);
+
+          //按钮背景渐变色
+          var beginBg =  $(appExtend.dragTarget).find("input").attr("beginBg"); //背景颜色
+          $(".skin-colorSelector-bgTp").attr("theColor",beginBg).attr("data-color",beginBg).siblings(".sp-replacer").find(".sp-preview-inner").css("background-color",beginBg);
+          var endBg =  $(appExtend.dragTarget).find("input").attr("endBg"); //背景颜色
+          $(".skin-colorSelector-bgBtm").attr("theColor",endBg).attr("data-color",endBg).siblings(".sp-replacer").find(".sp-preview-inner").css("background-color",endBg);
 
           var textSize = parseInt($(appExtend.dragTarget).parents(".drag").css("font-size")) || 14; //字体大小
           $("#fontConfig button").html(textSize);

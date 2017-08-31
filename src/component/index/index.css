@@ -96,6 +96,16 @@ body{
 	height:100%;
 	padding: 0;
 }
+.dragBox_parent>*>img.buttonIcon{
+    position: absolute;
+    max-width: 18px;
+    height: auto;
+    max-height: 78%;
+    left: 15%;
+    top: 50%;
+    margin-top: -12px;
+}
+
 .dragBox:hover{
 	background-color: rgba(58,126,194,.3);
 }

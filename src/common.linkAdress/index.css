@@ -13,7 +13,7 @@
     cursor: pointer;}
  .commonAddress{position: relative;text-align: left;width: 272px;}
  .commonAddress span{display: inline-block;width: 85px;}
- .commonAddress input{padding: 0 10px;width: 155px;height: 32px;line-height: 32px;border-radius: 4px;border: 1px solid #c4c4c4;}
+ .commonAddress input{padding: 0 30px 0 10px;width: 135px;height: 32px;line-height: 32px;border-radius: 4px;border: 1px solid #c4c4c4;}
  .linkAddress{display: none;}
  .linkAddress input{cursor: auto;}
  .backAddress{display: none;}
@@ -26,6 +26,6 @@
 
  .linkDemo.textLink .linkStyle{margin-bottom: 12px;}
  .linkDemo.textLink .commonAddress{width: 310px;}
- .linkDemo.textLink .commonAddress input{width: 222px;}
+ .linkDemo.textLink .commonAddress input{width: 200px;}
  .linkDemo.textLink .commonAddress span{width: 60px;}
-  .linkDemo.textLink ul.linkChoose{width: 242px;left: 64px;}
+ .linkDemo.textLink ul.linkChoose{width: 242px;left: 64px;}

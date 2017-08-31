@@ -120,9 +120,23 @@ define(function(require,exports,module){
             //     }
             // })
         },
+        createChooseRect:function(){
+            var div = document.createElement("div");
+            div.style.position = "absolute";
+            div.style.width = 0;
+            div.style.height = 0;
+            div.style.border = "1px dashed #ccc";
+            div.id = "chooseRect";
+            $("body").append(div);
+        },
         dragging:function(target,changeDiv,beforeMove,callback,afterMove){
             var me = this;
             var old = {};
+            var oldAll = {};
+            var oldChoosePos = {};
+            var choseArr = {};
+            var canChoseAll = false;
+            var ctrlKey = null;
             $(".mobile-container").delegate(target,"mousedown",function(e){
                 me.scrollDeltaH = 0;
                 me.dragTarget = this;
@@ -139,23 +153,117 @@ define(function(require,exports,module){
                 old.tp = parseInt($(this).parents(".drag").css("top"));
                 old.x = e.clientX;
                 old.y = e.clientY;
+                if(canChoseAll){
+                    for(var id in choseArr){
+                        oldAll[id] = {
+                            lf:parseInt($(choseArr[id]).parents(".drag").css("left")),
+                            tp:parseInt($(choseArr[id]).parents(".drag").css("top")),
+                            x:e.clientX,
+                            y:e.clientY
+                        };
+                    }
+                }
                 $(this).parents(".drag").css("transform-origin","center center");
                 beforeMove&&beforeMove(e);
+            })
+            $("body").mousedown(function(e){
+                if(canChoseAll){
+                    var lf = e.clientX;
+                    var tp = e.clientY;
+                    $("#chooseRect").css({"left":e.clientX+"px","top":e.clientY+"px"});
+                    $(".sizeControl_parent2").remove();
+                    $("body")[0].onmousemove = function(e){
+                            var w = e.clientX-lf;
+                            var h = e.clientY-tp;
+                            w<0?0:w;
+                            h<0?0:h;
+                            $("#chooseRect").css({"width":w+"px","height":h+"px"})
+                    }
+                    $("body")[0].onmouseup = function(e){
+                        $("body")[0].onmouseup = null;
+                        $("body")[0].onmousemove = null;
+                        if($(".mobile-container")[0]){
+                            var left = $("#chooseRect")[0].offsetLeft;
+                            var right = $("#chooseRect")[0].offsetLeft+$("#chooseRect").width();
+                            var top = $("#chooseRect")[0].offsetTop;
+                            var bottom = $("#chooseRect")[0].offsetTop+$("#chooseRect").height();
+                            for(var i = 0;i<$(".drag").length;i++){
+                                var lf = $(".drag")[i].offsetLeft+$(".mobile-container")[0].offsetLeft;
+                                var rt = $(".drag")[i].offsetLeft+$(".mobile-container")[0].offsetLeft+$(".drag").eq(i).width();
+                                var tp = $(".drag")[i].offsetTop+$(".mobile-container")[0].offsetTop;
+                                var btm = $(".drag")[i].offsetTop+$(".mobile-container")[0].offsetTop+$(".drag").eq(i).height();
+                                if(left<lf&&bottom>btm){
+                                    var str = me.createSizeControl();
+                                    $(".drag").eq(i).find(".dragBox_parent").append("<div class='sizeControl_parent2' data-name='linshi'>"+str+"</div>")
+                                    var id = $(".drag").eq(i).parent().attr("id");
+                                    choseArr[id] = $(".drag").eq(i).find(".dragBox")[0];
+                                }
+                            }
+                            for(var id in choseArr){
+                                oldAll[id] = {
+                                    lf:parseInt($(choseArr[id]).parents(".drag").css("left")),
+                                    tp:parseInt($(choseArr[id]).parents(".drag").css("top")),
+                                    x:e.clientX,
+                                    y:e.clientY
+                                };
+                            }
+                        }
+                        me.dragStatus = true;
+                        $("#chooseRect").remove();
+                        return false;
+                    }
+                }
+            })
+            $("body").keydown(function(e){
+                if(e.keyCode==17){
+                    ctrlKey = e.ctrlKey;
+                    canChoseAll = true;
+                    if(!$("#chooseRect")[0]){
+                        me.createChooseRect();
+                    }
+                }else{
+                    ctrlKey = false;
+                }
             })
             $(window).mousemove(function(e){
                 if(me.edit==true){
                     return;
                 }
                 if(me.dragStatus){
-                    callback&&callback(e,target,$(me.dragTarget).parents(".drag"),old)
+                    if(canChoseAll){
+                        for(var id in choseArr){
+                            callback&&callback(e,choseArr[id],$(choseArr[id]).parents(".drag"),oldAll[id])
+                        }
+                    }else{
+                        callback&&callback(e,target,$(me.dragTarget).parents(".drag"),old)
+                    }
                 }
             })
+            function checkChoseAll(){
+                for(var key in choseArr){
+                    console.log(key)
+                    if(key){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+                return false;
+            }
             $(".mobile-container").delegate(target,"click",function(e){
                 // me.stopBubble(e)
                 $(this).css("cursor","move");
                 if(!$(".sizeControl_parent")[0]){
                     var str = me.createSizeControl();
-                    $(this).parent().append("<div class='sizeControl_parent'>"+str+"</div>")
+                    if(canChoseAll){
+                        var id = $(this).parents(".drag").parent().attr("id");
+                        choseArr[id] = this;
+                        for(var id in choseArr){
+                            $("#"+id).find(".dragBox_parent").append("<div class='sizeControl_parent'>"+str+"</div>")
+                        }
+                    }else{
+                        $(this).parent().append("<div class='sizeControl_parent'>"+str+"</div>")
+                    }
                 }
             })
             $(document).mouseup(function(e){
@@ -165,6 +273,10 @@ define(function(require,exports,module){
                 }else{
                     if(!$(e.target).hasClass("sizeControl")){
                         $(".sizeControl_parent").remove();
+                        var id = $(me.dragTarget).parents(".drag").parent().attr("id");
+                        if(choseArr.hasOwnProperty(id)){
+                            canChoseAll = false;
+                        }
                         if($(e.target).parents(".dragBox")[0]){
                             pubsub.publish('dataChange');
                         }
@@ -187,19 +299,6 @@ define(function(require,exports,module){
             var w = $(changeDiv).width()/2;
             var h = $(changeDiv).height()/2;
             var scrollTop = parseInt($(".mCSB_dragger").css("top"));
-            // if(e.clientY>=(window.innerHeight-$(changeDiv).height())){
-            //     if(($(".mobile-container")[0].clientHeight+me.scrollH)>=$(".mCSB_container>.left").height()){
-            //         var height = $(".mCSB_container>.left").height();
-            //         $(".mCSB_container>.left").height(height+2);
-            //     }
-            //     me.scrollH+=2;
-            //     me.scrollDeltaH+=2;
-            //     //$(".VACT_main_page_index_box").mCustomScrollbar("scrollTo",me.scrollH);
-            // }else if(e.clientY<=scrollTop){
-            //     me.scrollH-=2;
-            //     me.scrollDeltaH-=2;
-            //     //$(".VACT_main_page_index_box").mCustomScrollbar("scrollTo",me.scrollH);
-            // }
             if(me.dragStatus){
                 $(changeDiv).css({"left":lf+deltaX,"top":tp+deltaY+me.scrollDeltaH});
             }else{
@@ -327,7 +426,6 @@ define(function(require,exports,module){
             $(document).mouseup(function(e){
                 me.brDragStatus = false;
                 if(!$(e.target).hasClass("sizeControl")){
-                    $(".sizeControl_parent").remove();
                     var vAct_modexBox_paragraphId = $(me.dragTarget).parents(".vAct_modexBox_paragraphId,.vAct_modexBox_pictureId");
                     if(vAct_modexBox_paragraphId.attr("id")){
                         me.getStyle(vAct_modexBox_paragraphId,vAct_modexBox_paragraphId.attr("id"))
@@ -361,7 +459,6 @@ define(function(require,exports,module){
             $(document).mouseup(function(e){
                 me.blDragStatus = false;
                 if(!$(e.target).hasClass("sizeControl")){
-                    $(".sizeControl_parent").remove();
                     var vAct_modexBox_paragraphId = $(me.dragTarget).parents(".vAct_modexBox_paragraphId,.vAct_modexBox_pictureId");
                     if(vAct_modexBox_paragraphId.attr("id")){
                         me.getStyle(vAct_modexBox_paragraphId,vAct_modexBox_paragraphId.attr("id"))
@@ -395,7 +492,6 @@ define(function(require,exports,module){
             $(document).mouseup(function(e){
                 me.tlDragStatus = false;
                 if(!$(e.target).hasClass("sizeControl")){
-                    $(".sizeControl_parent").remove();
                     var vAct_modexBox_paragraphId = $(me.dragTarget).parents(".vAct_modexBox_paragraphId,.vAct_modexBox_pictureId");
                     if(vAct_modexBox_paragraphId.attr("id")){
                         me.getStyle(vAct_modexBox_paragraphId,vAct_modexBox_paragraphId.attr("id"))
@@ -426,7 +522,6 @@ define(function(require,exports,module){
             $(window).mouseup(function(e){
                 me.trDragStatus = false;
                 if(!$(e.target).hasClass("sizeControl")){
-                    $(".sizeControl_parent").remove();
                     var vAct_modexBox_paragraphId = $(me.dragTarget).parents(".vAct_modexBox_paragraphId,.vAct_modexBox_pictureId");
                     //console.log(vAct_modexBox_paragraphId.attr("id"))
                     if(vAct_modexBox_paragraphId.attr("id")){
@@ -461,7 +556,6 @@ define(function(require,exports,module){
             $(document).mouseup(function(e){
                 me.bmDragStatus = false;
                 if(!$(e.target).hasClass("sizeControl")){
-                    $(".sizeControl_parent").remove();
                     var vAct_modexBox_paragraphId = $(me.dragTarget).parents(".vAct_modexBox_paragraphId,.vAct_modexBox_pictureId");
                     if(vAct_modexBox_paragraphId.attr("id")){
                         me.getStyle(vAct_modexBox_paragraphId,vAct_modexBox_paragraphId.attr("id"))
@@ -495,7 +589,6 @@ define(function(require,exports,module){
             $(document).mouseup(function(e){
                 me.tmDragStatus = false;
                 if(!$(e.target).hasClass("sizeControl")){
-                    $(".sizeControl_parent").remove();
                     var vAct_modexBox_paragraphId = $(me.dragTarget).parents(".vAct_modexBox_paragraphId,.vAct_modexBox_pictureId");
                     if(vAct_modexBox_paragraphId.attr("id")){
                         me.getStyle(vAct_modexBox_paragraphId,vAct_modexBox_paragraphId.attr("id"))
@@ -529,7 +622,6 @@ define(function(require,exports,module){
             $(document).mouseup(function(e){
                 me.mlDragStatus = false;
                 if(!$(e.target).hasClass("sizeControl")){
-                    $(".sizeControl_parent").remove();
                     var vAct_modexBox_paragraphId = $(me.dragTarget).parents(".vAct_modexBox_paragraphId,.vAct_modexBox_pictureId");
                     if(vAct_modexBox_paragraphId.attr("id")){
                         me.getStyle(vAct_modexBox_paragraphId,vAct_modexBox_paragraphId.attr("id"))
@@ -563,7 +655,6 @@ define(function(require,exports,module){
             $(document).mouseup(function(e){
                 me.mrDragStatus = false;
                 if(!$(e.target).hasClass("sizeControl")){
-                    $(".sizeControl_parent").remove();
                     var vAct_modexBox_paragraphId = $(me.dragTarget).parents(".vAct_modexBox_paragraphId,.vAct_modexBox_pictureId");
                     if(vAct_modexBox_paragraphId.attr("id")){
                         me.getStyle(vAct_modexBox_paragraphId,vAct_modexBox_paragraphId.attr("id"))

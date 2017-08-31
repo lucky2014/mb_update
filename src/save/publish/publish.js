@@ -24,7 +24,7 @@ define(function(require,exports,module){
             me.html = html;
             //渲染头部
             me.html += '<title>'+datas.components[0].pageName+'</title>'+
-            '</head><body style="background:'+datas.components[0].backgroundColor+'">';
+            '</head><body style="height:'+datas.components[0].height+'; background:'+datas.components[0].backgroundColor+'">';
 
             //渲染中间
             var obj = datas.components;
@@ -404,7 +404,7 @@ define(function(require,exports,module){
                                 return vAct_modexBoxArr.join("")
                             },
                             urlChangeFn:function(val){
-                                var reg = new RegExp("data-click","ig");
+                                var reg = new RegExp("pblUrl","ig");
                                 return val.replace(reg,"onclick")
                             },
                         };

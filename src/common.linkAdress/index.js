@@ -30,17 +30,13 @@ define(function(require,exports,module){
                 if(sign == 1){
                     $(".linkAddress").show();
                     $(".selectAddress,.backAddress").hide();
-                    /*$(".selectAddress .linkChoose").html("");*/
                 }else if(sign == 2){
                     $(".linkAddress,.backAddress").hide();
                     $(".selectAddress").show();
                 }else if(sign == 3){
                     $(".linkAddress,.selectAddress").hide();
                     $(".backAddress").show();
-                     $(app.dragTarget).unbind();
-                        $(app.dragTarget).bind("click",function(){
-                            location.href = history.back();
-                        })
+                    $(app.dragTarget).attr("pvUrl",'history.back()').attr("pblUrl",'history.back()');
                 }
                 self.parents(".linkStyle").attr("sign",sign);
 
@@ -48,14 +44,21 @@ define(function(require,exports,module){
             //内部链接下拉框
             $("body").delegate(".selectAddress .shclickLi,.selectAddress .shclickI","click",function(){
                 var self = $(this);
+                var thVal= self.val();
+
                 $(app.dragTarget).attr("sign","2");
                 self.siblings(".linkChoose").toggle();
                 self.parent("li").siblings("li").find(".linkChoose").hide();
                  setup.commonAjax("getCreatedUrlList.do", {siteId:siteId}, function(msg){
                     var linkTpl = require("common.linkAdress/linkSelect.tpl");
                     box.render($(".selectAddress .linkChoose"), msg, linkTpl);
-                    $(".selectAddress .linkChoose").prepend('<li class="selectedLi" urlname="">无</li>');
+                    $(".selectAddress .linkChoose").prepend('<li urlname="">无</li>');
                     //console.log(JSON.stringify(msg,null,2))
+                    if(thVal==""){
+                        $(".selectAddress .linkChoose li:first-child").addClass("selectedLi");
+                    }else{
+                        $(".selectAddress .linkChoose li[name="+thVal+"]").addClass("selectedLi");
+                    }
                 })
                 
             });
@@ -63,22 +66,33 @@ define(function(require,exports,module){
                 var self = $(this);
                 var meInput = self.parents(".linkChoose").siblings(".shclickLi");
                 var urlname = self.attr("urlname");
+                var url = self.attr("url");
 
                 meInput.attr("value",self.html())
                 meInput.val(self.html())
                 meInput.attr("urlname",urlname)
                 self.parents(".linkChoose").hide();
                 self.addClass("selectedLi").siblings("li").removeClass("selectedLi");
-                $(app.dragTarget).attr("data-click","location.href=pageId'"+urlname+"'");
+                if(urlname == "" || urlname == "无"){
+                    $(app.dragTarget).removeAttr("pvUrl").removeAttr("pblUrl");
+                }else{
+                    $(app.dragTarget).attr("pvUrl",'location.href="http://'+location.host+'/mb_update2/preview/index.html?pageId='+urlname+'"').attr("pblUrl",'location.href="'+url+'"');
+                }
+                
                 $(app.dragTarget).attr("linkName",self.html());
             })
             $("body").delegate(".linkAddress .shclickLi","keyup",function(){
                 var self = $(this);
                 self.attr("urlname",self.val());
                 var urlname = self.val();
-                $(app.dragTarget).attr("data-click","location.href='"+urlname+"'");
+            
+                if(urlname == "" || urlname == "无"){
+                    $(app.dragTarget).removeAttr("pvUrl").removeAttr("pblUrl");
+                }else{
+                    $(app.dragTarget).attr("pvUrl",'location.href="'+urlname+'"').attr("pblUrl",'location.href="'+urlname+'"');
+                }
                 $(app.dragTarget).attr("linkName",self.val());
-            })
+            });
             //点击其它区域隐藏下拉框
              $(document).on('mousedown',function(e){
                 if(!$(e.target).is($('.shclickLi,.shclickI')) && !$(e.target).is($('.linkChoose')) && $(e.target).parent('.linkChoose').length === 0){

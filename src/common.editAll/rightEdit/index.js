@@ -8,6 +8,7 @@ define(function(require,exports,module){
     var text = require("componentsSpecial/text/text.tpl");
     var ajaxFileUpload = require("common.ajaxfileupload/index");
     var popUp = require("common.PopUp/index");
+    /*var rightEdit = require("common.editAll/rightEdit/index")*/
     //文本编辑器
     var app = {
         stopBubble:function(e){
@@ -34,6 +35,54 @@ define(function(require,exports,module){
             
             $("body").delegate("#file_upload","click",function(e){
                 e&&me.stopBubble(e)
+                var self = $(this);
+
+                if(self.hasClass("buttonDia")){
+                  var settingButtonDialog = require("componentsSpecial/buttonEdit/settingButtonDialog.tpl");
+                  var systemIconTpl = require("componentsSpecial/buttonEdit/systemIcon.tpl");
+                  var systemIcon = require("componentsSpecial/buttonEdit/systemIcon.js");
+                  var url = "../src/component/imgs/btnIconsList.png";
+
+                  box.render($("#userPicDialog"), "", settingButtonDialog);
+                  box.render($(".sysPics #userPicList"), systemIcon, systemIconTpl);
+
+                  app.getData(".myPics #userPicList");
+                    me.selectFn(function(){
+                      if($("#userPicList .select").length==0){
+                               popUp({
+                                        "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                        showCancelButton: false,
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    });
+                              return false;
+                          }
+                          var url = $(".pic_thumb.select img").attr("src");
+                          //var pos = $(".pic_thumb.select i").attr("pos");
+                          $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find(".picBut").css("background-image","url("+url+")");
+                        $("#userPicDialog").fadeOut(300);
+                    })
+                }else if(self.hasClass("picDia")){
+                  var userPicDialog = require("componentsSpecial/picture/userPicDialog.tpl");
+                  box.render($("#userPicDialog"), "", userPicDialog);
+                  app.getData("#userPicList");
+                    me.selectFn(function(){
+                      if($("#userPicList .select").length==0){
+                              popUp({
+                                        "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                        showCancelButton: false,
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    });
+                              return false;
+                          }
+                          var url = $(".pic_thumb.select").attr("data-url");
+                          $(me.dragTarget).find("img")[0]&&$(me.dragTarget).find("img").attr("src",url);
+                          $("#show_pic_url").attr("src",url);//右边编辑区图片
+                          $("#userPicDialog").fadeOut(300);
+                    })
+                }
+                
                 $("#userPicDialog").fadeIn(300);
             })
             $("body").delegate(".dragBox","blur",function(e){

@@ -31,17 +31,22 @@ define(function(require,exports,module){
             }
             
             setup.commonAjax("showPage.do", params, function(msg){  
+                msg=JSON.parse(msg);
                 $("body").attr("style","background-color: "+msg.components[0].backgroundColor);
                 $("title").html(msg.components[0].pageName);
 
-                //run.loadFn(msg,"",1); //有第二个参数是预览效果，
-
                 var htmls = me.urlChangeFn(me.changePreviewDatas(msg));
-                $(".left").html(htmls);
+
+                //转换高度和最小高度
+                var height = msg.components[0].height;
+                height = height.replace(/px/,"");
+                height = height ? "height:" + (height*$(window).width()/308).toFixed(2) + "px;" : "";
+
+                $(".left").html(htmls).attr("style", height);
             });
         },
         urlChangeFn:function(val){
-            var reg = new RegExp("data-click","ig");
+            var reg = new RegExp("pvUrl","ig");
             return val.replace(reg,"onclick")
         },
         //预览的时候，改变数据格式，left、width变成百分百

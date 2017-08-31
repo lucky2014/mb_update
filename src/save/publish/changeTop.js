@@ -14,6 +14,14 @@ $(function(){
 		}
 		//$(v).find("img").css({"height": h});
 	});
+
+	//body的高度
+	var bdh = $("body").css("height");
+		bdh = bdh.replace(/px/g,"");
+		bdh = bdh/308*$(window).width().toFixed(2)+ "px";
+
+	$("body").css({"height": bdh});
+
 });
 
 

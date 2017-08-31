@@ -26,6 +26,13 @@ define(function(require, exports, module) {
                         msg && succCallback(msg.returnObject);
                     }else if(msg.resultCode == 8001){ //域名已被占用
                         $(".pblErr").show();
+                    }else if(msg.resultCode == 8002){
+                        popUp({
+                            "content":"页面名称不能超过16个字符！",
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
                     }
                 }, 
                 complete: function (XHR, TS) { XHR = null },

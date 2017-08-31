@@ -19,7 +19,9 @@ define(function(require,exports,module){
 　　　　document.selection.empty();
 　　};
     require("common.lib/jquery.ui/jquery.qrcode.min");
-
+    function trimNumber(str){ 
+        return str.replace(/\d+/g,''); 
+    }
     var app = {
         siteId: setup.getQueryString("siteId") || 60,
         templateId: setup.getQueryString("templateId"),
@@ -95,6 +97,10 @@ define(function(require,exports,module){
             }
             var htmls = me.getDataById(id);
             $(me.parentBox).append(htmls);
+            var lf = parseInt($("#"+id).find(".drag").css("left"));
+            var tp = parseInt($("#"+id).find(".drag").css("top"))+parseInt($("#"+id).find(".drag").height())+20;
+            $("#"+id).find(".drag").css({"left":lf,"top":tp});
+            me.rightEditComponentInit(null,trimNumber(id),$("#"+id)[0])
         },
         ctrlPaste:function(){
             var me = this;
@@ -103,13 +109,6 @@ define(function(require,exports,module){
                 var ctrlKey = e.ctrlKey;
                 if($(".sizeControl_parent")[0]){
                     if(ctrlKey&&code=="86"){
-                        if($(me.dragTarget).attr("contenteditable")){
-                            clearSlct
-                            if(me.getSelectionHtml()!=""){
-                                clearSlct();
-                            }
-                            return;
-                        }
                         me.ctrlPasteFn();
                     }
                 }
@@ -163,6 +162,8 @@ define(function(require,exports,module){
             if(me.cacheDatas && datas){
                 var a1 = JSON.stringify(datas);
                 var a2 = me.cacheDatas;
+                /*console.log(a1)
+                console.log(a2)*/
                 if(a1 == a2){
                     callBack && callBack();
                 }else{
@@ -179,7 +180,20 @@ define(function(require,exports,module){
                         $(".popUp").hide();
                     }, function(){
                         //点击取消
+                        //点否，离开按钮，左侧页面名称也返回
+                        var thName = (JSON.parse(a2)).components[0].pageName;
+                        var thLi = $(".itemsDraw li.activePage"); 
+                        var thPage = $(".itemsDraw li.activePage").attr("pageId");
+                        console.log(thPage) 
+                        if(thLi.attr("ishomepage") == 1){
+                           thLi.find("a").html('<i class="homeIcon"></i>'+thName);
+                        }else{
+                           thLi.find("a").html(thName); 
+                        }
+                        
                         callBack && callBack();
+                        $(".popUp").hide();
+                        //console.log((JSON.parse(a2)).components[0].pageName)
                     });
                     return ;
                 }
@@ -189,12 +203,12 @@ define(function(require,exports,module){
             }
         },
         //保存,在running页面调用
-        pageSave: function(){
+        pageSave: function(isPublish){
             var me = this;
             var datas = me.saveData();
             var thisLi = $("li.activePage");
             var ishomepage = $("li.activePage").attr("isHomePage");
-
+            //console.log(JSON.stringify(datas,null,2))
             //保存
             if($(".left").attr("pageId")){//新增的页面都调addPage接口
                 var params = {
@@ -205,12 +219,14 @@ define(function(require,exports,module){
                    "isHomePage": ishomepage,
                 };
                 setup.commonAjax("editPage.do", params, function(msg){
-                    popUp({
-                        "content":"保存成功！",
-                        showCancelButton: false,
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
+                    if(!isPublish){
+                        popUp({
+                            "content":"保存成功！",
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }
                 });
             }else{
                 //新增
@@ -224,16 +240,16 @@ define(function(require,exports,module){
                    // var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId="+me.returnObject;
                     thisLi.attr("pageId",msg);
                     $(".left").attr("pageId",msg);
-                    popUp({
-                        "content":"保存成功！",
-                        showCancelButton: false,
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
+                    if(!isPublish){
+                        popUp({
+                            "content":"保存成功！",
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }
                 });
             };
-        
-            me.cacheDatas = {};
             me.cacheDatas = JSON.stringify($.extend({},datas));
         },
         pagePreview: function(){
@@ -254,6 +270,7 @@ define(function(require,exports,module){
                 };
                 setup.commonAjax("editPage.do", params, function(msg){
                     var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId=" + $(".left").attr("pageId");
+                    console.log(href);
                     me.qrcodeInit(href,datas);
                 });
             }else{
@@ -299,8 +316,10 @@ define(function(require,exports,module){
             var me = this;
             var datas = me.saveData();
             //对比看是否有需要保存的数据
-            me.compareCacheDatas(datas,function(){
-                //先请求看是否已经发布过，判断是否曾经发布过
+           /* me.compareCacheDatas(datas,function(){*/
+                //先请求看是否已经发布过，判断是否曾经发布过\
+                me.pageSave(1);
+                 //me.pageSave();
                 me.getSiteInfo(me.siteId, function(msg){
                     /////此处为曾经发布过
                     me.hasPublished(me.siteId, msg.siteName, msg.domain, datas, 1);
@@ -351,7 +370,7 @@ define(function(require,exports,module){
 
                     ///////为发布结束
                 });
-            });
+            /*});*/
         },
         //调发布接口
         hasPublished: function(siteId, siteName, domain, datas, publishStatus){ //previewPop为tpl
@@ -461,6 +480,7 @@ define(function(require,exports,module){
             //保存数据成功后
             newDatas.components[0].backgroundColor = $("#sky").attr("color");
             newDatas.components[0].pageName = $("#sky h1").html();
+            newDatas.components[0].height = $(".left").css("height");
             return newDatas;
         },
         changeData:function(){
@@ -484,40 +504,43 @@ define(function(require,exports,module){
         loadFn:function(datas, ele, log){ //渲染html5 //log=1说明返回的数据是包括components
             //目前components只有1个数组值
             var me = this;
+            var leftHeight = datas.components[0].height;
+            var h3 = $(window).height()-130;
+            if(h3>500){
+                h3=500;
+            }
+            leftHeight = leftHeight ? leftHeight : h3+"px";
             if(ele){ //说明是预览或者发布
                 $("."+ele).html("");
                 this.elements = datas.components[0].elements||{};
                 this.changeData(); //预览的时候才需要改变数据的top值，减去55的sky header
                 var htmls = '<div><div class="skyHeader"><span>'+datas.components[0].pageName+'</span></div>';
-                htmls += me.urlChangeFn(this.getSaved())+'</div>';
-                $("." + ele).html(htmls);
+                htmls += me.urlUndoFn(this.getSaved())+'</div>';
+                $("." + ele).html(htmls).attr("style","height:"+leftHeight+";");
                 $("." + ele+">div").css({"backgroundColor": datas.components[0].backgroundColor});
-                me.cacheDatas = {};
-                me.cacheDatas = JSON.stringify($.extend({},datas));
             }else{
                 $(".left").html("");
                 if(log){ //初始渲染
                     this.elements = datas.components[0] ? datas.components[0].elements : {};
                     var htmls = me.urlUndoFn(this.getSaved());
-                    $(".left").html(htmls);
-                }else{
-                    this.elements = datas.elements||{};
-                    var htmls = me.urlUndoFn(this.getSaved());
-                    $(".left").html(htmls);
+                    $(".left").html(htmls).attr("style","height:"+leftHeight+";");
                 }
+                /*else{
+                    this.elements = datas.elements || {};
+                    var htmls = me.urlUndoFn(this.getSaved());
+                    $(".left").html(htmls).attr("style","height:"+leftHeight+";");;
+                }*/
                 /**这个方法作为读取组件信息时的基础数据绑定js在component/index/index.js*/
-                me.cacheDatas = null; 
-                me.cacheDatas = JSON.stringify($.extend({},datas)); 
                 me.rightEditComponentInitAll(null,true);
             } 
         },
         urlChangeFn:function(val){
-            var reg = new RegExp("data-click","ig");
+            var reg = new RegExp("pvUrl","ig");
             return val.replace(reg,"onclick")
         },
         urlUndoFn:function(val){
             var reg = new RegExp("onclick","ig");
-            return val.replace(reg,"data-click")
+            return val.replace(reg,"pvUrl")
         },
         getDataById:function(key){
             var me = this;

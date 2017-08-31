@@ -43,11 +43,11 @@
                       </div>
 
                       <div class="c-colorWrapper selectCommon" style="float: left;">
-                        <div class="c-opacityBg"></div>
-                        <div class="fieldSkin-color colorConfig" style="background-color: rgb(196, 196, 196);" config="#687683" status="v_paragraph_style1_border_color"></div>
-                        <input type="text" readonly class="skin-colorSelector skin-colorSelector-border">
-                        <i class="skin-colorSelector-border"></i>
-                        <b class="skin-colorSelector-border" style="background-color: rgb(196, 196, 196);"></b>
+                        <!-- <div class="c-opacityBg"></div>
+                        <div class="fieldSkin-color colorConfig" style="background-color: rgb(196, 196, 196);" config="#687683" status="v_paragraph_style1_border_color"></div> -->
+                        <input type="text" theColor="#617084" readonly class="skin-colorSelector skin-colorSelector-border">
+                        <!-- <i class="skin-colorSelector-border"></i>
+                        <b class="skin-colorSelector-border" style="background-color: rgb(196, 196, 196);"></b> -->
                         <!-- <div class="skin-colorSelector skin-colorSelector-border"></div> -->
                       </div>
 
@@ -63,11 +63,11 @@
                     <div id="background_color" class="colorSelectorWrapper none" style="height: 32px;line-height:32px; display: block;padding-top:20px;">
                       <label class="skin-label" style="float: left">背景</label>
                        <div class="c-colorWrapper n-c-colorWrapper selectCommon" style="float: left;">
-                           <div class="c-opacityBg"></div>
-                           <div class="fieldSkin-color colorConfig" style="background-color: rgb(223, 223, 237);" config="rgba(0,0,0,0)" status="v_paragraph_style1_border_color"></div>
-                           <input type="text" readonly class="skin-colorSelector skin-colorSelector-bg">
-                           <i class="skin-colorSelector-bg"></i>
-                           <b class="skin-colorSelector-bg" style="background-color: rgb(223, 223, 237);"></b>
+                           <!-- <div class="c-opacityBg"></div>
+                           <div class="fieldSkin-color colorConfig" style="background-color: rgb(223, 223, 237);" config="rgba(0,0,0,0)" status="v_paragraph_style1_border_color"></div> -->
+                           <input type="text" theColor="#fff" readonly class="skin-colorSelector skin-colorSelector-bg">
+                           <!-- <i class="skin-colorSelector-bg"></i>
+                           <b class="skin-colorSelector-bg" style="background-color: rgb(223, 223, 237);"></b> -->
                        </div>
                     </div>
                   </div>

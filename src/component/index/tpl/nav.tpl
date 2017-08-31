@@ -16,7 +16,7 @@
 		</div>
 	</div>
 	<!--模板-->
-	<div class="fl">
+	<!--div class="fl">
 		<div class="navi-btn">
 			<p>
 				<i class="new-icons-tpl"></i>单页模板
@@ -25,7 +25,7 @@
 		<div class="navi-btn-dropdown templates-list">
 			<ul class="templatesDraw"></ul>
 		</div>
-	</div>
+	</div-->
 	<!--组件-->
 	<div class="fl">
 		<div class="navi-btn zujian">
