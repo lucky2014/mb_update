@@ -1,0 +1,48 @@
+.cuttingLineCss label.skin-label{
+	line-height: 37px;
+}
+.cuttingLineCss .border_width,.cuttingLineCss .border_style,.cuttingLineCss #opacity{
+	margin-top: 24px;
+}
+.cuttingLineCss .borderWidth{width: 72px;} 
+.cuttingLineCss .borderStyle{width: 150px;position: relative;} 
+.cuttingLineCss .selectCommon ul.borCuttingUi {width: 150px;} 
+.cuttingLineCss .selectCommon ul.borCuttingUi li{position: relative;}
+.cuttingLineCss .selectCommon ul.borCuttingUi li b{
+	display: inline-block;
+	position: absolute;
+	width: 121px;
+	left: 15px;
+	top: 50%;
+	height: 2px;
+}
+.cuttingLineCss .selectCommon ul.borCuttingUi li[value="solid"] b{
+	background: url(../../../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -156px;
+} 
+.cuttingLineCss .selectCommon ul.borCuttingUi li[value="dashed"] b{
+	background: url(../../../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -178px;
+} 
+.cuttingLineCss .selectCommon ul.borCuttingUi li[value="dotted"] b{
+	background: url(../../../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -197px;
+} 
+.cuttingLineCss .borderStyle>b{
+	position: absolute;
+    background: url(../../../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -156px;
+    display: inline-block;
+    width: 109px;
+    height: 2px;
+    top: 16px;
+    left: 10px;
+}
+.cuttingLineCss .selectCommon ul.selectUl.borCuttingWUi{
+	width: 72px;
+} 
+.cuttingLineCss .selectCommon ul.selectUl li[value="solid"].selected b,.cuttingLineCss .selectCommon ul.selectUl li[value="solid"]:hover b{
+	background: url(../../../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -167px;
+}
+.cuttingLineCss .selectCommon ul.selectUl li[value="dashed"].selected b,.cuttingLineCss .selectCommon ul.selectUl li[value="dashed"]:hover b{
+	background: url(../../../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -187px;
+}
+.cuttingLineCss .selectCommon ul.selectUl li[value="dotted"].selected b,.cuttingLineCss .selectCommon ul.selectUl li[value="dotted"]:hover b{
+	background: url(../../../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -209px;
+}

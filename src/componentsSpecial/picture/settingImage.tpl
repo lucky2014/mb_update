@@ -53,12 +53,7 @@
                       </div>
 
                       <div class="c-colorWrapper selectCommon" style="float: left;">
-                        <!-- <div class="c-opacityBg"></div>
-                        <div class="fieldSkin-color colorConfig" style="background-color: rgb(196, 196, 196);" config="#687683" status="v_paragraph_style1_border_color"></div> -->
-                        <input type="text" theColor="#fff" readonly class="skin-colorSelector skin-colorSelector-border">
-                        <!-- <i class="skin-colorSelector-border"></i>
-                        <b class="skin-colorSelector-border" style="background-color: rgb(196, 196, 196);"></b> -->
-                        <!-- <div class="skin-colorSelector skin-colorSelector-border"></div> -->
+                        <input type="text" theColor="#000" readonly class="skin-colorSelector skin-colorSelector-border">
                       </div>
 
                       <div class="borderStyle selectCommon">
@@ -69,11 +64,6 @@
                             <li value="dashed">--</li>
                           </ul>
                       </div>
-                      <!-- <div class="select" style="float:left;">
-                        <select id="border_type_select" style="width: 53px;font-family: '微软雅黑';" status="v_paragraph_style1_border_style" config="solid">
-                          <option value="solid">一</option>
-                          <option value="dashed">--</option></select>
-                      </div> -->
                     </div>
 
                   </div>

@@ -33,43 +33,44 @@ define(function(require,exports,module){
                var cp = JSON.parse(v.data).components[0];
 
                var backgroundColor = cp && cp.backgroundColor;
-               $("#sky,#cp3").attr("color",backgroundColor);
-               $("#cp3").css("background",backgroundColor);
+               //console.log(backgroundColor)
+               $("#sky").attr("color",backgroundColor);
+               
                //页面名称change监控
-               $(".skySet").delegate(".navInput","keyup",function(){
-                   var self = $(this);
-                   var len = self.val().length;
-                   if(len<=16){
-                      $(".skySet .mustInput .inNumber b").html(len);
-                   }else{
-                      $(".skySet .mustInput .inNumber b").html("16");
-                   }
-                   
-                   $(".sky h1").html($("#storeName").val());
-
-                   if( $(".itemsDraw li.activePage").attr("ishomepage") == 1){
-                      $(".itemsDraw li.activePage a").html('<i class="homeIcon"></i>'+$("#storeName").val())
-                   }else{
-                      $(".itemsDraw li.activePage a").html($("#storeName").val())
-                   }
-               }) 
+              
            }else{
                 box.render($(".right"), "", img_showTpl);
            }
            
+           $(".skySet").delegate(".navInput","keyup",function(){
+               var self = $(this);
+               var len = self.val().length;
+               if(len<=16){
+                  $(".skySet .mustInput .inNumber b").html(len);
+               }else{
+                  $(".skySet .mustInput .inNumber b").html("16");
+               }
+               
+               $(".sky h1").html($("#storeName").val());
 
+               if( $(".itemsDraw li.activePage").attr("ishomepage") == 1){
+                  $(".itemsDraw li.activePage a").html('<i class="homeIcon"></i>'+$("#storeName").val())
+               }else{
+                  $(".itemsDraw li.activePage a").html($("#storeName").val())
+               }
+           }) 
             //sky背景颜色选择
             $("#cp3").spectrum({
                 color:backcolorSet,
                 showInput: true,
                 showPalette: true,
                 showSelectionPalette: true,
+                //showAlpha: true,
                 preferredFormat: "hex",
                 localStorageKey: "spectrum.demo",
                 move: function (color) {
                     hex = color.toHex();
-                    $("#cp3").css("background",color);
-                    $("#sky,#cp3").attr("color",color);
+                    $("#sky").attr("color",color);
                     pubsub.publish('dataChange',"sky");
                 },
                 show:function(){
@@ -78,8 +79,7 @@ define(function(require,exports,module){
                 hide: function (colpkr) {
                     isShow=0;
                     hex = colpkr.toHex();
-                    $("#cp3").css("background",colpkr);
-                    $("#sky,#cp3").attr("color",colpkr);
+                    $("#sky").attr("color",colpkr);
                     pubsub.publish('dataChange',"sky");
                 },
                 palette: [
@@ -107,11 +107,11 @@ define(function(require,exports,module){
                     pubsub.publish('dataChange',"sky");
                 }
             });*/
+            $("#skySet").find(".sp-preview-inner").css("background-color",backgroundColor);
             //重置背景颜色
             $(".backColor button").click(function(){
-                $("#cp3").spectrum("set", backcolorSet);
                 $(this).siblings("i").css("background",backcolorSet);
-                $("#sky,#cp3").attr("color",backcolorSet);
+                $("#sky").attr("color",backcolorSet);
                 pubsub.publish('dataChange',"sky");
             });
             

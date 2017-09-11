@@ -51,7 +51,7 @@ define(function(require,exports,module){
                  $(appExtend.dragTarget).parents(".drag").css(appExtend.rectForPos[id]);
                  $("input[name='module_pos_left']").val(appExtend.rectForPos[id].left);
             }else if(event.keyCode==40){//下
-                 appExtend.rectForPos[id].top+=2;
+                 appExtend.rectForPos[id].top++;
                  $(appExtend.dragTarget).parents(".drag").css(appExtend.rectForPos[id]);
                  $("input[name='module_pos_top']").val(appExtend.rectForPos[id].top);
                  var scrollTop = parseInt($(".mCSB_dragger").css("top"));
@@ -157,12 +157,16 @@ define(function(require,exports,module){
           $(".linkChoose li").removeClass("selectedLi");
           $(".linkChoose li[sign="+sign+"]").addClass("selectedLi");
 
-          var borWidth = parseInt($(appExtend.dragTarget).css("border-left-width")); //边框宽度
-          
-          $(".borderWidth input").val(borWidth); //边框宽度
-          $(".borWUi li").removeClass("selected");
-          $(".borWUi li").eq(borWidth).addClass("selected");
-
+         
+          if($(appExtend.dragTarget).children().hasClass("lineShow")){
+             var borWidth = parseInt($(appExtend.dragTarget).children().css("border-bottom-width")); //边框宽度
+             $(".borderWidth input").val(borWidth+"px");
+          }else{
+            var borWidth = parseInt($(appExtend.dragTarget).css("border-bottom-width")); //边框宽度
+            $(".borderWidth input").val(borWidth); //边框宽度
+            $(".borWUi li").removeClass("selected");
+            $(".borWUi li").eq(borWidth).addClass("selected");
+          }
           var borColor = $(appExtend.dragTarget).css("border-left-color"); //边框颜色
           if(borColor=="rgba(0, 0, 0, 0)"){
             borColor="rgba(255, 255, 255)";
@@ -172,9 +176,13 @@ define(function(require,exports,module){
 
           var borStyle = $(appExtend.dragTarget).css("border-left-style"); //边框类型
               borVal = $(".borSUi li[value="+borStyle+"]").html();
-          $(".borderStyle input").val(borVal); //边框类型
-          $(".borSUi li").removeClass("selected");
-          $(".borSUi li[value="+borStyle+"]").addClass("selected");
+          if($(appExtend.dragTarget).children().hasClass("lineShow")){
+
+          }else{
+            $(".borderStyle input").val(borVal); //边框类型
+            $(".borSUi li").removeClass("selected");
+            $(".borSUi li[value="+borStyle+"]").addClass("selected");
+          }
 
           var opacity = $(appExtend.dragTarget).css("opacity")*100; //不透明度
           $("#opacity .clearfix.progress p").attr("value",opacity); //不透明度
@@ -183,13 +191,21 @@ define(function(require,exports,module){
           var radius = parseInt($(appExtend.dragTarget).css("border-top-right-radius")); //圆角
           $("#border_radius .clearfix.progress p").attr("value",radius); //圆角
           $("#border_radius .clearfix.progress p b").css("width",(radius/24)*($(".clearfix.progress p").width())+10)
-          var backColor =  $(appExtend.dragTarget).find("input").css("background-color"); //背景颜色
-          
+          if($(appExtend.dragTarget).find("svg")[0]){
+            var backColor = $(appExtend.dragTarget).find("svg").attr("filebg");
+          }else{
+            var backColor = $(appExtend.dragTarget).find("input").css("background-color")||$(appExtend.dragTarget).css("background-color"); //背景颜色
+          }
           $(".innerDialog .skin-colorSelector-bg").attr("theColor",backColor).siblings(".sp-replacer").find(".sp-preview-inner").css("background-color",backColor);
-
-          var skyBackcolor = $("#sky").attr("color");
+          if($(appExtend.dragTarget).find("svg").attr("graphtype")=="square"){
+            $("#border_radius").css("display","block");
+          }else{
+            $("#border_radius").css("display","none");
+          }
+          /*var skyBackcolor = $("#sky").attr("color");
+          alert(skyBackcolor)
           $("#skySet .skin-colorSelector-bg").siblings(".sp-replacer").find(".sp-preview-inner").css("background-color",skyBackcolor);
-          $("#sky").attr("color",skyBackcolor);
+          $("#sky").attr("color",skyBackcolor);*/
 
           var butName = $(appExtend.dragTarget).children().val();//按钮文字
           $("#button_text .form-control").val(butName);
@@ -224,6 +240,16 @@ define(function(require,exports,module){
           var fontStyle = $(appExtend.dragTarget).children().css("font-style"); //字体倾斜
           if(fontStyle == "italic"){
             $("#fontConfig i[type=font-style]").addClass("active");
+          }
+
+          var cuttingV = $(appExtend.dragTarget).children().css("border-bottom-style");
+          var thisB = $(".cuttingLineCss .borderStyle>b");
+         if(cuttingV == "solid"){
+            thisB.css("background","url(../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -156px");
+          }else if(cuttingV == "dashed"){
+            thisB.css("background","url(../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -178px");
+          }else if(cuttingV == "dotted"){
+            thisB.css("background","url(../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -197px");
           }
 
         },

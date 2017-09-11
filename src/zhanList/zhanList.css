@@ -1,26 +1,42 @@
 body {
     background: #f4f5fa;
     font-size: 14px;
+    overflow-y:auto;
 }
 img{ border: none; outline:none;}
 .dn{display: none;}
-p.titleName{
+div.titleName{
     background: #fff;
-    height: 50px;
-    line-height: 50px;
-    margin-left: 5px;
+    height: 60px;
+    margin-left: 2px; overflow: hidden;
 }
-p.titleName span{
-    display: inline-block;
-    height: 25px;
-    line-height: 22px;
+div.titleName span.name{
+    display: inline-block; margin-top:10px;
+    height: 36px;
+    line-height: 36px;
     color: #656565;
     border-bottom: 3px solid #ffc63e;
     margin-left: 30px;
     font-size: 1.14rem;
     width: 70px;
     text-align: center;
+    float: left;
 }
+div.titleName a.ewnew{ display: inline-block; width: 66px; text-align: center; font-size: 16px; 
+height: 30px; line-height: 30px; border-radius: 8px; color: #1d8ce0; border: 2px solid #1d8ce0;
+margin-top: 11px;}
+div.titleName a.upgrade{ display: inline-block; width: 90px; text-align: center; 
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType = 1, startColorstr = #fbad14, endColorstr = #ff9000);
+height: 34px; line-height: 34px; font-size: 16px; background-image:-webkit-linear-gradient(to bottom, #ff9000, #fbad14);
+background-image:linear-gradient(to bottom, #ff9000, #fbad14); border-radius: 8px; color: #fff; margin: 11px 0 0 12px;}
+div.titleName a.help{ border-left: 1px solid #e1e1e1; margin-left: 20px; padding-left: 20px; 
+line-height: 52px; height: 60px; color: #617084; font-size: 16px;}
+div.titleName a.help i{ display: inline-block; background: url(../../imgs/q.png); width: 26px; 
+height: 26px; margin: 14px 10px 0 0; vertical-align: top;}
+.titleName .r{ float: right; width: 690px; padding: 0 0 0 50px; display: none;}
+.titleName .r span, .titleName .r a{ float: left;}
+.titleName .r span{ margin-right: 20px; padding-top: 8px; color: #617084; line-height: 22px;}
+.titleName .r span i,.titleName .r span em{ font-style: normal;}
 .section {
     min-width: 1100px;
     width: 98%;
@@ -78,7 +94,6 @@ font-size: 13px; z-index: 4; padding-left: 10px; line-height: 30px;}
 .microItem .siteEv canvas{ margin: 0 auto;}
 .microItem .hover a{
 	float: left;
-    /*width: 33.3%;*/
     width: 49.9%;
     height: 56px; text-align: center;
     cursor: pointer; display: inline-block; color: #fff;

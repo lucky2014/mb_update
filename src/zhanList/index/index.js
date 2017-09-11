@@ -8,6 +8,7 @@ define(function(require,exports,module){
 
     require("common.lib/jquery.ui/jquery.qrcode.min"); //生成二维码
     var popUp = require("common.PopUp/index");
+    var date = require("common.date/nowDate.js");
     
     //页面逻辑
     var app = {
@@ -42,6 +43,30 @@ define(function(require,exports,module){
                 var indexTpl = require("zhanList/index/index.tpl");
                 box.render($(".microContainer dl"), msg, indexTpl, 1);
                 me.init(); 
+            });
+        },
+        //判断用户是不是阿里用户
+        userType: function(){ //查询站点列表
+            var me = this;
+            setup.commonAjax("userInfo.do", "", function(msg){ 
+                if(msg.userType == "ali" || msg.userType == "qianniu"){
+                  $(".titleName .r").show();
+                  
+                  var remainTime = msg.serviceTime - new Date().getTime();
+                  var remainDay = parseInt(remainTime/1000/60/60/24);
+                  if(remainDay<1&&remainDay>0){
+                    var remain = "即将过期"
+                  }else if(remainDay<=0){
+                    var remain = "已过期"
+                  }else{
+                    var remain = '剩余'+remainDay+'天';
+                  }
+
+                  $(".titleName .r i.date").html(remain);
+                  $(".titleName .r em").html(date.toDate(msg.serviceTime,"long"));
+                }else{
+                  $(".titleName .r").hide();
+                }
             });
         },
     }
@@ -193,5 +218,9 @@ define(function(require,exports,module){
     $(".microContainer").delegate(".siteEv .cut", "click", function(){
       $(this).parent().hide();
     });
+
+
+    //判断用户类型
+    app.userType();
 });
 

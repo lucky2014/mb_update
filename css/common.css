@@ -12,7 +12,7 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, sub, sup, b, i, dl, d
     font-family: "微软雅黑"
 }
 p{white-space:normal !important;}
-body{background: #f4f5fa;overflow:hidden;}
+body{background: #f4f5fa;}
 /*浮动清除*/
 div:before, div before, div:after, div after, ul:before, ul before, ul:after, ul after, li:after, li after, li:before, li before, h3:before, h3 before, h3:after, h3 after {
     display: table;
@@ -33,3 +33,12 @@ input[type="button"], input[type="submit"], input[type="reset"] {
     background-color: transparent !important;
 }
 input.buttonInput{position: relative;text-indent: 18%;}/*图文按钮样式*/
+img.buttonIcon{
+    position: absolute;
+    max-width: 20px;
+    height: auto;
+    max-height: 24px;
+    left: 15%;
+    top: 50%;
+    margin-top: -10px;
+}

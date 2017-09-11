@@ -87,3 +87,5 @@
     text-indent: 3px;
     outline: none;
 }
+.specialSel{ width:194px; }
+.specialSel ul.selectUl{ width:194px; }

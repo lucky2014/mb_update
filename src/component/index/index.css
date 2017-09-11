@@ -9,7 +9,7 @@ div:before,div:after,ul:before,ul:after,li:before,li:after,p:before,p:after{
 	list-style: none;
 }
 input{outline: none;}
-input:focus{border: 1px solid #1d8ce0 !important;}
+.right input:focus{border: 1px solid #1d8ce0;}
 p.editText,p.companyText{outline: none;}
 p.editText:focus,p.companyText:focus{border: 1px solid #1d8ce0 !important;}
 .companyProductSet input.modelInput:focus,.hotRecommendSet input.modelInput:focus,.newProductSet input.modelInput:focus,.hotProductSet input.modelInput:focus{border: none !important;}
@@ -96,18 +96,18 @@ body{
 	height:100%;
 	padding: 0;
 }
-.dragBox_parent>*>img.buttonIcon{
+/* .dragBox_parent>*>img.buttonIcon{
     position: absolute;
-    max-width: 18px;
+    max-width: 20px;
     height: auto;
-    max-height: 78%;
+    max-height: 24px;
     left: 15%;
     top: 50%;
-    margin-top: -12px;
-}
+    margin-top: -10px;
+} */
 
 .dragBox:hover{
-	background-color: rgba(58,126,194,.3);
+	/* background-color: rgba(58,126,194,.3); */
 }
 .sizeControl {
     width: 8px;
@@ -115,6 +115,7 @@ body{
     border-radius: 50%;
     background: url(../imgs/hendles.png) no-repeat 50% 50%;
     position: absolute;
+    z-index:3;
 }
 .sizeControl:nth-child(1),.sizeControl:nth-child(8) {
     cursor: nw-resize;
@@ -396,7 +397,7 @@ body{
 	height:4px;
 }
 .progress p{
-	width:220px;
+	width:196px;
 	height:8px;
 	line-height: 8px;
 	border-radius: 4px;

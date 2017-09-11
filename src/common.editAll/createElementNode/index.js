@@ -116,7 +116,6 @@ define(function(require,exports,module){
 	            var vAct_modexBox_paragraph = document.createElement("div");
                 vAct_modexBox_paragraph.id = className;
                 vAct_modexBox_paragraph.className = className;
-                vAct_modexBox_paragraph.style.border = "1px solid #ccc";
 	            if(!$(".sizeControl_parent")[0]){
 	            	var str = me.createSizeControl();
 		            vAct_modexBox_paragraph.innerHTML = "<div style='"+dragStyle+"' class='drag' name='drag'><div class='dragBox_parent' name='dragBox_parent' style='height:100%;font-size:inherit;'><div class='dragBox' name='dragBox' style='"+dragBoxStyle+"'>"+tpl+"</div><div class='sizeControl_parent'>"+str+"</div></div></div>";

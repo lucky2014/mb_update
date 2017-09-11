@@ -29,7 +29,8 @@
             //检测当前浏览器是否是运行在mac平台下  
             mac: (agent.indexOf('macintosh') > -1), 
             //检测当前浏览器是否处于“怪异模式”下  
-            quirks: (document.compatMode == 'BackCompat')  
+            quirks: (document.compatMode == 'BackCompat'),
+            moz:agent.indexOf("firefox")!=-1 
         }; 
         //检测当前浏览器内核是否是gecko内核  
         browser.gecko = (navigator.product == 'Gecko' && !browser.webkit && !browser.opera && !browser.ie); 
@@ -132,13 +133,13 @@
     var isShow=0;
  	var app = {
  		colorPicker:function(currEle,initialColor){
-            //console.log(currEle)
             var me = this;
             var colorText = "";
             var colorText2 = "";
             if(!initialColor){
                 initialColor=$(currEle).attr("theColor");
             }
+            //console.log(currEle+","+initialColor)
             $(currEle).spectrum({
                 //allowEmpty:true,
                 color: initialColor,
@@ -170,6 +171,7 @@
                     }else if(currEle==".skin-colorSelector-bg"){//背景
                         //console.log($(me.dragTarget).find("svg")[0]);
                         if($(me.dragTarget).find("svg")[0]){
+                            $(me.dragTarget).find("svg")[0].setAttribute("filebg",'#' + hex)
                             $(me.dragTarget).find("svg").css("fill",'#' + hex);
                         }else if($(me.dragTarget).find("input")[0]){
                             $(me.dragTarget).find("input").css("backgroundColor",'#' + hex);
@@ -189,27 +191,43 @@
                         $(text).html(newValue)
                          me.choseAllFocus($("."+timeClass)[0])
                     }else if(currEle==".skin-colorSelector-font"){//字体颜色
-                        $(me.dragTarget).find("*").css("color",'#' + hex);
+                        if($(me.dragTarget).find(".lineShow")){
+                            $(me.dragTarget).find(".lineShow").css("border-bottom-color",'#' + hex);
+                        }else{
+                            $(me.dragTarget).find("*").css("color",'#' + hex);
+                        }
                     }else if(currEle==".skin-colorSelector-bgTp"){
                         var temp1 = '#' + hex;
                         var temp2 = $(".skin-colorSelector-bgBtm").attr("data-color");
                         $(me.dragTarget).find("input").attr("beginBg",temp1);
                         $(".skin-colorSelector-bgTp").attr("data-color",temp1);
-                        $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient("+temp1+", "+temp2+");"+
-                        +"-o-linear-gradient("+temp1+", "+temp2+");"+
-                        +"-moz-linear-gradient("+temp1+", "+temp2+");"+
-                        +"linear-gradient("+temp1+", "+temp2+");"+
-                        +"filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='"+temp1+"',endColorstr='"+temp2+"');*background:#DDD; }";
+                        $(me.dragTarget).find("input")[0].style.background = "linear-gradient(top,"+temp1+", "+temp2+")";
+                        if(browser.webkit){
+                            $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient(top,"+temp1+", "+temp2+")";
+                        }else if(browser.ie){
+                            $(me.dragTarget).find("input")[0].style.filter = "progid:DXImageTransform.Microsoft.gradient(startColorstr='"+temp1+"',endColorstr='"+temp2+"');*background:#DDD; }";
+                            $(me.dragTarget).find("input")[0].style.background = "linear-gradient("+temp1+", "+temp2+")";
+                        }else if(browser.opera){
+                            $(me.dragTarget).find("input")[0].style.background = "-o-linear-gradient(top,"+temp1+", "+temp2+")";
+                        }else{
+                             $(me.dragTarget).find("input")[0].style.background = "-moz-linear-gradient(top,"+temp1+", "+temp2+")"
+                        }
                     }else if(currEle==".skin-colorSelector-bgBtm"){
                         var temp1 = $(".skin-colorSelector-bgTp").attr("data-color");
                         var temp2 = '#' + hex;
                         $(".skin-colorSelector-bgBtm").attr("data-color",temp2);
                         $(me.dragTarget).find("input").attr("endBg",temp2);
-                        $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient("+temp1+", "+temp2+");"+
-                        +"-o-linear-gradient("+temp1+", "+temp2+");"+
-                        +"-moz-linear-gradient("+temp1+", "+temp2+");"+
-                        +"linear-gradient("+temp1+", "+temp2+");"+
-                        +"filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='"+temp1+"',endColorstr='"+temp2+"');*background:#DDD; }";
+                        $(me.dragTarget).find("input")[0].style.background = "linear-gradient(top,"+temp1+", "+temp2+")";
+                        if(browser.webkit){
+                            $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient(top,"+temp1+", "+temp2+")";
+                        }else if(browser.ie){
+                            $(me.dragTarget).find("input")[0].style.filter = "progid:DXImageTransform.Microsoft.gradient(startColorstr='"+temp1+"',endColorstr='"+temp2+"');*background:#DDD; }";
+                            $(me.dragTarget).find("input")[0].style.background = "linear-gradient("+temp1+", "+temp2+")";
+                        }else if(browser.opera){
+                            $(me.dragTarget).find("input")[0].style.background = "-o-linear-gradient(top,"+temp1+", "+temp2+")";
+                        }else{
+                             $(me.dragTarget).find("input")[0].style.background = "-moz-linear-gradient(top,"+temp1+", "+temp2+")"
+                        }
                     }
                 },
                 hide: function (colpkr) {
@@ -217,15 +235,17 @@
                     hex = colpkr.toHex();
                     $(currEle).attr("theColor",hex)
                     if(currEle==".skin-colorSelector-border"){//边框
+                        console.log($(me.dragTarget).find("svg")[0])
                         if($(me.dragTarget).find("svg")[0]){
-                            $(me.dragTarget).find("svg").css("stroke",'#' + hex);
+                            $(me.dragTarget).find("svg").children().css("stroke",'#' + hex);
                         }else{
                             $(me.dragTarget).css("border-color",'#' + hex);
                         }
                     }else if(currEle==".skin-colorSelector-bg"){//背景
                         //console.log($(me.dragTarget).find("svg")[0]);
+                        
                         if($(me.dragTarget).find("svg")[0]){
-                            $(me.dragTarget).find("svg").css("fill",'#' + hex);
+                            $(me.dragTarget).find("svg").children().css("fill",'#' + hex);
                         }else if($(me.dragTarget).find("input")[0]){
                             $(me.dragTarget).find("input").css("backgroundColor",'#' + hex);
                             $(me.dragTarget).css("backgroundColor",'#' + hex);
@@ -249,8 +269,12 @@
                         $(".skin-colorSelector-bgTp").attr("data-color",temp1);
                         if(browser.webkit){
                             $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient("+temp1+", "+temp2+")";
-                        }else if(browser.mac){
+                        }else if(browser.opera){
                             $(me.dragTarget).find("input")[0].style.background = "-o-linear-gradient("+temp1+", "+temp2+")";
+                        }else if(browser.moz){
+                            $(me.dragTarget).find("input")[0].style.background = "-moz-linear-gradient("+temp1+", "+temp2+")";
+                        }else if(browser.ie){
+                            $(me.dragTarget).find("input")[0].style.filter = "progid:DXImageTransform.Microsoft.gradient(startcolorstr="+temp1+",endcolorstr="+temp2+",gradientType=0);"
                         }else{
                             $(me.dragTarget).find("input")[0].style.background = "linear-gradient("+temp1+", "+temp2+")";
                         }
@@ -259,11 +283,14 @@
                         var temp2 = '#' + hex;
                         $(".skin-colorSelector-bgBtm").attr("data-color",temp2);
                         $(me.dragTarget).find("input").attr("endBg",temp2);
-                        $(me.dragTarget).find("input")[0].style.background = "linear-gradient("+temp1+", "+temp2+")";
                         if(browser.webkit){
                             $(me.dragTarget).find("input")[0].style.background = "-webkit-linear-gradient("+temp1+", "+temp2+")";
-                        }else if(browser.mac){
+                        }else if(browser.opera){
                             $(me.dragTarget).find("input")[0].style.background = "-o-linear-gradient("+temp1+", "+temp2+")";
+                        }else if(browser.moz){
+                            $(me.dragTarget).find("input")[0].style.background = "-moz-linear-gradient("+temp1+", "+temp2+")";
+                        }else if(browser.ie){
+                            $(me.dragTarget).find("input")[0].style.filter = "progid:DXImageTransform.Microsoft.gradient(startcolorstr="+temp1+",endcolorstr="+temp2+",gradientType=0);"
                         }else{
                             $(me.dragTarget).find("input")[0].style.background = "linear-gradient("+temp1+", "+temp2+")";
                         }

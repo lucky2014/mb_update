@@ -108,6 +108,9 @@ define(function(require,exports,module){
                 var code = e.keyCode;
                 var ctrlKey = e.ctrlKey;
                 if($(".sizeControl_parent")[0]){
+                	if($(me.dragTarget).attr("contenteditable")){
+                		return;
+                	}
                     if(ctrlKey&&code=="86"){
                         me.ctrlPasteFn();
                     }
@@ -136,7 +139,7 @@ define(function(require,exports,module){
                        }
                        classObj["attributes"] = {};
                        $.each(element.attributes,function(i,attrib){
-                            if(attrib.name!="style"){
+                            if(attrib.name!="style"&&attrib.name!="contenteditable"){
                                 classObj["attributes"][attrib.name] = attrib.value;
                             }
                        })
@@ -162,8 +165,6 @@ define(function(require,exports,module){
             if(me.cacheDatas && datas){
                 var a1 = JSON.stringify(datas);
                 var a2 = me.cacheDatas;
-                /*console.log(a1)
-                console.log(a2)*/
                 if(a1 == a2){
                     callBack && callBack();
                 }else{
@@ -184,13 +185,11 @@ define(function(require,exports,module){
                         var thName = (JSON.parse(a2)).components[0].pageName;
                         var thLi = $(".itemsDraw li.activePage"); 
                         var thPage = $(".itemsDraw li.activePage").attr("pageId");
-                        console.log(thPage) 
                         if(thLi.attr("ishomepage") == 1){
                            thLi.find("a").html('<i class="homeIcon"></i>'+thName);
                         }else{
                            thLi.find("a").html(thName); 
                         }
-                        
                         callBack && callBack();
                         $(".popUp").hide();
                         //console.log((JSON.parse(a2)).components[0].pageName)
@@ -208,7 +207,7 @@ define(function(require,exports,module){
             var datas = me.saveData();
             var thisLi = $("li.activePage");
             var ishomepage = $("li.activePage").attr("isHomePage");
-            //console.log(JSON.stringify(datas,null,2))
+            console.log(JSON.stringify(datas,null,2))
             //保存
             if($(".left").attr("pageId")){//新增的页面都调addPage接口
                 var params = {
@@ -238,8 +237,8 @@ define(function(require,exports,module){
                 };
                 setup.commonAjax("addPage.do", params, function(msg){ 
                    // var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId="+me.returnObject;
-                    thisLi.attr("pageId",msg);
-                    $(".left").attr("pageId",msg);
+                    thisLi.attr("pageId",msg.id).attr("sort",msg.sort);
+                    $(".left").attr("pageId",msg.id);
                     if(!isPublish){
                         popUp({
                             "content":"保存成功！",
@@ -270,7 +269,6 @@ define(function(require,exports,module){
                 };
                 setup.commonAjax("editPage.do", params, function(msg){
                     var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId=" + $(".left").attr("pageId");
-                    console.log(href);
                     me.qrcodeInit(href,datas);
                 });
             }else{
@@ -283,8 +281,8 @@ define(function(require,exports,module){
                 
                 setup.commonAjax("addPage.do", params, function(msg){
                     var href = "http://"+ location.host+ "/mb_update2/preview/index.html?pageId="+msg.returnObject;
-                    thisLi.attr("pageId",msg);
-                    $(".left").attr("pageId",msg);
+                    thisLi.attr("pageId",msg.id).attr("sort",msg.sort);
+                    $(".left").attr("pageId",msg.id);
                     // 预览弹框
                     me.qrcodeInit(href,datas);
                 });
@@ -344,7 +342,7 @@ define(function(require,exports,module){
                     }, function(){
                         var siteName = $(".siteName").val();
                         var siteDomain = $(".siteDomain").val();
-
+                        $(".popUp").hide();
                         if(!siteName){
                             $(".pblTipBox").html('<div class="pblTip">请输入您的站点名称！</div>').show();
                             setTimeout(function(){
@@ -503,6 +501,7 @@ define(function(require,exports,module){
         },
         loadFn:function(datas, ele, log){ //渲染html5 //log=1说明返回的数据是包括components
             //目前components只有1个数组值
+            //console.log(JSON.stringify(datas,null,2))
             var me = this;
             var leftHeight = datas.components[0].height;
             var h3 = $(window).height()-130;

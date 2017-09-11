@@ -47,21 +47,21 @@ define(function(require,exports,module){
                   box.render($(".sysPics #userPicList"), systemIcon, systemIconTpl);
 
                   app.getData(".myPics #userPicList");
-                    me.selectFn(function(){
-                      if($("#userPicList .select").length==0){
-                               popUp({
-                                        "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
-                                        showCancelButton: false,
-                                        showConfirmButton: false,
-                                        timer: 1000
-                                    });
-                              return false;
-                          }
-                          var url = $(".pic_thumb.select img").attr("src");
-                          //var pos = $(".pic_thumb.select i").attr("pos");
-                          $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find(".picBut").css("background-image","url("+url+")");
-                        $("#userPicDialog").fadeOut(300);
-                    })
+                  me.selectFn(function(){
+                    if($("#userPicList .select").length==0){
+                             popUp({
+                                      "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                      showCancelButton: false,
+                                      showConfirmButton: false,
+                                      timer: 1000
+                                  });
+                            return false;
+                        }
+                        var url = $(".pic_thumb.select img").attr("src");
+                        //var pos = $(".pic_thumb.select i").attr("pos");
+                        $(me.dragTarget).find("img")[0]&&$(me.dragTarget).find("img").attr("src",url);;
+                      $("#userPicDialog").fadeOut(300);
+                  })
                 }else if(self.hasClass("picDia")){
                   var userPicDialog = require("componentsSpecial/picture/userPicDialog.tpl");
                   box.render($("#userPicDialog"), "", userPicDialog);
@@ -81,6 +81,40 @@ define(function(require,exports,module){
                           $("#show_pic_url").attr("src",url);//右边编辑区图片
                           $("#userPicDialog").fadeOut(300);
                     })
+                }else if(self.hasClass("graphDia")){
+                  var svgPicDialog = require("componentsSpecial/imageSvg/svgPicDialog.tpl");
+                  box.render($("#userPicDialog"), "", svgPicDialog);
+                  $("#userPicDialog").fadeIn(300);
+                  me.selectFn(function(){
+                    if($("#userPicList .select").length==0){
+                      popUp({
+                                "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                      return false;
+                    }
+                    var url = $("#userPicDialog .select img").attr("src");
+                    $("#show_pic_url").attr("src",url)
+                    var type = $("#userPicDialog .select").attr("data-type");
+                    var w = $("#userPicDialog .select img").width()-parseInt($("#userPicDialog .select img").css("margin-left"))-3;
+                    var h = $("#userPicDialog .select img").height()-parseInt($("#userPicDialog .select img").css("margin-top"))-3;
+                    $(me.dragTarget).parents(".drag").css({"width":w,"height":h});
+                    var svgJs = require("componentsSpecial/imageSvg/common.svg/index.js");
+                    $(me.dragTarget).html(svgJs[type]());
+                    var newW = $(me.dragTarget).children().width();
+                    var newH = $(me.dragTarget).children().height();
+                    var r = Math.min(newW,newH)/2;
+                    $(me.dragTarget).children().children().attr("data-type",type);
+                    $("#userPicDialog").fadeOut(300);
+                    if(type=="rect"){
+                      $("#border_radius").css("display","block");
+                    }else{
+                      $("#border_radius").css("display","none");
+                      $(me.dragTarget).css("border-radius",0)
+                    }
+                  })
                 }
                 
                 $("#userPicDialog").fadeIn(300);
@@ -90,11 +124,6 @@ define(function(require,exports,module){
                 me.isEdit = false;
                 $(this).select();
                 $(".setting-panel-title,.setting-panel-content").hide();
-            })
-            $("body").click(function(e){
-              if(!$(e.target).parents("#cke_vAct_modexBox_paragraph_content")[0]){
-                  $(me.dragTarget).removeAttr("contenteditable");
-              }
             })
             $("body").delegate(".selectCommon>input,.selectCommon>i","click",function(e){ //ul下拉框显示or隐藏
                 $(".selectCommon ul,.textInput ul").hide();
@@ -129,23 +158,43 @@ define(function(require,exports,module){
                      $("div.textType").css('display','none');
                  }
              });
-             $("body").delegate(".selectCommon .selectUl li","click",function(e){//选择下拉框选项
+             $("body").delegate(".selectCommon .selectUl li,.selectCommon .selectUl li b","click",function(e){//选择下拉框选项
                 e&&me.stopBubble(e)
                 var self = $(this);
                 var value = self.html();
 
-                self.parent().siblings("input").val(value);
                 self.addClass("selected").siblings("li").removeClass("selected");
                 self.parent().hide();
                 if(self.parent().hasClass("borWUi")){
+                    self.parent().siblings("input").val(value);
                     $(me.dragTarget).css("border-width",value+"px");//改变显示区线宽
+                    //console.log($(me.dragTarget).css("border-color"))
+                    if($(me.dragTarget).css("border-color")=="rgba(0, 0, 0, 0)"){
+                        $(me.dragTarget).css("border-color","#000")
+                    }
                 }else if(self.parent().hasClass("borSUi")){
                      var valHtml = self.attr("value");
+                     self.parent().siblings("input").val(value);
                      if($(me.dragTarget).find("svg")[0]){
                          $(me.dragTarget).find("svg").css("stroke-style",valHtml);
                      }else{
                          $(me.dragTarget).css("border-style",valHtml);
                      }
+                }else if(self.parent().hasClass("borCuttingUi")){
+                   var thisV = self.attr("value");
+                   var thisB = self.parent().siblings("b");
+                   
+                    if(thisV == "solid"){
+                      thisB.css("background","url(../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -156px");
+                    }else if(thisV == "dashed"){
+                      thisB.css("background","url(../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -178px");
+                    }else if(thisV == "dotted"){
+                      thisB.css("background","url(../src/component/imgs/new_navbar_header_4.png) no-repeat -41px -197px");
+                    }
+                    $(me.dragTarget).children().css("border-bottom-style",thisV);
+                }else if(self.parent().hasClass("borCuttingWUi")){
+                  self.parent().siblings("input").val(value);
+                  $(me.dragTarget).children().css("border-bottom-width",value);
                 }
                 
              });

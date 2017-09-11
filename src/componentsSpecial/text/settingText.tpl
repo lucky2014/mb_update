@@ -45,7 +45,7 @@
                       <div class="c-colorWrapper selectCommon" style="float: left;">
                         <!-- <div class="c-opacityBg"></div>
                         <div class="fieldSkin-color colorConfig" style="background-color: rgb(196, 196, 196);" config="#687683" status="v_paragraph_style1_border_color"></div> -->
-                        <input type="text" theColor="#617084" readonly class="skin-colorSelector skin-colorSelector-border">
+                        <input type="text" theColor="#000" readonly class="skin-colorSelector skin-colorSelector-border">
                         <!-- <i class="skin-colorSelector-border"></i>
                         <b class="skin-colorSelector-border" style="background-color: rgb(196, 196, 196);"></b> -->
                         <!-- <div class="skin-colorSelector skin-colorSelector-border"></div> -->

@@ -24,7 +24,7 @@ define(function(require,exports,module){
 				callback2:function(me,e,self){
 					 
 					 me.stopBubble(e)
-					 console.log(e)
+					 //console.log(e)
 	                 me.choseAll(self,e)
 				},
 				componentTpl:function(){
@@ -89,12 +89,16 @@ define(function(require,exports,module){
 			graphTpl:{
 				callback:function(me,e,componentClass,componentTpl,editTpl){
 					var svgPicDialog = require("componentsSpecial/imageSvg/svgPicDialog.tpl");
+					/*var svgJs = require("componentsSpecial/imageSvg/common.svg/index.js");
+					$(me.dragTarget).html(svgJs["rect"]());
+			        $(me.dragTarget).children().children().attr("data-type","rect");
+					$("#border_radius").css("display","block");*/
 					box.render($("#userPicDialog"), "", svgPicDialog);
-    				$("#userPicDialog").fadeIn(300);
+    				//$("#userPicDialog").fadeIn(300);
 		            me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
 			                popUp({
-                                "content":"<div class='deleText'><b></b>请选择一张图片!</div>",
+                                "content":"<div class='deleText'><b></b>请选择一个图形!</div>",
                                 showCancelButton: false,
                                 showConfirmButton: false,
                                 timer: 1000
@@ -113,13 +117,18 @@ define(function(require,exports,module){
 			            var r = Math.min(newW,newH)/2;
 			            $(me.dragTarget).children().children().attr("data-type",type);
 			            $("#userPicDialog").fadeOut(300);
+			            if(type=="rect"){
+			            	$("#border_radius").css("display","block");
+			            }else{
+			            	$("#border_radius").css("display","none");
+			            }
 			    	})
 				},
 				callback2:function(me,e,componentClass,componentTpl,editTpl){
 					me.stopBubble(e)
 					var svgPicDialog = require("componentsSpecial/imageSvg/svgPicDialog.tpl");
 					box.render($("#userPicDialog"), "", svgPicDialog);
-    				$("#userPicDialog").fadeIn(300);
+    				//$("#userPicDialog").fadeIn(300);
     				me.selectFn(function(){
 			    		if($("#userPicList .select").length==0){
 			                 popUp({
@@ -145,7 +154,7 @@ define(function(require,exports,module){
 			    	})
 				},
 				componentTpl:function(){
-					return require("componentsSpecial/imageSvg/image.tpl")
+					return require("componentsSpecial/imageSvg/common.svg/rect.tpl")
 				},
 				setting:function(){
 					return require("componentsSpecial/imageSvg/settingSvg.js")
@@ -207,15 +216,15 @@ define(function(require,exports,module){
 						
 					},
 					componentTpl:function(){
-						return require("componentsSpecial/cuttingLine/cuttingLineShow/index.tpl");
+						return require("componentsSpecial/cuttingLine/cuttingLine.tpl");
 					},
 					setting:function(){
-						return require("componentsSpecial/cuttingLine/cuttingLineSet/index.js")
+						return require("componentsSpecial/cuttingLine/settingCuttingLine.js")
 					},
-					callback3:function(){
+					/*callback3:function(){
 						var app = require("componentsSpecial/cuttingLine/cuttingLineSet/index.js");
 						app.init();
-					}
+					}*/
 			},
 			buttonTpl: {
 				callback:function(me,e,componentClass,componentTpl,editTpl){
@@ -240,7 +249,7 @@ define(function(require,exports,module){
 			            }
 			            var url = $(".pic_thumb.select img").attr("src");
 			            //var pos = $(".pic_thumb.select i").attr("pos");
-			            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find(".picBut").css("background-image","url("+url+")");
+			            $(me.dragTarget).find("input")[0]&&$(me.dragTarget).find("img").css("src",url);
 				        $("#userPicDialog").fadeOut(300);
 			    	})
 				},
@@ -280,6 +289,35 @@ define(function(require,exports,module){
 				},
 				setting:function(){
 					return require("componentsSpecial/buttonEdit/index.js")
+				}
+			},
+			footernavTpl:{
+				callback:function(me,e,componentClass,componentTpl,editTpl){
+					
+				},
+				callback2:function(me,e,componentClass,componentTpl,editTpl){
+
+				
+				},
+				componentTpl:function(){
+					return require("componentsSpecial/footernav/footernav.tpl");
+				},
+				setting:function(){
+					return require("componentsSpecial/footernav/settingFooternav.js")
+				}
+			},
+			swiperTpl:{
+				callback:function(me,e,componentClass,componentTpl,editTpl){
+
+				},
+				callback2:function(me,e,componentClass,componentTpl,editTpl){
+					me.stopBubble(e)
+				},
+				componentTpl:function(){
+					return require("componentsSpecial/swiperTpl/swiper.tpl")
+				},
+				setting:function(){
+					return require("componentsSpecial/swiperTpl/settingSwiper.js")
 				}
 			}
 		}

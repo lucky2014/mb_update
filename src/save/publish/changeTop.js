@@ -13,6 +13,11 @@ $(function(){
 			$(v).css({"top": t, "height": h});
 		}
 		//$(v).find("img").css({"height": h});
+
+		//计算字体大小
+		var fontSize=$(v).css("font-size").replace(/px/g,"");
+		var newFontSize=(fontSize*$(window).width()/308).toFixed(2)
+		$(v).css("font-size",newFontSize+"px");
 	});
 
 	//body的高度

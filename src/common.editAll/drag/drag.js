@@ -20,6 +20,11 @@ define(function(require,exports,module){
            };
        } 
     }
+    var clearSlct= "getSelection" in window ? function(){
+     window.getSelection().removeAllRanges();
+    } : function(){
+     document.selection.empty();
+    };
     var dragObject = {
         dragTargetWidth:0,
         dragTargetHeight:0,
@@ -139,6 +144,11 @@ define(function(require,exports,module){
             var ctrlKey = null;
             $(".mobile-container").delegate(target,"mousedown",function(e){
                 me.scrollDeltaH = 0;
+                if(this!=me.dragTarget){
+                	$(this).removeAttr("contenteditable");
+                	$("#dialog_paragraph,#cke_vAct_modexBox_paragraph_content").hide();
+                	clearSlct();
+                }
                 me.dragTarget = this;
                 if(me.edit==true){
                     return;
@@ -182,21 +192,22 @@ define(function(require,exports,module){
                     $("body")[0].onmouseup = function(e){
                         $("body")[0].onmouseup = null;
                         $("body")[0].onmousemove = null;
-                        if($(".mobile-container")[0]){
+                        if($("#chooseRect")[0]){
                             var left = $("#chooseRect")[0].offsetLeft;
                             var right = $("#chooseRect")[0].offsetLeft+$("#chooseRect").width();
                             var top = $("#chooseRect")[0].offsetTop;
                             var bottom = $("#chooseRect")[0].offsetTop+$("#chooseRect").height();
                             for(var i = 0;i<$(".drag").length;i++){
-                                var lf = $(".drag")[i].offsetLeft+$(".mobile-container")[0].offsetLeft;
-                                var rt = $(".drag")[i].offsetLeft+$(".mobile-container")[0].offsetLeft+$(".drag").eq(i).width();
-                                var tp = $(".drag")[i].offsetTop+$(".mobile-container")[0].offsetTop;
-                                var btm = $(".drag")[i].offsetTop+$(".mobile-container")[0].offsetTop+$(".drag").eq(i).height();
+                                var lf = $(".drag").eq(i).offset().left;
+                                var rt = $(".drag").eq(i).offset().left+$(".drag").eq(i).width();
+                                var tp = $(".drag").eq(i).offset().top;
+                                var btm = $(".drag").eq(i).offset().top+$(".drag").eq(i).height();
                                 if(left<lf&&bottom>btm){
                                     var str = me.createSizeControl();
                                     $(".drag").eq(i).find(".dragBox_parent").append("<div class='sizeControl_parent2' data-name='linshi'>"+str+"</div>")
                                     var id = $(".drag").eq(i).parent().attr("id");
                                     choseArr[id] = $(".drag").eq(i).find(".dragBox")[0];
+                                    canChoseAll = true;
                                 }
                             }
                             for(var id in choseArr){
@@ -231,6 +242,7 @@ define(function(require,exports,module){
                 }
                 if(me.dragStatus){
                     if(canChoseAll){
+                    	$("#chooseRect").remove();
                         for(var id in choseArr){
                             callback&&callback(e,choseArr[id],$(choseArr[id]).parents(".drag"),oldAll[id])
                         }
@@ -386,6 +398,12 @@ define(function(require,exports,module){
             var checkOffsetLeft = me.getRect(e,$(me.dragTarget).parents(".drag"),newW,newH,$(posEle)).offsetLeft;
             var checkOffsetTop = me.getRect(e,$(me.dragTarget).parents(".drag"),newW,newH,$(posEle)).offsetTop;
             $(me.dragTarget).parents(".drag").css({"left":parseInt(lf+me.oldObj.offsetLeft-(checkOffsetLeft)),"top":parseInt(tp+me.oldObj.offsetTop-(checkOffsetTop))});
+            if($(me.dragTarget).find(".swiper-wrapper")[0]){//轮播组件拖动大小时先停止自动滚动，然后再初始化
+                var swiperApp = require("common.swiper/index.js");
+                $(me.dragTarget).find(".swiper-wrapper").css("transform","matrix(1, 0, 0, 1, 0, 0)");
+                swiperApp.stopSwiper();
+                swiperApp.swiperElement($(me.dragTarget));
+            }
         },
         checkPostionByIcon:function(dragTarget,posEle,deltaX,deltaY){
             if(posEle.indexOf("r")!="-1"){
@@ -678,7 +696,7 @@ define(function(require,exports,module){
         checkWOrH:function(type,currEle,w,h){
             if(type=="circle"){
                 var r = Math.min(w,h)/2;
-                $(currEle).attr("cx",r).attr("cy",r).attr("r",r);
+                //$(currEle).attr("cx",r).attr("cy",r).attr("r",r);
             }
         },
         dragInit:function(){
@@ -719,7 +737,7 @@ define(function(require,exports,module){
                 var type = $(me.dragTarget).find("svg").children().attr("data-type");
                 me.checkWOrH(type,$(me.dragTarget).find("svg").children(),w,h)
                 var r = Math.min(w,h)/2;
-                $(me.dragTarget).find("svg").children().width(w).height(h).attr("cx",r).attr("cy",r).attr("r",r);
+                //$(me.dragTarget).find("svg").children().width(w).height(h).attr("cx",r).attr("cy",r).attr("r",r);
                 var id = $(me.dragTarget).parents(".drag").parent().attr("id");
 
                 me.rectForPos[id] = {

@@ -11,6 +11,31 @@ define(function(require,exports,module){
     function getStyle(obj,attr){
         return window.getComputedStyle(obj,null)[attr]
     }
+    var clearSlct= "getSelection" in window ? function(){
+     window.getSelection().removeAllRanges();
+    } : function(){
+     document.selection.empty();
+    };
+    function IsURL (str_url) { 
+        var strRegex = '^((https|http|ftp|rtsp|mms)?://)'
+        + '?(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' //ftp的user@ 
+        + '(([0-9]{1,3}.){3}[0-9]{1,3}' // IP形式的URL- 199.194.52.184 
+        + '|' // 允许IP和DOMAIN（域名） 
+        + '([0-9a-z_!~*\'()-]+.)*' // 域名- www. 
+        + '([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].' // 二级域名 
+        + '[a-z]{2,6})' // first level domain- .com or .museum 
+        + '(:[0-9]{1,4})?' // 端口- :80 
+        + '((/?)|' // a slash isn't required if there is no file name 
+        + '(/[0-9a-z_!~*\'().;?:@&=+$,%#-]+)+/?)$'; 
+        var re=new RegExp(strRegex); 
+        //re.test() 
+        if (re.test(str_url)) { 
+        return (true); 
+        } else { 
+        return (false); 
+        } 
+    }
+    var errorTip = require("common.errorTip/index.js");
     var editText = {
         dragTarget:null,
         selectionObj:null,
@@ -53,7 +78,7 @@ define(function(require,exports,module){
 　　　　        var docFragment = rangeObj.cloneContents();
                 var testDiv = document.createElement("div");
         　　　　testDiv.appendChild(docFragment);
-        　　　　var selectHtml = testDiv.innerHTML;
+        　　　　var selectHtml = testDiv.innerHTML||"";
                 return selectHtml;
             }else{
                 return "";
@@ -124,15 +149,17 @@ define(function(require,exports,module){
                 if(bodyDrag){
                     if(me.getSelectionHtml()!=""){
                         me.rememberText = me.getSelectionHtml();
-                        if(me.rememberText.indexOf("hasBold")!=-1){
-                            $(".bold").addClass("drag_active");
-                        }else{
-                            $(".bold").removeClass("drag_active");
-                        }
-                        if(me.rememberText.indexOf("hasItalic")!=-1){
-                            $(".italic").addClass("drag_active");
-                        }else{
-                            $(".italic").removeClass("drag_active");
+                        if(me.rememberText){
+                            if(me.rememberText.indexOf("hasBold")!=-1){
+                                $(".bold").addClass("drag_active");
+                            }else{
+                                $(".bold").removeClass("drag_active");
+                            }
+                            if(me.rememberText.indexOf("hasItalic")!=-1){
+                                $(".italic").addClass("drag_active");
+                            }else{
+                                $(".italic").removeClass("drag_active");
+                            }
                         }
                     }
                     bodyDrag = false;
@@ -157,6 +184,15 @@ define(function(require,exports,module){
                focusVal(".fontSize",fontSize)
                focusVal(".lineHeight",lineHeight)
             })
+            $("body").mousedown(function(e){
+                if(!$(e.target).parents("#cke_vAct_modexBox_paragraph_content")[0]){
+                    if(!$(e.target).parents(".drag")[0]){
+                        $(".dragBox").removeAttr("contenteditable");
+                        $("#dialog_paragraph,#cke_vAct_modexBox_paragraph_content").hide();
+                        clearSlct();
+                    }
+                }
+            })
             $(".italic").click(function(e){
                 me.stopBubble(e)
                 var text = $(me.dragTarget)[0];
@@ -177,6 +213,7 @@ define(function(require,exports,module){
             })
             var selectHtml = "";
             var text = "";
+            var removeTimer = null;
             $(".link").click(function(e){
                 me.stopBubble(e)
                 /*$("#myPopover1").show();*/
@@ -188,20 +225,30 @@ define(function(require,exports,module){
                 }, function(){
                     var sign = $(".linkStyle").attr("sign");
                     var linkVal = $(".commonAddress[remark="+sign+"] input").attr("urlname");
-                    
-                    var textValue = $(text).html();
-                    if(!$(this).hasClass("drag_active")){
-                        $(this).addClass("drag_active");
-                        var selectHtml2 = me.delHtmlTag(selectHtml,"a");
-                        var newValue = textValue.replace(selectHtml,"<a data-url='"+linkVal+"'>"+selectHtml2+"</a>");
-                        $(text).html(newValue)
+                    var self = $(".popUp .linkAddress input")[0];
+                    if(!IsURL(linkVal)){
+                        errorTip.init(self,"仅支持http,https,ftp格式的链接,并确保填写的外部的链接可以在浏览器中打开。")
+                        $(self).css("border-color","#f00");
+                        clearTimeout(removeTimer);
+                        removeTimer = setTimeout(function(){
+                            $(self).css("border-color","#c4c4c4");
+                            errorTip.removeFn(self);
+                        },2000)
                     }else{
-                        $(this).removeClass("drag_active");
-                        var selectHtml2 = me.delHtmlTag(selectHtml,"a");
-                        var newValue = textValue.replace(selectHtml,selectHtml2);
-                        $(text).html(newValue)
+                        var textValue = $(text).html();
+                        if(!$(self).hasClass("drag_active")){
+                            $(self).addClass("drag_active");
+                            var selectHtml2 = me.delHtmlTag(selectHtml,"a");
+                            var newValue = textValue.replace(selectHtml,"<a data-url='"+linkVal+"'>"+selectHtml2+"</a>");
+                            $(text).html(newValue)
+                        }else{
+                            $(self).removeClass("drag_active");
+                            var selectHtml2 = me.delHtmlTag(selectHtml,"a");
+                            var newValue = textValue.replace(selectHtml,selectHtml2);
+                            $(text).html(newValue)
+                        }
+                        $(".popUp").css("display","none");
                     }
-                    $(".popUp").css("display","none");
                 });
                 
                 box.render($(".linkDemo"), "", linkAdressTpl);
@@ -305,6 +352,7 @@ define(function(require,exports,module){
             $("#dialog_paragraph,#cke_vAct_modexBox_paragraph_content").show();
             $("#cke_vAct_modexBox_paragraph_content").css({"left":lf,"top":tp-$("#cke_vAct_modexBox_paragraph_content").height()});
             $(self).attr("contenteditable",true);
+            $(self).attr("spellcheck",false)
             this.choseAllFocus(self)
         }
     }

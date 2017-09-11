@@ -103,6 +103,12 @@ define(function(require,exports,module){
             $(".site-page-navi-add").click(function(){
                 var pageNum = $(".itemsDraw li").length+1;
                 $(".site-page-navi-list ul").append("<li><input type='text' value='第"+pageNum+"页'/><button>确认</button></li>");
+                var datas = run.saveData();
+                if(datas.components[0].elements){
+                    run.compareCacheDatas(datas, function(){
+                        run.cacheDatas = JSON.stringify(run.saveData());
+                    });
+                }
             });
         },
         // 点击重命名
@@ -196,7 +202,7 @@ define(function(require,exports,module){
         //点击确认
         okBtn: function(){
             var me = this;
-            $(".site-page-navi-list ul").delegate(" button", "click", function(e){
+            $(".site-page-navi-list ul").delegate("button", "click", function(e){
                 e.stopPropagation();
                 if(!$(this).parents("li").hasClass("activePage")){
                     $(this).parents("li").click();
@@ -214,7 +220,6 @@ define(function(require,exports,module){
                 if(!thisLi.attr("pageId")){
                     thisLi.addClass("activePage").attr("templateId", "0").siblings("li").removeClass("activePage");
                     $(".left").html("").attr("pageId","").attr("isHomePage", "").attr("templateId", "0");
-                  
                     pageSet.img_edit(dataBlank);
                 }
                 $("#sky h1").html(val.text);
@@ -243,6 +248,7 @@ define(function(require,exports,module){
 
                 $.each(msg, function(i,v){
                     v.pageName = v.pageName ? v.pageName : "第"+ (i+1)+"页";
+                    //console.log(JSON.stringify(v,null,2))
                     if(v.isHomePage == 1){
                         $("#sky h1").html(v.pageName);
                         showDatas = $.extend({}, JSON.parse(v.data));
@@ -266,12 +272,10 @@ define(function(require,exports,module){
                 app.selectItems();         
             });
         },
-        //组件接口
+        //组件引入
         componentList: function(){ 
-            setup.commonAjax("componentList.do", "", function(msg){ 
                 var extsTpl = require("component/index/tpl/exts.tpl"); 
-                box.render($(".extsDraw1"), msg, extsTpl);               
-            });
+                box.render($(".extsDraw1"), "", extsTpl);  
         },
         //加载模板页面（空白或非空白）
         selectTemp: function(templateId){
@@ -332,10 +336,12 @@ define(function(require,exports,module){
                    "templateId": 0,
                    "pageName": msg.pageName,
                    "data": JSON.stringify({components: JSON.parse(msg.data).components}),
-                   "siteId": msg.siteId
+                   "siteId": msg.siteId,
+                   "sortNum":thisLi.index()+2,
                 };
 
                 setup.commonAjax("addPage.do", params, function(newPageId){ 
+                    var newPageId = newPageId.id;
                     $(".left").attr("pageId",newPageId);
 
                     $("#sky h1").html(msg.pageName);
@@ -353,7 +359,9 @@ define(function(require,exports,module){
                     $(".itemsDraw li").removeClass("activePage");
                     thisLi.next().addClass("activePage").attr("pageId",newPageId);
                     thisLi.next().removeAttr("ishomepage");
-                    thisLi.next().find(".page-control").append('<span class="page-share set-page-tpl page-dele"><i></i></span>');
+                    if(thisLi.attr("ishomepage") == 1){
+                        thisLi.next().find(".page-control").append('<span class="page-share set-page-tpl page-dele"><i></i></span>');
+                    }
                 });
 
             });
@@ -364,10 +372,14 @@ define(function(require,exports,module){
 
     $("#sky.leftDiv").click(function(){
         var pageId = $(".left").attr("pageId");
-        setup.commonAjax("getPageInfo.do", {pageId:pageId}, function(msg){  
+        /*setup.commonAjax("getPageInfo.do", {pageId:pageId}, function(msg){  */
             //渲染右边页面设置
-            pageSet.img_edit(msg);
-        });
+            var pageName = $(".sky h1").html();
+            var bkColor = $("#sky").attr("color");
+            pageSet.img_edit();
+             $("#storeName").val(pageName);
+             $("#skySet").find(".sp-preview-inner").css("background-color",bkColor);
+        /*});*/
     });
     return app;
 });

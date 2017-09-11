@@ -7,6 +7,7 @@ define(function(require,exports,module){
     var box = Engine.init();
     var run = require("common.editAll/editBased/running");
     require("../../css/common.css");
+    require("../../css/component.css");
 
     //页面逻辑
     var app = {

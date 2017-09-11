@@ -188,7 +188,12 @@ define(function(require,exports,module){
             if(borderColor=="rgba(0, 0, 0, 0)"){
                 borderColor="rgba(0, 0, 0)";
             }
-            var bgColor = $(me.dragTarget).children().css("background-color");
+            if($(appExtend.dragTarget).find("svg")[0]){
+                var bgColor = $(appExtend.dragTarget).find("svg").attr("filebg");
+                $("#show_pic_url").attr("src",$(appExtend.dragTarget).find("svg").attr("imgsrc"))
+            }else{
+                var bgColor = $(me.dragTarget).children().css("background-color");
+            }
             var fontColor = $(me.dragTarget).children().css("color");
             me.colorPicker(".skin-colorSelector-border",borderColor);
             me.colorPicker(".skin-colorSelector-bg",bgColor);
@@ -217,7 +222,6 @@ define(function(require,exports,module){
         e=e?e:undefined;
         this.rightEditComponent(e,type,tplObj.componentTpl(),settingJs.tpl(),function(e,self,componentClass,componentTpl,editTpl){
             tplObj.callback(app,e,componentClass,componentTpl,editTpl)
-            var w = $(app.dragTarget).children().width();
             pubsub.publish('dataChange');
         },function(e,self){
             tplObj.callback2(app,e,self)

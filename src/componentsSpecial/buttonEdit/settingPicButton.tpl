@@ -17,10 +17,10 @@
                           <div class="clearfix btnPic" style="float:left;margin-bottom:20px;text-align: left;">
                              <!--  <img src="../src/component/imgs/picIcon.png" style="margin-left:0"> -->
                              <ul class="picButFast">
-                               <li><img src="http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb6rOACbYxAAAE2wy7hXk965.png"></li>
-                               <li><img src="http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb6suAcj-BAAAE8HgIIEw495.png"></li>
-                               <li><img src="http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb6tGAaAm7AAAFQSO8K0A923.png"></li>
-                               <li><img src="http://122.224.218.61:8001/group1/M00/00/62/wKgCClmb6tSAXor2AAAFgT8z2-M805.png"></li>
+                               <li><img src="http://122.224.218.61:8001/group1/M00/00/65/wKgCClmniX-ADO-LAAAFSWylUsc689.png"></li>
+                               <li><img src="http://122.224.218.61:8001/group1/M00/00/65/wKgCClmniYOAUppsAAAFrQ0dp4g238.png"></li>
+                               <li><img src="http://122.224.218.61:8001/group1/M00/00/65/wKgCClmniYmADTQPAAAFsP2C-RM929.png"></li>
+                               <li><img src="http://122.224.218.61:8001/group1/M00/00/65/wKgCClmniY6AbDaHAAAF35kNiC4150.png"></li>
                              </ul>
                           </div>
                           <div id="file_upload" class="uploadify-button buttonDia" style="float:left;margin-left:15px;margin-top:3px;cursor:pointer;line-height: 24px;color:#1c9ae3;">
@@ -134,7 +134,7 @@
                         <div class="c-colorWrapper selectCommon" style="float: left;">
                           <!-- <div class="c-opacityBg"></div>
                           <div class="fieldSkin-color colorConfig" style="background-color: rgb(198, 198, 230);" config="#687683" status="v_paragraph_style1_border_color"></div> -->
-                          <input type="text" theColor="#fff" readonly class="skin-colorSelector skin-colorSelector-border">
+                          <input type="text" theColor="#000" readonly class="skin-colorSelector skin-colorSelector-border">
                           <!-- <i class="skin-colorSelector-border"></i>
                           <b class="skin-colorSelector-border" style="background-color: rgb(198, 198, 230);"></b> -->
                           <!-- <div class="skin-colorSelector skin-colorSelector-border"></div> -->

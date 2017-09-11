@@ -34,7 +34,7 @@ define(function(require,exports,module){
             var seconds = myDate.getSeconds();
 
             var str = year + '-' + me.formatterDate(month) + '-' + me.formatterDate(day);
-            var str1 = year + '-' + me.formatterDate(month) + '-' + me.formatterDate(day) + " " + hours + ":" + minutes + ":" + seconds;
+            var str1 = year + '-' + me.formatterDate(month) + '-' + me.formatterDate(day) + " " + me.formatterDate(hours) + ":" + me.formatterDate(minutes) + ":" + me.formatterDate(seconds);
             return log ? str1 : str;
         },
     };
